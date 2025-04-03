@@ -9,6 +9,11 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
+h1{
+    font-size: 3em;
+    padding:2em;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -69,7 +74,31 @@ body, html {
     background-color:black;
     color: whitesmoke;
 }
-
+#catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+;
+  }
+  .book {
+    border: 2px solid #000000;
+    padding: 10px;
+    margin: 10px;
+    width: 250px;
+    text-align: left;
+    background: #fff;
+  }
+  .book img {
+    width: 100%;
+    height: auto;
+  }
+  .out-of-stock {
+    color: rgb(164, 12, 12);
+    font-weight: bold;
+  }
+  .not-available {
+    opacity: 0.5;
+  }
 @media (min-width: 768px) {
     .container {
         flex-direction: row;
