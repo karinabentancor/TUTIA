@@ -1,0 +1,48 @@
+[
+    {
+      "id": 1,
+      "title": "Nunca fuimos modernos",
+      "author": "Bruno Latour",
+      "publisher": "Siglo Veintiuno editores",
+      "pages": 221,
+      "language": "Español",
+      "languageOriginal" :"Francés",
+      "image": "/img/nuncafuimosmodernos_test.jpg",
+      "available": true
+    },
+      {
+        "id": 2,
+        "title": "Trabajar cansa / vendrá la muerte y tendrá tus ojos",
+        "author": "Cesar Pavese",
+        "publisher": "Gricelda García",
+        "pages": 171,
+        "language": "Español",
+        "languageOriginal": "Italiano",
+        "image": "/img/trabajarcansa_test.jpg",
+        "available": false
+      },
+      {
+        "id": 3,
+        "title": "En las cumbres de la desesperación",
+        "author": "Emil Cioran",
+        "publisher": "Herminda",
+        "pages": 166,
+        "language": "Español",
+        "languageOriginal": "Rumano",
+        "image": "/img/en-las-cumbres_test.jpg",
+        "available": true
+      },
+      {
+        "id": 4,
+        "title": "Filosofías del sur - Descolonización y transmodernidad",
+        "author": "Enrique Dussel",
+        "publisher": "Akal",
+        "pages": 364,
+        "language": "Español",
+        "languageOriginal": "Español",
+        "image": "/img/filosofias-del-sur_test.jpg",
+        "available": true
+      }
+    ]
+    
+  
