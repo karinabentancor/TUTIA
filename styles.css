@@ -11,7 +11,7 @@ body, html {
 
 h1{
     font-size: 3em;
-    padding:2em;
+    padding:1.5em;
 }
 
 .container {
@@ -105,6 +105,12 @@ h1{
     opacity: 0.5;
   }
 
+  .arrow{
+    width: 100px;
+    height: 100px;
+    margin-left: 2em;
+    margin-top: 2em;
+  }
 
 @media (min-width: 768px) {
     .container {
