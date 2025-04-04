@@ -19,3 +19,27 @@ fetch("books.json")
     });
   })
   .catch(error => console.error("Error loading books:", error));
+  
+  function registrarUsuario() {
+      let ci = document.getElementById("documento").value;
+      let password = document.getElementById("password").value;
+      
+      if (ci && password) {
+          localStorage.setItem("usuario", JSON.stringify({ci, password}));
+          alert("Usuario registrado con éxito. Ahora puedes iniciar sesión.");
+      } else {
+          alert("Por favor, completa todos los campos.");
+      }
+  }
+
+  function registrarUsuario() {
+      let ci = document.getElementById("documento").value;
+      let password = document.getElementById("password").value;
+      
+      if (ci && password) {
+          localStorage.setItem("usuario", JSON.stringify({ci, password}));
+          alert("Usuario registrado con éxito. Ahora puedes iniciar sesión.");
+      } else {
+          alert("Por favor, completa todos los campos.");
+      }
+  }

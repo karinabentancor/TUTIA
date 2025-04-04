@@ -104,6 +104,8 @@ h1{
   .not-available {
     opacity: 0.5;
   }
+
+
 @media (min-width: 768px) {
     .container {
         flex-direction: row;
