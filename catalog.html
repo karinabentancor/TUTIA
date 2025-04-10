@@ -11,6 +11,29 @@
   <img src="svg/arrow-left-square.svg"class="arrow" alt="Go back">
 </a>
   <h1>CATÁLOGO</h1>
+  <div class="filters-container">
+    <div class="filter-item">
+      <input type="text" id="search" placeholder="Buscar por título..." />
+      <button id="search-button">
+          <path d="M11.742 10.742a6 6 0 1 0-1.268 1.268l3.578 3.578a1 1 0 1 0 1.415-1.415l-3.578-3.578zM12 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="filter-item">
+      <label for="editorial" class="filter-label"></label>
+      <select id="editorial">
+        <option value="all">EDITORIAL</option>
+      </select>
+    </div>
+    <div class="filter-item">
+      <button id="sort-author">ORDENAR POR AUTOR</button>
+    </div>
+    <div class="filter-item">
+      <button id="sort-title">ORDENAR POR TÍTULO</button>
+    </div>
+  </div>
+  
+</div>
   <div id="catalog"></div>
   <aside class="right-aside">
     <img src="svg/logo-negro.svg" alt="Logo" class="logo">
