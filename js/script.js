@@ -44,22 +44,19 @@ fetch("books.json")
       }
   }
 
-// Filtrar por búsqueda
 document.getElementById('search').addEventListener('input', function () {
   const query = this.value.toLowerCase();
   filterBooks(query, 'search');
 });
 
-// Filtrar por editorial
 document.getElementById('editorial').addEventListener('change', function () {
   const selectedEditorial = this.value;
   filterBooks(selectedEditorial, 'editorial');
 });
 
-// Función para filtrar libros
 function filterBooks(query, type) {
   const container = document.getElementById("catalog");
-  container.innerHTML = ''; // Limpiar el catálogo actual
+  container.innerHTML = ''; 
 
   fetch("books.json")
     .then(response => response.json())
@@ -91,20 +88,17 @@ function filterBooks(query, type) {
     .catch(error => console.error("Error loading books:", error));
 }
 
-// Función para ordenar por autor
 document.getElementById('sort-author').addEventListener('click', function () {
   sortBooks('author');
 });
 
-// Función para ordenar por título
 document.getElementById('sort-title').addEventListener('click', function () {
   sortBooks('title');
 });
 
-// Función para ordenar libros
 function sortBooks(type) {
   const container = document.getElementById("catalog");
-  container.innerHTML = ''; // Limpiar el catálogo actual
+  container.innerHTML = ''; 
 
   fetch("books.json")
     .then(response => response.json())
