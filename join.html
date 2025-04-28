@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UNIRME AL CLUB / TUTÍA</title>
     <link rel="stylesheet" href="css/join.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
     <div class="form-container">
-        <form id="registration-form" method="POST" action="http://localhost:3000/register">            <div class="personal-info">
+        <form id="registration-form">            
+            <div class="personal-info">
                 <div class="input-container">
                     <input type="text" id="nombre" name="nombre" placeholder=" " required>
                     <label for="nombre">Nombre</label>

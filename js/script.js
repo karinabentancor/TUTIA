@@ -129,3 +129,54 @@ function sortBooks(type) {
     })
     .catch(error => console.error("Error loading books:", error));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar EmailJS - Reemplaza "tu_user_id" con tu ID de usuario de EmailJS
+  emailjs.init("service_i518h1y");
+  
+  const form = document.getElementById('registration-form');
+  
+  form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      // Mostrar algún tipo de indicador de carga si lo deseas
+      const joinBtn = document.querySelector('.join-btn');
+      joinBtn.textContent = "Enviando...";
+      joinBtn.disabled = true;
+      
+      // Obtener los datos del formulario
+      const formData = {
+          nombre: document.getElementById('nombre').value,
+          apellidos: document.getElementById('apellidos').value,
+          documento: document.getElementById('documento').value,
+          direccion: document.getElementById('direccion').value,
+          esquina: document.getElementById('esquina').value,
+          celular: document.getElementById('celular').value,
+          email: document.getElementById('email').value,
+          user: document.getElementById('user').value,
+          password: document.getElementById('password').value
+      };
+      
+      // Enviar el formulario usando EmailJS
+      // Reemplaza "tu_service_id" y "tu_template_id" con tus IDs de EmailJS
+      emailjs.send("service_i518h1y","template_w01fkwj", formData)
+          .then(function(response) {
+              console.log("Formulario enviado correctamente", response);
+              // Mostrar mensaje de éxito
+              alert("¡Te has unido al club con éxito!");
+              // Resetear el formulario
+              form.reset();
+              // Restaurar el botón
+              joinBtn.textContent = "UNIRME AL CLUB";
+              joinBtn.disabled = false;
+          })
+          .catch(function(error) {
+              console.error("Error al enviar el formulario", error);
+              // Mostrar mensaje de error
+              alert("Ha ocurrido un error al enviar el formulario. Por favor, intenta de nuevo.");
+              // Restaurar el botón
+              joinBtn.textContent = "UNIRME AL CLUB";
+              joinBtn.disabled = false;
+          });
+  });
+});
