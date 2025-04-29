@@ -3,6 +3,27 @@
         padding: 6em;
         font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     }
+    .top-row {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: black;
+        padding: 1em;
+        position: relative;
+        z-index: 10;
+    }
+    .arrow-link .arrow {
+        width: 40px;
+        height: 40px;
+        margin-right: 1em;
+        z-index: 10;
+        display: block; 
+    }
+    
+    .logo-algo {
+        height: 50px;
+    }
+    
     .input-container {
         position: relative;
         width: 250px;

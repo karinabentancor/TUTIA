@@ -132,13 +132,11 @@ h1 {
     margin-block: 20px;
     color: white;
 }
-
 .filter-item {
     margin: 5px 10px;
     display: flex;
     align-items: center;
 }
-
 .filter-item input, 
 .filter-item select {
     padding: 5px 10px;
@@ -148,7 +146,6 @@ h1 {
     background-color: black;
     color: white;
 }
-
 .filter-item button {
     background: none;
     color: black;
@@ -160,17 +157,14 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-
 .filter-item button:hover {
     background-color: #fff;
     color: #000;
 }
-
 .filter-label {
     margin-right: 10px;
     font-weight: bold;
 }
-
 #search-button {
     background: none;
     border: none;
@@ -181,8 +175,6 @@ h1 {
 .sort-author {
     color: black;
 }
-
-
 #catalog {
     display: flex;
     flex-wrap: wrap;
@@ -198,7 +190,6 @@ h1 {
   width: 200px;
   height: 40px;
 }
-
 .switch-option {
   flex: 1;
   text-align: center;
@@ -207,14 +198,10 @@ h1 {
   font-size: 14px;
   transition: background-color 0.3s, color 0.3s;
 }
-
-/* Estado activo */
 .switch-option.active {
   background-color: black;
   color: white;
 }
-
-/* Estado inactivo */
 .switch-option:not(.active) {
   background-color: white;
   color: black;
