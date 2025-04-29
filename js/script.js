@@ -129,3 +129,52 @@ function sortBooks(type) {
     })
     .catch(error => console.error("Error loading books:", error));
 }
+
+  const allBooks = document.getElementById('all-books');
+  const availableBooks = document.getElementById('available-books');
+
+  document.querySelector('.switch-container').addEventListener('click', () => {
+    allBooks.classList.toggle('active');
+    availableBooks.classList.toggle('active');
+  });
+
+  // Suponiendo que tenés tu array de libros en una variable llamada books
+const books = [ /* tu array aquí */ ];
+
+const catalog = document.getElementById('catalog');
+const switchButton = document.getElementById('switch-button');
+
+let showOnlyAvailable = false;
+
+// Función para renderizar libros
+function renderBooks() {
+  catalog.innerHTML = ''; // Limpia el catálogo antes de renderizar
+
+  let filteredBooks = showOnlyAvailable
+    ? books.filter(book => book.available)
+    : books;
+
+  filteredBooks.forEach(book => {
+    const bookElement = document.createElement('div');
+    bookElement.classList.add('book');
+    if (!book.available) {
+      bookElement.classList.add('not-available');
+    }
+    bookElement.innerHTML = `
+      <img src="${book.image}" alt="${book.title}">
+      <h3>${book.title}</h3>
+      <p>${book.author}</p>
+    `;
+    catalog.appendChild(bookElement);
+  });
+}
+
+// Escuchamos el click en el botón switch
+switchButton.addEventListener('click', () => {
+  showOnlyAvailable = !showOnlyAvailable;
+  switchButton.classList.toggle('active');
+  renderBooks();
+});
+
+// Primera carga
+renderBooks();
