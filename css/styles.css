@@ -3,18 +3,16 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 html, body {
     height: 100%;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow: hidden;
+    overflow-y: auto; 
 }
-
 .container {
     display: flex;
     height: 100%;
 }
-
 .left-column, .right-column {
     width: 50%;
     height: 100%;
@@ -23,7 +21,6 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-
 .left-column {
     background-color: whitesmoke;
     color: black;
@@ -123,12 +120,19 @@ h1 {
     border: 1px solid white;
     margin: 20px 0;
 }
-
+.right-aside .logo {
+    width: 80px;  
+    height: auto;
+  }
+  
 .filters-container {
     display: grid;
     justify-content: space-between;
     border: 4px solid black;
-    padding: 10px;
+    grid-template-columns: repeat(3, 1fr);    /* 3 columnas de igual ancho */
+    grid-template-rows: repeat(2, 2em);     
+    gap: 5px 10px; 
+    padding: 15px;
     margin-block: 20px;
     color: white;
 }
@@ -137,6 +141,7 @@ h1 {
     display: flex;
     align-items: center;
 }
+
 .filter-item input, 
 .filter-item select {
     padding: 5px 10px;
