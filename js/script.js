@@ -59,6 +59,9 @@ function renderBooks(books) {
         <p><strong>Idioma:</strong> ${book.language}</p>
         <p><strong>Idioma original: </strong> ${book.languageOriginal}</p>
         ${status}
+        <div class="icon-bottom-right">
+          <img src="/svg/arrow-through-heart.svg" alt="Seleccionar libro">
+        </div>
       </div>
     `;
   });

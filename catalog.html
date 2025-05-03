@@ -12,39 +12,34 @@
       <img src="svg/arrow-left-square.svg" class="arrow" alt="Go back"></a>
     <img src="svg/CATÁLOGOn.svg" class="catalog-logo" alt="CATÁLOGO">
   </div>
-
   <div class="filters-container">
     <div class="filter-item">
       <input type="text" id="search" placeholder="Buscar por título o autor" />
-      <button id="search-button">
-          <path d="M11.742 10.742a6 6 0 1 0-1.268 1.268l3.578 3.578a1 1 0 1 0 1.415-1.415l-3.578-3.578zM12 6a5 5 0 1 1-10 0 5 5 0 0 1 10 0z"/>
-      </button>
     </div>
+  
     <div class="filter-item">
-      <label for="editorial" class="filter-label"></label>
       <select id="editorial">
         <option value="all">EDITORIAL</option>
       </select>
     </div>
-    <div class="filter-item">
+  
+    <div class="filter-item full-width">
       <div class="switch-container">
         <div class="switch-option active" id="all-books">TODOS</div>
         <div class="switch-option" id="available-books">DISPONIBLES</div>
       </div>
     </div>
-    
     <div class="filter-item">
-      <div class="filter-item">
-        <button id="sort-title">ORDENAR POR TÍTULO</button>
-      </div>
-       <button id="sort-author">ORDENAR POR AUTOR</button>
+      <button id="sort-title">ORDENAR POR TÍTULO</button>
     </div>
-  </div>
+    <div class="filter-item">
+      <button id="sort-author">ORDENAR POR AUTOR</button>
+    </div>
+</div>
     <div id="catalog"></div>
        <aside class="right-aside">
         <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo">
         <p>CLUB DE LIBROS</p>
-        <p><strong>UNITE AL CLUB</strong> </p>
         <p>Recibí 3 libros por mes por $ 450</p>
         <button class="button-wht" onclick="window.location.href='join.html';">UNIRME AL CLUB</button>
         <hr>
