@@ -83,4 +83,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Hubo un error. Por favor, intentá nuevamente.');
             });
     });
+    const docInput = document.getElementById('documento');
+    const userInput = document.getElementById('user');
+    
+    docInput.addEventListener('input', () => {
+      userInput.value = docInput.value;
+    });
+    const pwdInput = document.getElementById('password');
+const toggle = document.querySelector('.toggle-password img');
+
+toggle.addEventListener('click', () => {
+    const isPwd = pwdInput.type === 'password';
+    pwdInput.type = isPwd ? 'text' : 'password';
+    toggle.src = isPwd
+      ? 'svg/eye-see.svg'  
+      : 'svg/eye-hide.svg'; 
+    toggle.alt = isPwd
+      ? 'Ocultar contraseña'
+      : 'Mostrar contraseña';
+  });
+  
+
 });

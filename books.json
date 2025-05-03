@@ -7,7 +7,7 @@
     "pages": 221,
     "language": "Español",
     "languageOriginal": "Francés",
-    "image": "/img/nunca-fuimos-modernos.jpg",
+    "image": "#",
     "available": false
   },
   {
@@ -18,7 +18,7 @@
     "pages": 171,
     "language": "Español",
     "languageOriginal": "Italiano",
-    "image": "/img/trabajar-cansa-vendr-la-muerte-y-tendr-tus-ojos.jpg",
+    "image": "#",
     "available": true
   },
   {
@@ -29,7 +29,7 @@
     "pages": 166,
     "language": "Español",
     "languageOriginal": "Rumano",
-    "image": "/img/en-las-cumbres-de-la-desesperaci-n.jpg",
+    "image": "#",
     "available": false
   },
   {
@@ -40,7 +40,7 @@
     "pages": 364,
     "language": "Español",
     "languageOriginal": "Español",
-    "image": "/img/filosof-as-del-sur-descolonizaci-n-y-transmodernidad.jpg",
+    "image": "img/filosof-as-del-sur-descolonizaci-n-y-transmodernidad.jpg",
     "available": true
   },
   {

@@ -89,3 +89,21 @@
         background: black;
         color: whitesmoke;
     }
+    .input-container {
+        position: relative;
+        /* ... */
+      }
+      .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+      }
+      .toggle-password img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
