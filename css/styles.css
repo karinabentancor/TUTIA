@@ -124,17 +124,17 @@ h1 {
     width: 80px;  
     height: auto;
   }
- .filters-container {
+  .filters-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px 30px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: calc(100% - 300px);
+    gap: 10px 20px;
+    padding: 15px;
+    margin: 40px 40px 40px 40px;
+    max-width: calc(100% - 300px); 
     color: white;
     border: 3px solid black;
+    box-sizing: border-box;
 }
-
 .filter-item {
     display: flex;
     flex-direction: column;
@@ -175,14 +175,13 @@ h1 {
 
 .switch-container {
     margin: 20px auto 10px auto;
-    width: 180px;
+    width: 100px;
     height: 36px;
 }
 .switch-option {
     font-size: 13px;
     line-height: 36px;
 }
-
 
 #search-button {
     background: none;
@@ -268,5 +267,10 @@ margin-left: 5em;
 
     .left-column, .right-column {
         width: 50%;
+    }
+}
+@media (min-width: 768px) {
+    .filters-container {
+        margin-right: 270px; 
     }
 }
