@@ -187,20 +187,16 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
   }
-  
   .switch-option.active {
     background-color: white;
     color: black;
     
   }
-  
   .switch-option:not(.active) {
     background-color: black;
     color: white;
     border: solid 3px white;
   }
-  
-
 .switch-container {
     margin: 20px auto 10px auto;
     width: 100px;
@@ -220,6 +216,32 @@ h1 {
 
 .sort-author {
     color: black;
+}
+.select-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform .1s ease;
+}
+.select-btn:hover {
+  transform: scale(1.1);
+}
+.select-btn.selected img {
+  filter: invert(38%) sepia(87%) saturate(3377%) hue-rotate(322deg) brightness(93%) contrast(103%);
+}
+.selected-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+.selected-list li {
+  margin-bottom: .5rem;
+  font-size: .9rem;
+}
+.selected-list li.empty {
+  color: #666;
+  font-style: italic;
 }
 #catalog {
     display: flex;
