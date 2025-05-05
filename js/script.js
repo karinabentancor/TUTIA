@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .catch(error => console.error("Error loading books:", error));
 });
-
 function populateEditorials(data) {
   const select = document.getElementById("editorial");
   const editorials = Array.from(new Set(data.map(book => book.publisher))).sort();
@@ -117,7 +116,6 @@ function attachSelectionHandler() {
 
     const bookDiv = btn.closest(".book");
 
-    // ← Aquí: si no está disponible, no hacemos nada
     if (bookDiv.classList.contains("not-available")) return;
 
     const id = bookDiv.dataset.id;
@@ -141,16 +139,39 @@ function attachSelectionHandler() {
   });
 }
 
-
 function updateAsideList() {
   listContainer.innerHTML = "";
+
   if (!selectedBooks.length) {
     listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>";
     return;
   }
+
   selectedBooks.forEach(b => {
     const li = document.createElement("li");
-    li.textContent = `${b.title} — ${b.author}`;
+    li.dataset.id = b.id; 
+    li.innerHTML = `
+      ${b.title} — ${b.author}
+      <img 
+        src="svg/heart-outline.svg" 
+        class="aside-heart remove-btn" 
+        alt="Quitar"
+        title="Quitar de la selección"
+      />
+    `;
     listContainer.appendChild(li);
   });
 }
+
+listContainer.addEventListener("click", e => {
+  const removeBtn = e.target.closest(".remove-btn");
+  if (!removeBtn) return;
+
+  const li = removeBtn.closest("li");
+  const id = li.dataset.id;
+
+  const bookDiv = document.querySelector(`.book[data-id="${id}"]`);
+  const selectBtn = bookDiv.querySelector(".select-btn");
+
+  selectBtn.click();
+});
