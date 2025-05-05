@@ -185,7 +185,6 @@ h1 {
     width: 100%;
     height: 36px;
   }
-  
   .switch-option {
     flex: 1;
     text-align: center;
@@ -251,12 +250,26 @@ h1 {
   color: #666;
   font-style: italic;
 }
-#catalog {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-right: 250px;
+.selected-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+.selected-list li .remove-btn {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  cursor: pointer;
+  margin-left: 1em;
+}
+#catalog {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-right: 250px;
+  gap: 2rem;
+}
+
 .switch-container {
   display: flex;
   border: 2px solid black;
@@ -322,6 +335,10 @@ h1 {
   }
   .book {
     position: relative;
+  }
+  .remove-btn {
+    filter: brightness(0) invert(1);
+    
   }
   
   .icon-bottom-right {

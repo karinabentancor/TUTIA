@@ -153,7 +153,7 @@ function updateAsideList() {
     li.innerHTML = `
       ${b.title} — ${b.author}
       <img 
-        src="svg/heart-outline.svg" 
+        src="svg/trash.svg" 
         class="aside-heart remove-btn" 
         alt="Quitar"
         title="Quitar de la selección"
