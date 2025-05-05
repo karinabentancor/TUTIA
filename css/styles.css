@@ -290,7 +290,8 @@ h1 {
     width: 250px;
     text-align: left;
     background: #fff;
-}.book {
+    padding: 30px;  
+    margin: 20px;   
     position: relative;
   }
   
@@ -303,8 +304,9 @@ h1 {
   .icon-bottom-right img {
     width: 20px;
     height: 20px;
+    margin-bottom: 6em;
   }
-v.book {
+.book {
     position: relative;
   }
   
@@ -323,20 +325,21 @@ v.book {
   }
   
   .icon-bottom-right {
-    position: absolute;
+    position: relative;
     bottom: 10px;
     right: 10px;
+    margin-top: 1em; 
+    
   }
-  
+
   .icon-bottom-right img {
     width: 20px;
     height: 20px;
   }
-      
-
 .book img {
     width: 100%;
     height: auto;
+    margin-bottom: 1.5em;
 }
 
 .out-of-stock {
