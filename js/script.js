@@ -1,53 +1,58 @@
-let allBooksData = [];
-let currentBooks = [];
-let showOnlyAvailable = false;
-
+let allBooksData = []
+let currentBooks = []
+let showOnlyAvailable = false
+const aside = document.querySelector("aside.right-aside")
+let listContainer = document.createElement("ul")
+listContainer.className = "selected-list"
+aside.appendChild(listContainer)
 document.addEventListener("DOMContentLoaded", () => {
+  const storedUser = localStorage.getItem("clubUser")
+  if (storedUser) {
+    const btn = aside.querySelector("button.button-wht")
+    if (btn) btn.remove()
+    const pNombre = document.createElement("p")
+    pNombre.className = "welcome-user"
+    pNombre.textContent = `${storedUser.toUpperCase()}`
+    const infoP = aside.querySelectorAll("p")[1]
+    infoP.textContent = "Nos encanta que seas parte del club"
+    const tituloClub = aside.querySelectorAll("p")[0]
+    tituloClub.insertAdjacentElement("afterend", pNombre)
+  }
   fetch("books.json")
     .then(response => response.json())
     .then(data => {
-      allBooksData = data;
-      populateEditorials(data);
-      applyFilters();
+      allBooksData = data
+      populateEditorials(data)
+      applyFilters()
     })
-    .catch(error => console.error("Error loading books:", error));
-});
+    .catch(error => console.error("Error loading books:", error))
+})
 function populateEditorials(data) {
-  const select = document.getElementById("editorial");
-  const editorials = Array.from(new Set(data.map(book => book.publisher))).sort();
+  const select = document.getElementById("editorial")
+  const editorials = Array.from(new Set(data.map(book => book.publisher))).sort()
   editorials.forEach(editorial => {
-    const option = document.createElement("option");
-    option.value = editorial;
-    option.textContent = editorial;
-    select.appendChild(option);
-  });
+    const option = document.createElement("option")
+    option.value = editorial
+    option.textContent = editorial
+    select.appendChild(option)
+  })
 }
-
 function applyFilters() {
-  const query = document.getElementById("search").value.toLowerCase();
-  const editorial = document.getElementById("editorial").value;
-
+  const query = document.getElementById("search").value.toLowerCase()
+  const editorial = document.getElementById("editorial").value
   currentBooks = allBooksData.filter(book => {
-    const matchesSearch =
-      book.title.toLowerCase().includes(query) ||
-      book.author.toLowerCase().includes(query);
-
-    const matchesEditorial = editorial === "all" || book.publisher === editorial;
-
-    const matchesAvailability = !showOnlyAvailable || book.available;
-
-    return matchesSearch && matchesEditorial && matchesAvailability;
-  });
-
-  renderBooks(currentBooks);
+    const matchesSearch = book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query)
+    const matchesEditorial = editorial === "all" || book.publisher === editorial
+    const matchesAvailability = !showOnlyAvailable || book.available
+    return matchesSearch && matchesEditorial && matchesAvailability
+  })
+  renderBooks(currentBooks)
 }
-
 function renderBooks(books) {
-  const container = document.getElementById("catalog");
-  container.innerHTML = "";
-
+  const container = document.getElementById("catalog")
+  container.innerHTML = ""
   books.forEach(book => {
-    const status = book.available ? "" : "<p class='out-of-stock'>Libro en préstamo</p>";
+    const status = book.available ? "" : "<p class='out-of-stock'>Libro en préstamo</p>"
     container.innerHTML += `
       <div class="book ${book.available ? "" : "not-available"}" data-id="${book.id}">
         <img src="${book.image}" alt="${book.title}">
@@ -64,92 +69,66 @@ function renderBooks(books) {
           </button>
         </div>
       </div>
-    `;
-  });
-
-  attachSelectionHandler();
+    `
+  })
+  attachSelectionHandler()
 }
-
-
-document.getElementById("search").addEventListener("input", applyFilters);
-document.getElementById("editorial").addEventListener("change", applyFilters);
-
+document.getElementById("search").addEventListener("input", applyFilters)
+document.getElementById("editorial").addEventListener("change", applyFilters)
 document.getElementById("sort-title").addEventListener("click", () => {
-  currentBooks.sort((a, b) => a.title.localeCompare(b.title));
-  renderBooks(currentBooks);
-});
-
+  currentBooks.sort((a, b) => a.title.localeCompare(b.title))
+  renderBooks(currentBooks)
+})
 document.getElementById("sort-author").addEventListener("click", () => {
-  currentBooks.sort((a, b) => a.author.localeCompare(b.author));
-  renderBooks(currentBooks);
-});
-
+  currentBooks.sort((a, b) => a.author.localeCompare(b.author))
+  renderBooks(currentBooks)
+})
 document.getElementById("all-books").addEventListener("click", () => {
-  showOnlyAvailable = false;
-  document.getElementById("all-books").classList.add("active");
-  document.getElementById("available-books").classList.remove("active");
-  applyFilters();
-});
-
+  showOnlyAvailable = false
+  document.getElementById("all-books").classList.add("active")
+  document.getElementById("available-books").classList.remove("active")
+  applyFilters()
+})
 document.getElementById("available-books").addEventListener("click", () => {
-  showOnlyAvailable = true;
-  document.getElementById("available-books").classList.add("active");
-  document.getElementById("all-books").classList.remove("active");
-  applyFilters();
-});
-
-const selectedBooks = [];
-
-const aside = document.querySelector("aside.right-aside");
-let listContainer = document.createElement("ul");
-listContainer.className = "selected-list";
-aside.appendChild(listContainer);
-
+  showOnlyAvailable = true
+  document.getElementById("available-books").classList.add("active")
+  document.getElementById("all-books").classList.remove("active")
+  applyFilters()
+})
+const selectedBooks = []
 function attachSelectionHandler() {
-  const container = document.getElementById("catalog");
-  container.replaceWith(container.cloneNode(true));
-  const freshContainer = document.getElementById("catalog");
-
+  const container = document.getElementById("catalog")
+  container.replaceWith(container.cloneNode(true))
+  const freshContainer = document.getElementById("catalog")
   freshContainer.addEventListener("click", e => {
-    const btn = e.target.closest(".select-btn");
-    if (!btn) return;
-
-    const bookDiv = btn.closest(".book");
-
-    if (bookDiv.classList.contains("not-available")) return;
-
-    const id = bookDiv.dataset.id;
-    const title = bookDiv.querySelector("h3").textContent;
-    const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "");
-
-    const idx = selectedBooks.findIndex(b => b.id === id);
-
+    const btn = e.target.closest(".select-btn")
+    if (!btn) return
+    const bookDiv = btn.closest(".book")
+    if (bookDiv.classList.contains("not-available")) return
+    const id = bookDiv.dataset.id
+    const title = bookDiv.querySelector("h3").textContent
+    const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "")
+    const idx = selectedBooks.findIndex(b => b.id === id)
     if (idx === -1) {
-      if (selectedBooks.length >= 3) {
-        return alert("Solo puedes seleccionar hasta 3 libros.");
-      }
-      selectedBooks.push({ id, title, author });
-      btn.classList.add("selected");
+      if (selectedBooks.length >= 3) return alert("Solo puedes seleccionar hasta 3 libros.")
+      selectedBooks.push({ id, title, author })
+      btn.classList.add("selected")
     } else {
-      selectedBooks.splice(idx, 1);
-      btn.classList.remove("selected");
+      selectedBooks.splice(idx, 1)
+      btn.classList.remove("selected")
     }
-
-    updateAsideList();
-  });
+    updateAsideList()
+  })
 }
-
 function updateAsideList() {
-  listContainer.innerHTML = "";
-
+  listContainer.innerHTML = ""
   if (!selectedBooks.length) {
-    listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>";
-    return;
+    listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>"
+    return
   }
-
   selectedBooks.forEach(b => {
-    const li = document.createElement("li");
-    li.dataset.id = b.id; 
+    const li = document.createElement("li")
+    li.dataset.id = b.id
     li.innerHTML = `
       ${b.title} — ${b.author}
       <img 
@@ -158,20 +137,16 @@ function updateAsideList() {
         alt="Quitar"
         title="Quitar de la selección"
       />
-    `;
-    listContainer.appendChild(li);
-  });
+    `
+    listContainer.appendChild(li)
+  })
 }
-
 listContainer.addEventListener("click", e => {
-  const removeBtn = e.target.closest(".remove-btn");
-  if (!removeBtn) return;
-
-  const li = removeBtn.closest("li");
-  const id = li.dataset.id;
-
-  const bookDiv = document.querySelector(`.book[data-id="${id}"]`);
-  const selectBtn = bookDiv.querySelector(".select-btn");
-
-  selectBtn.click();
-});
+  const removeBtn = e.target.closest(".remove-btn")
+  if (!removeBtn) return
+  const li = removeBtn.closest("li")
+  const id = li.dataset.id
+  const bookDiv = document.querySelector(`.book[data-id="${id}"]`)
+  const selectBtn = bookDiv.querySelector(".select-btn")
+  selectBtn.click()
+})

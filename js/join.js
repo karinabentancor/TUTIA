@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     emailjs.init('QlrFx-Q3IIk9mClin');
 
@@ -68,21 +69,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const templateIDAdmin = 'template_4v1jaud';
 
-                emailjs.send(serviceID, templateIDAdmin, formData)
-                    .then(function(response) {
-                        console.log('SUCCESS! Mail al club enviado.', response.status, response.text);
-                        alert('¡Te has unido al club exitosamente!');
-                        form.reset();
-                    }, function(error) {
-                        console.error('FAILED to send admin email...', error);
-                        alert('Error enviando el aviso al club.');
-                    });
-
-            }, function(error) {
-                console.error('FAILED to send user email...', error);
+                return emailjs.send(serviceID, templateIDAdmin, formData);
+            })
+            .then(function(response) {
+                console.log('SUCCESS! Mail al club enviado.', response.status, response.text);
+                alert('¡Te has unido al club exitosamente!');
+                localStorage.setItem('clubUser', formData.nombre);
+                window.location.href = 'index.html';
+                form.reset();
+            })
+            .catch(function(error) {
+                console.error('FAILED...', error);
                 alert('Hubo un error. Por favor, intentá nuevamente.');
             });
     });
+
     const docInput = document.getElementById('documento');
     const userInput = document.getElementById('user');
     
@@ -90,18 +91,16 @@ document.addEventListener('DOMContentLoaded', function() {
       userInput.value = docInput.value;
     });
     const pwdInput = document.getElementById('password');
-const toggle = document.querySelector('.toggle-password img');
+    const toggle = document.querySelector('.toggle-password img');
 
-toggle.addEventListener('click', () => {
-    const isPwd = pwdInput.type === 'password';
-    pwdInput.type = isPwd ? 'text' : 'password';
-    toggle.src = isPwd
-      ? 'svg/eye-see.svg'  
-      : 'svg/eye-hide.svg'; 
-    toggle.alt = isPwd
-      ? 'Ocultar contraseña'
-      : 'Mostrar contraseña';
-  });
-  
-
+    toggle.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+        toggle.src = isPwd
+          ? 'svg/eye-see.svg'  
+          : 'svg/eye-hide.svg'; 
+        toggle.alt = isPwd
+          ? 'Ocultar contraseña'
+          : 'Mostrar contraseña';
+    });
 });
