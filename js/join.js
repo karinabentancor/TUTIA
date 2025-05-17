@@ -6,44 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('No se encontró el formulario con ID registration-form.');
         return;
     }
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const serviceID = 'service_n4zmblc';
-        const templateID = 'template_j2il74t';
-
-        const templateParams = {
-            nombre: document.getElementById('nombre').value,
-            apellidos: document.getElementById('apellidos').value,
-            documento: document.getElementById('documento').value,
-            direccion: document.getElementById('direccion').value,
-            esquina: document.getElementById('esquina').value,
-            celular: document.getElementById('celular').value,
-            email: document.getElementById('email').value,
-            user: document.getElementById('user').value,
-            password: document.getElementById('password').value
-        };
-
-        emailjs.send(serviceID, templateID, templateParams)
-            .then(function(response) {
-                console.log('SUCCESS!', response.status, response.text);
-                alert('¡Te has unido al club exitosamente!');
-                form.reset();
-            }, function(error) {
-                console.error('FAILED...', error);
-                alert('Hubo un error. Por favor, intentá nuevamente.');
-            });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    emailjs.init('QlrFx-Q3IIk9mClin');
-
-    const form = document.getElementById('registration-form');
-    if (!form) {
-        console.error('No se encontró el formulario con ID registration-form.');
-        return;
-    }
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -90,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     docInput.addEventListener('input', () => {
       userInput.value = docInput.value;
     });
+    
     const pwdInput = document.getElementById('password');
     const toggle = document.querySelector('.toggle-password img');
 

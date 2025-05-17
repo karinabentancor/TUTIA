@@ -401,6 +401,42 @@ h1 {
   transform: scale(0.5);
   transform-origin: top left;
 }
+.welcome-page {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.welcome-title {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 2.5em;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+#logo-black {
+    width: 350%;
+    max-width: 1200px;
+    height: auto;
+    padding: 40px;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.button-container .button-wht {
+    width: 300px;
+}
+
 @media (min-width: 768px) {
     .container {
         flex-direction: row;
