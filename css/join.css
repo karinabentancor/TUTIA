@@ -30,6 +30,11 @@
     background: #000;
     padding: 0.75em 1em;
   }
+  .arrow{
+    width: 70px;
+    margin: 1.5em;
+    margin-left: 3em;
+  }
   .arrow-link .arrow {
     width: 32px;
     height: 32px;
@@ -143,6 +148,10 @@
   .footer-logo {
     height: 150px;
     max-width: 60%;
+  }
+
+  .direccion{
+    margin: 3em;
   }
   @media (min-width: 768px) {
     body {
