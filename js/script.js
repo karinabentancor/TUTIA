@@ -57,11 +57,13 @@ function renderBooks(books) {
       <div class="book ${book.available ? "" : "not-available"}" data-id="${book.id}">
         <img src="${book.image}" alt="${book.title}">
         <h3>${book.title}</h3>
-        <p><strong>Autor/a:</strong> ${book.author}</p>
-        <p><strong>Editorial:</strong> ${book.publisher}</p>
-        <p><strong>Páginas:</strong> ${book.pages}</p>
-        <p><strong>Idioma:</strong> ${book.language}</p>
-        <p><strong>Idioma original: </strong> ${book.languageOriginal}</p>
+        <p><strong>Autor/a</strong> ${book.author}</p>
+        <p><strong>Editorial</strong> ${book.publisher}</p>
+        <p><strong>Categoría</strong> ${book.category}</p>
+        <p><strong>Páginas</strong> ${book.pages}</p>
+        <p><strong>Idioma</strong> ${book.language}</p>
+        <p><strong>Idioma original </strong> ${book.languageOriginal}</p>
+        
         ${status}
         <div class="icon-bottom-right">
           <button type="button" class="select-btn" aria-label="Seleccionar libro">

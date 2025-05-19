@@ -1,68 +1,74 @@
 [
-  {
-    "id": 1,
-    "title": "Nunca fuimos modernos",
-    "author": "Bruno Latour",
-    "publisher": "Siglo Veintiuno",
-    "pages": 221,
-    "language": "Español",
-    "languageOriginal": "Francés",
-    "image": "img/nuncafuimosmodernos-latour.jpg",
-    "available": true
-  },
-  {
-    "id": 2,
-    "title": "Trabajar cansa / vendrá la muerte y tendrá tus ojos",
-    "author": "Cesar Pavese",
-    "publisher": "Gricelda García",
-    "pages": 171,
-    "language": "Español",
-    "languageOriginal": "Italiano",
-    "image": "img/trabajarcansa-pavese.jpg",
-    "available": true
-  },
-  {
-    "id": 3,
-    "title": "En las cumbres de la desesperación",
-    "author": "Emil Cioran",
-    "publisher": "Herminda",
-    "pages": 166,
-    "language": "Español",
-    "languageOriginal": "Rumano",
-    "image": "#",
-    "available": false
-  },
-  {
-    "id": 4,
-    "title": "Filosofías del sur - Descolonización y transmodernidad",
-    "author": "Enrique Dussel",
-    "publisher": "Akal",
-    "pages": 364,
-    "language": "Español",
-    "languageOriginal": "Español",
-    "image": "img/filosof-as-del-sur-descolonizaci-n-y-transmodernidad.jpg",
-    "available": true
-  },
-  {
-    "id": 5,
-    "title": "La mirada del jaguar - Introducción al pespectivismo amerindio",
-    "author": "Eduardo Viveiros de Castro",
-    "publisher": "Tinta Limón",
-    "pages": 288,
-    "language": "Español",
-    "languageOriginal": "Portugués",
-    "image": "/img/la-mirada-del-jaguar-introducci-n-al-pespectivismo-amerindio.jpg",
-    "available": true
-  },
-  {
-    "id": 6,
-    "title": "Gramática de la multitud - Para un análisis de las formas de vida contemporáneas",
-    "author": "Paolo Virno",
-    "publisher": "Tinta Limón / Traficantes de sueños",
-    "pages": 137,
-    "language": "Español",
-    "languageOriginal": "Itanliano",
-    "image": "/img/gram-tica-de-la-multitud-para-un-an-lisis-de-las-formas-de-vida-contempor-neas.jpg",
-    "available": true
-  }
+{
+"id": 1,
+"title": "Nunca fuimos modernos",
+"author": "Bruno Latour",
+"publisher": "Siglo Veintiuno",
+"pages": 221,
+"language": "Español",
+"languageOriginal": "Francés",
+"image": "img/nuncafuimosmodernos-latour.jpg",
+"category": "Ciencia",
+"available": true
+},
+{
+"id": 2,
+"title": "Trabajar cansa / vendrá la muerte y tendrá tus ojos",
+"author": "Cesar Pavese",
+"publisher": "Gricelda García",
+"pages": 171,
+"language": "Español",
+"languageOriginal": "Italiano",
+"image": "img/trabajarcansa-pavese.jpg",
+"category": "Poesía",
+"available": true
+},
+{
+"id": 3,
+"title": "En las cumbres de la desesperación",
+"author": "Emil Cioran",
+"publisher": "Herminda",
+"pages": 166,
+"language": "Español",
+"languageOriginal": "Rumano",
+"image": "#",
+"category": "Filosofía",
+"available": false
+},
+{
+"id": 4,
+"title": "Filosofías del sur - Descolonización y transmodernidad",
+"author": "Enrique Dussel",
+"publisher": "Akal",
+"pages": 364,
+"language": "Español",
+"languageOriginal": "Español",
+"image": "img/filosof-as-del-sur-descolonizaci-n-y-transmodernidad.jpg",
+"category": "Filosofía",
+"available": true
+},
+{
+"id": 5,
+"title": "La mirada del jaguar - Introducción al pespectivismo amerindio",
+"author": "Eduardo Viveiros de Castro",
+"publisher": "Tinta Limón",
+"pages": 288,
+"language": "Español",
+"languageOriginal": "Portugués",
+"image": "/img/la-mirada-del-jaguar-introducci-n-al-pespectivismo-amerindio.jpg",
+"category": "Antropología",
+"available": true
+},
+{
+"id": 6,
+"title": "Gramática de la multitud - Para un análisis de las formas de vida contemporáneas",
+"author": "Paolo Virno",
+"publisher": "Tinta Limón / Traficantes de sueños",
+"pages": 137,
+"language": "Español",
+"languageOriginal": "Italiano",
+"image": "/img/gram-tica-de-la-multitud-para-un-an-lisis-de-las-formas-de-vida-contempor-neas.jpg",
+"category": "Filosofía",
+"available": true
+}
 ]
