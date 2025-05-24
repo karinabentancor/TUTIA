@@ -41,40 +41,79 @@ function applyFilters() {
   const query = document.getElementById("search").value.toLowerCase()
   const editorial = document.getElementById("editorial").value
   currentBooks = allBooksData.filter(book => {
-    const matchesSearch = book.title.toLowerCase().includes(query) || book.author.toLowerCase().includes(query)
-    const matchesEditorial = editorial === "all" || book.publisher === editorial
-    const matchesAvailability = !showOnlyAvailable || book.available
+    const matchesSearch =
+      book.title.toLowerCase().includes(query) ||
+      book.author.toLowerCase().includes(query)
+    const matchesEditorial =
+      editorial === "all" || book.publisher === editorial
+    const matchesAvailability =
+      !showOnlyAvailable || book.available
     return matchesSearch && matchesEditorial && matchesAvailability
   })
   renderBooks(currentBooks)
 }
+
 function renderBooks(books) {
   const container = document.getElementById("catalog")
   container.innerHTML = ""
   books.forEach(book => {
-    const status = book.available ? "" : "<p class='out-of-stock'>Libro en préstamo</p>"
-    container.innerHTML += `
-      <div class="book ${book.available ? "" : "not-available"}" data-id="${book.id}">
-        <img src="${book.image}" alt="${book.title}">
-        <h3>${book.title}</h3>
-        <p><strong>Autor/a</strong> ${book.author}</p>
-        <p><strong>Editorial</strong> ${book.publisher}</p>
-        <p><strong>Categoría</strong> ${book.category}</p>
-        <p><strong>Páginas</strong> ${book.pages}</p>
-        <p><strong>Idioma</strong> ${book.language}</p>
-        <p><strong>Idioma original </strong> ${book.languageOriginal}</p>
-        
-        ${status}
-        <div class="icon-bottom-right">
-          <button type="button" class="select-btn" aria-label="Seleccionar libro">
-            <img src="svg/arrow-through-heart.svg" alt="" />
-          </button>
-        </div>
-      </div>
-    `
+    const bookDiv = document.createElement("div")
+    bookDiv.className = `book ${book.available ? "" : "not-available"}`
+    bookDiv.dataset.id = book.id
+
+    const img = document.createElement("img")
+    img.src = book.image
+    img.alt = book.title
+
+    const h3 = document.createElement("h3")
+    h3.textContent = book.title
+
+    const pAuthor = document.createElement("p")
+    pAuthor.innerHTML = `<strong>Autor/a</strong> ${book.author}`
+
+    const pPublisher = document.createElement("p")
+    pPublisher.innerHTML = `<strong>Editorial</strong> ${book.publisher}`
+
+    const pCategory = document.createElement("p")
+    pCategory.innerHTML = `<strong>Categoría</strong> ${book.category}`
+
+    const pPages = document.createElement("p")
+    pPages.innerHTML = `<strong>Páginas</strong> ${book.pages}`
+
+    const pLang = document.createElement("p")
+    pLang.innerHTML = `<strong>Idioma</strong> ${book.language}`
+
+    const pOrigLang = document.createElement("p")
+    pOrigLang.innerHTML = `<strong>Idioma original </strong> ${book.languageOriginal}`
+
+    if (!book.available) {
+      const pUnavailable = document.createElement("p")
+      pUnavailable.className = "out-of-stock"
+      pUnavailable.textContent = "Libro en préstamo"
+      bookDiv.appendChild(pUnavailable)
+    }
+
+    const iconWrapper = document.createElement("div")
+    iconWrapper.className = "icon-bottom-right"
+
+    const button = document.createElement("button")
+    button.type = "button"
+    button.className = "select-btn"
+    button.setAttribute("aria-label", "Seleccionar libro")
+
+    const icon = document.createElement("img")
+    icon.src = "svg/arrow-through-heart.svg"
+    icon.alt = ""
+
+    button.appendChild(icon)
+    iconWrapper.appendChild(button)
+
+    bookDiv.append(img, h3, pAuthor, pPublisher, pCategory, pPages, pLang, pOrigLang, iconWrapper)
+    container.appendChild(bookDiv)
   })
   attachSelectionHandler()
 }
+
 document.getElementById("search").addEventListener("input", applyFilters)
 document.getElementById("editorial").addEventListener("change", applyFilters)
 document.getElementById("sort-title").addEventListener("click", () => {
@@ -100,27 +139,28 @@ document.getElementById("available-books").addEventListener("click", () => {
 const selectedBooks = []
 function attachSelectionHandler() {
   const container = document.getElementById("catalog")
-  container.replaceWith(container.cloneNode(true))
-  const freshContainer = document.getElementById("catalog")
-  freshContainer.addEventListener("click", e => {
-    const btn = e.target.closest(".select-btn")
-    if (!btn) return
-    const bookDiv = btn.closest(".book")
-    if (bookDiv.classList.contains("not-available")) return
-    const id = bookDiv.dataset.id
-    const title = bookDiv.querySelector("h3").textContent
-    const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "")
-    const idx = selectedBooks.findIndex(b => b.id === id)
-    if (idx === -1) {
-      if (selectedBooks.length >= 3) return alert("Solo puedes seleccionar hasta 3 libros.")
-      selectedBooks.push({ id, title, author })
-      btn.classList.add("selected")
-    } else {
-      selectedBooks.splice(idx, 1)
-      btn.classList.remove("selected")
-    }
-    updateAsideList()
-  })
+  container.removeEventListener("click", handleBookSelection)
+  container.addEventListener("click", handleBookSelection)
+}
+
+function handleBookSelection(e) {
+  const btn = e.target.closest(".select-btn")
+  if (!btn) return
+  const bookDiv = btn.closest(".book")
+  if (bookDiv.classList.contains("not-available")) return
+  const id = bookDiv.dataset.id
+  const title = bookDiv.querySelector("h3").textContent
+  const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "")
+  const idx = selectedBooks.findIndex(b => b.id === id)
+  if (idx === -1) {
+    if (selectedBooks.length >= 3) return alert("Solo puedes seleccionar hasta 3 libros.")
+    selectedBooks.push({ id, title, author })
+    btn.classList.add("selected")
+  } else {
+    selectedBooks.splice(idx, 1)
+    btn.classList.remove("selected")
+  }
+  updateAsideList()
 }
 function updateAsideList() {
   listContainer.innerHTML = ""
