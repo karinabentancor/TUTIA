@@ -11,8 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = aside.querySelector("button.button-wht")
     if (btn) btn.remove()
     const pNombre = document.createElement("p")
-    pNombre.className = "welcome-user"
-    pNombre.textContent = `${storedUser.toUpperCase()}`
+pNombre.className = "welcome-user"
+pNombre.textContent = `${storedUser.toUpperCase()}`
+pNombre.style.cursor = "pointer"
+pNombre.title = "Ver perfil"
+pNombre.addEventListener("click", () => {
+  window.location.href = "profile.html"
+})
+
     const infoP = aside.querySelectorAll("p")[1]
     infoP.textContent = "Nos encanta que seas parte del club"
     const tituloClub = aside.querySelectorAll("p")[0]
