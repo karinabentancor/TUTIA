@@ -1,57 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TUTÍA</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6V6f5YkzQg9lfQZbMvH+PvLVWZ0tZrGv7huZOnIxN0Rs"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <div class="header-container">
-    <a href="index.html">
-      <img src="svg/arrow-left.svg" class="arrow" alt="Go back">
-    </a>
-    <img src="svg/CATÁLOGOn.svg" class="catalog-logo" alt="CATÁLOGO">
+  <div class="container-fluid h-100 p-0">
+    <div class="row gx-0 h-100">
+      <main class="col-lg-9 col-12 d-flex flex-column">
+        <div class="row align-items-center py-3 px-3 header-container">
+          <div class="col-auto">
+            <a href="index.html">
+              <img src="svg/arrow-left.svg" class="arrow" alt="Volver atrás" />
+            </a>
+          </div>
+          <div class="col">
+            <img
+              src="svg/CATÁLOGOn.svg"
+              class="catalog-logo mx-auto d-block"
+              alt="CATÁLOGO"
+            />
+          </div>
+        </div>
+        <div class="row gx-3 gy-3 px-3 filters-container">
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
+            <input
+              type="text"
+              id="search"
+              class="form-control"
+              placeholder="Buscar por título o autor"
+            />
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
+            <select id="editorial" class="form-select">
+              <option value="all">EDITORIAL</option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
+            <select id="category" class="form-select">
+              <option value="all">CATEGORÍA</option>
+            </select>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
+            <button id="sort-title" class="button">ORDENAR POR TÍTULO</button>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
+            <button id="sort-author" class="button">ORDENAR POR AUTOR</button>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
+            <button
+              id="view-packs"
+              class="big-button button-wht"
+              onclick="window.location.href='packs.html'"
+            >
+              VER PACKS
+            </button>
+          </div>
+          <div class="col-12 col-md-4 filter-item">
+            <div class="switch-container mx-auto">
+              <div class="switch-option active" id="all-books">TODOS</div>
+              <div class="switch-option" id="available-books">DISPONIBLES</div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="catalog"
+          class="row gx-4 gy-4 px-3 flex-grow-1 overflow-auto"
+        ></div>
+      </main>
+      <aside
+        class="col-lg-3 d-none d-lg-flex flex-column justify-content-center align-items-center right-aside"
+      >
+        <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo" />
+        <p>CLUB DE LIBROS</p>
+        <p>Recibí 3 libros por mes por $ 450</p>
+        <button
+          class="button-wht mb-3"
+          onclick="window.location.href='join.html'">UNIRME AL CLUB
+        </button>
+        <hr/>
+      </aside>
+    </div>
   </div>
-  <div class="filters-container">
-    <div class="filter-item">
-      <input type="text" id="search" placeholder="Buscar por título o autor">
-    </div>
-    <div class="filter-item">
-      <select id="editorial">
-        <option value="all">EDITORIAL</option>
-      </select>
-    </div>
-    <div class="filter-item">
-      <select id="category">
-        <option value="all">CATEGORÍA</option>
-      </select>
-    </div>
-    
-    <div class="filter-item">
-      <button id="sort-title">ORDENAR POR TÍTULO</button>
-    </div>
-    <div class="filter-item">
-      <button id="sort-author">ORDENAR POR AUTOR</button>
-    </div>
-    <div class="filter-item">
-  <button id="view-packs" class="big-button" onclick="window.location.href='packs.html'">VER PACKS</button>
-</div>
-  </div>
-  <div class="filter-item full-width">
-      <div class="switch-container">
-        <div class="switch-option active" id="all-books">TODOS</div>
-        <div class="switch-option" id="available-books">DISPONIBLES</div>
-      </div>
-    </div>
-  <div id="catalog"></div>
-  <aside class="right-aside">
-    <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo">
-    <p>CLUB DE LIBROS</p>
-    <p>Recibí 3 libros por mes por $ 450</p>
-    <button class="button-wht" onclick="window.location.href='join.html';">UNIRME AL CLUB</button>
-    <hr>
-  </aside>
   <script src="js/script.js"></script>
 </body>
 </html>
