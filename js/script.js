@@ -159,7 +159,7 @@ function handleBookSelection(e) {
   const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "")
   const idx = selectedBooks.findIndex(b => b.id === id)
   if (idx === -1) {
-    if (selectedBooks.length >= 3) return alert("Solo puedes seleccionar hasta 3 libros.")
+    if (selectedBooks.length >= 3) return alert("Puedes seleccionar hasta 3 libros")
     selectedBooks.push({ id, title, author })
     btn.classList.add("selected")
   } else {
