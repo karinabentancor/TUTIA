@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: monospace;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: black;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-column {
+    position: relative;
+    width: 60%;
+    background-color: whitesmoke;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.logo-aside {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+}
+
+.text {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-size: clamp(1rem, 4vw, 2rem);
+    white-space: nowrap;
+}
+
+.text-end {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(0.8rem, 3vw, 1.5rem);
+    white-space: nowrap;
+}
+
+.aside-right {
+    width: 40%;
+    background-color: black;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.button,
+.button-wht {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    font-family: monospace;
+    text-transform: uppercase;
+    /* Permite que el texto se ajuste y siempre sea visible */
+    white-space: normal;
+    overflow: visible;
+}
+
+.aside-right .button {
+    background-color: transparent;
+    color: whitesmoke;
+    border: 3px solid whitesmoke;
+}
+
+.aside-right .button:hover {
+    background-color: black;
+    color: whitesmoke;
+    border: 4px solid whitesmoke;
+}
+
+.button-wht {
+    background-color: whitesmoke;
+    color: black;
+    border: 4px solid whitesmoke;
+}
+
+.button-wht:hover {
+    background-color: black;
+    color: whitesmoke;
+    border: 4px solid whitesmoke;
+}
+
+@media (max-width: 767px) {
+    .logo-aside {
+        width: 95%;
+    }
+    .button,
+    .button-wht {
+        font-size: 12px;
+        padding: 10px;
+    }
+    .text {
+        bottom: 2.5rem;
+    }
+    .text-end {
+        bottom: 1rem;
+    }
+}
