@@ -10,34 +10,26 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6V6f5YkzQg9lfQZbMvH+PvLVWZ0tZrGv7huZOnIxN0Rs"
     crossorigin="anonymous"
   />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
   <div class="container-fluid h-100 p-0">
     <div class="row gx-0 h-100">
+      <aside class="col-lg-3 d-none d-lg-flex flex-column justify-content-center align-items-center right-aside bg-dark text-white">
+        <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo mb-3" />
+        <p>CLUB DE LIBROS</p>
+        <p>Recibí 3 libros por mes por $ 450</p>
+        <button class="button-wht mb-3" onclick="window.location.href='join.html'">UNIRME AL CLUB</button>
+        <hr/>
+      </aside>
       <main class="col-lg-9 col-12 d-flex flex-column">
-        <div class="row align-items-center py-3 px-3 header-container">
-          <div class="col-auto">
-            <a href="index.html">
-              <img src="svg/arrow-left.svg" class="arrow" alt="Volver atrás" />
-            </a>
-          </div>
-          <div class="col">
-            <img
-              src="svg/CATÁLOGOn.svg"
-              class="catalog-logo mx-auto d-block"
-              alt="CATÁLOGO"
-            />
-          </div>
+        <div class="header-img-container">
+          <img src="svg/CATÁLOGOn.svg" class="catalog-logo mx-auto d-block my-3" alt="CATÁLOGO" />
+          <img src="img/header.jpg" class="img-fluid w-100" alt="Header" />
         </div>
-        <div class="row gx-3 gy-3 px-3 filters-container">
+        <div class="row gx-3 gy-3 px-3 filters-container py-3">
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
-            <input
-              type="text"
-              id="search"
-              class="form-control"
-              placeholder="Buscar por título o autor"
-            />
+            <input type="text" id="search" class="form-control" placeholder="Buscar por título o autor" />
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
             <select id="editorial" class="form-select">
@@ -56,11 +48,7 @@
             <button id="sort-author" class="button">ORDENAR POR AUTOR</button>
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
-            <button
-              id="view-packs"
-              class="big-button button-wht"
-              onclick="window.location.href='packs.html'"
-            >
+            <button id="view-packs" class="big-button button-wht" onclick="window.location.href='packs.html'">
               VER PACKS
             </button>
           </div>
@@ -71,23 +59,8 @@
             </div>
           </div>
         </div>
-        <div
-          id="catalog"
-          class="row gx-4 gy-4 px-3 flex-grow-1 overflow-auto"
-        ></div>
+        <div id="catalog" class="row gx-4 gy-4 px-3 flex-grow-1 overflow-auto"></div>
       </main>
-      <aside
-        class="col-lg-3 d-none d-lg-flex flex-column justify-content-center align-items-center right-aside"
-      >
-        <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo" />
-        <p>CLUB DE LIBROS</p>
-        <p>Recibí 3 libros por mes por $ 450</p>
-        <button
-          class="button-wht mb-3"
-          onclick="window.location.href='join.html'">UNIRME AL CLUB
-        </button>
-        <hr/>
-      </aside>
     </div>
   </div>
   <script src="js/script.js"></script>

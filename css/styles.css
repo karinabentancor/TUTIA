@@ -25,6 +25,7 @@ html, body {
 .left-column {
     background-color: whitesmoke;
     color: black;
+    align-self: left;
 }
 
 .right-column {
