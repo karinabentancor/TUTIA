@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,12 +20,11 @@
         <p>CLUB DE LIBROS</p>
         <p>Recibí 3 libros por mes por $ 450</p>
         <button class="button-wht mb-3" onclick="window.location.href='join.html'">UNIRME AL CLUB</button>
-        <hr/>
+        <hr />
       </aside>
       <main class="col-lg-9 col-12 d-flex flex-column">
         <div class="header-img-container">
           <img src="svg/CATÁLOGOn.svg" class="catalog-logo mx-auto d-block my-3" alt="CATÁLOGO" />
-          <img src="img/header.jpg" class="img-fluid w-100" alt="Header" />
         </div>
         <div class="row gx-3 gy-3 px-3 filters-container py-3">
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
@@ -59,10 +58,11 @@
             </div>
           </div>
         </div>
-        <div id="catalog" class="row gx-4 gy-4 px-3 flex-grow-1 overflow-auto"></div>
+        <div id="catalog" style="flex-grow: 1; overflow-y: auto;"></div>
       </main>
     </div>
   </div>
+
   <script src="js/script.js"></script>
 </body>
 </html>

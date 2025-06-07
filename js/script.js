@@ -43,6 +43,16 @@ function populateEditorials(data) {
     select.appendChild(option)
   })
 }
+function populateCategories(data) {
+  const selectCat = document.getElementById('category');
+  const categories = Array.from(new Set(data.map(book => book.category))).sort();
+  categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat;
+    option.textContent = cat;
+    selectCat.appendChild(option);
+  });
+}
 function applyFilters() {
   const query = document.getElementById("search").value.toLowerCase()
   const editorial = document.getElementById("editorial").value
