@@ -7,6 +7,11 @@ html, body {
   height: 100%;
   font-family: 'Courier New', Courier, monospace, system-ui, sans-serif;
   background-color: #f6f6f6;
+  background-image: url('img/img-test.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #000;
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -66,22 +71,38 @@ main {
   background: none;
   border: none;
   cursor: pointer;
-  width: 16px;
-  height: 16px;
+  width: 80px;
+  height: 80px;
+  transition: transform 0.3s ease;
+}
+.select-btn:hover {
+  transform: scale(1.1);
 }
 .select-btn img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: invert(1);
+  filter: invert(13%) sepia(94%) saturate(7471%) hue-rotate(356deg) brightness(91%) contrast(118%);
 }
 .select-btn svg {
   width: 100%;
   height: 100%;
-  fill: white;
+  fill: #dc2626;
 }
-.select-btn.selected {
-  filter: invert(31%) sepia(84%) saturate(3562%) hue-rotate(330deg) brightness(100%) contrast(97%);
+.select-btn.selected img {
+  filter: invert(7%) sepia(100%) saturate(7499%) hue-rotate(4deg) brightness(89%) contrast(114%);
+}
+.select-btn.selected svg {
+  fill: #a40f5e;
+}
+.bookDiv { 
+  position: relative;
+}
+
+.positioned-bottom {
+  position: absolute;
+  bottom: 10px; 
+  right: 10px; 
 }
 .container-fluid {
   width: 100%;
