@@ -5,19 +5,35 @@ const aside = document.querySelector("aside.right-aside")
 let listContainer = document.createElement("ul")
 listContainer.className = "selected-list"
 aside.appendChild(listContainer)
+let selectedBooks = []
+
+function loadSavedSelection() {
+  const savedSelection = localStorage.getItem('selectedBooks')
+  if (savedSelection) {
+    try {
+      selectedBooks = JSON.parse(savedSelection)
+    } catch (error) {
+      console.error('Error al cargar selección guardada:', error)
+      selectedBooks = []
+    }
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  loadSavedSelection()
+  
   const storedUser = localStorage.getItem("clubUser")
   if (storedUser) {
     const btn = aside.querySelector("button.button-wht")
     if (btn) btn.remove()
     const pNombre = document.createElement("p")
-pNombre.className = "welcome-user"
-pNombre.textContent = `${storedUser.toUpperCase()}`
-pNombre.style.cursor = "pointer"
-pNombre.title = "Ver perfil"
-pNombre.addEventListener("click", () => {
-  window.location.href = "profile.html"
-})
+    pNombre.className = "welcome-user"
+    pNombre.textContent = `${storedUser.toUpperCase()}`
+    pNombre.style.cursor = "pointer"
+    pNombre.title = "Ver perfil"
+    pNombre.addEventListener("click", () => {
+      window.location.href = "profile.html"
+    })
 
     const infoP = aside.querySelectorAll("p")[1]
     infoP.textContent = "Nos encanta que seas parte del club"
@@ -30,9 +46,11 @@ pNombre.addEventListener("click", () => {
       allBooksData = data
       populateEditorials(data)
       applyFilters()
+      updateAsideList()
     })
     .catch(error => console.error("Error loading books:", error))
 })
+
 function populateEditorials(data) {
   const select = document.getElementById("editorial")
   const editorials = Array.from(new Set(data.map(book => book.publisher))).sort()
@@ -43,6 +61,7 @@ function populateEditorials(data) {
     select.appendChild(option)
   })
 }
+
 function populateCategories(data) {
   const selectCat = document.getElementById('category');
   const categories = Array.from(new Set(data.map(book => book.category))).sort();
@@ -53,6 +72,7 @@ function populateCategories(data) {
     selectCat.appendChild(option);
   });
 }
+
 function applyFilters() {
   const query = document.getElementById("search").value.toLowerCase()
   const editorial = document.getElementById("editorial").value
@@ -117,6 +137,11 @@ function renderBooks(books) {
     button.className = "select-btn"
     button.setAttribute("aria-label", "Seleccionar libro")
 
+    const isSelected = selectedBooks.some(selectedBook => selectedBook.id == book.id)
+    if (isSelected) {
+      button.classList.add("selected")
+    }
+
     const icon = document.createElement("img")
     icon.src = "svg/arrow-through-heart.svg"
     icon.alt = ""
@@ -152,7 +177,7 @@ document.getElementById("available-books").addEventListener("click", () => {
   document.getElementById("all-books").classList.remove("active")
   applyFilters()
 })
-const selectedBooks = []
+
 function attachSelectionHandler() {
   const container = document.getElementById("catalog")
   container.removeEventListener("click", handleBookSelection)
@@ -165,25 +190,47 @@ function handleBookSelection(e) {
   const bookDiv = btn.closest(".book")
   if (bookDiv.classList.contains("not-available")) return
   const id = bookDiv.dataset.id
-  const title = bookDiv.querySelector("h3").textContent
-  const author = bookDiv.querySelector("p strong").parentNode.textContent.replace("Autor/a: ", "")
-  const idx = selectedBooks.findIndex(b => b.id === id)
+  const bookData = allBooksData.find(book => book.id == id)
+  const idx = selectedBooks.findIndex(b => b.id == id)
+  
   if (idx === -1) {
     if (selectedBooks.length >= 3) return alert("Puedes seleccionar hasta 3 libros")
-    selectedBooks.push({ id, title, author })
+    selectedBooks.push({
+      id: bookData.id,
+      title: bookData.title,
+      author: bookData.author,
+      publisher: bookData.publisher,
+      category: bookData.category,
+      pages: bookData.pages,
+      language: bookData.language,
+      languageOriginal: bookData.languageOriginal,
+      image: bookData.image,
+      available: bookData.available
+    })
     btn.classList.add("selected")
   } else {
     selectedBooks.splice(idx, 1)
     btn.classList.remove("selected")
   }
+  
+  // Guardar en localStorage cada vez que cambie la selección
+  localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
   updateAsideList()
 }
+
 function updateAsideList() {
   listContainer.innerHTML = ""
+  
+  const existingButton = aside.querySelector('.finalize-selection-btn')
+  if (existingButton) {
+    existingButton.remove()
+  }
+  
   if (!selectedBooks.length) {
     listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>"
     return
   }
+  
   selectedBooks.forEach(b => {
     const li = document.createElement("li")
     li.dataset.id = b.id
@@ -198,7 +245,24 @@ function updateAsideList() {
     `
     listContainer.appendChild(li)
   })
+  
+  if (selectedBooks.length > 0) {
+    const finalizeButton = document.createElement("button")
+    finalizeButton.className = "button-wht finalize-selection-btn"
+    finalizeButton.textContent = "FINALIZAR SELECCIÓN"
+    finalizeButton.style.marginTop = "15px"
+    finalizeButton.style.width = "100%"
+    
+    finalizeButton.addEventListener("click", () => {
+      console.log("Libros seleccionados:", selectedBooks)
+      localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+      window.location.href = 'selection.html'
+    })
+    
+    aside.appendChild(finalizeButton)
+  }
 }
+
 listContainer.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-btn")
   if (!removeBtn) return
