@@ -45,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(data => {
       allBooksData = data
       populateEditorials(data)
+      populateCategories(data)
       applyFilters()
       updateAsideList()
     })
@@ -63,28 +64,31 @@ function populateEditorials(data) {
 }
 
 function populateCategories(data) {
-  const selectCat = document.getElementById('category');
-  const categories = Array.from(new Set(data.map(book => book.category))).sort();
+  const selectCat = document.getElementById('category')
+  const categories = Array.from(new Set(data.map(book => book.category))).sort()
   categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat;
-    option.textContent = cat;
-    selectCat.appendChild(option);
-  });
+    const option = document.createElement('option')
+    option.value = cat
+    option.textContent = cat
+    selectCat.appendChild(option)
+  })
 }
 
 function applyFilters() {
   const query = document.getElementById("search").value.toLowerCase()
   const editorial = document.getElementById("editorial").value
+  const category = document.getElementById("category").value
   currentBooks = allBooksData.filter(book => {
     const matchesSearch =
       book.title.toLowerCase().includes(query) ||
       book.author.toLowerCase().includes(query)
     const matchesEditorial =
       editorial === "all" || book.publisher === editorial
+    const matchesCategory =
+      category === "all" || book.category === category
     const matchesAvailability =
       !showOnlyAvailable || book.available
-    return matchesSearch && matchesEditorial && matchesAvailability
+    return matchesSearch && matchesEditorial && matchesCategory && matchesAvailability
   })
   renderBooks(currentBooks)
 }
@@ -157,6 +161,7 @@ function renderBooks(books) {
 
 document.getElementById("search").addEventListener("input", applyFilters)
 document.getElementById("editorial").addEventListener("change", applyFilters)
+document.getElementById("category").addEventListener("change", applyFilters)
 document.getElementById("sort-title").addEventListener("click", () => {
   currentBooks.sort((a, b) => a.title.localeCompare(b.title))
   renderBooks(currentBooks)
@@ -213,7 +218,6 @@ function handleBookSelection(e) {
     btn.classList.remove("selected")
   }
   
-  // Guardar en localStorage cada vez que cambie la selección
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
   updateAsideList()
 }
@@ -235,10 +239,13 @@ function updateAsideList() {
     const li = document.createElement("li")
     li.dataset.id = b.id
     li.innerHTML = `
-      ${b.title} — ${b.author}
+      <div style="flex-grow: 1;">
+        <div style="font-weight: bold; margin-bottom: 2px;">${b.title}</div>
+        <div style="font-size: 0.9em; opacity: 0.8;">${b.author}</div>
+      </div>
       <img 
         src="svg/trash.svg" 
-        class="aside-heart remove-btn" 
+        class="remove-btn" 
         alt="Quitar"
         title="Quitar de la selección"
       />
@@ -250,8 +257,6 @@ function updateAsideList() {
     const finalizeButton = document.createElement("button")
     finalizeButton.className = "button-wht finalize-selection-btn"
     finalizeButton.textContent = "FINALIZAR SELECCIÓN"
-    finalizeButton.style.marginTop = "15px"
-    finalizeButton.style.width = "100%"
     
     finalizeButton.addEventListener("click", () => {
       console.log("Libros seleccionados:", selectedBooks)
