@@ -46,6 +46,7 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   padding: 1rem;
+  padding-bottom: 60px;
   color: #000;
   text-shadow: 0 0 5px rgba(0,0,0,0.6);
   position: relative;
@@ -67,15 +68,16 @@ main {
 }
 .icon-bottom-right {
   position: absolute;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .select-btn {
   background: none;
   border: none;
   cursor: pointer;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   transition: transform 0.3s ease;
 }
 .select-btn:hover {
@@ -133,8 +135,9 @@ main {
 .right-aside .logo {
   max-width: 180px;
   transform: rotate(-90deg);
-  margin: 0.5rem 0;
-  padding: 1em;
+  margin: 1.5rem 0;
+  margin-top: 2rem;
+  padding: 2rem;
 }
 .right-aside p {
   margin: 0.15rem 0;
@@ -162,7 +165,7 @@ main {
 hr {
   width: 60%;
   border: 0.5px solid #555;
-  margin: 0.3rem 0;
+  margin: 1rem 0;
 }
 
 .selected-list {
@@ -180,7 +183,7 @@ hr {
   margin: 0.2rem 0;
   background-color: rgba(255,255,255,0.1);
   border-radius: 3px;
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   line-height: 1.1;
   position: relative;
   display: flex;
@@ -204,14 +207,17 @@ hr {
   filter: invert(1);
   transition: transform 0.2s ease;
   flex-shrink: 0;
-  margin-left: 0.3rem;
   background-color: rgba(255,255,255,0.8);
   border-radius: 2px;
   padding: 2px;
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .selected-list .remove-btn:hover {
-  transform: scale(1.2);
+  transform: translateY(-50%) scale(1.2);
   background-color: rgba(255,255,255,1);
 }
 
@@ -266,9 +272,9 @@ hr {
   border-radius: 0;
 }
 .filters-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
   padding: 0 1rem 1rem;
 }
 .filter-item {
@@ -278,8 +284,8 @@ hr {
 input.form-control,
 select.form-select {
   width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 0.4rem;
+  font-size: 0.8rem;
   border-radius: 0;
   border: 1px solid #000;
   background-color: #fff;
@@ -308,20 +314,21 @@ select.form-select:focus {
   background-color: #eee;
   color: #000;
   border: none;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.8rem;
   font-weight: 700;
   border-radius: 0;
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: 'Courier New', Courier, monospace;
   letter-spacing: 1.5px;
+  font-size: 0.7rem;
 }
 .button:hover {
   background-color: #ccc;
 }
 .big-button {
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
 }
 .switch-container {
   display: flex;
@@ -332,6 +339,7 @@ select.form-select:focus {
   background: #eee;
   border-radius: 0;
   padding: 0.25rem;
+  grid-column: 1 / -1;
 }
 .switch-option {
   flex-grow: 1;
@@ -345,6 +353,7 @@ select.form-select:focus {
   transition: background-color 0.3s, color 0.3s;
   font-family: 'Courier New', Courier, monospace;
   letter-spacing: 1.5px;
+  font-size: 0.7rem;
 }
 .switch-option.active {
   background-color: #000;
@@ -403,7 +412,15 @@ select.form-select:focus {
     max-height: calc(100vh - 280px);
   }
   .selected-list li {
-    font-size:1.5rem;
+    font-size: 0.6rem;
+    padding-right: 2rem;
+  }
+  .filters-container {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+  .switch-container {
+    grid-column: 1;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -425,7 +442,15 @@ select.form-select:focus {
     max-height: calc(100vh - 290px);
   }
   .selected-list li {
-    font-size: 0.62rem;
+    font-size: 0.75rem;
+    padding-right: 2rem;
+  }
+  .filters-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+  }
+  .switch-container {
+    grid-column: 1 / -1;
   }
 }
 @media (min-width: 992px) {
@@ -436,6 +461,33 @@ select.form-select:focus {
   }
   .selected-list {
     max-height: calc(100vh - 300px);
+  }
+  .selected-list li {
+    font-size: 0.9rem;
+    padding-right: 2rem;
+  }
+  .filters-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .switch-container {
+    grid-column: 1 / -1;
+  }
+  input.form-control,
+  select.form-select {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+  .button {
+    font-size: 0.9rem;
+    padding: 0.75rem 1rem;
+  }
+  .big-button {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
+  .switch-option {
+    font-size: 0.9rem;
   }
 }
 @media (min-width: 576px) {

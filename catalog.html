@@ -33,7 +33,13 @@
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
             <input type="text" id="search" class="form-control" placeholder="Buscar por título o autor" />
           </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
+            <button id="sort-title" class="button">ORDENAR POR TÍTULO</button>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
+            <button id="sort-author" class="button">ORDENAR POR AUTOR</button>
+          </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 filter-item">
             <select id="editorial" class="form-select">
               <option value="all">EDITORIAL</option>
             </select>
@@ -42,12 +48,6 @@
             <select id="category" class="form-select">
               <option value="all">CATEGORÍA</option>
             </select>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
-            <button id="sort-title" class="button">ORDENAR POR TÍTULO</button>
-          </div>
-          <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
-            <button id="sort-author" class="button">ORDENAR POR AUTOR</button>
           </div>
           <div class="col-sm-6 col-md-4 col-lg-3 filter-item d-grid">
             <button id="view-packs" class="big-button button-wht" onclick="window.location.href='packs.html'">
