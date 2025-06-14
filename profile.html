@@ -1,45 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROFILE</title>
-    <link rel="stylesheet" href="css/profile.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TUTÍA</title>
+  <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
-    <main class="profile-page">
-        <section class="personal-info">
-            <h1>Nombre</h1>
-            <p>Juan Pérez</p>
-            <h2>Contacto</h2>
-            <p>Teléfono: +598 1234 5678</p>
-            <p>Email: juan.perez@example.com</p>
-        </section>
+  <aside class="sidebar">
+    <img src="img/tutíaperfil.png" alt="Foto de perfil" class="profile-photo" id="profilePhoto">
+    <button class="change-photo-btn" onclick="togglePhotoOptions()">CAMBIAR TU TÍA</button>
+    
+    <div class="photo-options" id="photoOptions">
+      <img src="img/img-test.jpg" alt="Opción 1" class="photo-option" onclick="changePhoto('https://via.placeholder.com/120x120/ff6b6b/fff?text=1')">
+      <img src="https://via.placeholder.com/60x60/4ecdc4/fff?text=2" alt="Opción 2" class="photo-option" onclick="changePhoto('https://via.placeholder.com/120x120/4ecdc4/fff?text=2')">
+      <img src="https://via.placeholder.com/60x60/45b7d1/fff?text=3" alt="Opción 3" class="photo-option" onclick="changePhoto('https://via.placeholder.com/120x120/45b7d1/fff?text=3')">
+      <img src="https://via.placeholder.com/60x60/f9ca24/fff?text=4" alt="Opción 4" class="photo-option" onclick="changePhoto('https://via.placeholder.com/120x120/f9ca24/fff?text=4')">
+      <img src="https://via.placeholder.com/60x60/6c5ce7/fff?text=5" alt="Opción 5" class="photo-option" onclick="changePhoto('https://via.placeholder.com/120x120/6c5ce7/fff?text=5')">
+    </div>
 
-        <section class="direcciones">
-            <h2>Dirección 1</h2>
-            <p>Calle Falsa 123, Apt. 4B</p>
-            <p>Montevideo, Uruguay</p>
-            <h2>Dirección 2</h2>
-            <p>Avenida Siempre Viva 742</p>
-            <p>Ciudad, País</p>
-        </section>
+    <div class="user-info">
+      <div class="user-name">NOMBRE</div>
+      
+      <div class="contact-info">
+        <p>nombre.apellido@email.com</p>
+        <p>+598 99 123 456</p>
+      </div>
+      
+      <div class="join-date">
+        Parte del club desde 16 de julio de 2025
+      </div>
+    </div>
+  </aside>
 
-        <section class="libros-seleccionados">
-            <h2>Libros seleccionados</h2>
-            <ul>
-                <li>"Cien años de soledad" – Gabriel García Márquez</li>
-                <li>"Don Quijote de la Mancha" – Miguel de Cervantes</li>
-            </ul>
-        </section>
+  <main class="main-content">
+    <div class="content-container">
+      <div class="container-title">LIBROS ACTUALMENTE EN PRÉSTAMO</div>
+      
+      <div class="book-item">
+        <div class="book-title">Título libro</div>
+      </div>
+      <div class="book-item">
+        <div class="book-title">Título libro 2</div>
+      </div>
 
-        <section class="libros-anteriores">
-            <h2>Libros anteriores</h2>
-            <ul>
-                <li>"La ciudad y los perros" – Mario Vargas Llosa</li>
-                <li>"Rayuela" – Julio Cortázar</li>
-            </ul>
-        </section>
-    </main>
+      <div class="book-item">
+        <div class="book-title">Título libro 3</div>
+        </div>
+
+        <div class="book-buttons">
+        <div class="book-dates">
+          Préstamo: 25/05/2024  Devolución: 25/06/2024
+        </div>
+          <button class="btn" onclick="renovarPrestamo(this)">RENOVAR PRÉSTAMO</button>
+          <button class="btn btn-outline" onclick="coordinarDevolucion()">COORDINAR DEVOLUCIÓN</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-container">
+      <div class="container-title">DIRECCIONES</div>
+      
+      <div class="address-section">
+        <div class="address-title">Dirección 1</div>
+        <div class="input-container">
+          <input type="text" id="calle1" name="calle1" placeholder=" " required>
+          <label for="calle1">Calle</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="numero1" name="numero1" placeholder=" " required>
+          <label for="numero1">Número</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="esquina1" name="esquina1" placeholder=" " required>
+          <label for="esquina1">Esquina</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="especificidades1" name="especificidades1" placeholder=" " required>
+          <label for="especificidades1">Especificidades</label>
+        </div>
+      </div>
+
+      <div class="address-section">
+        <div class="address-title">Dirección 2</div>
+        <div class="input-container">
+          <input type="text" id="calle2" name="calle2" placeholder=" " required>
+          <label for="calle2">Calle</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="numero2" name="numero2" placeholder=" " required>
+          <label for="numero2">Número</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="esquina2" name="esquina2" placeholder=" " required>
+          <label for="esquina2">Esquina</label>
+        </div>
+        <div class="input-container">
+          <input type="text" id="especificidades2" name="especificidades2" placeholder=" " required>
+          <label for="especificidades2">Especificidades</label>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function togglePhotoOptions() {
+      const options = document.getElementById('photoOptions');
+      options.classList.toggle('active');
+    }
+
+    function changePhoto(newSrc) {
+      const profilePhoto = document.getElementById('profilePhoto');
+      profilePhoto.src = newSrc;
+      togglePhotoOptions();
+    }
+
+    function renovarPrestamo(button) {
+      const bookItem = button.closest('.book-item');
+      const datesElement = bookItem.querySelector('.book-dates');
+      const currentText = datesElement.textContent;
+      
+      const today = new Date();
+      const newReturnDate = new Date(today);
+      newReturnDate.setMonth(newReturnDate.getMonth() + 1);
+      
+      const formatDate = (date) => {
+        return date.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      };
+      
+      const loanDate = currentText.split(' - ')[0].split(': ')[1];
+      datesElement.textContent = `Préstamo: ${loanDate} - Devolución: ${formatDate(newReturnDate)}`;
+      
+      alert('Préstamo renovado exitosamente');
+    }
+
+    function coordinarDevolucion() {
+      const phoneNumber = '59899123456';
+      const message = 'Hola! Quiero coordinar la devolución de mis libros del club :)';
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+  </script>
 </body>
 </html>
