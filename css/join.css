@@ -1,15 +1,17 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-    font-family: monospace;
-    font-size: larger;
-  }
- body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: monospace;
+  font-size: larger;
+}
+
+body {
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.2)),
     url('../img/img-test.jpg');
@@ -17,158 +19,316 @@
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-}.header-row {
- background: #000;
- padding: 0.5em;
- display: flex;
- justify-content: space-between;
- align-items: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-row {
+  background: #000;
+  padding: 3em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
 }
 
 .header-row .arrow {
- width: 32px;
- height: 32px;
- margin-left: 1em;
- filter: brightness(0) invert(1);
+  width: 32px;
+  height: 32px;
+  margin-left: 1em;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.header-row .arrow:hover {
+  transform: translateX(-3px) scale(1.1);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  margin: 0 2em;
 }
 
 .header-logo {
- height: 40px;
- max-width: 60%;
- object-fit: contain;
- margin-right: 1em;
+  height: 40px;
+  max-width: 60%;
+  object-fit: contain;
+  margin-bottom: 1em;
 }
-  .form-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 3em auto;
-    padding: 0 1em;
-  }
-  #registration-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  .personal-info,
-  .create-user {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  .input-container {
-    position: relative;
-    width: 100%;
-  }
-  .input-container input {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #000;
-    background: none;
-    font-size: 1rem;
-    color: #000;
-  }
-  .input-container label {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #000;
-    padding: 0 5px;
-    color: #fff;
-    transition: 0.3s;
-  }
-  .input-container input:focus + label,
-  .input-container input:not(:placeholder-shown) + label {
-    top: -0.6em;
-    font-size: 0.75rem;
-  }
-  .create-user {
-    background: #000;
-    color: #fff;
-    border: 2px solid #fff;
-    padding: 1em;
-    gap: 1em;
-  }
-  .create-user .input-container input {
-    border-color: #fff;
-    color: #fff;
-  }
-  .create-user .input-container label {
-    background: #000;
-    color: #fff;
-  }
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-  .toggle-password img {
-    width: 100%;
-    height: 100%;
-  }
-  .join-btn {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    background: none;
-    color: #000;
-    border: 2px solid #000;
-    border-radius: 4px;
-    transition: background-color 0.3s, color 0.3s;
-    letter-spacing: 0.05em;
-  }
-  .join-btn:hover {
-    background-color: #000;
-    color: #fff;
-    border-color: #fff;
-  }
-  .footer-row {
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2em;
-    margin-top: 2em;
-  }
-  .footer-row p {
-    font-size: 1rem;
-  }
-  .footer-logo {
-    height: 150px;
-    max-width: 60%;
-  }
 
-  .direccion{
-    margin: 3em;
-  }
-  @media (min-width: 768px) {
-    body {
-      padding: 0;
-    }
-    .form-container {
-      padding: 0;
-      margin: 2em auto;
-    }
-    .personal-info {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 1em;
-    }
-    .personal-info .input-container {
-      flex: 1 1 calc(50% - 1em);
-    }
-    .create-user {
-      flex-direction: row;
-      gap: 1em;
-    }
-    .create-user .input-container {
-      flex: 1 1 calc(50% - 1em);
-    }
+.header-info h3 {
+  font-size: 1rem;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.header-pricing {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 2em;
+  width: 100%;
+  text-align: center;
+}
+
+.subscription-info, .alternative-info {
+  flex: 1;
+}
+
+.price {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 0.3em;
+}
+
+.terms {
+  font-size: 0.7em;
+  opacity: 0.8;
+  margin-bottom: 0.5em;
+}
+
+.no-club {
+  font-size: 0.8em;
+  margin-bottom: 0.3em;
+}
+
+.book-offer {
+  font-size: 0.9em;
+  margin-bottom: 0.5em;
+}
+
+.whatsapp-btn {
+ width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #ffffff;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  margin-block: 2em;
+}
+
+.whatsapp-btn:hover {
+  background: ;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 3em auto;
+  padding: 0 2em;
+  flex: 1;
+}
+
+#registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.personal-info,
+.create-user {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.direccion-section {
+  margin: 1em 0;
+}
+
+.direccion-section h4 {
+  margin-bottom: 1em;
+  font-size: 1.1em;
+  color: #000;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #000;
+  background: none;
+  font-size: 1rem;
+  color: #000;
+}
+
+.input-container label {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  padding: 0 5px;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: -0.6em;
+  font-size: 0.75rem;
+}
+
+.create-user {
+  background: #000;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 1em;
+  gap: 1em;
+}
+
+.create-user .input-container input {
+  border-color: #fff;
+  color: #fff;
+}
+
+.create-user .input-container label {
+  background: #000;
+  color: #fff;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.toggle-password img {
+  width: 100%;
+  height: 100%;
+}
+
+.join-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: none;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.join-btn:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #fff;
+}
+
+.footer-row {
+  background: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  margin-top: auto;
+}
+
+.footer-content {
+  flex: 1;
+}
+
+.footer-content h3 {
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
+
+.footer-text, .footer-contact, .footer-phone {
+  margin-bottom: 0.8em;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.whatsapp-link {
+  color: #d32539;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.whatsapp-link:hover {
+  color: #e8717f;
+  text-decoration-thickness: 2px;
+}
+
+.footer-logo {
+  height: 150px;
+  max-width: 60%;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: 0;
   }
   
+  .header-content {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .header-logo {
+    height: 60px;
+    margin-bottom: 0;
+    margin-right: 2em;
+  }
+  
+  .header-info {
+    flex: 1;
+  }
+  
+  .header-pricing {
+    justify-content: flex-end;
+    gap: 3em;
+  }
+  
+  .form-container {
+    padding: 0 3em;
+    margin: 2em auto;
+  }
+  
+  .personal-info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+  
+  .personal-info > .input-container {
+    flex: 1 1 calc(50% - 1em);
+  }
+  
+  .direccion-section {
+    flex: 1 1 100%;
+  }
+  
+  .create-user {
+    flex-direction: row;
+    gap: 1em;
+  }
+  
+  .create-user .input-container {
+    flex: 1 1 calc(50% - 1em);
+  }
+}
