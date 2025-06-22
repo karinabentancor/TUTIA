@@ -1,0 +1,62 @@
+[
+  {
+    "id": "pack_virno",
+    "books": [
+      {
+        "title": "Cuando las cosas se desplazan",
+        "author": "Virno",
+        "publisher": "Ediciones del Signo"
+      },
+      {
+        "title": "La multitud subjetiva",
+        "author": "Virno",
+        "publisher": "Caja Negra"
+      },
+      {
+        "title": "Multitud y acción política",
+        "author": "Paolo Virno",
+        "publisher": "Akal"
+      }
+    ]
+  },
+  {
+    "id": "pack_inverso",
+    "books": [
+      {
+        "title": "Inverso",
+        "author": "Autor Ejemplo",
+        "publisher": "Editorial Uno"
+      },
+      {
+        "title": "Contra Inverso",
+        "author": "Autor Ejemplo",
+        "publisher": "Editorial Dos"
+      },
+      {
+        "title": "Más Inverso",
+        "author": "Autor Ejemplo",
+        "publisher": "Editorial Tres"
+      }
+    ]
+  },
+  {
+    "id": "pack_agamben_i",
+    "books": [
+      {
+        "title": "Homo Sacer I",
+        "author": "Giorgio Agamben",
+        "publisher": "Editorial Trotta"
+      },
+      {
+        "title": "El reino y la gloria",
+        "author": "Giorgio Agamben",
+        "publisher": "Editorial Pre-Textos"
+      },
+      {
+        "title": "Lo que queda de Auschwitz",
+        "author": "Giorgio Agamben",
+        "publisher": "Editorial Scriptorium"
+      }
+    ]
+  }
+]
