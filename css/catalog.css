@@ -359,24 +359,27 @@ select.form-select:focus {
   background-color: #000;
   color: #fff;
 }
-.ver-packs-button,
 .editorial-button {
   border-radius: 0;
   color: #000;
   font-family: 'Courier New', Courier, monospace;
   letter-spacing: 1.5px;
 }
-.ver-packs-button {
+#view-packs {
   border: 2px solid #000;
-  background-color: transparent;
+  background-color: black;
+  color:white;
   padding: 0.75rem 1.25rem;
 }
-.ver-packs-button:hover {
-  background-color: #000;
-  color: #fff;
+#view-packs:hover {
+  border: 2px solid #000;
+  background-color: rgb(255, 255, 255);
+  color:rgb(9, 9, 9);
+  padding: 0.75rem 1.25rem;
+  transform: scale(1em);
 }
 .editorial-button {
-  background-color: #000;
+  background-color: #e12d2d;
   color: #fff;
   padding: 0.75rem 1.25rem;
   border: none;

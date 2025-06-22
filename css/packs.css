@@ -37,6 +37,17 @@
             padding: 2rem;
         }
 
+        .back-arrow {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            filter: brightness(0);
+        }
+
+        .back-arrow:hover {
+            transform: scale(1.1);
+        }
         .main-title {
             font-size: clamp(3rem, 8vw, 6rem);
             font-weight: bold;
