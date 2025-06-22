@@ -11,47 +11,23 @@
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6V6f5YkzQg9lfQZbMvH+PvLVWZ0tZrGv7huZOnIxN0Rs"
     crossorigin="anonymous"
   />
-  <style>
-    .book-cover {
-      width: 60px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .book-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .no-image {
-      color: #666;
-      text-align: center;
-      font-size: 10px;
-    }
-  </style>
 </head>
 
 <body>
-
   <div class="container-fluid h-100 p-0">
     <div class="row gx-0 h-100">
       <aside class="col-lg-3 d-none d-lg-flex flex-column justify-content-center align-items-center right-aside bg-dark text-white">
         <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo mb-3" />
-        <p>CLUB DE LIBROS</p>
-        <p>Recibí 3 libros por mes por $ 450</p>
+        <h2>CLUB DE LIBROS</h2>
+        <p>Recibí 3 libros x mes</p>
+        <h1>$ 450</h1>
         <button class="button-wht mb-3" onclick="window.location.href='join.html'">UNIRME AL CLUB</button>
-        <hr />
+        <hr/>
       </aside>
 
       <main class="col-lg-9 col-12 d-flex flex-column">
         <div class="selection-container">
           <div class="selection-header">
-            <h1>Tu Selección</h1>
             <p>Revisa los libros que has seleccionado</p>
           </div>
 
@@ -60,14 +36,13 @@
         </div>
 
           <div class="selection-summary" id="summaryContainer">
-            <h3>Has seleccionado <span id="totalBooks">0</span> libros</h3>
+            <h3>Has seleccionado <span id="totalBooks"></span></h3>
             <p>¿Listx para continuar?</p>
           </div>
 
           <div class="action-buttons">
             <button class="button" onclick="goBack()">VOLVER AL CATÁLOGO</button>
-            <button class="button button-primary" onclick="proceedToCheckout()" id="continueBtn">CONTINUAR</button>
-          </div>
+            <button class="button button-primary" onclick="window.location.href='order.html'" id="continueBtn">CONTINUAR</button>          </div>
         </div>
       </main>
     </div>
@@ -131,10 +106,9 @@
              <div class="book-author"> ${book.author || 'Autor desconocido'}</div>
              <div class="book-publisher">${book.publisher}</div>
            </div>
-           <button class="remove-btn" onclick="removeBook(${book.id})">
-             ELIMINAR
-           </button>
-         </div>
+<button class="remove-btn" onclick="removeBook(${book.id})">
+  <img src="svg/close-red.svg" alt="Eliminar" />
+</button>       </div>
        `;
      }).join('');
 
