@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: monospace;
 }
 
 html, body {
@@ -91,6 +92,14 @@ body {
   min-width: 200px;
 }
 
+.mobile-separator {
+  display: none;
+  border: none;
+  border-top: 2px solid #fff;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
 .no-club {
   font-size: 0.9em;
   margin-bottom: 0.5em;
@@ -98,7 +107,7 @@ body {
 
 .book-offer {
   font-size: 1em;
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
   font-weight: bold;
 }
 
@@ -278,6 +287,7 @@ body {
   max-width: 60%;
 }
 
+/* MOBILE STYLES */
 @media (max-width: 768px) {
   .header-content {
     flex-direction: column;
@@ -290,13 +300,58 @@ body {
   }
   
   .header-logo {
-    height: 60px;
+    height: 100px; /* Más grande en móvil */
+  }
+  
+  .mobile-separator {
+    display: block; /* Mostrar HR en móvil */
+  }
+  
+  /* Footer más pequeño en móvil */
+  .footer-row {
+    padding: 1.5em;
+  }
+  
+  .footer-logo {
+    height: 80px; /* Logo más pequeño en móvil */
+  }
+  
+  .footer-text, .footer-contact, .footer-phone {
+    font-size: 0.8em; /* Texto más pequeño en móvil */
   }
 }
 
+/* DESKTOP STYLES */
 @media (min-width: 768px) {
   body {
     padding: 0;
+  }
+  
+  /* Flecha más grande en desktop */
+  .header-row .arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Alternative info más grande y más abajo */
+  .alternative-info {
+    min-width: 250px;
+    margin-top: 2em;
+  }
+  
+  .no-club {
+    font-size: 1.1em;
+    margin-bottom: 0.7em;
+  }
+
+  .book-offer {
+    font-size: 1.2em;
+    margin-bottom: 1.2em;
+  }
+  
+  .whatsapp-btn {
+    font-size: 1rem;
+    padding: 15px 25px;
   }
   
   .form-container {
