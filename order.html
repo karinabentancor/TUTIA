@@ -1,0 +1,219 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TUTÍA</title>
+  <link rel="stylesheet" href="css/selection.css">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6V6f5YkzQg9lfQZbMvH+PvLVWZ0tZrGv7huZOnIxN0Rs"
+    crossorigin="anonymous"
+  />
+</head>
+
+<body>
+  <div class="container-fluid h-100 p-0">
+    <div class="row gx-0 h-100">
+      <main class="col-12 d-flex flex-column">
+        <div class="selection-container">
+          <div class="selection-header">
+            <h1>Confirmación</h1>
+            <p>Detalles del préstamo antes de confirmar</p>
+          </div>
+
+          <div class="loan-dates">
+            <div class="date-info">
+              <strong>Préstamo:</strong> <span id="loanDate"></span>
+            </div>
+            <div class="date-info">
+              <strong>Devolución:</strong> <span id="returnDate"></span>
+            </div>
+          </div>
+
+          <div class="books-section">
+            <h3>Libros seleccionados</h3>
+            <div id="selectedBooksContainer">
+
+            </div>
+          </div>
+
+          <div class="address-section">
+            <h3>Selecciona tu dirección de entrega</h3>
+            <div class="address-options">
+              <div class="address-option">
+                <input type="radio" id="address1" name="delivery_address" value="address1" checked>
+                <label for="address1">
+                  <div class="address-label">Dirección 1</div>
+                  <div class="address-details">
+                    <input type="text" id="street1" placeholder="Nombre de la calle" class="address-input" />
+                    <input type="text" id="number1" placeholder="Número" class="address-input" />
+                  </div>
+                </label>
+              </div>
+
+              <div class="address-option">
+                <input type="radio" id="address2" name="delivery_address" value="address2">
+                <label for="address2">
+                  <div class="address-label">Dirección 2</div>
+                  <div class="address-details">
+                    <input type="text" id="street2" placeholder="Nombre de la calle" class="address-input" />
+                    <input type="text" id="number2" placeholder="Número" class="address-input" />
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="button" onclick="goBack()">VOLVER</button>
+            <button class="button button-primary" onclick="confirmOrder()" id="confirmBtn">CONFIRMAR PRÉSTAMO</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+
+<style>
+    body{
+        background-color: #000;
+    }
+  .loan-dates {
+    background: #000;
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date-info {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .books-section {
+    margin-bottom: 2rem;
+  }
+
+  .books-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
+  }
+
+  .books-list-order {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .selected-book-order {
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .address-section {
+    margin-bottom: 2rem;
+  }
+
+  .address-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #000;
+  }
+
+  .address-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .address-option {
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.3s ease;
+  }
+
+  .address-option:hover {
+    border-color: #000;
+  }
+
+  .address-option input[type="radio"] {
+    margin-right: 1rem;
+    transform: scale(1.2);
+  }
+
+  .address-option label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .address-label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-right: 2rem;
+    min-width: 120px;
+  }
+
+  .address-details {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  .address-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+  }
+
+  .address-input:focus {
+    outline: none;
+    border-color: #000;
+  }
+
+  @media (max-width: 767px) {
+    .loan-dates {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .address-option label {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .address-details {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .address-label {
+      margin-right: 0;
+      min-width: auto;
+    }
+  }
+</style>
+        <script src="js/order.js"></script>
+</body>
+</html>
