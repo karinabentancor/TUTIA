@@ -23,37 +23,46 @@ html, body {
     background-color: whitesmoke;
     color: black;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     overflow: hidden;
+    padding: 1rem;
 }
 
 .logo-aside {
-    width: 90%;
+    width: 120%;
     max-width: 600px;
     height: auto;
-    max-height: calc(100vh - 160px);
-    object-fit: contain;
+    max-height: 70vh;
+    object-fit: center;
+    flex-shrink: 0;
+    margin-top: 6em;
+}
+
+.text-container {
+    margin-top: auto;
+    padding: 1rem 0;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .text {
-    position: absolute;
-    bottom: 3rem;
-    left: 50%;
-    transform: translateX(-50%);
     font-weight: bold;
     font-size: clamp(0.8rem, 3.5vw, 2rem);
     white-space: nowrap;
+    line-height: 1.2;
 }
 
 .text-end {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: clamp(0.6rem, 2.5vw, 1.5rem);
     white-space: nowrap;
+    line-height: 1.2;
 }
 
 .aside-right {
@@ -113,17 +122,20 @@ html, body {
     border: 4px solid whitesmoke;
 }
 
-@media (max-height: 500px) {
+/* Media queries mejoradas */
+@media (max-height: 600px) {
     .logo-aside {
-        max-height: calc(100vh - 120px);
+        max-height: 60vh;
         width: 85%;
     }
+    .text-container {
+        min-height: 60px;
+        padding: 0.5rem 0;
+    }
     .text {
-        bottom: 1.5rem;
         font-size: clamp(0.6rem, 2.8vw, 1.4rem);
     }
     .text-end {
-        bottom: 0.2rem;
         font-size: clamp(0.5rem, 2vw, 1rem);
     }
     .aside-right {
@@ -139,9 +151,16 @@ html, body {
 }
 
 @media (max-width: 767px) {
+    .left-column {
+        padding: 0.5rem;
+    }
     .logo-aside {
         width: 85%;
-        max-height: calc(100vh - 140px);
+        max-height: 65vh;
+    }
+    .text-container {
+        min-height: 70px;
+        padding: 0.8rem 0;
     }
     .button,
     .button-wht {
@@ -150,11 +169,9 @@ html, body {
         min-height: clamp(30px, 4.5vh, 45px);
     }
     .text {
-        bottom: 2.5rem;
         font-size: clamp(0.7rem, 3.5vw, 1.6rem);
     }
     .text-end {
-        bottom: 1rem;
         font-size: clamp(0.5rem, 2.5vw, 1.2rem);
     }
     .aside-right {
@@ -163,16 +180,22 @@ html, body {
 }
 
 @media (max-width: 480px) {
+    .left-column {
+        padding: 0.3rem;
+    }
     .logo-aside {
         width: 80%;
-        max-height: calc(100vh - 130px);
+        max-height: 60vh;
+    }
+    .text-container {
+        min-height: 60px;
+        padding: 0.5rem 0;
+        gap: 0.3rem;
     }
     .text {
-        bottom: 2rem;
         font-size: clamp(0.6rem, 3.5vw, 1.3rem);
     }
     .text-end {
-        bottom: 0.5rem;
         font-size: clamp(0.4rem, 2.8vw, 1rem);
     }
     .button,
@@ -185,5 +208,23 @@ html, body {
     .aside-right {
         gap: clamp(0.7rem, 2vh, 1.2rem);
         padding: 1.5rem;
+    }
+}
+
+/* Media query adicional para pantallas muy pequeñas */
+@media (max-width: 360px), (max-height: 500px) {
+    .logo-aside {
+        max-height: 55vh;
+        width: 75%;
+    }
+    .text-container {
+        min-height: 50px;
+        padding: 0.3rem 0;
+    }
+    .text {
+        font-size: clamp(0.5rem, 3vw, 1rem);
+    }
+    .text-end {
+        font-size: clamp(0.4rem, 2.5vw, 0.8rem);
     }
 }
