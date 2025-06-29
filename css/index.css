@@ -8,6 +8,7 @@ html, body {
     height: 100%;
     font-family: monospace;
     background-color: black;
+    overflow: hidden;
 }
 
 .container {
@@ -23,7 +24,6 @@ html, body {
     background-color: whitesmoke;
     color: black;
     display: flex;
-    justify-content: center;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -39,8 +39,7 @@ html, body {
     max-height: 70vh;
     object-fit: center;
     flex-shrink: 0;
-    padding: 1em;
-    margin-top: 4em;
+    margin-top: 6em;
 }
 
 .text-container {
@@ -50,7 +49,6 @@ html, body {
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    margin-top:auto;
 }
 
 .text {
@@ -58,7 +56,6 @@ html, body {
     font-size: clamp(0.8rem, 3.5vw, 2rem);
     white-space: nowrap;
     line-height: 1.2;
-    margin-top:auto;
 }
 
 .text-end {
