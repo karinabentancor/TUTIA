@@ -4,7 +4,6 @@ let showOnlyAvailable = false
 const aside = document.querySelector("aside.right-aside")
 let listContainer = document.createElement("ul")
 listContainer.className = "selected-list"
-aside.appendChild(listContainer)
 let selectedBooks = []
 
 function loadSavedSelection() {
@@ -24,8 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const storedUser = localStorage.getItem("clubUser")
   if (storedUser) {
+    // Eliminar el botón de unirse al club si existe
     const btn = aside.querySelector("button.button-wht")
     if (btn) btn.remove()
+    
     const pNombre = document.createElement("p")
     pNombre.className = "welcome-user"
     pNombre.textContent = `${storedUser.toUpperCase()}`
@@ -40,6 +41,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const tituloClub = aside.querySelectorAll("p")[0]
     tituloClub.insertAdjacentElement("afterend", pNombre)
   }
+  
+  // Agregar el contenedor de lista al aside después de los filtros
+  const filtersContainer = aside.querySelector('.filters-container')
+  filtersContainer.insertAdjacentElement('afterend', listContainer)
+  
   fetch("books.json")
     .then(response => response.json())
     .then(data => {
