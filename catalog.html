@@ -4,40 +4,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TUTÍA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700;900&family=Noto+Sans+JP:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/catalog.css" />
 </head>
 <body>
   <div class="header-row">
-    <a href="index.html">
-      <img src="svg/arrow-left-square-svgrepo-com.svg" class="arrow" alt="Volver">
-    </a>
-  </div>
-
-  <div class="main-container">
-    <aside class="right-aside">
-      <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo" />
-      <hr />
+    <div class="header-left">
+      <a href="index.html">
+        <img src="svg/arrow-left-square-svgrepo-com.svg" class="arrow" alt="Volver">
+      </a>
+    </div>
+    
+    <div class="filters-header">
+      <input type="text" id="search" placeholder="Buscar por título o autor" />
       
-      <div class="filters-container">
-        <input type="text" id="search" placeholder="Buscar por título o autor" />
-        
-        <button id="sort-title" class="button">ORDENAR POR TÍTULO</button>
-        <button id="sort-author" class="button">ORDENAR POR AUTOR</button>
-        
+      <div class="filter-row">
+        <button id="sort-title" class="button">ORDENAR TÍTULO</button>
+        <button id="sort-author" class="button">ORDENAR AUTOR</button>
+      </div>
+      
+      <div class="filter-row">
         <select id="editorial">
           <option value="all">EDITORIAL</option>
         </select>
         <select id="category">
           <option value="all">CATEGORÍA</option>
         </select>
-        <button id="view-packs" class="button-dark" onclick="window.location.href='packs.html'">
-          VER PACKS
-        </button>
+      </div>
 
-        <div class="availability-switch">
-          <div class="switch-option active" id="all-books">TODOS</div>
-          <div class="switch-option" id="available-books">DISPONIBLES</div>
-        </div>
+      <button id="view-packs" class="button-dark" onclick="window.location.href='packs.html'">
+        VER PACKS
+      </button>
+
+      <div class="availability-switch">
+        <div class="switch-option active" id="all-books">TODOS</div>
+        <div class="switch-option" id="available-books">DISPONIBLES</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <aside class="right-aside">
+      <a href="index.html">
+        <img src="svg/TUTÍA_b.svg" alt="Logo" class="logo" />
+      </a>
+      <hr />
+      
+      <div class="aside-bottom">
+        <ul class="selected-list"></ul>
       </div>
     </aside>
 

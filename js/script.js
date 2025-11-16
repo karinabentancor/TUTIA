@@ -2,8 +2,7 @@ let allBooksData = []
 let currentBooks = []
 let showOnlyAvailable = false
 const aside = document.querySelector("aside.right-aside")
-let listContainer = document.createElement("ul")
-listContainer.className = "selected-list"
+let listContainer = null
 let selectedBooks = []
 
 function loadSavedSelection() {
@@ -21,9 +20,10 @@ function loadSavedSelection() {
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedSelection()
   
+  listContainer = aside.querySelector('.selected-list')
+  
   const storedUser = localStorage.getItem("clubUser")
   if (storedUser) {
-    // Eliminar el botón de unirse al club si existe
     const btn = aside.querySelector("button.button-wht")
     if (btn) btn.remove()
     
@@ -37,14 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     const infoP = aside.querySelectorAll("p")[1]
-    infoP.textContent = "Nos encanta que seas parte del club"
+    if (infoP) infoP.textContent = "Nos encanta que seas parte del club"
     const tituloClub = aside.querySelectorAll("p")[0]
-    tituloClub.insertAdjacentElement("afterend", pNombre)
+    if (tituloClub) tituloClub.insertAdjacentElement("afterend", pNombre)
   }
-  
-  // Agregar el contenedor de lista al aside después de los filtros
-  const filtersContainer = aside.querySelector('.filters-container')
-  filtersContainer.insertAdjacentElement('afterend', listContainer)
   
   fetch("books.json")
     .then(response => response.json())
@@ -111,6 +107,9 @@ function renderBooks(books) {
     img.src = book.image
     img.alt = book.title
 
+    const bookContent = document.createElement("div")
+    bookContent.className = "book-content"
+
     const h3 = document.createElement("h3")
     h3.textContent = book.title
 
@@ -130,7 +129,7 @@ function renderBooks(books) {
     pLang.innerHTML = `<strong>Idioma</strong> ${book.language}`
 
     const pOrigLang = document.createElement("p")
-    pOrigLang.innerHTML = `<strong>Idioma original </strong> ${book.languageOriginal}`
+    pOrigLang.innerHTML = `<strong>Idioma original</strong> ${book.languageOriginal}`
 
     if (!book.available) {
       const pUnavailable = document.createElement("p")
@@ -159,7 +158,8 @@ function renderBooks(books) {
     button.appendChild(icon)
     iconWrapper.appendChild(button)
 
-    bookDiv.append(img, h3, pAuthor, pPublisher, pCategory, pPages, pLang, pOrigLang, iconWrapper)
+    bookContent.append(h3, pAuthor, pPublisher, pCategory, pPages, pLang, pOrigLang)
+    bookDiv.append(img, bookContent, iconWrapper)
     container.appendChild(bookDiv)
   })
   attachSelectionHandler()
@@ -229,6 +229,8 @@ function handleBookSelection(e) {
 }
 
 function updateAsideList() {
+  if (!listContainer) return
+  
   listContainer.innerHTML = ""
   
   const existingButton = aside.querySelector('.finalize-selection-btn')
@@ -245,7 +247,7 @@ function updateAsideList() {
     const li = document.createElement("li")
     li.dataset.id = b.id
     li.innerHTML = `
-      <div style="flex-grow: 1;">
+      <div style="flex-grow: 1; padding-right: 20px;">
         <div style="font-weight: bold; margin-bottom: 2px;">${b.title}</div>
         <div style="font-size: 0.9em; opacity: 0.8;">${b.author}</div>
       </div>
@@ -270,16 +272,34 @@ function updateAsideList() {
       window.location.href = 'selection.html'
     })
     
-    aside.appendChild(finalizeButton)
+    const asideBottom = aside.querySelector('.aside-bottom')
+    asideBottom.appendChild(finalizeButton)
   }
 }
 
-listContainer.addEventListener("click", e => {
+// Event listener para el botón de eliminar
+document.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-btn")
   if (!removeBtn) return
+  
   const li = removeBtn.closest("li")
+  if (!li) return
+  
   const id = li.dataset.id
   const bookDiv = document.querySelector(`.book[data-id="${id}"]`)
-  const selectBtn = bookDiv.querySelector(".select-btn")
-  selectBtn.click()
+  
+  if (bookDiv) {
+    const selectBtn = bookDiv.querySelector(".select-btn")
+    if (selectBtn) {
+      selectBtn.click()
+    }
+  } else {
+    // Si no está visible el libro, eliminarlo directamente
+    const idx = selectedBooks.findIndex(b => b.id == id)
+    if (idx !== -1) {
+      selectedBooks.splice(idx, 1)
+      localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+      updateAsideList()
+    }
+  }
 })
