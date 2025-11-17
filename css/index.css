@@ -124,7 +124,7 @@ html, body {
 @media (max-height: 600px) {
     .logo-aside {
         max-height: 60vh;
-        width: 85%;
+        width: 75%;
     }
     .text-container {
         min-height: 60px;

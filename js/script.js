@@ -152,7 +152,7 @@ function renderBooks(books) {
     }
 
     const icon = document.createElement("img")
-    icon.src = "svg/arrow-through-heart.svg"
+    icon.src = "svg/corazon svg4.svg"
     icon.alt = ""
 
     button.appendChild(icon)
