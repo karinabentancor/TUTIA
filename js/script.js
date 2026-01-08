@@ -114,22 +114,22 @@ function renderBooks(books) {
     h3.textContent = book.title
 
     const pAuthor = document.createElement("p")
-    pAuthor.innerHTML = `<strong>Autor/a</strong> ${book.author}`
+    pAuthor.innerHTML = `<strong>Autor/a:</strong> <span class="value">${book.author}</span>`
 
     const pPublisher = document.createElement("p")
-    pPublisher.innerHTML = `<strong>Editorial</strong> ${book.publisher}`
+    pPublisher.innerHTML = `<strong>Editorial:</strong> <span class="value">${book.publisher}</span>`
 
     const pCategory = document.createElement("p")
-    pCategory.innerHTML = `<strong>Categoría</strong> ${book.category}`
+    pCategory.innerHTML = `<strong>Categoría:</strong> <span class="value">${book.category}</span>`
 
     const pPages = document.createElement("p")
-    pPages.innerHTML = `<strong>Páginas</strong> ${book.pages}`
+    pPages.innerHTML = `<strong>Páginas:</strong> <span class="value">${book.pages}</span>`
 
     const pLang = document.createElement("p")
-    pLang.innerHTML = `<strong>Idioma</strong> ${book.language}`
+    pLang.innerHTML = `<strong>Idioma:</strong> <span class="value">${book.language}</span>`
 
     const pOrigLang = document.createElement("p")
-    pOrigLang.innerHTML = `<strong>Idioma original</strong> ${book.languageOriginal}`
+    pOrigLang.innerHTML = `<strong>Idioma original:</strong> <span class="value">${book.languageOriginal}</span>`
 
     if (!book.available) {
       const pUnavailable = document.createElement("p")
@@ -163,6 +163,7 @@ function renderBooks(books) {
     container.appendChild(bookDiv)
   })
   attachSelectionHandler()
+  attachModalHandler()
 }
 
 document.getElementById("search").addEventListener("input", applyFilters)
@@ -198,6 +199,9 @@ function attachSelectionHandler() {
 function handleBookSelection(e) {
   const btn = e.target.closest(".select-btn")
   if (!btn) return
+  
+  e.stopPropagation()
+  
   const bookDiv = btn.closest(".book")
   if (bookDiv.classList.contains("not-available")) return
   const id = bookDiv.dataset.id
@@ -226,6 +230,100 @@ function handleBookSelection(e) {
   
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
   updateAsideList()
+}
+
+function attachModalHandler() {
+  const container = document.getElementById("catalog")
+  container.removeEventListener("click", handleBookClick)
+  container.addEventListener("click", handleBookClick)
+}
+
+function handleBookClick(e) {
+  if (e.target.closest(".select-btn")) return
+  
+  const bookDiv = e.target.closest(".book")
+  if (!bookDiv) return
+  
+  const id = bookDiv.dataset.id
+  const bookData = allBooksData.find(book => book.id == id)
+  
+  if (bookData) {
+    openModal(bookData)
+  }
+}
+
+function openModal(book) {
+  let modal = document.getElementById("book-modal")
+  
+  if (!modal) {
+    modal = document.createElement("div")
+    modal.id = "book-modal"
+    modal.className = "modal"
+    document.body.appendChild(modal)
+  }
+  
+  const images = [
+    book.image,
+    book.image2 || book.image,
+    book.image3 || book.image
+  ]
+  
+  modal.innerHTML = `
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      
+      <div class="modal-main-image">
+        <img id="main-image" src="${images[0]}" alt="${book.title}">
+      </div>
+      
+      <div class="modal-thumbnails">
+        ${images.map((img, index) => `
+          <img src="${img}" 
+               class="modal-thumbnail ${index === 0 ? 'active' : ''}" 
+               data-index="${index}"
+               alt="Imagen ${index + 1}">
+        `).join('')}
+      </div>
+      
+      <div class="modal-info">
+        <h2>${book.title}</h2>
+        <p><strong>Autor/a:</strong> <span class="value">${book.author}</span></p>
+        <p><strong>Editorial:</strong> <span class="value">${book.publisher}</span></p>
+        <p><strong>Categoría:</strong> <span class="value">${book.category}</span></p>
+        <p><strong>Páginas:</strong> <span class="value">${book.pages}</span></p>
+        <p><strong>Idioma:</strong> <span class="value">${book.language}</span></p>
+        <p><strong>Idioma original:</strong> <span class="value">${book.languageOriginal}</span></p>
+        ${book.synopsis ? `<p><strong>Sinopsis:</strong> <span class="value">${book.synopsis}</span></p>` : ''}
+        <p><strong>Disponibilidad:</strong> <span class="value">${book.available ? 'Disponible' : 'En préstamo'}</span></p>
+      </div>
+    </div>
+  `
+  
+  modal.classList.add("active")
+  
+  const closeBtn = modal.querySelector(".modal-close")
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active")
+  })
+  
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active")
+    }
+  })
+  
+  const thumbnails = modal.querySelectorAll(".modal-thumbnail")
+  const mainImage = modal.querySelector("#main-image")
+  
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener("click", () => {
+      const index = thumb.dataset.index
+      mainImage.src = images[index]
+      
+      thumbnails.forEach(t => t.classList.remove("active"))
+      thumb.classList.add("active")
+    })
+  })
 }
 
 function updateAsideList() {
@@ -277,7 +375,6 @@ function updateAsideList() {
   }
 }
 
-// Event listener para el botón de eliminar
 document.addEventListener("click", e => {
   const removeBtn = e.target.closest(".remove-btn")
   if (!removeBtn) return
@@ -294,7 +391,6 @@ document.addEventListener("click", e => {
       selectBtn.click()
     }
   } else {
-    // Si no está visible el libro, eliminarlo directamente
     const idx = selectedBooks.findIndex(b => b.id == id)
     if (idx !== -1) {
       selectedBooks.splice(idx, 1)

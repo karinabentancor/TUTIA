@@ -80,7 +80,7 @@ html, body {
 .aside-right {
     width: 40%;
     background-color: black;
-    color: whitesmoke;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
