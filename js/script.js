@@ -169,14 +169,7 @@ function renderBooks(books) {
 document.getElementById("search").addEventListener("input", applyFilters)
 document.getElementById("editorial").addEventListener("change", applyFilters)
 document.getElementById("category").addEventListener("change", applyFilters)
-document.getElementById("sort-title").addEventListener("click", () => {
-  currentBooks.sort((a, b) => a.title.localeCompare(b.title))
-  renderBooks(currentBooks)
-})
-document.getElementById("sort-author").addEventListener("click", () => {
-  currentBooks.sort((a, b) => a.author.localeCompare(b.author))
-  renderBooks(currentBooks)
-})
+
 document.getElementById("all-books").addEventListener("click", () => {
   showOnlyAvailable = false
   document.getElementById("all-books").classList.add("active")
