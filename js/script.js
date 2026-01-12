@@ -131,19 +131,11 @@ function renderBooks(books) {
     const pOrigLang = document.createElement("p")
     pOrigLang.innerHTML = `<strong>Idioma original:</strong> <span class="value">${book.languageOriginal}</span>`
 
-    if (!book.available) {
-      const pUnavailable = document.createElement("p")
-      pUnavailable.className = "out-of-stock"
-      pUnavailable.textContent = "Libro en préstamo"
-      bookDiv.appendChild(pUnavailable)
-    }
-
-    const iconWrapper = document.createElement("div")
-    iconWrapper.className = "icon-bottom-right"
+    const bookFooter = document.createElement("div")
+    bookFooter.className = "book-footer"
 
     const button = document.createElement("button")
-    button.type = "button"
-    button.className = "select-btn"
+    button.className = "pack-button"
     button.setAttribute("aria-label", "Seleccionar libro")
 
     const isSelected = selectedBooks.some(selectedBook => selectedBook.id == book.id)
@@ -152,14 +144,15 @@ function renderBooks(books) {
     }
 
     const icon = document.createElement("img")
-    icon.src = "svg/corazon svg4.svg"
+    icon.src = "svg/arrow-through-heart.svg"
     icon.alt = ""
 
     button.appendChild(icon)
-    iconWrapper.appendChild(button)
+    bookFooter.appendChild(button)
 
     bookContent.append(h3, pAuthor, pPublisher, pCategory, pPages, pLang, pOrigLang)
-    bookDiv.append(img, bookContent, iconWrapper)
+    bookDiv.append(img, bookContent, bookFooter)
+    
     container.appendChild(bookDiv)
   })
   attachSelectionHandler()
@@ -190,7 +183,7 @@ function attachSelectionHandler() {
 }
 
 function handleBookSelection(e) {
-  const btn = e.target.closest(".select-btn")
+  const btn = e.target.closest(".pack-button")
   if (!btn) return
   
   e.stopPropagation()
@@ -232,7 +225,7 @@ function attachModalHandler() {
 }
 
 function handleBookClick(e) {
-  if (e.target.closest(".select-btn")) return
+  if (e.target.closest(".pack-button")) return
   
   const bookDiv = e.target.closest(".book")
   if (!bookDiv) return
@@ -379,9 +372,9 @@ document.addEventListener("click", e => {
   const bookDiv = document.querySelector(`.book[data-id="${id}"]`)
   
   if (bookDiv) {
-    const selectBtn = bookDiv.querySelector(".select-btn")
-    if (selectBtn) {
-      selectBtn.click()
+    const packBtn = bookDiv.querySelector(".pack-button")
+    if (packBtn) {
+      packBtn.click()
     }
   } else {
     const idx = selectedBooks.findIndex(b => b.id == id)
@@ -389,6 +382,7 @@ document.addEventListener("click", e => {
       selectedBooks.splice(idx, 1)
       localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
       updateAsideList()
+      applyFilters()
     }
   }
 })
