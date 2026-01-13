@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TUTÍA</title>
-  <link rel="stylesheet" href="css/selection.css">
   <link rel="stylesheet" href="css/order.css">
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -35,23 +35,21 @@
             <div id="selectedBooksContainer"></div>
           </div>
 
+          <div class="price-display" id="priceDisplay">TOTAL: $0</div>
+
           <div class="personal-info-section">
             <h3>Datos personales</h3>
             <div class="personal-info-form">
               <div class="form-row">
                 <input type="text" id="firstName" placeholder="Nombre" class="form-input" required />
-              </div>
-              <div class="form-row">
                 <input type="text" id="lastName" placeholder="Apellido" class="form-input" required />
               </div>
               <div class="form-row">
-                <input type="text" id="documentId" placeholder="Documento de identidad" class="form-input" required />
+                <input type="text" id="documentId" placeholder="Documento" class="form-input" required />
+                <input type="tel" id="phone" placeholder="Celular" class="form-input" required />
               </div>
               <div class="form-row">
                 <input type="email" id="email" placeholder="Email" class="form-input" required />
-              </div>
-              <div class="form-row">
-                <input type="tel" id="phone" placeholder="Celular" class="form-input" required />
               </div>
             </div>
           </div>
@@ -60,7 +58,7 @@
             <h3>Documento de identidad</h3>
             <div class="document-upload-container">
               <div class="upload-item">
-                <label class="upload-label">Frente del documento</label>
+                <label class="upload-label">Frente</label>
                 <div class="file-upload-wrapper">
                   <input type="file" id="docFront" accept="image/*" class="file-input" />
                   <label for="docFront" class="file-label">
@@ -69,7 +67,7 @@
                 </div>
               </div>
               <div class="upload-item">
-                <label class="upload-label">Dorso del documento</label>
+                <label class="upload-label">Dorso</label>
                 <div class="file-upload-wrapper">
                   <input type="file" id="docBack" accept="image/*" class="file-input" />
                   <label for="docBack" class="file-label">
@@ -89,22 +87,20 @@
                   <label for="delivery" class="address-label">ENVÍO</label>
                 </div>
                 <div class="address-content">
-                  <div class="address-details">
-                    <input type="text" id="street" placeholder="Calle" class="address-input" />
+                  <div class="address-fields">
+                    <input type="text" id="street" placeholder="Dirección" class="address-input" />
                     <input type="text" id="corner" placeholder="Esquina" class="address-input" />
                   </div>
-                  <div class="address-notes">
-                    <textarea id="notes" placeholder="Aclaraciones (opcional)" class="address-textarea"></textarea>
-                  </div>
+                  <textarea id="notes" placeholder="Aclaraciones" class="address-textarea"></textarea>
                 </div>
               </div>
 
               <div class="address-option">
-                <div class="address-option-header">
+                <div class="pickup-info">
                   <input type="radio" id="pickup" name="delivery_address" value="pickup">
                   <label for="pickup" class="address-label">PICK-UP</label>
+                  <span class="pickup-text">Paysandú esquina Av. Rondeau</span>
                 </div>
-                <div class="pickup-address">Paysandú 1163 esquina Av. Rondeau</div>
               </div>
             </div>
           </div>

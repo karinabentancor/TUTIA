@@ -38,9 +38,17 @@ function generateImageName(title, author) {
   return `img/${titleClean}-${authorLastName}.jpg`;
 }
 
+function calculatePrice(bookCount) {
+  if (bookCount === 1) return 400;
+  if (bookCount === 2) return 500;
+  if (bookCount >= 3) return 700;
+  return 0;
+}
+
 function loadSelectedBooks() {
   const selectedBooks = JSON.parse(localStorage.getItem('selectedBooks')) || [];
   const container = document.getElementById('selectedBooksContainer');
+  const priceDisplay = document.getElementById('priceDisplay');
 
   console.log('Libros cargados desde localStorage:', selectedBooks);
 
@@ -52,15 +60,20 @@ function loadSelectedBooks() {
         <button class="button button-primary" onclick="window.location.href='selection.html'">SELECCIONAR LIBROS</button>
       </div>
     `;
+    priceDisplay.style.display = 'none';
     document.getElementById('confirmBtn').style.display = 'none';
     return;
   }
+
+  const price = calculatePrice(selectedBooks.length);
+  priceDisplay.textContent = `TOTAL: $ ${price}`;
+  priceDisplay.style.display = 'block';
 
   const booksHTML = selectedBooks.map((book, index) => {
     const imagePath = book.image || generateImageName(book.title, book.author);
     
     return `
-      <div class="selected-book-order" data-book-id="${book.id || index}">
+      <div class="selected-book" data-book-id="${book.id || index}">
         <div class="book-cover">
           ${imagePath ? 
             `<img src="${imagePath}" alt="Portada de ${book.title || 'libro'}" 
@@ -78,11 +91,7 @@ function loadSelectedBooks() {
     `;
   }).join('');
 
-  container.innerHTML = `
-    <div class="books-list-order">
-      ${booksHTML}
-    </div>
-  `;
+  container.innerHTML = booksHTML;
 }
 
 function goBack() {
@@ -128,23 +137,21 @@ function confirmOrder() {
   if (selectedAddress === 'pickup') {
     addressInfo = {
       type: 'pickup',
-      location: 'Paysandú 1163 esquina Av. Rondeau'
+      location: 'Paysandú esquina Av. Rondeau'
     };
   } else {
     const street = document.getElementById('street').value;
     const corner = document.getElementById('corner').value;
-    const notes = document.getElementById('notes').value;
 
     if (!street || !corner) {
-      alert('Por favor, completa la calle y esquina para el envío');
+      alert('Por favor, completa la dirección y esquina para el envío');
       return;
     }
 
     addressInfo = {
       type: 'delivery',
       street: street,
-      corner: corner,
-      notes: notes
+      corner: corner
     };
   }
 
@@ -171,7 +178,7 @@ function confirmOrder() {
   
   const paymentText = selectedPayment === 'transfer' ? 'Transferencia bancaria' : 'Efectivo';
   const deliveryText = selectedAddress === 'pickup' 
-    ? 'PICK-UP: Paysandú 1163 esquina Av. Rondeau'
+    ? 'PICK-UP: Paysandú esquina Av. Rondeau'
     : `${addressInfo.street} esquina ${addressInfo.corner}`;
 
   alert(`Préstamo confirmado!\n\nLibros: ${selectedBooks.length}\nEntrega: ${deliveryText}\nPago: ${paymentText}\n\nRecibirás una confirmación por email.`);

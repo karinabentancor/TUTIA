@@ -13,6 +13,7 @@ html, body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: #000;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,90 +22,46 @@ body {
   min-height: 100vh;
 }
 
-.back-arrow {
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 3px solid #000;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  margin: 0.5rem;
-}
-
-.back-arrow:hover {
-  transform: scale(1.1);
-  background: #000;
-}
-
-.back-arrow img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0);
-  transition: all 0.3s ease;
-}
-
-.back-arrow:hover img {
-  filter: brightness(0) invert(1);
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
+.container-fluid {
   flex: 1;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: 100%;
-  padding-top: 5rem;
+  overflow-y: auto;
   padding-bottom: 2rem;
 }
 
-.order-container {
-  background: rgba(255, 255, 255, 0.92);
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.selection-container {
+  background: rgba(255, 255, 255, 0.98);
   border-radius: 5px;
   padding: 1.5rem;
   border: 3px solid #000;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 2rem auto;
-  overflow: hidden;
+  margin: 0 auto;
 }
 
-.order-header {
+.selection-header {
   text-align: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
   border-bottom: 3px solid #000;
 }
 
-.order-header h1 {
-  font-size: 1.3rem;
+.selection-header p {
+  font-size: 1rem;
   font-weight: bold;
   color: #000;
   text-transform: uppercase;
-  margin-bottom: 0.5rem;
-  word-wrap: break-word;
-}
-
-.order-header p {
-  font-size: 0.75rem;
-  color: #333;
+  margin: 0;
   word-wrap: break-word;
 }
 
@@ -133,30 +90,23 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.books-section h3 {
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: #000;
-  text-transform: uppercase;
-  border-bottom: 2px solid #000;
-  padding-bottom: 0.5rem;
-}
-
-.books-list-order {
+#selectedBooksContainer {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.selected-book-order {
+.selected-book {
   background: #fff;
-  border: 2px solid #000;
+  border: 3px solid #000;
   border-radius: 5px;
   padding: 1rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  align-items: flex-start;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
 }
 
 .book-cover {
@@ -167,9 +117,9 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  flex-shrink: 0;
   border: 2px solid #000;
   background-color: #f9f9f9;
-  flex-shrink: 0;
 }
 
 .book-cover img {
@@ -178,38 +128,66 @@ body {
   object-fit: contain;
 }
 
+.no-image {
+  color: #666;
+  text-align: center;
+  font-size: 0.5rem;
+  padding: 0.3rem;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+
 .book-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
   min-width: 0;
 }
 
 .book-title {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: bold;
-  margin-bottom: 0.3rem;
+  color: #000;
+  line-height: 1.3;
   word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
 .book-author {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.book-publisher {
+  font-size: 0.6rem;
   color: #666;
   word-wrap: break-word;
-  overflow-wrap: break-word;
+}
+
+.price-display {
+  background: #000;
+  color: #fff;
+  padding: 0.8rem;
+  border-radius: 5px;
+  text-align: right;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  font-size: 0.85rem;
 }
 
 .personal-info-section,
 .document-upload-section,
-.delivery-section,
+.address-section,
 .payment-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .personal-info-section h3,
 .document-upload-section h3,
-.delivery-section h3,
+.address-section h3,
 .payment-section h3 {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: bold;
   margin-bottom: 1rem;
   color: #000;
@@ -221,19 +199,26 @@ body {
 .personal-info-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .form-input {
-  width: 100%;
-  padding: 0.5rem 0.7rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.4rem 0.6rem;
   border: 3px solid #000;
   background-color: #fff;
   color: #000;
   text-align: center;
   border-radius: 5px;
   font-family: monospace;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: bold;
   text-transform: uppercase;
   transition: all 0.3s ease;
@@ -258,55 +243,33 @@ body {
   background-color: rgba(0,0,0,0.02);
 }
 
-.form-textarea {
-  width: 100%;
-  padding: 0.5rem 0.7rem;
-  border: 3px solid #000;
-  background-color: #fff;
-  color: #000;
-  border-radius: 5px;
-  font-family: monospace;
-  font-size: 0.65rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  min-height: 80px;
-  resize: vertical;
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #ffe6e6 inset !important;
+  -webkit-text-fill-color: #000 !important;
+  box-shadow: 0 0 0 30px #ffe6e6 inset !important;
 }
 
-.form-textarea::placeholder {
-  color: #666;
-  font-family: monospace;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.form-textarea:focus {
-  outline: none;
-  background-color: #fff;
-  color: #000;
-  border-color: #000;
-  box-shadow: 0 0 0 1px #000;
-}
-
-.form-textarea:hover {
-  background-color: rgba(0,0,0,0.02);
+.document-upload-section {
+  margin-bottom: 1.5rem;
 }
 
 .document-upload-container {
   display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .upload-item {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
 .upload-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: bold;
   color: #000;
   text-transform: uppercase;
@@ -326,85 +289,201 @@ body {
 .file-label {
   display: block;
   width: 100%;
-  padding: 0.5rem 0.7rem;
+  padding: 0.4rem 0.6rem;
   border: 3px solid #000;
-  background-color: transparent;
-  color: #000;
   text-align: center;
   border-radius: 5px;
   font-family: monospace;
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.file-label:hover {
+.upload-item:first-child .file-label {
   background-color: #000;
   color: #fff;
 }
 
-.delivery-options {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+.upload-item:first-child .file-label:hover {
+  background-color: transparent;
+  color: #000;
 }
 
-.delivery-option {
+.upload-item:last-child .file-label {
+  background-color: transparent;
+  color: #000;
+}
+
+.upload-item:last-child .file-label:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.address-section {
+  margin-bottom: 1.5rem;
+}
+
+.address-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.address-option {
   border: 3px solid #000;
   border-radius: 5px;
   padding: 1rem;
   background: transparent;
 }
 
-.delivery-option-header {
+.address-option-header {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   margin-bottom: 1rem;
 }
 
-.delivery-option-header input[type="radio"] {
+.address-option-header input[type="radio"] {
   width: 18px;
   height: 18px;
+  min-width: 18px;
   cursor: pointer;
   flex-shrink: 0;
+  accent-color: #ff0000;
 }
 
-.delivery-label {
-  font-size: 0.75rem;
+.address-label {
+  font-size: 0.7rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  flex: 1;
   color: #000;
 }
 
-.delivery-content {
+.address-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-left: 1.5rem;
+  gap: 0.8rem;
 }
 
-.delivery-fields {
+.address-fields {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
-.pickup-address {
+.address-input {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 3px solid #000;
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.address-input::placeholder {
+  color: #666;
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.address-input:focus {
+  outline: none;
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.address-input:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+.address-input:-webkit-autofill,
+.address-input:-webkit-autofill:hover,
+.address-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #ffe6e6 inset !important;
+  -webkit-text-fill-color: #000 !important;
+  box-shadow: 0 0 0 30px #ffe6e6 inset !important;
+}
+
+.address-textarea {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 3px solid #000;
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 0.6rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  min-height: 60px;
+  resize: vertical;
+}
+
+.address-textarea::placeholder {
+  color: #666;
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.address-textarea:focus {
+  outline: none;
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
+  box-shadow: 0 0 0 1px #000;
+}
+
+.address-textarea:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+.address-textarea:-webkit-autofill,
+.address-textarea:-webkit-autofill:hover,
+.address-textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 30px #ffe6e6 inset !important;
+  -webkit-text-fill-color: #000 !important;
+  box-shadow: 0 0 0 30px #ffe6e6 inset !important;
+}
+
+.pickup-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.pickup-info input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: #ff0000;
+}
+
+.pickup-text {
   font-size: 0.7rem;
   color: #333;
-  margin-left: 1.5rem;
   word-wrap: break-word;
 }
 
 .payment-options {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .payment-option {
@@ -427,10 +506,11 @@ body {
   height: 18px;
   cursor: pointer;
   flex-shrink: 0;
+  accent-color: #ff0000;
 }
 
 .payment-option label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
@@ -443,7 +523,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .button {
@@ -470,68 +550,30 @@ body {
   color: #fff;
 }
 
-.button-dark {
+.button-primary {
   background-color: #000;
   color: #fff;
   border: 3px solid #000;
-  padding: 0.5rem 0.8rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: monospace;
-  font-size: 0.65rem;
-  text-align: center;
-  text-transform: uppercase;
-  white-space: nowrap;
-  flex: 1;
-  min-width: 140px;
-  max-width: 200px;
 }
 
-.button-dark:hover {
+.button-primary:hover {
   background-color: transparent;
   color: #000;
-  transform: scale(1.02);
 }
 
-/* Tablets */
 @media (min-width: 576px) {
-  .back-arrow {
-    width: 44px;
-    height: 44px;
-    top: 1.2rem;
-    left: 1.2rem;
-    margin: 0.6rem;
-  }
-
-  .back-arrow img {
-    width: 26px;
-    height: 26px;
-  }
-
-  .content {
-    padding: 2rem 1.5rem;
-    padding-top: 5rem;
-  }
-
-  .order-container {
+  .selection-container {
     padding: 2rem;
     max-width: 750px;
   }
 
-  .order-header h1 {
-    font-size: 1.4rem;
-  }
-
-  .order-header p {
-    font-size: 0.8rem;
+  .selection-header p {
+    font-size: 1.1rem;
   }
 
   .loan-dates {
     flex-direction: row;
     justify-content: space-between;
-    padding: 1.2rem;
   }
 
   .date-info {
@@ -545,76 +587,56 @@ body {
   }
 
   .book-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .book-author {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+
+  .price-display {
+    font-size: 0.9rem;
   }
 
   .form-input,
-  .form-textarea,
+  .address-input,
+  .address-textarea,
   .file-label {
-    font-size: 0.7rem;
-    padding: 0.55rem 0.8rem;
+    font-size: 0.65rem;
+    padding: 0.45rem 0.7rem;
   }
 
-  .delivery-fields {
+  .address-fields {
     flex-direction: row;
   }
 
-  .button, .button-dark {
+  .pickup-text {
+    font-size: 0.75rem;
+  }
+
+  .button {
     font-size: 0.7rem;
     padding: 0.55rem 1rem;
     min-width: 160px;
-    max-width: 220px;
   }
 }
 
-/* Desktop Small */
 @media (min-width: 768px) {
-  .back-arrow {
-    width: 48px;
-    height: 48px;
-    top: 1.5rem;
-    left: 1.5rem;
-    margin: 0.8rem;
-  }
-
-  .back-arrow img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .content {
+  main {
     padding: 2.5rem 2rem;
-    padding-top: 3rem;
-    justify-content: center;
   }
 
-  .order-container {
+  .selection-container {
     padding: 2.5rem;
     max-width: 850px;
   }
 
-  .order-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .order-header p {
-    font-size: 0.85rem;
+  .selection-header p {
+    font-size: 1.2rem;
   }
 
   .date-info {
     font-size: 0.85rem;
-  }
-
-  .books-section h3,
-  .personal-info-section h3,
-  .document-upload-section h3,
-  .delivery-section h3,
-  .payment-section h3 {
-    font-size: 1rem;
   }
 
   .book-cover {
@@ -624,90 +646,65 @@ body {
   }
 
   .book-title {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .book-author {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .price-display {
+    font-size: 0.95rem;
+  }
+
+  .personal-info-section h3,
+  .document-upload-section h3,
+  .address-section h3,
+  .payment-section h3 {
+    font-size: 0.9rem;
   }
 
   .form-input,
-  .form-textarea,
+  .address-input,
+  .address-textarea,
   .file-label {
-    font-size: 0.75rem;
-    padding: 0.6rem 0.9rem;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
   }
 
   .upload-label,
-  .delivery-label,
+  .address-label,
   .payment-option label {
+    font-size: 0.75rem;
+  }
+
+  .pickup-text {
     font-size: 0.8rem;
   }
 
-  .document-upload-container {
-    flex-direction: row;
-    gap: 1.5rem;
-  }
-
-  .upload-item {
-    flex: 1;
-  }
-
-  .button, .button-dark {
+  .button {
     font-size: 0.75rem;
     padding: 0.6rem 1.2rem;
     min-width: 180px;
-    max-width: 250px;
   }
 }
 
-/* Desktop Medium */
 @media (min-width: 1024px) {
-  .back-arrow {
-    width: 52px;
-    height: 52px;
-    top: 2rem;
-    left: 2rem;
-    margin: 1rem;
-  }
-
-  .back-arrow img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .content {
+  main {
     padding: 3rem 3rem;
-    padding-top: 3rem;
   }
 
-  .order-container {
+  .selection-container {
     padding: 3rem;
     max-width: 950px;
   }
 
-  .order-header h1 {
-    font-size: 1.6rem;
-  }
-
-  .order-header p {
-    font-size: 0.9rem;
-  }
-
-  .loan-dates {
-    padding: 1.5rem;
+  .selection-header p {
+    font-size: 1.3rem;
   }
 
   .date-info {
     font-size: 0.9rem;
-  }
-
-  .books-section h3,
-  .personal-info-section h3,
-  .document-upload-section h3,
-  .delivery-section h3,
-  .payment-section h3 {
-    font-size: 1.1rem;
   }
 
   .book-cover {
@@ -717,110 +714,45 @@ body {
   }
 
   .book-title {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   .book-author {
-    font-size: 0.85rem;
-  }
-
-  .form-input,
-  .form-textarea,
-  .file-label {
     font-size: 0.8rem;
-    padding: 0.65rem 1rem;
   }
 
-  .upload-label,
-  .delivery-label,
-  .payment-option label {
-    font-size: 0.85rem;
-  }
-
-  .button, .button-dark {
-    font-size: 0.8rem;
-    padding: 0.65rem 1.4rem;
-    min-width: 200px;
-    max-width: 280px;
-  }
-}
-
-/* Desktop Large */
-@media (min-width: 1440px) {
-  .back-arrow {
-    width: 56px;
-    height: 56px;
-    top: 2.5rem;
-    left: 2.5rem;
-    margin: 1.2rem;
-  }
-
-  .back-arrow img {
-    width: 32px;
-    height: 32px;
-  }
-
-  .content {
-    padding: 4rem 4rem;
-    padding-top: 3rem;
-  }
-
-  .order-container {
-    padding: 3.5rem;
-    max-width: 1000px;
-  }
-
-  .order-header h1 {
-    font-size: 1.7rem;
-  }
-
-  .order-header p {
-    font-size: 0.95rem;
-  }
-
-  .date-info {
-    font-size: 0.95rem;
-  }
-
-  .books-section h3,
-  .personal-info-section h3,
-  .document-upload-section h3,
-  .delivery-section h3,
-  .payment-section h3 {
-    font-size: 1.2rem;
-  }
-
-  .book-cover {
-    width: 100px;
-    height: 145px;
-    min-width: 100px;
-  }
-
-  .book-title {
+  .price-display {
     font-size: 1rem;
   }
 
-  .book-author {
-    font-size: 0.9rem;
+  .personal-info-section h3,
+  .document-upload-section h3,
+  .address-section h3,
+  .payment-section h3 {
+    font-size: 0.95rem;
   }
 
   .form-input,
-  .form-textarea,
+  .address-input,
+  .address-textarea,
   .file-label {
-    font-size: 0.85rem;
-    padding: 0.7rem 1.1rem;
+    font-size: 0.75rem;
+    padding: 0.55rem 0.9rem;
   }
 
   .upload-label,
-  .delivery-label,
+  .address-label,
   .payment-option label {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
-  .button, .button-dark {
+  .pickup-text {
     font-size: 0.85rem;
-    padding: 0.7rem 1.6rem;
-    min-width: 220px;
-    max-width: 300px;
+  }
+
+  .button {
+    font-size: 0.8rem;
+    padding: 0.65rem 1.4rem;
+    min-width: 200px;
   }
 }
