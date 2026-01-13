@@ -144,7 +144,7 @@ function renderBooks(books) {
     }
 
     const icon = document.createElement("img")
-    icon.src = "svg/Vector.png"
+    icon.src = "svg/c cuadr.svg"
     icon.alt = ""
 
     button.appendChild(icon)
