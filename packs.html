@@ -1,120 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/packs.css">
-    <title>PACKS / TUTÍA</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PACKS / TUTÍA</title>
+  <link rel="stylesheet" href="css/packs.css" />
 </head>
-
 <body>
-    <div class="container">
-        <div class="left-column">
- <div class="header-section">
-                <img src="svg/arrow-left-square-svgrepo-com.svg" alt="Volver" class="back-arrow" onclick="history.back()">
-                <h1 class="main-title">PACKS</h1>
-            </div>            
-            <div class="section">
-                <h2 class="section-title">PACKS DE 2 LIBROS</h2>
-                <div class="carousel">
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK PERI ROSSI</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK CAGE</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK BATAILLE</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section">
-                <h2 class="section-title">PACKS DE 3 LIBROS</h2>
-                <div class="carousel">
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK VIRNO</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK INVERSO</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="pack-card">
-                        <div class="pack-image">
-                            Imagen Pack
-                        </div>
-                        <div class="pack-info">
-                            <div class="pack-name">PACK AGAMBEN I</div>
-                            <button class="pack-button">
-                                <img src="svg/arrow-through-heart.svg" alt="Comprar">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="header-row">
+    <div class="header-left">
+      <a href="catalog.html">
+        <img src="svg/arrow-left-square-svgrepo-com.svg" class="arrow" alt="Volver">
+      </a>
+      <h1 class="page-title">PACKS</h1>
+    </div>
+  </div>
+
+  <main class="content">
+    <div class="packs-sections">
+      <section class="pack-section">
+        <h2 class="section-title">PACKS DE 2 LIBROS</h2>
+        <div class="carousel" id="packs-2"></div>
+      </section>
+      
+      <section class="pack-section">
+        <h2 class="section-title">PACKS DE 3 LIBROS</h2>
+        <div class="carousel" id="packs-3"></div>
+      </section>
+    </div>
+
+    <div class="roulette-section">
+      <div class="roulette-container">
+        <div class="roulette-intro">
+          <h2 class="roulette-title">¿NO SABÉS CUÁL ELEGIR?</h2>
+          <h3 class="roulette-subtitle">GIRÁ LA RULETA</h3>
         </div>
         
-        <div class="right-column">
-            <div id="roulette">
-    <div class="roulette-intro">
-        <h2>¿No sabés cuál elegir?<br>GIRÁ LA RULETA</h2>
-        <img src="" alt="Ruleta girando" class="roulette-gif">
-    </div>
-    <button id="spin">GIRAR RULETA</button>
-    <div id="result"></div>
-    <div id="actions" style="display:none; margin-top:1rem;">
-        <button id="select">Seleccionar este pack</button>
-        <button id="retry">Volver a girar ruleta</button>
-    </div>
-</div>
-</div>
-        <p style="font-weight: bold; font-size: clamp(1rem, 3vw, 1.5rem); text-align: center;">CLUB DE LIBROS</p>
-            <p style="font-size: clamp(0.8rem, 2vw, 1.2rem); text-align: center; margin-top: 0.5rem;">Montevideo, Uruguay</p>
+        <button id="spin" class="button-dark spin-button">GIRAR RULETA</button>
+        
+        <div id="result" class="roulette-result"></div>
+        
+        <div id="actions" class="roulette-actions">
+          <button id="select" class="button">SELECCIONAR ESTE PACK</button>
+          <button id="retry" class="button">VOLVER A GIRAR</button>
         </div>
+      </div>
     </div>
-    <script src="js/packs.js"></script>
+
+    <footer class="page-footer">
+        <a href="index.html">
+        <img src="svg/TUTÍA_b.svg" alt="Logo TUTÍA" class="logo" />
+      </a>
+      <p class="footer-title">CLUB DE LIBROS</p>
+      <p class="footer-location">Montevideo, Uruguay</p>
+    </footer>
+  </main>
+
+  <script src="js/packs.js"></script>
 </body>
 </html>
