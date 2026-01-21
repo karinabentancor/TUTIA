@@ -114,22 +114,19 @@ function renderBooks(books) {
     h3.textContent = book.title
 
     const pAuthor = document.createElement("p")
-    pAuthor.innerHTML = `<strong>Autor/a:</strong> <span class="value">${book.author}</span>`
+    pAuthor.innerHTML = `<span class="value">${book.author}</span>`
 
     const pPublisher = document.createElement("p")
-    pPublisher.innerHTML = `<strong>Editorial:</strong> <span class="value">${book.publisher}</span>`
+    pPublisher.innerHTML = `<span class="value">${book.publisher}</span>`
 
     const pCategory = document.createElement("p")
-    pCategory.innerHTML = `<strong>Categoría:</strong> <span class="value">${book.category}</span>`
+    pCategory.innerHTML = `<span class="value">${book.category}</span>`
 
     const pPages = document.createElement("p")
-    pPages.innerHTML = `<strong>Páginas:</strong> <span class="value">${book.pages}</span>`
+    pPages.innerHTML = `<span class="value">${book.pages} páginas</span>`
 
     const pLang = document.createElement("p")
-    pLang.innerHTML = `<strong>Idioma:</strong> <span class="value">${book.language}</span>`
-
-    const pOrigLang = document.createElement("p")
-    pOrigLang.innerHTML = `<strong>Idioma original:</strong> <span class="value">${book.languageOriginal}</span>`
+    pLang.innerHTML = `<span class="value">${book.language}</span>`
 
     const bookFooter = document.createElement("div")
     bookFooter.className = "book-footer"
@@ -148,15 +145,25 @@ function renderBooks(books) {
     icon.alt = ""
 
     button.appendChild(icon)
+    
+    button.addEventListener("click", (e) => {
+      e.stopPropagation()
+      handleBookSelection(book, button)
+    })
+    
     bookFooter.appendChild(button)
 
-    bookContent.append(h3, pAuthor, pPublisher, pCategory, pPages, pLang, pOrigLang)
+    bookContent.append(h3, pAuthor, pPublisher, pCategory, pPages, pLang)
     bookDiv.append(img, bookContent, bookFooter)
+    
+    bookDiv.addEventListener("click", (e) => {
+      if (!e.target.closest(".pack-button")) {
+        openModal(book)
+      }
+    })
     
     container.appendChild(bookDiv)
   })
-  attachSelectionHandler()
-  attachModalHandler()
 }
 
 document.getElementById("search").addEventListener("input", applyFilters)
@@ -176,66 +183,40 @@ document.getElementById("available-books").addEventListener("click", () => {
   applyFilters()
 })
 
-function attachSelectionHandler() {
-  const container = document.getElementById("catalog")
-  container.removeEventListener("click", handleBookSelection)
-  container.addEventListener("click", handleBookSelection)
-}
-
-function handleBookSelection(e) {
-  const btn = e.target.closest(".pack-button")
-  if (!btn) return
+function handleBookSelection(book, button) {
+  if (!book.available) {
+    alert("Este libro no está disponible")
+    return
+  }
   
-  e.stopPropagation()
-  
-  const bookDiv = btn.closest(".book")
-  if (bookDiv.classList.contains("not-available")) return
-  const id = bookDiv.dataset.id
-  const bookData = allBooksData.find(book => book.id == id)
+  const id = book.id
   const idx = selectedBooks.findIndex(b => b.id == id)
   
   if (idx === -1) {
-    if (selectedBooks.length >= 3) return alert("Puedes seleccionar hasta 3 libros")
+    if (selectedBooks.length >= 3) {
+      alert("Puedes seleccionar hasta 3 libros")
+      return
+    }
     selectedBooks.push({
-      id: bookData.id,
-      title: bookData.title,
-      author: bookData.author,
-      publisher: bookData.publisher,
-      category: bookData.category,
-      pages: bookData.pages,
-      language: bookData.language,
-      languageOriginal: bookData.languageOriginal,
-      image: bookData.image,
-      available: bookData.available
+      id: book.id,
+      title: book.title,
+      author: book.author,
+      publisher: book.publisher,
+      category: book.category,
+      pages: book.pages,
+      language: book.language,
+      languageOriginal: book.languageOriginal,
+      image: book.image,
+      available: book.available
     })
-    btn.classList.add("selected")
+    button.classList.add("selected")
   } else {
     selectedBooks.splice(idx, 1)
-    btn.classList.remove("selected")
+    button.classList.remove("selected")
   }
   
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
   updateAsideList()
-}
-
-function attachModalHandler() {
-  const container = document.getElementById("catalog")
-  container.removeEventListener("click", handleBookClick)
-  container.addEventListener("click", handleBookClick)
-}
-
-function handleBookClick(e) {
-  if (e.target.closest(".pack-button")) return
-  
-  const bookDiv = e.target.closest(".book")
-  if (!bookDiv) return
-  
-  const id = bookDiv.dataset.id
-  const bookData = allBooksData.find(book => book.id == id)
-  
-  if (bookData) {
-    openModal(bookData)
-  }
 }
 
 function openModal(book) {
@@ -371,18 +352,18 @@ document.addEventListener("click", e => {
   const id = li.dataset.id
   const bookDiv = document.querySelector(`.book[data-id="${id}"]`)
   
-  if (bookDiv) {
-    const packBtn = bookDiv.querySelector(".pack-button")
-    if (packBtn) {
-      packBtn.click()
+  const idx = selectedBooks.findIndex(b => b.id == id)
+  if (idx !== -1) {
+    selectedBooks.splice(idx, 1)
+    localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+    
+    if (bookDiv) {
+      const packBtn = bookDiv.querySelector(".pack-button")
+      if (packBtn) {
+        packBtn.classList.remove("selected")
+      }
     }
-  } else {
-    const idx = selectedBooks.findIndex(b => b.id == id)
-    if (idx !== -1) {
-      selectedBooks.splice(idx, 1)
-      localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
-      updateAsideList()
-      applyFilters()
-    }
+    
+    updateAsideList()
   }
 })
