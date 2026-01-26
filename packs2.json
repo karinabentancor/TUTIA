@@ -1,61 +1,681 @@
 [
   {
-    "id": "pack_virno",
+    "id": "001",
+    "name": "PACK VIRNO",
+    "image": "",
     "books": [
       {
-        "title": "Cuando las cosas se desplazan",
-        "author": "Virno",
-        "publisher": "Ediciones del Signo"
-      },
-      {
-        "title": "La multitud subjetiva",
-        "author": "Virno",
-        "publisher": "Caja Negra"
-      },
-      {
-        "title": "Multitud y acción política",
+        "title": "Gramática de la multitud - Para un análisis de las formas de vida contemporáneas",
         "author": "Paolo Virno",
+        "publisher": "Tinta Limón / Traficantes de sueños"
+      },
+      {
+        "title": "Sobre la impotencia - La vida en la era de su parálisis frenética",
+        "author": "Paolo Virno",
+        "publisher": "Tinta Limón / Tercero incluido / Traficantes de sueños"
+      }
+    ]
+  },
+  {
+    "id": "002",
+    "name": "PACK AGAMBEN",
+    "image": "",
+    "books": [
+      {
+        "title": "Homo sacer: El poder soberano y la vida desnuda",
+        "author": "Giorgio Agamben",
+        "publisher": "Adriana Hidalgo"
+      },
+      {
+        "title": "Profanaciones",
+        "author": "Giorgio Agamben",
+        "publisher": "Adriana Hidalgo"
+      }
+    ]
+  },
+  {
+    "id": "003",
+    "name": "PACK KAFKA",
+    "image": "",
+    "books": [
+      {
+        "title": "El castillo",
+        "author": "Franz Kafka",
+        "publisher": "Alianza / Emecé"
+      },
+      {
+        "title": "El proceso",
+        "author": "Franz Kafka",
+        "publisher": "Galas"
+      }
+    ]
+  },
+  {
+    "id": "004",
+    "name": "PACK WILDE",
+    "image": "",
+    "books": [
+      {
+        "title": "El retrato de Dorian Gray",
+        "author": "Oscar Wilde",
+        "publisher": "Edaf"
+      },
+      {
+        "title": "La decadencia de la mentira",
+        "author": "Oscar Wilde",
+        "publisher": "Acantilado"
+      }
+    ]
+  },
+  {
+    "id": "005",
+    "name": "PACK PERI ROSSI",
+    "image": "",
+    "books": [
+      {
+        "title": "Los amores equivocados",
+        "author": "Cristina Peri Rossi",
+        "publisher": "HUM"
+      },
+      {
+        "title": "Arqueología amprpsa: antología poética 1971-2018",
+        "author": "Cristina Peri Rossi",
+        "publisher": "Estuario"
+      }
+    ]
+  },
+  {
+    "id": "006",
+    "name": "PACK WOOLF",
+    "image": "",
+    "books": [
+      {
+        "title": "Un cuarto propio",
+        "author": "Virginia Woolf",
+        "publisher": "Austral"
+      },
+      {
+        "title": "La señora Dalloway",
+        "author": "Virginia Woolf",
+        "publisher": "Plutón"
+      }
+    ]
+  },
+  {
+    "id": "007",
+    "name": "PACK CIORAN",
+    "image": "",
+    "books": [
+      {
+        "title": "En las cumbres de la desesperación",
+        "author": "Emil Cioran",
+        "publisher": "Herminda"
+      },
+      {
+        "title": "De lágrimas y santos",
+        "author": "Emil Cioran",
+        "publisher": "Tusquets"
+      }
+    ]
+  },
+  {
+    "id": "008",
+    "name": "PACK PRECIADO",
+    "image": "",
+    "books": [
+      {
+        "title": "Un apartamento en Urano - Crónicas del cruce",
+        "author": "Paul B Preciado",
+        "publisher": "Anagrama"
+      },
+      {
+        "title": "Pornotopía - Arquitectura y sexualidad en 'Playboy' durante la guerra fría",
+        "author": "Paul B Preciado",
+        "publisher": "Anagrama"
+      }
+    ]
+  },
+  {
+    "id": "009",
+    "name": "PACK PESSOA",
+    "image": "",
+    "books": [
+      {
+        "title": "Suave es vivir solo",
+        "author": "Fernando Pessoa",
+        "publisher": "Penguin Random House"
+      },
+      {
+        "title": "El banquero anarquista",
+        "author": "Fernando Pessoa",
+        "publisher": "Interzona"
+      }
+    ]
+  },
+  {
+    "id": "010",
+    "name": "PACK VISCARRA",
+    "image": "",
+    "books": [
+      {
+        "title": "Borracho estaba, pero me acuerdo: Memorias del Victor Hugo",
+        "author": "Victor Hugo Viscarra",
+        "publisher": "Correveidile"
+      },
+      {
+        "title": "Alcoholatum & otros drinks: crónicas para gatos y pelagatos",
+        "author": "Victor Hugo Viscarra",
+        "publisher": "Correveidile"
+      }
+    ]
+  },
+  {
+    "id": "011",
+    "name": "PACK GUTIÉRREZ",
+    "image": "",
+    "books": [
+      {
+        "title": "Obra junta (1966 - 1972)",
+        "author": "Íbero Gutiérrez",
+        "publisher": "Estuario"
+      },
+      {
+        "title": "Mover el antiguo instrumental de la noche - 57 piezas dramáticas o Teatro completo",
+        "author": "Íbero Gutiérrez",
+        "publisher": "Estuario"
+      }
+    ]
+  },
+  {
+    "id": "012",
+    "name": "PACK LE GUIN",
+    "image": "",
+    "books": [
+      {
+        "title": "La teoría de la bolsa de la ficción",
+        "author": "Ursula K Le Guin",
+        "publisher": "Rara avis"
+      },
+      {
+        "title": "Las niñas salvajes",
+        "author": "Ursula K Le Guin",
+        "publisher": "Virus"
+      }
+    ]
+  },
+  {
+    "id": "013",
+    "name": "PACK BARRUBIA",
+    "image": "",
+    "books": [
+      {
+        "title": "Arena",
+        "author": "Lalo Barrubia",
+        "publisher": "Planeta"
+      },
+      {
+        "title": "Los misterios dolorosos",
+        "author": "Lalo Barrubia",
+        "publisher": "HUM"
+      }
+    ]
+  },
+  {
+    "id": "014",
+    "name": "PACK FERREIRO",
+    "image": "",
+    "books": [
+      {
+        "title": "Catálogo incompleto de ideas truncas y otras mascotas que no llegate a conocer",
+        "author": "Alejandro Ferreiro",
+        "publisher": "Estuario"
+      },
+      {
+        "title": "Portland",
+        "author": "Alejandro Ferreiro",
+        "publisher": "HUM"
+      }
+    ]
+  },
+  {
+    "id": "015",
+    "name": "PACK TIQQUN",
+    "image": "",
+    "books": [
+      {
+        "title": "La hipótesis cibernética",
+        "author": "Tiqqun",
+        "publisher": "Acuarela libros / Machado / S,L"
+      },
+      {
+        "title": "Primeros materiales para una teoría de la jovencita",
+        "author": "Tiqqun",
+        "publisher": "Acuarela libros / Machado / S,L"
+      }
+    ]
+  },
+  {
+    "id": "016",
+    "name": "PACK BARTRA",
+    "image": "",
+    "books": [
+      {
+        "title": "Antropología del cerebro: Conciencia, cultura y libre albedrío",
+        "author": "Roger Bartra",
+        "publisher": "PRE-TEXTOS"
+      },
+      {
+        "title": "Chamanes y robots: Reflexiones sobre el efecto placebo y la conciencia artificial",
+        "author": "Roger Bartra",
+        "publisher": "Anagrama"
+      }
+    ]
+  },
+  {
+    "id": "017",
+    "name": "PACK ARTAUD",
+    "image": "",
+    "books": [
+      {
+        "title": "Antonin Artaud Textos",
+        "author": "Antonin Artaud",
+        "publisher": "De bolsillo"
+      },
+      {
+        "title": "El arte y la muerte / Otros escritos",
+        "author": "Antonin Artaud",
+        "publisher": "Caja negra"
+      }
+    ]
+  },
+  {
+    "id": "018",
+    "name": "PACK BATAILLE",
+    "image": "",
+    "books": [
+      {
+        "title": "Lo imposible",
+        "author": "Georges Bataille",
+        "publisher": "Arena"
+      },
+      {
+        "title": "El erotismo",
+        "author": "Georges Bataille",
+        "publisher": "Tusquets"
+      }
+    ]
+  },
+  {
+    "id": "019",
+    "name": "PACK CAGE",
+    "image": "",
+    "books": [
+      {
+        "title": "Conferencia sobre nada",
+        "author": "John Cage",
+        "publisher": "Interzona"
+      },
+      {
+        "title": "Escribir en el agua: Cartas (1930-1992)",
+        "author": "John Cage",
+        "publisher": "Caja negra"
+      }
+    ]
+  },
+  {
+    "id": "020",
+    "name": "PACK HARWICZ",
+    "image": "",
+    "books": [
+      {
+        "title": "Perder el juicio",
+        "author": "Ariana Harwicz",
+        "publisher": "Anagrama"
+      },
+      {
+        "title": "Trilogía de la pasión",
+        "author": "Ariana Harwicz",
+        "publisher": "Mardulce"
+      }
+    ]
+  },
+  {
+    "id": "021",
+    "name": "PACK FILOSOFÍA CONTEMPORÁNEA",
+    "image": "",
+    "books": [
+      {
+        "title": "Nunca fuimos modernos",
+        "author": "Bruno Latour",
+        "publisher": "Siglo Veintiuno"
+      },
+      {
+        "title": "La sociedad del espectáculo",
+        "author": "Guy Debord",
+        "publisher": "Punto flotante"
+      }
+    ]
+  },
+  {
+    "id": "022",
+    "name": "PACK ANTROPOLOGÍA",
+    "image": "",
+    "books": [
+      {
+        "title": "La mirada del jaguar - Introducción al pespectivismo amerindio",
+        "author": "Eduardo Viveiros de Castro",
+        "publisher": "Tinta Limón"
+      },
+      {
+        "title": "Fragmentos de antropología anarquista",
+        "author": "David Graeber",
+        "publisher": "Virus"
+      }
+    ]
+  },
+  {
+    "id": "023",
+    "name": "PACK ESTUDIOS SONOROS",
+    "image": "",
+    "books": [
+      {
+        "title": "El arte de los ruidos",
+        "author": "Luigi Russolo",
+        "publisher": "Dobra robota"
+      },
+      {
+        "title": "Música e imaginación",
+        "author": "Aaron Copland",
+        "publisher": "Emecé"
+      }
+    ]
+  },
+  {
+    "id": "024",
+    "name": "PACK POESÍA URUGUAYA",
+    "image": "",
+    "books": [
+      {
+        "title": "Cielo genital",
+        "author": "Julio Inverso",
+        "publisher": "Fardo"
+      },
+      {
+        "title": "Poesía",
+        "author": "Elías Uriarte",
+        "publisher": "Paréntesis"
+      }
+    ]
+  },
+  {
+    "id": "025",
+    "name": "PACK POESÍA LATINOAMERICANA",
+    "image": "",
+    "books": [
+      {
+        "title": "Trabajar cansa / vendrá la muerte y tendrá tus ojos",
+        "author": "Cesar Pavese",
+        "publisher": "Gricelda García"
+      },
+      {
+        "title": "Anunciaciones y otras fábulas",
+        "author": "Juan Gelman",
+        "publisher": "La página"
+      }
+    ]
+  },
+  {
+    "id": "026",
+    "name": "PACK POESÍA CLÁSICA",
+    "image": "",
+    "books": [
+      {
+        "title": "Las flores del mal",
+        "author": "Charles Baudelaire",
+        "publisher": "Austral"
+      },
+      {
+        "title": "El barco ebrio",
+        "author": "Arthur Rimbaud",
+        "publisher": "Interzona"
+      }
+    ]
+  },
+  {
+    "id": "027",
+    "name": "PACK POESÍA ESPAÑOLA",
+    "image": "",
+    "books": [
+      {
+        "title": "Agujero llamado Nevermore: (Selección poética 1968-1999)",
+        "author": "Leopoldo María Panero",
+        "publisher": "Cátedra"
+      },
+      {
+        "title": "Cien poemas escogidos",
+        "author": "Giuseppe Ungaretti",
+        "publisher": "Argonauta"
+      }
+    ]
+  },
+  {
+    "id": "028",
+    "name": "PACK FEMINISMO Y GÉNERO",
+    "image": "",
+    "books": [
+      {
+        "title": "Manifiesto contrasexual",
+        "author": "Paul B Preciado",
+        "publisher": "Destruir para crear"
+      },
+      {
+        "title": "Manifiesto para Cyborgs: Ciencia, tencnología y feminismo socialista a finales del silo XX",
+        "author": "Donna Haraway",
+        "publisher": "Letra Sudaca"
+      }
+    ]
+  },
+  {
+    "id": "029",
+    "name": "PACK NARRATIVA LATINOAMERICANA",
+    "image": "",
+    "books": [
+      {
+        "title": "Novelita lumpen",
+        "author": "Roberto Bolaño",
+        "publisher": "Chupacabra"
+      },
+      {
+        "title": "Todas las sangres",
+        "author": "José María Arguedas",
+        "publisher": "Horizonte"
+      }
+    ]
+  },
+  {
+    "id": "030",
+    "name": "PACK FILOSOFÍA Y POESÍA",
+    "image": "",
+    "books": [
+      {
+        "title": "Derrames entre el capitalismo y la esquizofrenia",
+        "author": "Gilles Deleuze",
+        "publisher": "Cactus"
+      },
+      {
+        "title": "Poesías completas",
+        "author": "Delmira Agustini",
+        "publisher": "Losada"
+      }
+    ]
+  },
+  {
+    "id": "031",
+    "name": "PACK ENSAYO Y NARRATIVA",
+    "image": "",
+    "books": [
+      {
+        "title": "Lo infraordinario",
+        "author": "Georges Perec",
+        "publisher": "Eterna cadencia"
+      },
+      {
+        "title": "Notas del subsuelo",
+        "author": "Fiódor Dostoyevski",
+        "publisher": "Séptimo sello"
+      }
+    ]
+  },
+  {
+    "id": "032",
+    "name": "PACK PENSAMIENTO CRÍTICO",
+    "image": "",
+    "books": [
+      {
+        "title": "Crítica de la violencia",
+        "author": "Walter Benjamin",
+        "publisher": "Biblioteca Nueva"
+      },
+      {
+        "title": "Eichmann y el Holocausto",
+        "author": "Hannah Arendt",
+        "publisher": "Taurus"
+      }
+    ]
+  },
+  {
+    "id": "033",
+    "name": "PACK LATINOAMÉRICA HOY",
+    "image": "",
+    "books": [
+      {
+        "title": "Capitalismo gore - Control económico, violencia y narcopoder",
+        "author": "Sayak Valencia",
+        "publisher": "Paidós"
+      },
+      {
+        "title": "Filosofías del sur - Descolonización y transmodernidad",
+        "author": "Enrique Dussel",
         "publisher": "Akal"
       }
     ]
   },
   {
-    "id": "pack_inverso",
+    "id": "034",
+    "name": "PACK NARRATIVA EXPERIMENTAL",
+    "image": "",
     "books": [
       {
-        "title": "Inverso",
-        "author": "Autor Ejemplo",
-        "publisher": "Editorial Uno"
+        "title": "La existencia está en otra parte",
+        "author": "Virginia Mórtola",
+        "publisher": "Fin de siglo"
       },
       {
-        "title": "Contra Inverso",
-        "author": "Autor Ejemplo",
-        "publisher": "Editorial Dos"
-      },
-      {
-        "title": "Más Inverso",
-        "author": "Autor Ejemplo",
-        "publisher": "Editorial Tres"
+        "title": "Maestros de la escritura",
+        "author": "Liliana Villanueva",
+        "publisher": "Godot"
       }
     ]
   },
   {
-    "id": "pack_agamben_i",
+    "id": "035",
+    "name": "PACK AFORISMOS Y REFLEXIÓN",
+    "image": "",
     "books": [
       {
-        "title": "Homo Sacer I",
-        "author": "Giorgio Agamben",
-        "publisher": "Editorial Trotta"
+        "title": "Aforismos",
+        "author": "Oscar Wilde",
+        "publisher": "Interzona"
       },
       {
-        "title": "El reino y la gloria",
-        "author": "Giorgio Agamben",
-        "publisher": "Editorial Pre-Textos"
+        "title": "El poder de las palabras",
+        "author": "Simone Weil",
+        "publisher": "Godot"
+      }
+    ]
+  },
+  {
+    "id": "036",
+    "name": "PACK ENSAYO CONTEMPORÁNEO",
+    "image": "",
+    "books": [
+      {
+        "title": "Madmaxismo",
+        "author": "Fernando López Lage",
+        "publisher": "Estuario"
       },
       {
-        "title": "Lo que queda de Auschwitz",
-        "author": "Giorgio Agamben",
-        "publisher": "Editorial Scriptorium"
+        "title": "Devenir perra",
+        "author": "Itziar Ziga",
+        "publisher": "Melusina"
+      }
+    ]
+  },
+  {
+    "id": "037",
+    "name": "PACK VOCES DEL SUR",
+    "image": "",
+    "books": [
+      {
+        "title": "¿Hay mundo por venir?",
+        "author": "Déborah Danowski - Eduardo Viveiros de castro",
+        "publisher": "Caja negra"
+      },
+      {
+        "title": "Cómo desaparecer",
+        "author": "Haytham el-Wardany",
+        "publisher": "Dobra Robota"
+      }
+    ]
+  },
+  {
+    "id": "038",
+    "name": "PACK MEMORIA Y POLÍTICA",
+    "image": "",
+    "books": [
+      {
+        "title": "Memoria del mal, tentación del bien",
+        "author": "Tzvetan Todorov",
+        "publisher": "Galaxia Gutenberg"
+      },
+      {
+        "title": "La paradoja del conservador",
+        "author": "Jean Clair",
+        "publisher": "Elba"
+      }
+    ]
+  },
+  {
+    "id": "039",
+    "name": "PACK LITERATURA Y MÚSICA",
+    "image": "",
+    "books": [
+      {
+        "title": "Zurcidor / Eduardo Darnauchans",
+        "author": "Fidel Sclavo",
+        "publisher": "Estuario"
+      },
+      {
+        "title": "El sonido de las plantas",
+        "author": "Gabriela De Mola - Belén Alfaro",
+        "publisher": "Dobra robota"
+      }
+    ]
+  },
+  {
+    "id": "040",
+    "name": "PACK POESÍA Y NARRATIVA URUGUAYA",
+    "image": "",
+    "books": [
+      {
+        "title": "Todas esas cosas siguen vivas",
+        "author": "Leonor Courtoisie",
+        "publisher": "Pez en el hielo"
+      },
+      {
+        "title": "Donde vuela el camaleón",
+        "author": "Ida Vitale",
+        "publisher": "Estuario"
       }
     ]
   }
