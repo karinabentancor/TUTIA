@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   selectBtn.addEventListener('click', () => {
-    if (selectedPack) {
-      console.log('Pack seleccionado:', selectedPack)
-      alert(`Has seleccionado: ${selectedPack.name || 'Pack aleatorio'}`)
+    if (selectedPack && selectedPack.books) {
+      localStorage.setItem('selectedBooks', JSON.stringify(selectedPack.books))
+      window.location.href = 'selection.html'
     }
   })
 
@@ -229,8 +229,10 @@ function attachPackButtonHandlers() {
 }
 
 function handlePackSelection(pack) {
-  console.log('Pack seleccionado:', pack)
-  alert(`Has seleccionado: ${pack.name || 'Pack'}`)
+  if (pack && pack.books) {
+    localStorage.setItem('selectedBooks', JSON.stringify(pack.books))
+    window.location.href = 'selection.html'
+  }
 }
 
 function showPackDetails(pack) {

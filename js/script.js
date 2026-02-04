@@ -141,7 +141,7 @@ function renderBooks(books) {
     }
 
     const icon = document.createElement("img")
-    icon.src = "svg/c cuadr.svg"
+    icon.src = "svg/arrow-through-heart.svg"
     icon.alt = ""
 
     button.appendChild(icon)
@@ -323,6 +323,14 @@ function updateAsideList() {
         title="Quitar de la selección"
       />
     `
+    
+    // Agregar el evento click directamente al botón trash cuando se crea
+    const trashBtn = li.querySelector('.remove-btn')
+    trashBtn.addEventListener('click', (e) => {
+      e.stopPropagation()
+      handleRemoveBook(b.id)
+    })
+    
     listContainer.appendChild(li)
   })
   
@@ -342,21 +350,15 @@ function updateAsideList() {
   }
 }
 
-document.addEventListener("click", e => {
-  const removeBtn = e.target.closest(".remove-btn")
-  if (!removeBtn) return
+function handleRemoveBook(bookId) {
+  const idx = selectedBooks.findIndex(b => b.id == bookId)
   
-  const li = removeBtn.closest("li")
-  if (!li) return
-  
-  const id = li.dataset.id
-  const bookDiv = document.querySelector(`.book[data-id="${id}"]`)
-  
-  const idx = selectedBooks.findIndex(b => b.id == id)
   if (idx !== -1) {
     selectedBooks.splice(idx, 1)
     localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
     
+    // Actualizar el botón del corazón en el catálogo
+    const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
     if (bookDiv) {
       const packBtn = bookDiv.querySelector(".pack-button")
       if (packBtn) {
@@ -366,4 +368,4 @@ document.addEventListener("click", e => {
     
     updateAsideList()
   }
-})
+}
