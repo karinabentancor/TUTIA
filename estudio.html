@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUTÍA — ESTUDIO</title>
+    <style>
+        :root {
+            --red: #cc0000;
+            --black: #000;
+            --white: #fff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: monospace;
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* HEADER */
+        .estudio-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--black);
+            border-bottom: 3px solid var(--red);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .estudio-header .arrow {
+            width: 36px;
+            height: 36px;
+            filter: invert(1);
+            transition: transform 0.2s;
+            display: block;
+        }
+        .estudio-header .arrow:hover { transform: translateX(-4px); }
+        .estudio-header-title {
+            font-family: monospace;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--white);
+        }
+        .estudio-header-title span { color: var(--red); }
+
+        /* PAGE */
+        .estudio-page {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 24px 80px;
+        }
+
+        .section-title {
+            font-family: monospace;
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 900;
+            letter-spacing: 6px;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+        .section-title span { color: var(--red); }
+
+        .studios-intro {
+            margin-top: 12px;
+            margin-bottom: 44px;
+            font-family: monospace;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            color: #555;
+            border-left: 3px solid var(--red);
+            padding-left: 12px;
+        }
+
+        /* BLOQUES */
+        .studios-container {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .studio-block {
+            border: 2px solid var(--black);
+            overflow: hidden;
+        }
+
+        .studio-block-title {
+            font-family: monospace;
+            font-size: 18px;
+            letter-spacing: 3px;
+            font-weight: 900;
+            padding: 16px 22px;
+            background: var(--black);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .studio-block-title::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            flex-shrink: 0;
+        }
+
+        .studio-block-body { padding: 22px; }
+
+        /* SLIDER */
+        .studio-slider {
+            position: relative;
+            margin-bottom: 22px;
+            background: var(--black);
+            padding: 3px;
+        }
+        .slider-container { overflow: hidden; width: 100%; }
+        .slider-track { display: flex; transition: transform 0.5s ease; }
+        .slider-item { min-width: 100%; flex-shrink: 0; }
+        .slider-item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--black);
+            color: var(--white);
+            border: 2px solid var(--white);
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.2s;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slider-btn:hover { background: var(--red); border-color: var(--red); }
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 0;
+            background: var(--black);
+        }
+        .slider-dot {
+            width: 9px;
+            height: 9px;
+            border: 2px solid #555;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .slider-dot.active { background: var(--red); border-color: var(--red); }
+
+        /* INFO CARD */
+        .studio-card {
+            border: 2px solid var(--black);
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .studio-header { background: var(--black); padding: 14px 18px; }
+        .studio-price {
+            font-family: monospace;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--red);
+        }
+        .studio-features { padding: 16px 18px; }
+        .studio-features p {
+            font-family: monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-weight: 900;
+            color: #888;
+        }
+        .studio-features ul { list-style: none; padding: 0; }
+        .studio-features li {
+            font-family: monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            padding: 7px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .studio-features li::before { content: '—'; color: var(--red); font-weight: 900; }
+        .studio-features li:last-child { border-bottom: none; }
+
+        /* OPCIONALES */
+        .opcionales-section {
+            margin-top: 40px;
+            padding: 22px;
+            border: 2px solid var(--black);
+            background: var(--black);
+            color: var(--white);
+        }
+        .opcionales-section h4 {
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+            font-weight: 900;
+            color: var(--red);
+        }
+        .opcionales-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .opcionales-list span {
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            padding: 7px 12px;
+            border: 1px solid #444;
+            transition: border-color 0.2s, color 0.2s;
+            cursor: default;
+        }
+        .opcionales-list span:hover { border-color: var(--red); color: var(--red); }
+
+        /* CALENDARIO */
+        .calendar-section {
+            margin-top: 50px;
+            border: 2px solid var(--black);
+            overflow: hidden;
+        }
+        .calendar-title {
+            font-family: monospace;
+            font-size: clamp(14px, 2.5vw, 22px);
+            letter-spacing: 3px;
+            font-weight: 900;
+            text-align: center;
+            background: var(--black);
+            color: var(--white);
+            padding: 16px;
+            border-bottom: 3px solid var(--red);
+        }
+        .calendar-inner { padding: 24px; }
+        .calendar-legend {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #eee;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 900;
+        }
+        .legend-box { width: 18px; height: 18px; border: 2px solid var(--black); }
+        .legend-box.available { background: var(--white); }
+        .legend-box.occupied  { background: var(--black); }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .calendar-day {
+            border: 2px solid var(--black);
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+        .calendar-day:hover { border-color: var(--red); }
+        .calendar-day-header {
+            font-family: monospace;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 900;
+            padding: 10px;
+            border-bottom: 1px solid var(--black);
+            text-align: center;
+            background: #f5f5f5;
+        }
+        .calendar-slots {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        .calendar-slot {
+            padding: 11px 10px;
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            text-align: center;
+            font-weight: 700;
+            background: var(--white);
+            border-top: 1px solid #eee;
+        }
+        .calendar-slot:first-child { border-top: none; }
+        .calendar-slot.available:hover { background: var(--red); color: var(--white); }
+        .calendar-slot.occupied {
+            background: var(--black);
+            color: #555;
+            cursor: not-allowed;
+            font-weight: 400;
+        }
+        .calendar-slot.full-day { grid-column: 1 / -1; font-weight: 900; }
+
+        /* BOOKING MODAL */
+        .booking-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .booking-modal.show { display: flex; }
+        .booking-modal-content {
+            background: var(--white);
+            border: 2px solid var(--black);
+            border-top: 4px solid var(--red);
+            padding: 30px;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            font-family: monospace;
+            line-height: 1;
+            padding: 4px 10px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .modal-close:hover { background: var(--red); color: var(--white); }
+        .modal-title {
+            font-family: monospace;
+            font-size: 18px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        .booking-info {
+            padding: 14px;
+            border: 1px solid var(--black);
+            border-left: 3px solid var(--red);
+            margin-bottom: 24px;
+            font-family: monospace;
+            font-size: 12px;
+            line-height: 1.9;
+            letter-spacing: 1px;
+            background: #fafafa;
+        }
+        .booking-info strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--red);
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .form-group label {
+            position: absolute;
+            left: 12px;
+            top: -9px;
+            background: var(--white);
+            padding: 0 4px;
+            font-family: monospace;
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid var(--black);
+            background: var(--white);
+            font-family: monospace;
+            font-size: 13px;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus { outline: none; border-color: var(--red); }
+        .form-group input.error { border-color: var(--red); }
+        .error-message {
+            color: var(--red);
+            font-family: monospace;
+            font-size: 10px;
+            margin-top: 4px;
+            display: none;
+            letter-spacing: 1px;
+        }
+        .error-message.show { display: block; }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--black);
+            background: var(--black);
+            color: var(--white);
+            font-family: monospace;
+            font-size: 13px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            font-weight: 900;
+        }
+        .submit-btn:hover:not(:disabled) { background: var(--red); border-color: var(--red); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .success-message {
+            display: none;
+            padding: 14px;
+            background: var(--red);
+            color: var(--white);
+            text-align: center;
+            margin-top: 14px;
+            font-family: monospace;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+        .success-message.show { display: block; }
+
+        /* RESPONSIVE */
+        @media (min-width: 600px) {
+            .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+            .calendar-slots { grid-template-columns: repeat(3, 1fr); }
+            .calendar-slot { border-top: none; border-left: 1px solid #eee; }
+            .calendar-slot:first-child { border-left: none; }
+        }
+        @media (min-width: 900px) {
+            .calendar-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (min-width: 1200px) {
+            .calendar-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="estudio-header">
+        <a href="index.html">
+            <img src="svg/arrow-left-square-svgrepo-com.svg" class="arrow" alt="Volver">
+        </a>
+        <span class="estudio-header-title">TUTÍA <span>/</span> ESTUDIO</span>
+    </header>
+
+    <div class="estudio-page">
+
+        <h2 class="section-title">ESTU<span>D</span>IO</h2>
+        <div class="studios-intro">
+            ESPACIOS DISPONIBLES PARA ALQUILER — TURNOS DE 4 HORAS O DÍA COMPLETO
+        </div>
+
+        <div class="studios-container">
+
+            <article class="studio-block">
+                <h3 class="studio-block-title">ESTUDIO I</h3>
+                <div class="studio-block-body">
+                    <div class="studio-slider">
+                        <div class="slider-container">
+                            <div class="slider-track" id="slider1">
+                                <div class="slider-item"><img src="estudio1-foto1.jpg" alt="Estudio I - Foto 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO I%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio1-foto2.jpg" alt="Estudio I - Foto 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO I%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio1-foto3.jpg" alt="Estudio I - Foto 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO I%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio1-foto4.jpg" alt="Estudio I - Foto 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO I%3C/text%3E%3C/svg%3E'"></div>
+                            </div>
+                        </div>
+                        <button class="slider-btn prev" data-slider="slider1">←</button>
+                        <button class="slider-btn next" data-slider="slider1">→</button>
+                        <div class="slider-dots" id="dots1"></div>
+                    </div>
+                    <div class="studio-card">
+                        <div class="studio-header"><div class="studio-price">$3000 / 4HS</div></div>
+                        <div class="studio-features">
+                            <p>INCLUYE</p>
+                            <ul>
+                                <li>SILLÓN</li><li>LUCES</li><li>MESA BAJA</li><li>ESPEJO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="studio-block">
+                <h3 class="studio-block-title">ESTUDIO COMPLETO</h3>
+                <div class="studio-block-body">
+                    <div class="studio-slider">
+                        <div class="slider-container">
+                            <div class="slider-track" id="slider2">
+                                <div class="slider-item"><img src="estudio-completo-foto1.jpg" alt="Estudio Completo - Foto 1" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO COMPLETO%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio-completo-foto2.jpg" alt="Estudio Completo - Foto 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO COMPLETO%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio-completo-foto3.jpg" alt="Estudio Completo - Foto 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO COMPLETO%3C/text%3E%3C/svg%3E'"></div>
+                                <div class="slider-item"><img src="estudio-completo-foto4.jpg" alt="Estudio Completo - Foto 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23f0f0f0%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22Courier New%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO COMPLETO%3C/text%3E%3C/svg%3E'"></div>
+                            </div>
+                        </div>
+                        <button class="slider-btn prev" data-slider="slider2">←</button>
+                        <button class="slider-btn next" data-slider="slider2">→</button>
+                        <div class="slider-dots" id="dots2"></div>
+                    </div>
+                    <div class="studio-card">
+                        <div class="studio-header"><div class="studio-price">$8000 / 12HS</div></div>
+                        <div class="studio-features">
+                            <p>INCLUYE TODO LO ANTERIOR MÁS</p>
+                            <ul>
+                                <li>MESA + 2 SILLAS</li><li>ESTANTERÍA</li><li>PARLANTES</li>
+                                <li>COCINA CON JARRA ELÉCTRICA</li><li>HELADERA</li><li>BAÑO</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="opcionales-section">
+            <h4>OPCIONALES</h4>
+            <div class="opcionales-list">
+                <span>PERCHERO + 15 PERCHAS</span>
+                <span>ESTANTERÍA</span>
+                <span>SOPORTE PC</span>
+                <span>CATERING</span>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <h3 class="calendar-title">MARZO 2026 — DISPONIBILIDAD</h3>
+            <div class="calendar-inner">
+                <div class="calendar-legend">
+                    <div class="legend-item"><div class="legend-box available"></div><span>DISPONIBLE</span></div>
+                    <div class="legend-item"><div class="legend-box occupied"></div><span>OCUPADO</span></div>
+                </div>
+                <div class="calendar-grid" id="calendar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BOOKING MODAL -->
+    <div class="booking-modal" id="bookingModal">
+        <div class="booking-modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <h3 class="modal-title">RESERVAR TURNO</h3>
+            <div class="booking-info" id="bookingInfo"></div>
+            <form id="bookingForm" novalidate>
+                <div class="form-group">
+                    <label for="bookingNombre">NOMBRE</label>
+                    <input type="text" id="bookingNombre" name="nombre" required>
+                    <div class="error-message" id="bookingNombreError">Ingresá tu nombre</div>
+                </div>
+                <div class="form-group">
+                    <label for="bookingEmail">EMAIL</label>
+                    <input type="email" id="bookingEmail" name="email" required>
+                    <div class="error-message" id="bookingEmailError">Ingresá un email válido</div>
+                </div>
+                <div class="form-group">
+                    <label for="bookingCelular">CELULAR</label>
+                    <input type="tel" id="bookingCelular" name="celular" required>
+                    <div class="error-message" id="bookingCelularError">Ingresá tu celular</div>
+                </div>
+                <button type="submit" class="submit-btn">CONFIRMAR RESERVA</button>
+            </form>
+            <div class="success-message" id="bookingSuccess">
+                ¡RESERVA CONFIRMADA! TE CONTACTAREMOS PRONTO.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class Slider {
+            constructor(sliderId) {
+                this.track = document.getElementById(sliderId);
+                if (!this.track) return;
+                this.slides = this.track.querySelectorAll('.slider-item');
+                this.currentIndex = 0;
+                this.totalSlides = this.slides.length;
+                this.dotsContainer = document.getElementById(sliderId.replace('slider', 'dots'));
+                this.createDots();
+                this.prevBtn = document.querySelector(`[data-slider="${sliderId}"].prev`);
+                this.nextBtn = document.querySelector(`[data-slider="${sliderId}"].next`);
+                if (this.prevBtn) this.prevBtn.addEventListener('click', () => this.prev());
+                if (this.nextBtn) this.nextBtn.addEventListener('click', () => this.next());
+                this.startX = 0;
+                this.track.addEventListener('touchstart', e => { this.startX = e.touches[0].clientX; });
+                this.track.addEventListener('touchend', e => {
+                    const diff = this.startX - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 50) diff > 0 ? this.next() : this.prev();
+                });
+                window.addEventListener('resize', () => this.updateSlider());
+            }
+            createDots() {
+                if (!this.dotsContainer) return;
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('slider-dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+            }
+            updateDots() {
+                if (!this.dotsContainer) return;
+                this.dotsContainer.querySelectorAll('.slider-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === this.currentIndex);
+                });
+            }
+            updateSlider() {
+                this.track.style.transform = `translateX(${-this.currentIndex * 100}%)`;
+                this.updateDots();
+            }
+            next() { this.currentIndex = (this.currentIndex + 1) % this.totalSlides; this.updateSlider(); }
+            prev() { this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides; this.updateSlider(); }
+            goToSlide(i) { this.currentIndex = i; this.updateSlider(); }
+        }
+
+        const calendarSchedule = {
+            lunes:     [{ time: '9-13', available: false }, { time: '13-17', available: true  }, { time: '17-21', available: true  }],
+            martes:    [{ time: '9-21', available: true, fullDay: true }],
+            miercoles: [{ time: '9-13', available: true  }, { time: '13-17', available: true  }, { time: '17-21', available: false }],
+            jueves:    [{ time: '9-13', available: false }, { time: '13-17', available: true  }, { time: '17-21', available: true  }],
+            viernes:   [{ time: '9-13', available: false }, { time: '13-17', available: true  }, { time: '17-21', available: false }],
+            sabado:    [{ time: '9-13', available: false }, { time: '13-17', available: false }, { time: '17-21', available: false }],
+            domingo:   [{ time: '9-13', available: false }, { time: '13-17', available: false }, { time: '17-21', available: false }]
+        };
+
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            if (!calendar) return;
+            const daysOfWeek  = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
+            const daysDisplay = ['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
+            let html = '';
+            let currentDay = 0;
+            for (let day = 1; day <= 31; day++) {
+                const dayName = daysOfWeek[currentDay];
+                const schedule = calendarSchedule[dayName];
+                html += `<div class="calendar-day"><div class="calendar-day-header">${day} MAR — ${daysDisplay[currentDay]}</div><div class="calendar-slots">`;
+                schedule.forEach(slot => {
+                    const price = slot.fullDay ? '$8000' : '$3000';
+                    const text  = slot.fullDay ? `TODO EL DÍA ${slot.time} — ${price}` : `${slot.time}HS — ${price}`;
+                    html += `<div class="calendar-slot ${slot.available ? 'available' : 'occupied'} ${slot.fullDay ? 'full-day' : ''}" data-day="${day}" data-month="MARZO" data-time="${slot.time}" data-price="${price}" data-full-day="${slot.fullDay || false}">${text}</div>`;
+                });
+                html += `</div></div>`;
+                currentDay = (currentDay + 1) % 7;
+            }
+            calendar.innerHTML = html;
+            document.querySelectorAll('.calendar-slot.available').forEach(slot => {
+                slot.addEventListener('click', () => openBookingModal(slot));
+            });
+        }
+
+        const bookingModal = document.getElementById('bookingModal');
+        const modalClose   = document.getElementById('modalClose');
+        const bookingForm  = document.getElementById('bookingForm');
+        let selectedSlot   = null;
+
+        function openBookingModal(slot) {
+            selectedSlot = { day: slot.dataset.day, month: slot.dataset.month, time: slot.dataset.time, price: slot.dataset.price, fullDay: slot.dataset.fullDay === 'true' };
+            document.getElementById('bookingInfo').innerHTML = `<strong>RESERVA SELECCIONADA</strong>${selectedSlot.day} DE ${selectedSlot.month}<br>HORARIO: ${selectedSlot.time}HS<br>TIPO: ${selectedSlot.fullDay ? 'ESTUDIO COMPLETO' : 'ESTUDIO I'}<br>PRECIO: ${selectedSlot.price}`;
+            bookingModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            bookingModal.classList.remove('show');
+            document.body.style.overflow = '';
+            bookingForm.reset();
+            clearBookingErrors();
+            document.getElementById('bookingSuccess').classList.remove('show');
+        }
+
+        modalClose.addEventListener('click', closeBookingModal);
+        bookingModal.addEventListener('click', e => { if (e.target === bookingModal) closeBookingModal(); });
+
+        function validateEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+
+        function showBookingError(input, errorId, message) {
+            input.classList.add('error');
+            const el = document.getElementById(errorId);
+            el.textContent = message;
+            el.classList.add('show');
+        }
+        function clearBookingError(input, errorId) {
+            input.classList.remove('error');
+            const el = document.getElementById(errorId);
+            if (el) el.classList.remove('show');
+        }
+        function clearBookingErrors() {
+            ['bookingNombre','bookingEmail','bookingCelular'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) clearBookingError(input, id + 'Error');
+            });
+        }
+
+        const bookingNombre  = document.getElementById('bookingNombre');
+        const bookingEmail   = document.getElementById('bookingEmail');
+        const bookingCelular = document.getElementById('bookingCelular');
+
+        bookingNombre.addEventListener('input',  () => clearBookingError(bookingNombre,  'bookingNombreError'));
+        bookingEmail.addEventListener('input',   () => clearBookingError(bookingEmail,   'bookingEmailError'));
+        bookingCelular.addEventListener('input', () => clearBookingError(bookingCelular, 'bookingCelularError'));
+
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+            clearBookingErrors();
+            if (!bookingNombre.value.trim())  { showBookingError(bookingNombre,  'bookingNombreError',  'Ingresá tu nombre');      isValid = false; }
+            if (!bookingEmail.value.trim())   { showBookingError(bookingEmail,   'bookingEmailError',   'Ingresá tu email');       isValid = false; }
+            else if (!validateEmail(bookingEmail.value.trim())) { showBookingError(bookingEmail, 'bookingEmailError', 'Ingresá un email válido'); isValid = false; }
+            if (!bookingCelular.value.trim()) { showBookingError(bookingCelular, 'bookingCelularError', 'Ingresá tu celular');     isValid = false; }
+            if (isValid && selectedSlot) {
+                const btn = bookingForm.querySelector('.submit-btn');
+                btn.disabled = true; btn.textContent = 'ENVIANDO...';
+                const s = encodeURIComponent(`RESERVA ESTUDIO - ${selectedSlot.day} DE ${selectedSlot.month}`);
+                const b = encodeURIComponent(`NUEVA RESERVA\nNombre: ${bookingNombre.value.trim()}\nEmail: ${bookingEmail.value.trim()}\nCelular: ${bookingCelular.value.trim()}\nFecha: ${selectedSlot.day} DE ${selectedSlot.month}\nHorario: ${selectedSlot.time}HS\nTipo: ${selectedSlot.fullDay ? 'ESTUDIO COMPLETO' : 'ESTUDIO I'}\nPrecio: ${selectedSlot.price}`);
+                window.location.href = `mailto:HOLA@TUTIA.UY?subject=${s}&body=${b}`;
+                setTimeout(() => {
+                    bookingForm.reset();
+                    document.getElementById('bookingSuccess').classList.add('show');
+                    btn.disabled = false; btn.textContent = 'CONFIRMAR RESERVA';
+                    setTimeout(closeBookingModal, 3000);
+                }, 500);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            new Slider('slider1');
+            new Slider('slider2');
+            generateCalendar();
+        });
+    </script>
+</body>
+</html>
