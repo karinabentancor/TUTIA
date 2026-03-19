@@ -8,7 +8,6 @@
     --red: #cc0000;
     --black: #000;
     --white: #fff;
-    --smoke: whitesmoke;
 }
 
 html, body {
@@ -50,7 +49,6 @@ html, body {
     max-height: 50vh;
     object-fit: contain;
     flex-shrink: 0;
-    /* si el logo es negro, invertirlo para que se vea en fondo negro */
     filter: invert(1);
 }
 
@@ -69,10 +67,16 @@ html, body {
     color: var(--white);
 }
 
+/* Montevideo abajo del todo */
 .text-end {
-    font-size: clamp(0.7rem, 2.5vw, 1rem);
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
     letter-spacing: 2px;
-    color: #666;
+    color: var(--white);
+    white-space: nowrap;
 }
 
 /* ── COLUMNA DERECHA / ASIDE ── */
@@ -123,23 +127,22 @@ html, body {
     border: 2px solid var(--red);
 }
 
-/* botón secundario — outline rojo */
+/* botón secundario — outline blanco */
 .aside-right .button {
     background-color: transparent;
     color: var(--white);
-    border: 2px solid var(--red);
+    border: 2px solid var(--white);
 }
 .aside-right .button:hover {
-    background-color: var(--red);
-    color: var(--white);
-    border: 2px solid var(--red);
+    background-color: var(--white);
+    color: var(--black);
+    border: 2px solid var(--white);
 }
 
 /* ── RESPONSIVE ── */
 @media (max-height: 700px) {
     .left-column { padding: 2rem 1rem; }
     .logo-aside { max-height: 38vh; max-width: 280px; }
-    .text-end { margin-bottom: 0; }
 }
 
 @media (max-height: 600px) {
