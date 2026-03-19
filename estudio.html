@@ -13,6 +13,7 @@
             background: var(--white);
             color: var(--black);
             overflow-x: hidden;
+        max-width: 100vw;
         }
 
         /* HEADER */
@@ -20,8 +21,8 @@
             position: sticky; top: 0; z-index: 100;
             background: var(--black);
             border-bottom: 3px solid var(--red);
-            padding: 12px 24px;
-            display: flex; align-items: center; gap: 16px;
+            padding: 10px 24px;
+            display: flex; align-items: center; gap: 24px;
         }
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
@@ -30,30 +31,23 @@
             border: 2px solid var(--white);
             font-family: monospace; font-size: 18px;
             text-decoration: none;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
+            transition: background 0.2s, border-color 0.2s;
             flex-shrink: 0;
         }
         .back-btn:hover { background: var(--red); border-color: var(--red); }
-        .estudio-header-title {
-            font-family: monospace; font-size: 18px; font-weight: 900;
-            letter-spacing: 5px; color: var(--white);
+
+        .header-logo {
+            height: 28px; width: auto;
+            filter: invert(1);
         }
-        .estudio-header-title span { color: var(--red); }
+        .header-sep { color: var(--red); font-size: 14px; font-weight: 900; }
+        .header-section {
+            font-family: monospace; font-size: 13px; font-weight: 900;
+            letter-spacing: 3px; color: var(--white);
+        }
 
         /* PAGE */
         .estudio-page { max-width: 1200px; margin: 0 auto; padding: 50px 24px 80px; }
-
-        .section-title {
-            font-size: clamp(32px, 6vw, 64px);
-            font-weight: 900; letter-spacing: 6px; margin-bottom: 4px; line-height: 1;
-        }
-        .section-title span { color: var(--red); }
-
-        .studios-intro {
-            margin-top: 12px; margin-bottom: 44px;
-            font-size: 12px; letter-spacing: 1.5px; color: var(--black);
-            border-left: 3px solid var(--red); padding-left: 12px;
-        }
 
         /* BLOQUES CLICKEABLES */
         .studios-container { display: flex; flex-direction: column; gap: 30px; }
@@ -61,7 +55,7 @@
         .studio-block {
             border: 2px solid var(--black);
             cursor: pointer;
-            transition: border-color 0.2s, transform 0.15s;
+            transition: border-color 0.2s;
             text-decoration: none;
             color: inherit;
             display: block;
@@ -140,21 +134,41 @@
             .studio-block-body { flex-direction: column; }
             .studio-thumb { width: 100%; }
         }
+
+        /* SOLAPAS LATERALES */
+        .floating-tab {
+            position: fixed;
+            right: -30px;
+            transform: translateY(-50%) rotate(90deg);
+            transform-origin: center center;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            padding: 8px 16px;
+            z-index: 999;
+            border: 2px solid var(--white);
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+        }
+        .floating-tab:hover { background: var(--red); border-color: var(--red); }
+        .floating-tab.proyectos { top: 40%; }
+        .floating-tab.eventos   { top: 58%; }
     </style>
 </head>
 <body>
 
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
-    <span class="estudio-header-title">TUTÍA <span>/</span> ESTUDIO</span>
+    <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
+    <span class="header-sep">/</span>
+    <span class="header-section">ESTUDIO</span>
 </header>
 
 <div class="estudio-page">
-
-    <h2 class="section-title">ESTU<span>D</span>IO</h2>
-    <div class="studios-intro">
-        ESPACIOS DISPONIBLES PARA ALQUILER — TURNOS DE 4 HORAS O DÍA COMPLETO
-    </div>
 
     <div class="studios-container">
 
@@ -213,5 +227,8 @@
     </div>
 
 </div>
+
+    <a href="proyectos.html" class="floating-tab proyectos">PROYECTOS</a>
+    <a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
 </body>
 </html>
