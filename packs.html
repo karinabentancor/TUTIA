@@ -5,50 +5,117 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PACKS / TUTÍA</title>
   <link rel="stylesheet" href="css/packs.css" />
+  <style>
+    :root {
+      --red: #cc0000;
+      --black: #000;
+      --white: #fff;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,43,43,1);
+      border-bottom: 3px solid var(--black);
+    }
+    .nav-row-1 {
+      display: flex;
+      align-items: center;
+      padding: 10px 24px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      color: var(--black);
+      border: 2px solid var(--black);
+      font-family: monospace;
+      font-size: 18px;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      margin-right: 20px;
+    }
+    .back-btn:hover { background: var(--black); color: rgba(255,43,43,1); border-color: var(--black); }
+
+    .header-logo {
+      height: 48px;
+      width: auto;
+      filter: brightness(0); /* negro sobre rojo */
+      margin-right: 28px;
+    }
+    .nav-row-1-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-sep { font-family: monospace; font-size: 13px; font-weight: 900; color: var(--black); }
+    .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--black); }
+
+    /* ── reducir espacio entre nav y cards ── */
+    .content { padding-top: 16px; }
+    .pack-section { margin-top: 0; padding-top: 0; }
+
+    @media (max-width: 680px) {
+      .header-logo { height: 34px; }
+    }
+    @media (max-width: 420px) {
+      .nav-row-1 { padding: 8px 12px; }
+      .header-logo { height: 28px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="header-row">
-    <div class="header-left">
-      <a href="catalog.html">
-        <img src="svg/arrow-left-square-svgrepo-com.svg" class="arrow" alt="Volver">
-      </a>
+
+  <nav class="site-nav">
+    <div class="nav-row-1">
+      <a href="catalog.html" class="back-btn">←</a>
+      <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
+      <div class="nav-row-1-right">
+        <span class="header-sep">/</span>
+        <span class="header-section">PACKS DE LIBROS</span>
+      </div>
     </div>
-  </div>
+  </nav>
 
   <main class="content">
     <div class="packs-sections">
       <section class="pack-section">
-        <h2 class="section-title">PACKS DE 2 LIBROS</h2>
         <div class="carousel" id="packs-2"></div>
       </section>
-      
 
+      <div class="roulette-section">
+        <div class="roulette-container">
+          <div class="roulette-intro">
+            <h2 class="roulette-title">¿NO SABÉS CUÁL ELEGIR?</h2>
+            <h3 class="roulette-subtitle">GIRÁ LA RULETA</h3>
+          </div>
 
-    <div class="roulette-section">
-      <div class="roulette-container">
-        <div class="roulette-intro">
-          <h2 class="roulette-title">¿NO SABÉS CUÁL ELEGIR?</h2>
-          <h3 class="roulette-subtitle">GIRÁ LA RULETA</h3>
-        </div>
-        
-        <button id="spin" class="button-dark spin-button">GIRAR RULETA</button>
-        
-        <div id="result" class="roulette-result"></div>
-        
-        <div id="actions" class="roulette-actions">
-          <button id="select" class="button">SELECCIONAR ESTE PACK</button>
-          <button id="retry" class="button">VOLVER A GIRAR</button>
+          <button id="spin" class="button-dark spin-button">GIRAR RULETA</button>
+
+          <div id="result" class="roulette-result"></div>
+
+          <div id="actions" class="roulette-actions">
+            <button id="select" class="button">SELECCIONAR ESTE PACK</button>
+            <button id="retry" class="button">VOLVER A GIRAR</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <footer class="page-footer">
+      <footer class="page-footer">
         <a href="index.html">
-        <img src="svg/TUTÍA_b.svg" alt="Logo TUTÍA" class="logo" />
-      </a>
-      <p class="footer-title">CLUB DE LIBROS</p>
-      <p class="footer-location">Montevideo, Uruguay</p>
-    </footer>
+          <img src="svg/TUTÍA_b.svg" alt="Logo TUTÍA" class="logo" />
+        </a>
+        <p class="footer-title">CLUB DE LIBROS</p>
+        <p class="footer-location">Montevideo, Uruguay</p>
+      </footer>
+    </div>
   </main>
 
   <script src="js/packs.js"></script>

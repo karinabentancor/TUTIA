@@ -6,7 +6,7 @@ let listContainer = null
 let selectedBooks = []
 
 function loadSavedSelection() {
-  const savedSelection = localStorage.getItem('selectedBooks')
+  const savedSelection = sessionStorage.getItem('selectedBooks')
   if (savedSelection) {
     try {
       selectedBooks = JSON.parse(savedSelection)
@@ -21,6 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   loadSavedSelection()
   
   listContainer = aside.querySelector('.selected-list')
+  
+  // Ocultar aside hasta que haya al menos un libro seleccionado
+  if (!selectedBooks.length) aside.style.display = "none"
   
   const storedUser = localStorage.getItem("clubUser")
   if (storedUser) {
@@ -219,7 +222,7 @@ function handleBookSelection(book, button, bookDiv) {
     if (bookDiv) bookDiv.classList.remove("selected-card")
   }
   
-  localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+  sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
   updateAsideList()
 }
 
@@ -302,14 +305,15 @@ function updateAsideList() {
   listContainer.innerHTML = ""
   
   const existingButton = aside.querySelector('.finalize-selection-btn')
-  if (existingButton) {
-    existingButton.remove()
-  }
+  if (existingButton) existingButton.remove()
   
   if (!selectedBooks.length) {
     listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>"
+    aside.style.display = "none"
     return
   }
+
+  aside.style.display = ""
   
   selectedBooks.forEach(b => {
     const li = document.createElement("li")
@@ -342,7 +346,7 @@ function updateAsideList() {
     finalizeButton.textContent = "FINALIZAR SELECCIÓN"
     
     finalizeButton.addEventListener("click", () => {
-      localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+      sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
       window.location.href = 'selection.html'
     })
     
@@ -356,7 +360,7 @@ function handleRemoveBook(bookId) {
   
   if (idx !== -1) {
     selectedBooks.splice(idx, 1)
-    localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
+    sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
     
     const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
     if (bookDiv) {
