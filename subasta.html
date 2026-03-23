@@ -323,7 +323,17 @@
         max-width: 100% !important;
         min-width: 0 !important;
       }
+      .button-dark { width: 100%; }
+      /* packs + subasta en la misma fila, mitad cada uno */
       .button-dark, .button-subasta { width: 100%; }
+      .nav-row-2 .button-dark,
+      .nav-row-2 .button-subasta { width: auto; flex: 1; }
+      .nav-row-2 .buttons-row {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 8px;
+        width: 100%;
+      }
       .availability-switch {
         grid-column: 1 / -1;
         width: 100%;
@@ -363,9 +373,7 @@
         <div class="switch-option" id="available-books">DISPONIBLES</div>
       </div>
 
-     <button class="button-dark" onclick="window.location.href='packs.html'">
-        VER PACKS
-      </button>
+      <!-- 2. Filtros -->
       <input type="text" id="search" placeholder="TÍTULO O AUTOR" />
 
       <select id="editorial">
@@ -376,10 +384,15 @@
         <option value="all">CATEGORÍA</option>
       </select>
 
-
-      <button class="button-subasta" onclick="window.location.href='subasta.html'">
-        SUBASTA
-      </button>
+      <!-- 3. Botones -->
+      <div class="buttons-row">
+        <button class="button-dark" onclick="window.location.href='packs.html'">
+          VER PACKS
+        </button>
+        <button class="button-subasta" onclick="window.location.href='subasta.html'">
+          SUBASTA
+        </button>
+      </div>
 
     </div>
   </nav>

@@ -99,8 +99,11 @@ function renderBooks(books) {
   const container = document.getElementById("catalog")
   container.innerHTML = ""
   books.forEach(book => {
+    const isSelected = selectedBooks.some(b => b.id == book.id)
+
     const bookDiv = document.createElement("div")
-    bookDiv.className = `book ${book.available ? "" : "not-available"}`
+    // selected-card: borde rojo si está seleccionado
+    bookDiv.className = `book ${book.available ? "" : "not-available"} ${isSelected ? "selected-card" : ""}`
     bookDiv.dataset.id = book.id
 
     const img = document.createElement("img")
@@ -135,7 +138,6 @@ function renderBooks(books) {
     button.className = "pack-button"
     button.setAttribute("aria-label", "Seleccionar libro")
 
-    const isSelected = selectedBooks.some(selectedBook => selectedBook.id == book.id)
     if (isSelected) {
       button.classList.add("selected")
     }
@@ -148,7 +150,7 @@ function renderBooks(books) {
     
     button.addEventListener("click", (e) => {
       e.stopPropagation()
-      handleBookSelection(book, button)
+      handleBookSelection(book, button, bookDiv)
     })
     
     bookFooter.appendChild(button)
@@ -183,7 +185,7 @@ document.getElementById("available-books").addEventListener("click", () => {
   applyFilters()
 })
 
-function handleBookSelection(book, button) {
+function handleBookSelection(book, button, bookDiv) {
   if (!book.available) {
     alert("Este libro no está disponible")
     return
@@ -210,9 +212,11 @@ function handleBookSelection(book, button) {
       available: book.available
     })
     button.classList.add("selected")
+    if (bookDiv) bookDiv.classList.add("selected-card")
   } else {
     selectedBooks.splice(idx, 1)
     button.classList.remove("selected")
+    if (bookDiv) bookDiv.classList.remove("selected-card")
   }
   
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
@@ -286,7 +290,6 @@ function openModal(book) {
     thumb.addEventListener("click", () => {
       const index = thumb.dataset.index
       mainImage.src = images[index]
-      
       thumbnails.forEach(t => t.classList.remove("active"))
       thumb.classList.add("active")
     })
@@ -324,7 +327,6 @@ function updateAsideList() {
       />
     `
     
-    // Agregar el evento click directamente al botón trash cuando se crea
     const trashBtn = li.querySelector('.remove-btn')
     trashBtn.addEventListener('click', (e) => {
       e.stopPropagation()
@@ -340,7 +342,6 @@ function updateAsideList() {
     finalizeButton.textContent = "FINALIZAR SELECCIÓN"
     
     finalizeButton.addEventListener("click", () => {
-      console.log("Libros seleccionados:", selectedBooks)
       localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
       window.location.href = 'selection.html'
     })
@@ -357,13 +358,11 @@ function handleRemoveBook(bookId) {
     selectedBooks.splice(idx, 1)
     localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
     
-    // Actualizar el botón del corazón en el catálogo
     const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
     if (bookDiv) {
       const packBtn = bookDiv.querySelector(".pack-button")
-      if (packBtn) {
-        packBtn.classList.remove("selected")
-      }
+      if (packBtn) packBtn.classList.remove("selected")
+      bookDiv.classList.remove("selected-card")
     }
     
     updateAsideList()
