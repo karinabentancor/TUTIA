@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TUTÍA — ESTUDIO</title>
     <style>
-        :root { --red: #cc0000; --black: #000; --white: #fff; }
+        :root {
+            --red: #cc0000;
+            --black: #000;
+            --white: #fff;
+            --gray: #eee;
+            --border: 2px solid var(--black);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -13,7 +19,7 @@
             background: var(--white);
             color: var(--black);
             overflow-x: hidden;
-        max-width: 100vw;
+            max-width: 100vw;
         }
 
         /* HEADER */
@@ -36,120 +42,215 @@
         }
         .back-btn:hover { background: var(--red); border-color: var(--red); }
 
-        .header-logo {
-            height: 28px; width: auto;
-            filter: invert(1);
-        }
+        .header-logo { height: 28px; width: auto; filter: invert(1); }
         .header-sep { color: var(--red); font-size: 14px; font-weight: 900; }
-        .header-section {
-            font-family: monospace; font-size: 13px; font-weight: 900;
-            letter-spacing: 3px; color: var(--white);
+        .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--white); }
+
+        /* HORARIO BADGE */
+        .header-hours {
+            margin-left: auto;
+            font-size: 11px; letter-spacing: 2px; font-weight: 900;
+            color: var(--red);
+            border: 1px solid var(--red);
+            padding: 4px 10px;
         }
 
         /* PAGE */
-        .estudio-page { max-width: 1200px; margin: 0 auto; padding: 50px 24px 80px; }
+        .estudio-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
-        /* BLOQUES CLICKEABLES */
-        .studios-container { display: flex; flex-direction: column; gap: 30px; }
-
-        .studio-block {
-            border: 2px solid var(--black);
-            cursor: pointer;
-            transition: border-color 0.2s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        .studio-block:hover { border-color: var(--red); }
-
-        .studio-block-title {
-            font-size: 18px; letter-spacing: 3px; font-weight: 900;
-            padding: 16px 22px;
-            background: var(--black); color: var(--white);
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .studio-block-title .title-left { display: flex; align-items: center; gap: 10px; }
-        .studio-block-title .title-left::before {
-            content: ''; display: inline-block; width: 10px; height: 10px;
-            background: var(--red); flex-shrink: 0;
-        }
-        .studio-block-title .arrow-right {
-            font-size: 20px; color: var(--red); transition: transform 0.2s;
-        }
-        .studio-block:hover .arrow-right { transform: translateX(4px); }
-
-        .studio-block-body { padding: 22px; display: flex; gap: 24px; align-items: flex-start; }
-
-        .studio-thumb {
-            width: 220px; flex-shrink: 0;
-            aspect-ratio: 4/3; object-fit: cover;
-            border: 2px solid var(--black);
-            background: #eee;
-        }
-
-        .studio-summary { flex: 1; }
-        .studio-price {
-            font-size: 22px; font-weight: 900; letter-spacing: 1px;
+        /* SECTION LABEL */
+        .section-label {
+            font-size: 10px; letter-spacing: 4px; font-weight: 900;
             color: var(--red); margin-bottom: 14px;
+            display: flex; align-items: center; gap: 10px;
         }
-        .studio-features-list { list-style: none; }
-        .studio-features-list li {
-            font-size: 12px; letter-spacing: 1px;
-            padding: 6px 0; border-bottom: 1px solid #ddd;
+        .section-label::after {
+            content: ''; flex: 1; height: 1px; background: var(--red); opacity: 0.3;
+        }
+        .section-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 22px; height: 22px;
+            background: var(--red); color: var(--white);
+            font-size: 10px; font-weight: 900; flex-shrink: 0;
+        }
+
+        /* STEP */
+        .step { margin-bottom: 36px; }
+
+        /* STUDIO SELECTOR */
+        .studio-tabs { display: flex; gap: 0; }
+        .studio-tab {
+            flex: 1; border: 2px solid var(--black);
+            padding: 0; cursor: pointer;
+            background: var(--white); color: var(--black);
+            font-family: monospace; text-align: left;
+            transition: border-color 0.2s;
+        }
+        .studio-tab + .studio-tab { border-left: none; }
+        .studio-tab:hover { border-color: var(--red); z-index: 1; }
+        .studio-tab.active {
+            border-color: var(--red);
+            z-index: 1;
+        }
+        .studio-tab.active .tab-title {
+            background: var(--black); color: var(--white);
+        }
+        .tab-title {
+            background: var(--gray);
+            padding: 12px 18px;
+            font-size: 13px; letter-spacing: 3px; font-weight: 900;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 2px solid var(--black);
+            transition: background 0.2s, color 0.2s;
+        }
+        .studio-tab.active .tab-title::before,
+        .studio-tab:hover .tab-title::before {
+            background: var(--red);
+        }
+        .tab-title::before {
+            content: ''; display: inline-block; width: 8px; height: 8px;
+            background: #999; flex-shrink: 0; transition: background 0.2s;
+        }
+        .tab-body { padding: 14px 18px; }
+
+        /* HOUR OPTIONS */
+        .hour-options { display: flex; flex-wrap: wrap; gap: 10px; }
+        .hour-btn {
+            border: 2px solid var(--black);
+            padding: 10px 16px;
+            background: var(--white); color: var(--black);
+            font-family: monospace; font-size: 12px; letter-spacing: 1px; font-weight: 900;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+        }
+        .hour-btn:hover { border-color: var(--red); }
+        .hour-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+        .hour-btn .price { display: block; font-size: 14px; color: var(--red); margin-top: 3px; }
+        .hour-btn.active .price { color: #ff6666; }
+
+        /* TIME INPUT */
+        .time-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .time-field {
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .time-field label { font-size: 10px; letter-spacing: 2px; font-weight: 900; }
+        .time-field input[type="time"] {
+            border: 2px solid var(--black);
+            padding: 10px 14px;
+            font-family: monospace; font-size: 16px; font-weight: 900;
+            background: var(--white); color: var(--black);
+            outline: none;
+            width: 140px;
+        }
+        .time-field input[type="time"]:focus { border-color: var(--red); }
+        .time-arrow { font-size: 20px; color: var(--red); font-weight: 900; margin-top: 20px; }
+        .time-end {
+            font-size: 24px; font-weight: 900; letter-spacing: 1px;
+            color: var(--black); margin-top: 20px;
+        }
+        .time-note {
+            font-size: 10px; letter-spacing: 1px; color: #888;
+            margin-top: 8px;
+        }
+        .time-error {
+            font-size: 10px; letter-spacing: 1px; color: var(--red);
+            margin-top: 8px; display: none;
+        }
+
+        /* CATERING */
+        .catering-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 10px;
+        }
+        .catering-item {
+            border: 2px solid #ddd;
+            padding: 12px 14px;
+            display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer;
+            transition: border-color 0.15s;
+            user-select: none;
+        }
+        .catering-item:hover { border-color: var(--black); }
+        .catering-item.selected { border-color: var(--red); background: #fff5f5; }
+        .catering-item-info { flex: 1; }
+        .catering-item-name { font-size: 11px; letter-spacing: 1px; font-weight: 900; margin-bottom: 2px; }
+        .catering-item-detail { font-size: 10px; letter-spacing: 1px; color: #666; }
+        .catering-item-right { display: flex; align-items: center; gap: 8px; }
+        .catering-item-price { font-size: 12px; font-weight: 900; color: var(--red); min-width: 52px; text-align: right; }
+        .qty-ctrl {
+            display: flex; align-items: center; gap: 0;
+        }
+        .qty-btn {
+            width: 24px; height: 24px;
+            border: 1px solid var(--black);
+            background: var(--white); color: var(--black);
+            font-family: monospace; font-size: 14px; font-weight: 900;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s;
+        }
+        .qty-btn:hover { background: var(--black); color: var(--white); }
+        .qty-display {
+            width: 26px; text-align: center;
+            font-size: 12px; font-weight: 900;
+            border-top: 1px solid var(--black);
+            border-bottom: 1px solid var(--black);
+            height: 24px; line-height: 24px;
+        }
+
+        /* RESUMEN */
+        .resumen-box {
+            border: 3px solid var(--black);
+            background: var(--black); color: var(--white);
+        }
+        .resumen-header {
+            padding: 14px 20px;
+            font-size: 11px; letter-spacing: 3px; font-weight: 900;
+            border-bottom: 2px solid var(--red);
             display: flex; align-items: center; gap: 8px;
         }
-        .studio-features-list li::before { content: '—'; color: var(--red); font-weight: 900; }
-        .studio-features-list li:last-child { border-bottom: none; }
+        .resumen-header::before {
+            content: ''; display: inline-block; width: 8px; height: 8px; background: var(--red);
+        }
+        .resumen-body { padding: 18px 20px; }
+        .resumen-line {
+            display: flex; justify-content: space-between; align-items: baseline;
+            font-size: 12px; letter-spacing: 1px;
+            padding: 7px 0; border-bottom: 1px solid #333;
+        }
+        .resumen-line:last-child { border-bottom: none; }
+        .resumen-line .label { color: #aaa; }
+        .resumen-line .value { font-weight: 900; color: var(--white); }
+        .resumen-line.total {
+            margin-top: 10px; padding-top: 14px;
+            border-top: 2px solid var(--red); border-bottom: none;
+        }
+        .resumen-line.total .label { color: var(--white); font-size: 13px; letter-spacing: 2px; }
+        .resumen-line.total .value { font-size: 22px; color: var(--red); }
+        .resumen-empty { font-size: 11px; letter-spacing: 1px; color: #666; padding: 10px 0; }
 
-        .studio-cta {
-            margin-top: 16px;
-            display: inline-block;
-            padding: 10px 18px;
-            background: var(--black); color: var(--white);
-            font-size: 11px; letter-spacing: 2px; font-weight: 900;
-            border: 2px solid var(--black);
-            transition: background 0.2s, border-color 0.2s;
+        /* CTA */
+        .cta-btn {
+            width: 100%; margin-top: 18px;
+            padding: 16px;
+            background: var(--red); color: var(--white);
+            border: 2px solid var(--red);
+            font-family: monospace; font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            cursor: pointer;
+            transition: background 0.2s;
         }
-        .studio-block:hover .studio-cta { background: var(--red); border-color: var(--red); }
+        .cta-btn:hover { background: #aa0000; border-color: #aa0000; }
+        .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
 
-        /* OPCIONALES */
-        .opcionales-section {
-            margin-top: 40px; padding: 22px;
-            border: 2px solid var(--black);
-            background: var(--black); color: var(--white);
-        }
-        .opcionales-section h4 {
-            font-size: 11px; letter-spacing: 3px; margin-bottom: 14px;
-            font-weight: 900; color: var(--red);
-        }
-        .opcionales-list { display: flex; flex-wrap: wrap; gap: 8px; }
-        .opcionales-list span {
-            font-size: 11px; letter-spacing: 1px;
-            padding: 7px 12px; border: 1px solid #666;
-            transition: border-color 0.2s, color 0.2s; cursor: default;
-        }
-        .opcionales-list span:hover { border-color: var(--red); color: var(--red); }
-
-        @media (max-width: 600px) {
-            .studio-block-body { flex-direction: column; }
-            .studio-thumb { width: 100%; }
-        }
-
-        /* SOLAPAS LATERALES */
+        /* FLOATING TABS */
         .floating-tab {
-            position: fixed;
-            right: -30px;
+            position: fixed; right: -30px;
             transform: translateY(-50%) rotate(90deg);
             transform-origin: center center;
-            background: var(--black);
-            color: var(--white);
-            text-decoration: none;
-            font-family: monospace;
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 0.15em;
-            padding: 8px 16px;
-            z-index: 999;
+            background: var(--black); color: var(--white);
+            text-decoration: none; font-family: monospace;
+            font-size: 10px; font-weight: 900; letter-spacing: 0.15em;
+            padding: 8px 16px; z-index: 999;
             border: 2px solid var(--white);
             transition: background 0.2s, color 0.2s, border-color 0.2s;
             white-space: nowrap;
@@ -157,6 +258,13 @@
         .floating-tab:hover { background: var(--red); border-color: var(--red); }
         .floating-tab.proyectos { top: 40%; }
         .floating-tab.eventos   { top: 58%; }
+
+        @media (max-width: 600px) {
+            .studio-tabs { flex-direction: column; }
+            .studio-tab + .studio-tab { border-left: 2px solid var(--black); border-top: none; }
+            .hour-options { gap: 8px; }
+            .hour-btn { padding: 8px 12px; }
+        }
     </style>
 </head>
 <body>
@@ -166,69 +274,309 @@
     <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
     <span class="header-sep">/</span>
     <span class="header-section">ESTUDIO</span>
+    <span class="header-hours">09:00 — 21:00 HS</span>
 </header>
 
 <div class="estudio-page">
 
-    <div class="studios-container">
+    <!-- STEP 1: ESTUDIO -->
+    <div class="step">
+        <div class="section-label"><span class="section-num">1</span> SELECCIONÁ EL ESPACIO</div>
+        <div class="studio-tabs">
 
-        <a class="studio-block" href="detalle.html?id=1">
-            <div class="studio-block-title">
-                <span class="title-left">ESTUDIO I</span>
-                <span class="arrow-right">→</span>
-            </div>
-            <div class="studio-block-body">
-                <img class="studio-thumb" src="estudio1-foto1.jpg" alt="Estudio I"
-                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23eee%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO I%3C/text%3E%3C/svg%3E'">
-                <div class="studio-summary">
-                    <div class="studio-price">$3000 / 4HS</div>
-                    <ul class="studio-features-list">
-                        <li>SILLÓN</li>
-                        <li>LUCES</li>
-                        <li>MESA BAJA</li>
-                        <li>ESPEJO</li>
-                    </ul>
-                    <span class="studio-cta">VER DISPONIBILIDAD →</span>
+            <button class="studio-tab active" data-studio="1" onclick="selectStudio(1)">
+                <div class="tab-title">ESTUDIO I</div>
+                <div class="tab-body">
+                    <div class="hour-options" id="hours-1">
+                        <button class="hour-btn" data-hs="2" data-price="1500" onclick="selectHours(event,2,1500)">
+                            2 HS<span class="price">$1.500</span>
+                        </button>
+                        <button class="hour-btn" data-hs="4" data-price="2000" onclick="selectHours(event,4,2000)">
+                            4 HS<span class="price">$2.000</span>
+                        </button>
+                        <button class="hour-btn" data-hs="8" data-price="4000" onclick="selectHours(event,8,4000)">
+                            8 HS<span class="price">$4.000</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </button>
 
-        <a class="studio-block" href="detalle.html?id=2">
-            <div class="studio-block-title">
-                <span class="title-left">ESTUDIO COMPLETO</span>
-                <span class="arrow-right">→</span>
-            </div>
-            <div class="studio-block-body">
-                <img class="studio-thumb" src="estudio-completo-foto1.jpg" alt="Estudio Completo"
-                    onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 600%22%3E%3Crect fill=%22%23eee%22 width=%22800%22 height=%22600%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 font-family=%22monospace%22 font-size=%2224%22 fill=%22%23000%22%3EESTUDIO COMPLETO%3C/text%3E%3C/svg%3E'">
-                <div class="studio-summary">
-                    <div class="studio-price">$8000 / 12HS</div>
-                    <ul class="studio-features-list">
-                        <li>TODO LO DEL ESTUDIO I</li>
-                        <li>MESA + 2 SILLAS</li>
-                        <li>PARLANTES</li>
-                        <li>COCINA · HELADERA · BAÑO</li>
-                    </ul>
-                    <span class="studio-cta">VER DISPONIBILIDAD →</span>
+            <button class="studio-tab" data-studio="2" onclick="selectStudio(2)">
+                <div class="tab-title">ESTUDIO COMPLETO</div>
+                <div class="tab-body">
+                    <div class="hour-options" id="hours-2">
+                        <button class="hour-btn" data-hs="2" data-price="2500" onclick="selectHours(event,2,2500)">
+                            2 HS<span class="price">$2.500</span>
+                        </button>
+                        <button class="hour-btn" data-hs="4" data-price="4000" onclick="selectHours(event,4,4000)">
+                            4 HS<span class="price">$4.000</span>
+                        </button>
+                        <button class="hour-btn" data-hs="8" data-price="6500" onclick="selectHours(event,8,6500)">
+                            8 HS<span class="price">$6.500</span>
+                        </button>
+                        <button class="hour-btn" data-hs="12" data-price="9000" onclick="selectHours(event,12,9000)">
+                            12 HS<span class="price">$9.000</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </button>
 
+        </div>
     </div>
 
-    <div class="opcionales-section">
-        <h4>OPCIONALES</h4>
-        <div class="opcionales-list">
-            <span>PERCHERO + 15 PERCHAS</span>
-            <span>ESTANTERÍA</span>
-            <span>SOPORTE PC</span>
-            <span>CATERING</span>
+    <!-- STEP 2: HORARIO -->
+    <div class="step">
+        <div class="section-label"><span class="section-num">2</span> HORARIO</div>
+        <div class="time-row">
+            <div class="time-field">
+                <label>DESDE</label>
+                <input type="time" id="time-start" min="09:00" max="21:00" value="09:00" oninput="updateTimeEnd()">
+            </div>
+            <div class="time-arrow">→</div>
+            <div>
+                <div class="time-field">
+                    <label>HASTA</label>
+                    <div class="time-end" id="time-end">—</div>
+                </div>
+            </div>
         </div>
+        <div class="time-note" id="time-note">Seleccioná un espacio y duración para ver el horario de fin.</div>
+        <div class="time-error" id="time-error">⚠ El horario seleccionado excede el cierre (21:00 hs).</div>
+    </div>
+
+    <!-- STEP 3: CATERING -->
+    <div class="step">
+        <div class="section-label"><span class="section-num">3</span> ADICIONALES — CATERING</div>
+        <div class="catering-grid" id="catering-grid"></div>
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="step">
+        <div class="section-label"><span class="section-num">4</span> RESUMEN</div>
+        <div class="resumen-box">
+            <div class="resumen-header">DETALLE DE RESERVA</div>
+            <div class="resumen-body" id="resumen-body">
+                <div class="resumen-empty">Completá los pasos anteriores para ver el resumen.</div>
+            </div>
+        </div>
+        <button class="cta-btn" id="cta-btn" disabled onclick="confirmarReserva()">CONFIRMAR RESERVA →</button>
     </div>
 
 </div>
 
-    <a href="proyectos.html" class="floating-tab proyectos">PROYECTOS</a>
-    <a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
+<a href="proyectos.html" class="floating-tab proyectos">PROYECTOS</a>
+<a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
+
+<script>
+    const CATERING = [
+        { id: 'jugo',        name: 'JUGO DE NARANJA',          detail: '1 litro',      price: 250  },
+        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600 },
+        { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400  },
+        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400 },
+        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800 },
+        { id: 'cerveza',     name: 'CERVEZA',                  detail: '330 ml',       price: 300  },
+        { id: 'cervsinalc',  name: 'CERVEZA SIN ALCOHOL',      detail: '330 ml',       price: 300  },
+        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800 },
+        { id: 'empqya',      name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades', price: 800 },
+        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300 },
+        { id: 'mani',        name: 'MANÍ SALADO',              detail: '250 gr',       price: 250  },
+        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400 },
+        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350 },
+    ]
+
+    let state = {
+        studio: 1,
+        hs: null,
+        price: 0,
+        startTime: '09:00',
+        catering: {} // id: qty
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', () => {
+        buildCatering()
+        updateTimeEnd()
+        updateResumen()
+    })
+
+    function selectStudio(id) {
+        state.studio = id
+        state.hs = null
+        state.price = 0
+        document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
+        document.querySelector(`.studio-tab[data-studio="${id}"]`).classList.add('active')
+        document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('active'))
+        updateTimeEnd()
+        updateResumen()
+    }
+
+    function selectHours(e, hs, price) {
+        e.stopPropagation()
+        state.hs = hs
+        state.price = price
+        const studioId = state.studio
+        document.querySelectorAll(`#hours-${studioId} .hour-btn`).forEach(b => b.classList.remove('active'))
+        e.currentTarget.classList.add('active')
+        updateTimeEnd()
+        updateResumen()
+    }
+
+    function updateTimeEnd() {
+        const input = document.getElementById('time-start')
+        state.startTime = input.value || '09:00'
+        const endEl = document.getElementById('time-end')
+        const noteEl = document.getElementById('time-note')
+        const errorEl = document.getElementById('time-error')
+
+        if (!state.hs) {
+            endEl.textContent = '—'
+            noteEl.style.display = 'block'
+            errorEl.style.display = 'none'
+            return
+        }
+
+        noteEl.style.display = 'none'
+        const [h, m] = state.startTime.split(':').map(Number)
+        const startMins = h * 60 + m
+        const endMins = startMins + state.hs * 60
+        const endH = Math.floor(endMins / 60)
+        const endM = endMins % 60
+        const endStr = `${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}`
+
+        if (endH > 21 || (endH === 21 && endM > 0)) {
+            endEl.textContent = endStr
+            endEl.style.color = '#cc0000'
+            errorEl.style.display = 'block'
+        } else {
+            endEl.textContent = endStr
+            endEl.style.color = ''
+            errorEl.style.display = 'none'
+        }
+
+        updateResumen()
+    }
+
+    document.getElementById('time-start').addEventListener('input', updateTimeEnd)
+
+    function buildCatering() {
+        const grid = document.getElementById('catering-grid')
+        grid.innerHTML = ''
+        CATERING.forEach(item => {
+            const qty = state.catering[item.id] || 0
+            const div = document.createElement('div')
+            div.className = `catering-item${qty > 0 ? ' selected' : ''}`
+            div.id = `cat-${item.id}`
+            div.innerHTML = `
+                <div class="catering-item-info">
+                    <div class="catering-item-name">${item.name}</div>
+                    <div class="catering-item-detail">${item.detail}</div>
+                </div>
+                <div class="catering-item-right">
+                    <div class="catering-item-price">$${item.price.toLocaleString('es-AR')}</div>
+                    <div class="qty-ctrl">
+                        <button class="qty-btn" onclick="changeQty('${item.id}',-1,event)">−</button>
+                        <div class="qty-display" id="qty-${item.id}">${qty}</div>
+                        <button class="qty-btn" onclick="changeQty('${item.id}',1,event)">+</button>
+                    </div>
+                </div>
+            `
+            grid.appendChild(div)
+        })
+    }
+
+    function changeQty(id, delta, e) {
+        e.stopPropagation()
+        const current = state.catering[id] || 0
+        const next = Math.max(0, current + delta)
+        if (next === 0) delete state.catering[id]
+        else state.catering[id] = next
+
+        document.getElementById(`qty-${id}`).textContent = next
+        const itemEl = document.getElementById(`cat-${id}`)
+        if (next > 0) itemEl.classList.add('selected')
+        else itemEl.classList.remove('selected')
+
+        updateResumen()
+    }
+
+    function updateResumen() {
+        const body = document.getElementById('resumen-body')
+        const cta = document.getElementById('cta-btn')
+
+        const studioName = state.studio === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
+        const [h, m] = (state.startTime || '09:00').split(':').map(Number)
+        const startMins = h * 60 + m
+        let endStr = '—'
+        let timeValid = false
+
+        if (state.hs) {
+            const endMins = startMins + state.hs * 60
+            const eH = Math.floor(endMins / 60)
+            const eM = endMins % 60
+            endStr = `${String(eH).padStart(2,'0')}:${String(eM).padStart(2,'0')}`
+            timeValid = eH < 21 || (eH === 21 && eM === 0)
+        }
+
+        // Catering total
+        let cateringTotal = 0
+        const cateringItems = []
+        for (const [id, qty] of Object.entries(state.catering)) {
+            const item = CATERING.find(c => c.id === id)
+            if (item && qty > 0) {
+                const subtotal = item.price * qty
+                cateringTotal += subtotal
+                cateringItems.push({ name: item.name, qty, subtotal })
+            }
+        }
+
+        const total = state.price + cateringTotal
+        const isComplete = state.hs && state.startTime && timeValid
+
+        // Render
+        let html = ''
+
+        html += `<div class="resumen-line">
+            <span class="label">ESPACIO</span>
+            <span class="value">${studioName}</span>
+        </div>`
+
+        html += `<div class="resumen-line">
+            <span class="label">DURACIÓN</span>
+            <span class="value">${state.hs ? state.hs + ' HS' : '—'}</span>
+        </div>`
+
+        html += `<div class="resumen-line">
+            <span class="label">HORARIO</span>
+            <span class="value">${state.hs ? state.startTime + ' → ' + endStr : '—'}</span>
+        </div>`
+
+        html += `<div class="resumen-line">
+            <span class="label">ALQUILER</span>
+            <span class="value">${state.price ? '$' + state.price.toLocaleString('es-AR') : '—'}</span>
+        </div>`
+
+        if (cateringItems.length) {
+            cateringItems.forEach(ci => {
+                html += `<div class="resumen-line">
+                    <span class="label">${ci.name} ×${ci.qty}</span>
+                    <span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span>
+                </div>`
+            })
+        }
+
+        html += `<div class="resumen-line total">
+            <span class="label">TOTAL</span>
+            <span class="value">${isComplete || cateringItems.length ? '$' + total.toLocaleString('es-AR') : '—'}</span>
+        </div>`
+
+        body.innerHTML = html
+        cta.disabled = !isComplete
+    }
+
+    function confirmarReserva() {
+        alert('¡Reserva enviada! Nos ponemos en contacto para confirmar.')
+    }
+</script>
+
 </body>
 </html>
