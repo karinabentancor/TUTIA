@@ -108,6 +108,7 @@ body {
     letter-spacing: 1px;
     cursor: pointer;
     background: var(--black);
+    /* CAMBIO 1: gris igual al placeholder cuando no está activo */
     color: #555;
     transition: background 0.2s, color 0.2s;
     white-space: nowrap;
@@ -232,11 +233,12 @@ body {
     min-width: 0;
 }
 
+/* CAMBIO 2: catalog centrado con padding uniforme */
 #catalog {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 /* ── CARD LIBRO ── */
@@ -282,9 +284,10 @@ body {
     justify-content: flex-end;
 }
 
+/* CAMBIO 3: pack-button siempre rojo */
 .pack-button {
-    background: transparent;
-    border: 2px solid var(--black);
+    background: var(--red);
+    border: 2px solid var(--red);
     padding: 5px 7px;
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
@@ -292,11 +295,19 @@ body {
     align-items: center;
     justify-content: center;
 }
-.pack-button img { width: 16px; height: 16px; margin: 0; transition: filter 0.2s; }
-.pack-button:hover,
-.pack-button.selected { background: var(--red); border-color: var(--red); }
-.pack-button:hover img,
-.pack-button.selected img { filter: brightness(0) invert(1); }
+.pack-button img {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    transition: filter 0.2s;
+    filter: brightness(0) invert(1);
+}
+/* cuando está seleccionado, borde negro para diferenciarlo */
+.pack-button.selected {
+    background: var(--red);
+    border-color: var(--black);
+}
+.pack-button:hover { opacity: 0.8; }
 
 .out-of-stock { color: var(--red); font-weight: bold; font-size: 11px; }
 
@@ -436,6 +447,7 @@ body {
     }
 
     .content { padding: 16px 14px; }
+    /* CAMBIO 2 responsive: centrado también en tablet */
     #catalog { justify-content: center; gap: 14px; }
     .book { width: 160px; padding: 14px; }
 }

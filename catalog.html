@@ -43,15 +43,16 @@
       text-decoration: none;
       flex-shrink: 0;
       transition: background 0.2s, border-color 0.2s;
-      margin-right: 20px;
+      /* CAMBIO 4: más separación entre flecha y logo */
+      margin-right: 36px;
     }
     .back-btn:hover { background: var(--red); border-color: var(--red); }
 
     .header-logo {
-      height: 48px;       /* ← más grande */
+      height: 48px;
       width: auto;
       filter: invert(1);
-      margin-right: 28px; /* ← más separado */
+      margin-right: 28px;
     }
 
     /* empuja el título a la derecha */
@@ -164,7 +165,8 @@
       line-height: 34px;
       cursor: pointer;
       background: var(--black);
-      color: var(--white);
+      /* CAMBIO 1: gris cuando no está activo */
+      color: #666;
       transition: background 0.2s, color 0.2s;
       white-space: nowrap;
     }
@@ -173,11 +175,9 @@
     .switch-option:not(.active):hover { background: var(--red); color: var(--white); }
 
     /* ── CARD SELECTED ── */
-    /* borde rojo cuando la card está seleccionada */
     .book.selected-card {
       border-color: var(--red);
     }
-    /* pack-button siempre visible (corazón) */
     .pack-button {
       opacity: 1 !important;
       visibility: visible !important;
@@ -196,11 +196,12 @@
       background: var(--white);
       overflow-y: auto;
     }
+    /* CAMBIO 2: centrado con padding uniforme */
     #catalog {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     /* ── ASIDE DERECHO ── */
@@ -332,6 +333,8 @@
       .switch-option { flex: 1; text-align: center; }
       .header-logo { height: 34px; }
       .nav-row-1-right { gap: 6px; }
+      /* CAMBIO 2 responsive */
+      #catalog { justify-content: center; }
     }
     @media (max-width: 420px) {
       .nav-row-1 { padding: 8px 12px; }
@@ -375,7 +378,6 @@
       <select id="category">
         <option value="all">CATEGORÍA</option>
       </select>
-
 
       <button class="button-subasta" onclick="window.location.href='subasta.html'">
         SUBASTA
