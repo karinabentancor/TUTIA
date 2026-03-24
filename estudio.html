@@ -46,7 +46,6 @@
         .header-sep { color: var(--red); font-size: 14px; font-weight: 900; }
         .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--white); }
 
-        /* HORARIO BADGE */
         .header-hours {
             margin-left: auto;
             font-size: 11px; letter-spacing: 2px; font-weight: 900;
@@ -75,26 +74,25 @@
         }
 
         /* STEP */
-        .step { margin-bottom: 36px; }
+        .step { margin-bottom: 40px; }
 
-        /* STUDIO SELECTOR */
+        /* STUDIO TABS */
         .studio-tabs { display: flex; gap: 0; }
+
         .studio-tab {
-            flex: 1; border: 2px solid var(--black);
-            padding: 0; cursor: pointer;
+            flex: 1;
+            border: 2px solid var(--black);
+            cursor: pointer;
             background: var(--white); color: var(--black);
             font-family: monospace; text-align: left;
             transition: border-color 0.2s;
+            overflow: hidden;
         }
         .studio-tab + .studio-tab { border-left: none; }
         .studio-tab:hover { border-color: var(--red); z-index: 1; }
-        .studio-tab.active {
-            border-color: var(--red);
-            z-index: 1;
-        }
-        .studio-tab.active .tab-title {
-            background: var(--black); color: var(--white);
-        }
+        .studio-tab.active { border-color: var(--red); z-index: 1; }
+        .studio-tab.active .tab-title { background: var(--black); color: var(--white); }
+
         .tab-title {
             background: var(--gray);
             padding: 12px 18px;
@@ -103,15 +101,160 @@
             border-bottom: 2px solid var(--black);
             transition: background 0.2s, color 0.2s;
         }
-        .studio-tab.active .tab-title::before,
-        .studio-tab:hover .tab-title::before {
-            background: var(--red);
-        }
         .tab-title::before {
             content: ''; display: inline-block; width: 8px; height: 8px;
             background: #999; flex-shrink: 0; transition: background 0.2s;
         }
-        .tab-body { padding: 14px 18px; }
+        .studio-tab.active .tab-title::before,
+        .studio-tab:hover .tab-title::before { background: var(--red); }
+
+        .tab-body { padding: 14px 16px 16px; }
+
+        /* GALLERY CAROUSEL */
+        .tab-gallery {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            background: #111;
+            overflow: hidden;
+            margin-bottom: 14px;
+            cursor: pointer;
+        }
+        .tab-gallery-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s ease;
+        }
+        .tab-gallery-slide {
+            flex-shrink: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .tab-gallery-slide img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Placeholder when no image */
+        .tab-gallery-slide .slide-placeholder {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 8px; width: 100%; height: 100%;
+            color: #444;
+        }
+        .slide-placeholder-icon {
+            width: 36px; height: 36px;
+            border: 2px solid #333;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .slide-placeholder-label {
+            font-size: 9px; letter-spacing: 3px; color: #444;
+        }
+
+        /* Overlay expand hint */
+        .gallery-expand-hint {
+            position: absolute; bottom: 8px; right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: var(--white);
+            font-size: 9px; letter-spacing: 2px; font-weight: 900;
+            padding: 4px 8px;
+            border: 1px solid #444;
+            pointer-events: none;
+        }
+
+        /* Arrows */
+        .gallery-arrow {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.6); color: var(--white);
+            border: 1px solid #555;
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 900;
+            cursor: pointer; z-index: 5;
+            transition: background 0.2s;
+        }
+        .gallery-arrow:hover { background: var(--red); border-color: var(--red); }
+        .gallery-arrow.prev { left: 6px; }
+        .gallery-arrow.next { right: 6px; }
+
+        /* Dots */
+        .gallery-dots {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 5px; z-index: 5;
+        }
+        .gallery-dot {
+            width: 6px; height: 6px;
+            background: #555; border: 1px solid #777;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .gallery-dot.active { background: var(--red); border-color: var(--red); }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.95);
+            align-items: center; justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 90vw; max-height: 80vh;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .lightbox-img-wrap img {
+            max-width: 90vw; max-height: 78vh;
+            object-fit: contain;
+            display: block;
+        }
+        .lightbox-placeholder {
+            width: 600px; max-width: 90vw; height: 400px; max-height: 70vh;
+            background: #1a1a1a;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 12px;
+            border: 2px solid #333;
+            color: #444;
+        }
+        .lightbox-placeholder .lp-icon { font-size: 32px; }
+        .lightbox-placeholder .lp-label { font-size: 10px; letter-spacing: 3px; }
+        .lightbox-close {
+            position: absolute; top: 16px; right: 20px;
+            background: none; border: 2px solid #555;
+            color: var(--white); font-family: monospace;
+            font-size: 18px; font-weight: 900;
+            width: 40px; height: 40px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .lightbox-close:hover { border-color: var(--red); background: var(--red); }
+        .lightbox-nav {
+            display: flex; gap: 0; margin-top: 16px;
+        }
+        .lightbox-nav-btn {
+            background: none; border: 2px solid #555;
+            color: var(--white); font-family: monospace;
+            font-size: 16px; font-weight: 900;
+            width: 48px; height: 48px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .lightbox-nav-btn + .lightbox-nav-btn { border-left: none; }
+        .lightbox-nav-btn:hover { border-color: var(--red); background: rgba(204,0,0,0.2); }
+        .lightbox-counter {
+            font-size: 10px; letter-spacing: 3px; color: #666;
+            margin-top: 10px;
+        }
+        .lightbox-studio-label {
+            font-size: 10px; letter-spacing: 4px; font-weight: 900;
+            color: var(--red); margin-bottom: 14px;
+        }
 
         /* HOUR OPTIONS */
         .hour-options { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -128,34 +271,35 @@
         .hour-btn .price { display: block; font-size: 14px; color: var(--red); margin-top: 3px; }
         .hour-btn.active .price { color: #ff6666; }
 
-        /* TIME INPUT */
-        .time-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .time-field {
-            display: flex; flex-direction: column; gap: 6px;
-        }
+        /* TIME — select-based */
+        .time-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+        .time-field { display: flex; flex-direction: column; gap: 6px; }
         .time-field label { font-size: 10px; letter-spacing: 2px; font-weight: 900; }
-        .time-field input[type="time"] {
+
+        .time-select {
             border: 2px solid var(--black);
             padding: 10px 14px;
             font-family: monospace; font-size: 16px; font-weight: 900;
             background: var(--white); color: var(--black);
             outline: none;
-            width: 140px;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 110px;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23cc0000'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 30px;
         }
-        .time-field input[type="time"]:focus { border-color: var(--red); }
-        .time-arrow { font-size: 20px; color: var(--red); font-weight: 900; margin-top: 20px; }
+        .time-select:focus { border-color: var(--red); }
+
+        .time-arrow { font-size: 20px; color: var(--red); font-weight: 900; padding-bottom: 10px; }
         .time-end {
             font-size: 24px; font-weight: 900; letter-spacing: 1px;
-            color: var(--black); margin-top: 20px;
+            color: var(--black); padding-bottom: 8px;
         }
-        .time-note {
-            font-size: 10px; letter-spacing: 1px; color: #888;
-            margin-top: 8px;
-        }
-        .time-error {
-            font-size: 10px; letter-spacing: 1px; color: var(--red);
-            margin-top: 8px; display: none;
-        }
+        .time-note { font-size: 10px; letter-spacing: 1px; color: #888; margin-top: 8px; }
+        .time-error { font-size: 10px; letter-spacing: 1px; color: var(--red); margin-top: 8px; display: none; }
 
         /* CATERING */
         .catering-grid {
@@ -176,11 +320,9 @@
         .catering-item-info { flex: 1; }
         .catering-item-name { font-size: 11px; letter-spacing: 1px; font-weight: 900; margin-bottom: 2px; }
         .catering-item-detail { font-size: 10px; letter-spacing: 1px; color: #666; }
-        .catering-item-right { display: flex; align-items: center; gap: 8px; }
+        .catering-item-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .catering-item-price { font-size: 12px; font-weight: 900; color: var(--red); min-width: 52px; text-align: right; }
-        .qty-ctrl {
-            display: flex; align-items: center; gap: 0;
-        }
+        .qty-ctrl { display: flex; align-items: center; gap: 0; }
         .qty-btn {
             width: 24px; height: 24px;
             border: 1px solid var(--black);
@@ -193,8 +335,7 @@
         .qty-display {
             width: 26px; text-align: center;
             font-size: 12px; font-weight: 900;
-            border-top: 1px solid var(--black);
-            border-bottom: 1px solid var(--black);
+            border-top: 1px solid var(--black); border-bottom: 1px solid var(--black);
             height: 24px; line-height: 24px;
         }
 
@@ -236,8 +377,7 @@
             background: var(--red); color: var(--white);
             border: 2px solid var(--red);
             font-family: monospace; font-size: 12px; letter-spacing: 3px; font-weight: 900;
-            cursor: pointer;
-            transition: background 0.2s;
+            cursor: pointer; transition: background 0.2s;
         }
         .cta-btn:hover { background: #aa0000; border-color: #aa0000; }
         .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
@@ -259,11 +399,45 @@
         .floating-tab.proyectos { top: 40%; }
         .floating-tab.eventos   { top: 58%; }
 
-        @media (max-width: 600px) {
+        /* ── RESPONSIVE ─────────────────────────────────────── */
+        @media (max-width: 640px) {
+            .estudio-page { padding: 24px 16px 80px; }
+
+            .estudio-header { padding: 10px 14px; gap: 12px; }
+            .header-hours { display: none; }
+
+            /* Stack studio tabs vertically */
             .studio-tabs { flex-direction: column; }
-            .studio-tab + .studio-tab { border-left: 2px solid var(--black); border-top: none; }
+            .studio-tab + .studio-tab {
+                border-left: 2px solid var(--black);
+                border-top: none;
+            }
+
+            .tab-gallery { height: 180px; }
+
+            .tab-title { font-size: 11px; letter-spacing: 2px; padding: 10px 14px; }
+            .tab-body { padding: 12px 12px 14px; }
+
             .hour-options { gap: 8px; }
-            .hour-btn { padding: 8px 12px; }
+            .hour-btn { padding: 8px 12px; font-size: 11px; }
+
+            .time-row { gap: 10px; flex-wrap: nowrap; }
+            .time-select { font-size: 14px; width: 90px; padding: 8px 10px; padding-right: 26px; }
+            .time-end { font-size: 18px; }
+
+            .catering-grid { grid-template-columns: 1fr; }
+
+            .resumen-line { font-size: 11px; }
+            .resumen-line.total .value { font-size: 18px; }
+
+            .floating-tab { display: none; }
+
+            .lightbox-placeholder { width: 90vw; height: 55vw; }
+        }
+
+        @media (max-width: 380px) {
+            .time-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .time-arrow { display: none; }
         }
     </style>
 </head>
@@ -277,15 +451,39 @@
     <span class="header-hours">09:00 — 21:00 HS</span>
 </header>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <div class="lightbox-studio-label" id="lb-studio-label">ESTUDIO I</div>
+    <div class="lightbox-img-wrap" id="lb-img-wrap">
+        <!-- filled by JS -->
+    </div>
+    <div class="lightbox-nav">
+        <button class="lightbox-nav-btn" onclick="lbNav(-1)">←</button>
+        <button class="lightbox-nav-btn" onclick="lbNav(1)">→</button>
+    </div>
+    <div class="lightbox-counter" id="lb-counter">1 / 1</div>
+</div>
+
 <div class="estudio-page">
 
-    <!-- STEP 1: ESTUDIO -->
+    <!-- STEP 1 -->
     <div class="step">
         <div class="section-label"><span class="section-num">1</span> SELECCIONÁ EL ESPACIO</div>
         <div class="studio-tabs">
 
-            <button class="studio-tab active" data-studio="1" onclick="selectStudio(1)">
+            <div class="studio-tab active" data-studio="1" onclick="selectStudio(1)">
                 <div class="tab-title">ESTUDIO I</div>
+                <!-- Gallery -->
+                <div class="tab-gallery" id="gallery-1" onclick="openLightbox(1, event)">
+                    <div class="tab-gallery-track" id="track-1">
+                        <!-- slides injected by JS -->
+                    </div>
+                    <button class="gallery-arrow prev" onclick="galleryNav(1,-1,event)">‹</button>
+                    <button class="gallery-arrow next" onclick="galleryNav(1, 1,event)">›</button>
+                    <div class="gallery-dots" id="dots-1"></div>
+                    <div class="gallery-expand-hint">VER FOTOS ↗</div>
+                </div>
                 <div class="tab-body">
                     <div class="hour-options" id="hours-1">
                         <button class="hour-btn" data-hs="2" data-price="1500" onclick="selectHours(event,2,1500)">
@@ -299,10 +497,20 @@
                         </button>
                     </div>
                 </div>
-            </button>
+            </div>
 
-            <button class="studio-tab" data-studio="2" onclick="selectStudio(2)">
+            <div class="studio-tab" data-studio="2" onclick="selectStudio(2)">
                 <div class="tab-title">ESTUDIO COMPLETO</div>
+                <!-- Gallery -->
+                <div class="tab-gallery" id="gallery-2" onclick="openLightbox(2, event)">
+                    <div class="tab-gallery-track" id="track-2">
+                        <!-- slides injected by JS -->
+                    </div>
+                    <button class="gallery-arrow prev" onclick="galleryNav(2,-1,event)">‹</button>
+                    <button class="gallery-arrow next" onclick="galleryNav(2, 1,event)">›</button>
+                    <div class="gallery-dots" id="dots-2"></div>
+                    <div class="gallery-expand-hint">VER FOTOS ↗</div>
+                </div>
                 <div class="tab-body">
                     <div class="hour-options" id="hours-2">
                         <button class="hour-btn" data-hs="2" data-price="2500" onclick="selectHours(event,2,2500)">
@@ -319,7 +527,7 @@
                         </button>
                     </div>
                 </div>
-            </button>
+            </div>
 
         </div>
     </div>
@@ -330,14 +538,14 @@
         <div class="time-row">
             <div class="time-field">
                 <label>DESDE</label>
-                <input type="time" id="time-start" min="09:00" max="21:00" value="09:00" oninput="updateTimeEnd()">
+                <select class="time-select" id="time-start" onchange="updateTimeEnd()">
+                    <!-- populated by JS: 09:00 to 20:00 -->
+                </select>
             </div>
             <div class="time-arrow">→</div>
-            <div>
-                <div class="time-field">
-                    <label>HASTA</label>
-                    <div class="time-end" id="time-end">—</div>
-                </div>
+            <div class="time-field">
+                <label>HASTA</label>
+                <div class="time-end" id="time-end">—</div>
             </div>
         </div>
         <div class="time-note" id="time-note">Seleccioná un espacio y duración para ver el horario de fin.</div>
@@ -346,7 +554,7 @@
 
     <!-- STEP 3: CATERING -->
     <div class="step">
-        <div class="section-label"><span class="section-num">3</span> ADICIONALES — CATERING</div>
+        <div class="section-label"><span class="section-num">3</span> CATERING</div>
         <div class="catering-grid" id="catering-grid"></div>
     </div>
 
@@ -368,40 +576,178 @@
 <a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
 
 <script>
+    /* ── DATA ─────────────────────────────────────────────────── */
+
+    // Replace src strings with actual image paths when available.
+    // Set src: null to show placeholder, src: 'path/to/img.jpg' for real images.
+    const STUDIO_PHOTOS = {
+        1: [
+            { src: null, alt: 'Estudio I — Vista principal' },
+            { src: null, alt: 'Estudio I — Ángulo lateral' },
+            { src: null, alt: 'Estudio I — Detalle' },
+        ],
+        2: [
+            { src: null, alt: 'Estudio Completo — Vista principal' },
+            { src: null, alt: 'Estudio Completo — Ángulo lateral' },
+            { src: null, alt: 'Estudio Completo — Detalle' },
+        ]
+    }
+
     const CATERING = [
         { id: 'jugo',        name: 'JUGO DE NARANJA',          detail: '1 litro',      price: 250  },
-        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600 },
+        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600  },
         { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400  },
-        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400 },
-        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800 },
+        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400  },
+        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800  },
         { id: 'cerveza',     name: 'CERVEZA',                  detail: '330 ml',       price: 300  },
         { id: 'cervsinalc',  name: 'CERVEZA SIN ALCOHOL',      detail: '330 ml',       price: 300  },
-        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800 },
+        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800  },
         { id: 'empqya',      name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades', price: 800 },
-        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300 },
+        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300  },
         { id: 'mani',        name: 'MANÍ SALADO',              detail: '250 gr',       price: 250  },
-        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400 },
-        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350 },
+        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400  },
+        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350  },
     ]
 
+    /* ── STATE ────────────────────────────────────────────────── */
     let state = {
         studio: 1,
         hs: null,
         price: 0,
-        startTime: '09:00',
-        catering: {} // id: qty
+        startHour: 9,   // integer 9–20
+        catering: {}
     }
 
-    // Init
+    // Gallery current index per studio
+    const galleryCurrent = { 1: 0, 2: 0 }
+
+    /* ── INIT ─────────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', () => {
+        buildTimeSelect()
+        buildGalleries()
         buildCatering()
         updateTimeEnd()
         updateResumen()
     })
 
+    /* ── TIME SELECT ──────────────────────────────────────────── */
+    function buildTimeSelect() {
+        const sel = document.getElementById('time-start')
+        for (let h = 9; h <= 20; h++) {
+            const opt = document.createElement('option')
+            opt.value = h
+            opt.textContent = `${String(h).padStart(2,'0')}:00`
+            sel.appendChild(opt)
+        }
+        sel.value = 9
+    }
+
+    /* ── GALLERY ──────────────────────────────────────────────── */
+    function buildGalleries() {
+        [1, 2].forEach(studioId => {
+            const photos = STUDIO_PHOTOS[studioId]
+            const track = document.getElementById(`track-${studioId}`)
+            const dotsEl = document.getElementById(`dots-${studioId}`)
+            track.innerHTML = ''
+            dotsEl.innerHTML = ''
+
+            photos.forEach((photo, i) => {
+                const slide = document.createElement('div')
+                slide.className = 'tab-gallery-slide'
+                if (photo.src) {
+                    slide.innerHTML = `<img src="${photo.src}" alt="${photo.alt}">`
+                } else {
+                    slide.innerHTML = `
+                        <div class="slide-placeholder">
+                            <div class="slide-placeholder-icon">⬜</div>
+                            <div class="slide-placeholder-label">FOTO ${i+1}</div>
+                        </div>`
+                }
+                track.appendChild(slide)
+
+                const dot = document.createElement('div')
+                dot.className = `gallery-dot${i === 0 ? ' active' : ''}`
+                dot.onclick = (e) => { e.stopPropagation(); goToSlide(studioId, i) }
+                dotsEl.appendChild(dot)
+            })
+
+            goToSlide(studioId, 0)
+        })
+    }
+
+    function goToSlide(studioId, idx) {
+        const photos = STUDIO_PHOTOS[studioId]
+        const total = photos.length
+        idx = (idx + total) % total
+        galleryCurrent[studioId] = idx
+        const track = document.getElementById(`track-${studioId}`)
+        track.style.transform = `translateX(-${idx * 100}%)`
+        const dots = document.querySelectorAll(`#dots-${studioId} .gallery-dot`)
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx))
+    }
+
+    function galleryNav(studioId, dir, e) {
+        e.stopPropagation()
+        goToSlide(studioId, galleryCurrent[studioId] + dir)
+    }
+
+    /* ── LIGHTBOX ─────────────────────────────────────────────── */
+    let lbStudio = 1
+    let lbIndex  = 0
+
+    function openLightbox(studioId, e) {
+        e.stopPropagation()
+        lbStudio = studioId
+        lbIndex  = galleryCurrent[studioId]
+        const studioName = studioId === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
+        document.getElementById('lb-studio-label').textContent = studioName
+        renderLightbox()
+        document.getElementById('lightbox').classList.add('open')
+        document.body.style.overflow = 'hidden'
+    }
+
+    function renderLightbox() {
+        const photos = STUDIO_PHOTOS[lbStudio]
+        const photo  = photos[lbIndex]
+        const wrap   = document.getElementById('lb-img-wrap')
+        if (photo.src) {
+            wrap.innerHTML = `<img src="${photo.src}" alt="${photo.alt}">`
+        } else {
+            wrap.innerHTML = `
+                <div class="lightbox-placeholder">
+                    <div class="lp-icon">⬜</div>
+                    <div class="lp-label">FOTO ${lbIndex + 1} — ${photo.alt}</div>
+                </div>`
+        }
+        document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${photos.length}`
+    }
+
+    function lbNav(dir) {
+        const total = STUDIO_PHOTOS[lbStudio].length
+        lbIndex = (lbIndex + dir + total) % total
+        renderLightbox()
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open')
+        document.body.style.overflow = ''
+    }
+
+    function closeLightboxOutside(e) {
+        if (e.target === document.getElementById('lightbox')) closeLightbox()
+    }
+
+    document.addEventListener('keydown', e => {
+        if (!document.getElementById('lightbox').classList.contains('open')) return
+        if (e.key === 'Escape') closeLightbox()
+        if (e.key === 'ArrowLeft')  lbNav(-1)
+        if (e.key === 'ArrowRight') lbNav(1)
+    })
+
+    /* ── STUDIO SELECT ────────────────────────────────────────── */
     function selectStudio(id) {
         state.studio = id
-        state.hs = null
+        state.hs    = null
         state.price = 0
         document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
         document.querySelector(`.studio-tab[data-studio="${id}"]`).classList.add('active')
@@ -412,7 +758,7 @@
 
     function selectHours(e, hs, price) {
         e.stopPropagation()
-        state.hs = hs
+        state.hs    = hs
         state.price = price
         const studioId = state.studio
         document.querySelectorAll(`#hours-${studioId} .hour-btn`).forEach(b => b.classList.remove('active'))
@@ -421,11 +767,11 @@
         updateResumen()
     }
 
+    /* ── TIME ─────────────────────────────────────────────────── */
     function updateTimeEnd() {
-        const input = document.getElementById('time-start')
-        state.startTime = input.value || '09:00'
-        const endEl = document.getElementById('time-end')
-        const noteEl = document.getElementById('time-note')
+        state.startHour = parseInt(document.getElementById('time-start').value, 10) || 9
+        const endEl   = document.getElementById('time-end')
+        const noteEl  = document.getElementById('time-note')
         const errorEl = document.getElementById('time-error')
 
         if (!state.hs) {
@@ -436,14 +782,10 @@
         }
 
         noteEl.style.display = 'none'
-        const [h, m] = state.startTime.split(':').map(Number)
-        const startMins = h * 60 + m
-        const endMins = startMins + state.hs * 60
-        const endH = Math.floor(endMins / 60)
-        const endM = endMins % 60
-        const endStr = `${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}`
+        const endH = state.startHour + state.hs
+        const endStr = `${String(endH).padStart(2,'0')}:00`
 
-        if (endH > 21 || (endH === 21 && endM > 0)) {
+        if (endH > 21) {
             endEl.textContent = endStr
             endEl.style.color = '#cc0000'
             errorEl.style.display = 'block'
@@ -456,8 +798,7 @@
         updateResumen()
     }
 
-    document.getElementById('time-start').addEventListener('input', updateTimeEnd)
-
+    /* ── CATERING ─────────────────────────────────────────────── */
     function buildCatering() {
         const grid = document.getElementById('catering-grid')
         grid.innerHTML = ''
@@ -478,8 +819,7 @@
                         <div class="qty-display" id="qty-${item.id}">${qty}</div>
                         <button class="qty-btn" onclick="changeQty('${item.id}',1,event)">+</button>
                     </div>
-                </div>
-            `
+                </div>`
             grid.appendChild(div)
         })
     }
@@ -493,31 +833,21 @@
 
         document.getElementById(`qty-${id}`).textContent = next
         const itemEl = document.getElementById(`cat-${id}`)
-        if (next > 0) itemEl.classList.add('selected')
-        else itemEl.classList.remove('selected')
-
+        itemEl.classList.toggle('selected', next > 0)
         updateResumen()
     }
 
+    /* ── RESUMEN ──────────────────────────────────────────────── */
     function updateResumen() {
         const body = document.getElementById('resumen-body')
-        const cta = document.getElementById('cta-btn')
+        const cta  = document.getElementById('cta-btn')
 
         const studioName = state.studio === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
-        const [h, m] = (state.startTime || '09:00').split(':').map(Number)
-        const startMins = h * 60 + m
-        let endStr = '—'
-        let timeValid = false
+        const endH = state.hs ? state.startHour + state.hs : null
+        const endStr  = endH ? `${String(endH).padStart(2,'0')}:00` : '—'
+        const startStr = `${String(state.startHour).padStart(2,'0')}:00`
+        const timeValid = endH !== null && endH <= 21
 
-        if (state.hs) {
-            const endMins = startMins + state.hs * 60
-            const eH = Math.floor(endMins / 60)
-            const eM = endMins % 60
-            endStr = `${String(eH).padStart(2,'0')}:${String(eM).padStart(2,'0')}`
-            timeValid = eH < 21 || (eH === 21 && eM === 0)
-        }
-
-        // Catering total
         let cateringTotal = 0
         const cateringItems = []
         for (const [id, qty] of Object.entries(state.catering)) {
@@ -530,39 +860,32 @@
         }
 
         const total = state.price + cateringTotal
-        const isComplete = state.hs && state.startTime && timeValid
+        const isComplete = state.hs && timeValid
 
-        // Render
         let html = ''
-
         html += `<div class="resumen-line">
             <span class="label">ESPACIO</span>
             <span class="value">${studioName}</span>
         </div>`
-
         html += `<div class="resumen-line">
             <span class="label">DURACIÓN</span>
             <span class="value">${state.hs ? state.hs + ' HS' : '—'}</span>
         </div>`
-
         html += `<div class="resumen-line">
             <span class="label">HORARIO</span>
-            <span class="value">${state.hs ? state.startTime + ' → ' + endStr : '—'}</span>
+            <span class="value">${state.hs ? startStr + ' → ' + endStr : '—'}</span>
         </div>`
-
         html += `<div class="resumen-line">
             <span class="label">ALQUILER</span>
             <span class="value">${state.price ? '$' + state.price.toLocaleString('es-AR') : '—'}</span>
         </div>`
 
-        if (cateringItems.length) {
-            cateringItems.forEach(ci => {
-                html += `<div class="resumen-line">
-                    <span class="label">${ci.name} ×${ci.qty}</span>
-                    <span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span>
-                </div>`
-            })
-        }
+        cateringItems.forEach(ci => {
+            html += `<div class="resumen-line">
+                <span class="label">${ci.name} ×${ci.qty}</span>
+                <span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span>
+            </div>`
+        })
 
         html += `<div class="resumen-line total">
             <span class="label">TOTAL</span>
