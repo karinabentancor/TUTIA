@@ -28,14 +28,15 @@
             background: var(--black);
             border-bottom: 3px solid var(--red);
             padding: 10px 24px;
-            display: flex; align-items: center; gap: 24px;
+            display: flex; align-items: center; gap: 16px;
+            flex-wrap: wrap;
         }
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 44px; height: 44px;
+            width: 32px; height: 32px;
             background: var(--black); color: var(--white);
             border: 2px solid var(--white);
-            font-family: monospace; font-size: 18px;
+            font-family: monospace; font-size: 14px;
             text-decoration: none;
             transition: background 0.2s, border-color 0.2s;
             flex-shrink: 0;
@@ -43,16 +44,47 @@
         .back-btn:hover { background: var(--red); border-color: var(--red); }
 
         .header-logo { height: 28px; width: auto; filter: invert(1); }
+
+        /* sep + section pushed to the right together */
+        .header-right {
+            margin-left: auto;
+            display: flex; align-items: center; gap: 10px;
+        }
         .header-sep { color: var(--red); font-size: 14px; font-weight: 900; }
-        .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--white); }
+        .header-section {
+            font-family: monospace; font-size: 13px; font-weight: 900;
+            letter-spacing: 3px; color: var(--white);
+        }
 
         .header-hours {
-            margin-left: auto;
             font-size: 11px; letter-spacing: 2px; font-weight: 900;
             color: var(--red);
             border: 1px solid var(--red);
             padding: 4px 10px;
+            flex-shrink: 0;
         }
+
+        /* FLOATING TABS — crisp, no blur */
+        .floating-tab {
+            position: fixed;
+            right: 0;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            background: var(--black); color: var(--white);
+            text-decoration: none; font-family: monospace;
+            font-size: 10px; font-weight: 900; letter-spacing: 0.2em;
+            padding: 16px 10px;
+            z-index: 999;
+            border: 2px solid var(--white);
+            border-right: none;
+            transition: background 0.2s, color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            image-rendering: crisp-edges;
+        }
+        .floating-tab:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+        .floating-tab.proyectos { top: calc(50% - 90px); }
+        .floating-tab.eventos   { top: calc(50% + 10px); }
 
         /* PAGE */
         .estudio-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
@@ -76,8 +108,8 @@
         /* STEP */
         .step { margin-bottom: 40px; }
 
-        /* STUDIO TABS */
-        .studio-tabs { display: flex; gap: 0; }
+        /* STUDIO TABS — now with gap */
+        .studio-tabs { display: flex; gap: 16px; }
 
         .studio-tab {
             flex: 1;
@@ -88,7 +120,6 @@
             transition: border-color 0.2s;
             overflow: hidden;
         }
-        .studio-tab + .studio-tab { border-left: none; }
         .studio-tab:hover { border-color: var(--red); z-index: 1; }
         .studio-tab.active { border-color: var(--red); z-index: 1; }
         .studio-tab.active .tab-title { background: var(--black); color: var(--white); }
@@ -139,7 +170,6 @@
             object-fit: cover;
             display: block;
         }
-        /* Placeholder when no image */
         .tab-gallery-slide .slide-placeholder {
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
@@ -156,7 +186,6 @@
             font-size: 9px; letter-spacing: 3px; color: #444;
         }
 
-        /* Overlay expand hint */
         .gallery-expand-hint {
             position: absolute; bottom: 8px; right: 8px;
             background: rgba(0,0,0,0.7);
@@ -167,7 +196,6 @@
             pointer-events: none;
         }
 
-        /* Arrows */
         .gallery-arrow {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(0,0,0,0.6); color: var(--white);
@@ -182,7 +210,6 @@
         .gallery-arrow.prev { left: 6px; }
         .gallery-arrow.next { right: 6px; }
 
-        /* Dots */
         .gallery-dots {
             position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
             display: flex; gap: 5px; z-index: 5;
@@ -257,24 +284,92 @@
         }
 
         /* HOUR OPTIONS */
-        .hour-options { display: flex; flex-wrap: wrap; gap: 10px; }
+        .hour-options { display: flex; flex-wrap: nowrap; gap: 0; }
         .hour-btn {
+            flex: 1;
             border: 2px solid var(--black);
-            padding: 10px 16px;
+            border-right: none;
+            padding: 10px 8px;
             background: var(--white); color: var(--black);
             font-family: monospace; font-size: 12px; letter-spacing: 1px; font-weight: 900;
-            cursor: pointer;
+            cursor: pointer; text-align: center;
             transition: background 0.15s, border-color 0.15s, color 0.15s;
         }
-        .hour-btn:hover { border-color: var(--red); }
-        .hour-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
-        .hour-btn .price { display: block; font-size: 14px; color: var(--red); margin-top: 3px; }
+        .hour-btn:last-child { border-right: 2px solid var(--black); }
+        .hour-btn:hover { border-color: var(--red); z-index: 1; position: relative; }
+        .hour-btn.active {
+            background: var(--black); color: var(--white);
+            border-color: var(--black); z-index: 1; position: relative;
+        }
+        .hour-btn .price { display: block; font-size: 13px; color: var(--red); margin-top: 3px; }
         .hour-btn.active .price { color: #ff6666; }
 
-        /* TIME — select-based */
+        /* TIME — wrapper layout */
+        .time-section { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; }
+
+        /* CALENDAR */
+        .cal-wrap { flex-shrink: 0; }
+        .cal-label { font-size: 10px; letter-spacing: 2px; font-weight: 900; margin-bottom: 8px; }
+        .cal {
+            border: 2px solid var(--black);
+            width: 224px;
+            user-select: none;
+        }
+        .cal-header {
+            background: var(--black); color: var(--white);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 8px 10px;
+        }
+        .cal-month-label {
+            font-size: 11px; letter-spacing: 3px; font-weight: 900;
+            flex: 1; text-align: center;
+        }
+        .cal-nav {
+            background: none; border: none;
+            color: var(--white); font-family: monospace;
+            font-size: 16px; font-weight: 900;
+            cursor: pointer; padding: 0 4px; line-height: 1;
+            transition: color 0.15s;
+        }
+        .cal-nav:hover { color: var(--red); }
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .cal-dow {
+            text-align: center; padding: 6px 0;
+            font-size: 9px; letter-spacing: 1px; font-weight: 900;
+            color: #888; border-bottom: 1px solid #ddd;
+            background: #f5f5f5;
+        }
+        .cal-day {
+            text-align: center;
+            padding: 7px 2px;
+            font-size: 11px; font-weight: 900; font-family: monospace;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: background 0.12s, color 0.12s;
+            position: relative;
+        }
+        .cal-day:hover:not(.cal-day--empty):not(.cal-day--past) {
+            background: #f0f0f0; border-color: #ccc;
+        }
+        .cal-day--empty { cursor: default; }
+        .cal-day--past { color: #ccc; cursor: not-allowed; }
+        /* Today: black text, no dot */
+        .cal-day--today { color: var(--black); font-weight: 900; }
+        /* Selected: red background, white text */
+        .cal-day--selected {
+            background: var(--red) !important;
+            color: var(--white) !important;
+            border-color: var(--red) !important;
+        }
+
+        /* TIME row (beside calendar) */
         .time-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
         .time-field { display: flex; flex-direction: column; gap: 6px; }
         .time-field label { font-size: 10px; letter-spacing: 2px; font-weight: 900; }
+        .time-controls { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
 
         .time-select {
             border: 2px solid var(--black);
@@ -339,6 +434,41 @@
             height: 24px; line-height: 24px;
         }
 
+        /* DATOS PERSONALES */
+        .datos-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px 20px;
+        }
+        .datos-field.span2 { grid-column: span 1; } /* no span needed on desktop */
+
+        .datos-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .datos-field label {
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: 900;
+            color: #666;
+        }
+        .datos-field input {
+            border: none;
+            border-bottom: 2px solid #ccc;
+            padding: 6px 0;
+            font-family: monospace;
+            font-size: 11px;
+            background: transparent;
+            color: var(--black);
+            outline: none;
+            transition: border-color 0.15s;
+            border-radius: 0;
+            -webkit-appearance: none;
+            width: 100%;
+        }
+        .datos-field input:focus { border-bottom-color: var(--red); }
+
         /* RESUMEN */
         .resumen-box {
             border: 3px solid var(--black);
@@ -360,14 +490,20 @@
             padding: 7px 0; border-bottom: 1px solid #333;
         }
         .resumen-line:last-child { border-bottom: none; }
-        .resumen-line .label { color: #aaa; }
-        .resumen-line .value { font-weight: 900; color: var(--white); }
+        /* label = concept name, bold white LEFT; value = the data, also white RIGHT */
+        .resumen-line .label { color: var(--white); font-weight: 900; }
+        .resumen-line .value { color: var(--white); font-weight: 900; }
+
+        /* Catering lines: keep label muted, value red */
+        .resumen-line.catering-line .label { color: #aaa; font-weight: 400; }
+        .resumen-line.catering-line .value { color: var(--red); font-weight: 900; }
+
         .resumen-line.total {
             margin-top: 10px; padding-top: 14px;
             border-top: 2px solid var(--red); border-bottom: none;
         }
-        .resumen-line.total .label { color: var(--white); font-size: 13px; letter-spacing: 2px; }
-        .resumen-line.total .value { font-size: 22px; color: var(--red); }
+        .resumen-line.total .label { color: var(--white); font-size: 13px; letter-spacing: 2px; font-weight: 900; }
+        .resumen-line.total .value { font-size: 22px; color: var(--red); font-weight: 900; }
         .resumen-empty { font-size: 11px; letter-spacing: 1px; color: #666; padding: 10px 0; }
 
         /* CTA */
@@ -403,29 +539,46 @@
         @media (max-width: 640px) {
             .estudio-page { padding: 24px 16px 80px; }
 
-            .estudio-header { padding: 10px 14px; gap: 12px; }
-            .header-hours { display: none; }
-
-            /* Stack studio tabs vertically */
-            .studio-tabs { flex-direction: column; }
-            .studio-tab + .studio-tab {
-                border-left: 2px solid var(--black);
-                border-top: none;
+            .estudio-header { padding: 8px 14px; gap: 10px; }
+            /* On mobile: hours drop below on its own row */
+            .header-right { gap: 8px; }
+            .header-hours {
+                display: block;
+                order: 10;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid #333;
+                margin-top: 4px;
+                padding: 6px 0 2px;
+                border-left: none; border-right: none; border-bottom: none;
             }
 
-            .tab-gallery { height: 180px; }
+            .studio-tabs { flex-direction: column; gap: 12px; }
 
+            .tab-gallery { height: 180px; }
             .tab-title { font-size: 11px; letter-spacing: 2px; padding: 10px 14px; }
             .tab-body { padding: 12px 12px 14px; }
 
-            .hour-options { gap: 8px; }
-            .hour-btn { padding: 8px 12px; font-size: 11px; }
+            .hour-options { flex-wrap: wrap; }
+            .hour-btn {
+                flex: 1 1 calc(50% - 1px);
+                border-right: none;
+                min-width: 0;
+            }
+            .hour-btn:nth-child(2n) { border-right: 2px solid var(--black); }
+            .hour-btn:last-child { border-right: 2px solid var(--black); }
 
             .time-row { gap: 10px; flex-wrap: nowrap; }
             .time-select { font-size: 14px; width: 90px; padding: 8px 10px; padding-right: 26px; }
             .time-end { font-size: 18px; }
 
             .catering-grid { grid-template-columns: 1fr; }
+            .datos-grid { grid-template-columns: 1fr 1fr; }
+
+            .time-section { gap: 20px; }
+            .cal { width: 100%; }
+            .cal-grid { grid-template-columns: repeat(7, 1fr); }
+            .time-controls { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 10px; }
 
             .resumen-line { font-size: 11px; }
             .resumen-line.total .value { font-size: 18px; }
@@ -438,6 +591,7 @@
         @media (max-width: 380px) {
             .time-row { flex-direction: column; align-items: flex-start; gap: 10px; }
             .time-arrow { display: none; }
+            .datos-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -446,18 +600,18 @@
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
     <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
-    <span class="header-sep">/</span>
-    <span class="header-section">ESTUDIO</span>
-    <span class="header-hours">09:00 — 21:00 HS</span>
+    <div class="header-right">
+        <span class="header-sep">/</span>
+        <span class="header-section">ESTUDIO</span>
+        <span class="header-hours">09:00 — 21:00 HS</span>
+    </div>
 </header>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <div class="lightbox-studio-label" id="lb-studio-label">ESTUDIO I</div>
-    <div class="lightbox-img-wrap" id="lb-img-wrap">
-        <!-- filled by JS -->
-    </div>
+    <div class="lightbox-img-wrap" id="lb-img-wrap"></div>
     <div class="lightbox-nav">
         <button class="lightbox-nav-btn" onclick="lbNav(-1)">←</button>
         <button class="lightbox-nav-btn" onclick="lbNav(1)">→</button>
@@ -474,11 +628,8 @@
 
             <div class="studio-tab active" data-studio="1" onclick="selectStudio(1)">
                 <div class="tab-title">ESTUDIO I</div>
-                <!-- Gallery -->
                 <div class="tab-gallery" id="gallery-1" onclick="openLightbox(1, event)">
-                    <div class="tab-gallery-track" id="track-1">
-                        <!-- slides injected by JS -->
-                    </div>
+                    <div class="tab-gallery-track" id="track-1"></div>
                     <button class="gallery-arrow prev" onclick="galleryNav(1,-1,event)">‹</button>
                     <button class="gallery-arrow next" onclick="galleryNav(1, 1,event)">›</button>
                     <div class="gallery-dots" id="dots-1"></div>
@@ -501,11 +652,8 @@
 
             <div class="studio-tab" data-studio="2" onclick="selectStudio(2)">
                 <div class="tab-title">ESTUDIO COMPLETO</div>
-                <!-- Gallery -->
                 <div class="tab-gallery" id="gallery-2" onclick="openLightbox(2, event)">
-                    <div class="tab-gallery-track" id="track-2">
-                        <!-- slides injected by JS -->
-                    </div>
+                    <div class="tab-gallery-track" id="track-2"></div>
                     <button class="gallery-arrow prev" onclick="galleryNav(2,-1,event)">‹</button>
                     <button class="gallery-arrow next" onclick="galleryNav(2, 1,event)">›</button>
                     <div class="gallery-dots" id="dots-2"></div>
@@ -534,22 +682,44 @@
 
     <!-- STEP 2: HORARIO -->
     <div class="step">
-        <div class="section-label"><span class="section-num">2</span> HORARIO</div>
-        <div class="time-row">
-            <div class="time-field">
-                <label>DESDE</label>
-                <select class="time-select" id="time-start" onchange="updateTimeEnd()">
-                    <!-- populated by JS: 09:00 to 20:00 -->
-                </select>
+        <div class="section-label"><span class="section-num">2</span> FECHA Y HORARIO</div>
+        <div class="time-section">
+
+            <!-- CALENDAR -->
+            <div class="cal-wrap">
+                <div class="cal-label">DÍA</div>
+                <div class="cal" id="cal">
+                    <div class="cal-header">
+                        <button class="cal-nav" onclick="calNav(-1)">‹</button>
+                        <div class="cal-month-label" id="cal-month-label"></div>
+                        <button class="cal-nav" onclick="calNav(1)">›</button>
+                    </div>
+                    <div class="cal-grid" id="cal-grid"></div>
+                </div>
             </div>
-            <div class="time-arrow">→</div>
-            <div class="time-field">
-                <label>HASTA</label>
-                <div class="time-end" id="time-end">—</div>
+
+            <!-- TIME SELECTORS -->
+            <div class="time-controls">
+                <div class="time-row">
+                    <div class="time-field">
+                        <label>DESDE</label>
+                        <select class="time-select" id="time-start" onchange="updateTimeEnd()">
+                            <!-- populated by JS: 09:00 to 19:00 -->
+                        </select>
+                    </div>
+                    <div class="time-arrow">→</div>
+                    <div class="time-field">
+                        <label>HASTA</label>
+                        <div class="time-end" id="time-end">—</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="time-note" id="time-note">Seleccioná un espacio y duración para ver el horario de fin.</div>
+                    <div class="time-error" id="time-error">⚠ El horario seleccionado excede el cierre (21:00 hs).</div>
+                </div>
             </div>
+
         </div>
-        <div class="time-note" id="time-note">Seleccioná un espacio y duración para ver el horario de fin.</div>
-        <div class="time-error" id="time-error">⚠ El horario seleccionado excede el cierre (21:00 hs).</div>
     </div>
 
     <!-- STEP 3: CATERING -->
@@ -558,9 +728,36 @@
         <div class="catering-grid" id="catering-grid"></div>
     </div>
 
-    <!-- RESUMEN -->
+    <!-- STEP 4: DATOS -->
     <div class="step">
-        <div class="section-label"><span class="section-num">4</span> RESUMEN</div>
+        <div class="section-label"><span class="section-num">4</span> TUS DATOS</div>
+        <div class="datos-grid">
+            <div class="datos-field">
+                <label>NOMBRE</label>
+                <input type="text" id="dato-nombre" autocomplete="given-name">
+            </div>
+            <div class="datos-field">
+                <label>APELLIDO</label>
+                <input type="text" id="dato-apellido" autocomplete="family-name">
+            </div>
+            <div class="datos-field">
+                <label>DOCUMENTO</label>
+                <input type="text" id="dato-doc" autocomplete="off">
+            </div>
+            <div class="datos-field">
+                <label>CELULAR</label>
+                <input type="tel" id="dato-cel" autocomplete="tel">
+            </div>
+            <div class="datos-field">
+                <label>EMAIL</label>
+                <input type="email" id="dato-mail" autocomplete="email">
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 5: RESUMEN -->
+    <div class="step">
+        <div class="section-label"><span class="section-num">5</span> RESUMEN</div>
         <div class="resumen-box">
             <div class="resumen-header">DETALLE DE RESERVA</div>
             <div class="resumen-body" id="resumen-body">
@@ -577,9 +774,6 @@
 
 <script>
     /* ── DATA ─────────────────────────────────────────────────── */
-
-    // Replace src strings with actual image paths when available.
-    // Set src: null to show placeholder, src: 'path/to/img.jpg' for real images.
     const STUDIO_PHOTOS = {
         1: [
             { src: null, alt: 'Estudio I — Vista principal' },
@@ -593,20 +787,23 @@
         ]
     }
 
+    // Ordered: food first, then drinks at the end
     const CATERING = [
-        { id: 'jugo',        name: 'JUGO DE NARANJA',          detail: '1 litro',      price: 250  },
-        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600  },
-        { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400  },
-        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400  },
-        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800  },
-        { id: 'cerveza',     name: 'CERVEZA',                  detail: '330 ml',       price: 300  },
-        { id: 'cervsinalc',  name: 'CERVEZA SIN ALCOHOL',      detail: '330 ml',       price: 300  },
-        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800  },
-        { id: 'empqya',      name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades', price: 800 },
-        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300  },
-        { id: 'mani',        name: 'MANÍ SALADO',              detail: '250 gr',       price: 250  },
-        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400  },
-        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350  },
+        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600,  type: 'food' },
+        { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400,  type: 'food' },
+        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400,  type: 'food' },
+        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400,  type: 'food' },
+        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800,  type: 'food' },
+        { id: 'empqya',      name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades', price: 800, type: 'food' },
+        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350,  type: 'food' },
+        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300,  type: 'food' },
+        { id: 'mani',        name: 'MANÍ SALADO',              detail: '250 gr',       price: 250,  type: 'food' },
+        { id: 'mixfrutos',   name: 'MIX FRUTOS SECOS',         detail: '250 gr',       price: 350,  type: 'food' },
+        { id: 'jugo',        name: 'JUGO DE NARANJA',          detail: '1 litro',      price: 250,  type: 'drink' },
+        { id: 'kombucha',    name: 'KOMBUCHA',                 detail: '350 ml',       price: 200,  type: 'drink' },
+        { id: 'cerveza',     name: 'CERVEZA',                  detail: '330 ml',       price: 300,  type: 'drink' },
+        { id: 'cervsinalc',  name: 'CERVEZA SIN ALCOHOL',      detail: '330 ml',       price: 300,  type: 'drink' },
+        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800,  type: 'drink' },
     ]
 
     /* ── STATE ────────────────────────────────────────────────── */
@@ -614,26 +811,102 @@
         studio: 1,
         hs: null,
         price: 0,
-        startHour: 9,   // integer 9–20
-        catering: {}
+        startHour: 9,
+        catering: {},
+        selectedDate: null   // { year, month, day }
     }
 
-    // Gallery current index per studio
     const galleryCurrent = { 1: 0, 2: 0 }
+    // Calendar navigation state
+    const today = new Date()
+    let calYear  = today.getFullYear()
+    let calMonth = today.getMonth() // 0-based
 
     /* ── INIT ─────────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', () => {
         buildTimeSelect()
         buildGalleries()
         buildCatering()
+        buildCalendar()
         updateTimeEnd()
         updateResumen()
     })
 
-    /* ── TIME SELECT ──────────────────────────────────────────── */
+    /* ── CALENDAR ─────────────────────────────────────────────── */
+    const MONTHS_ES = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO',
+                       'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
+    const DAYS_ES   = ['DO','LU','MA','MI','JU','VI','SA']
+
+    function buildCalendar() {
+        renderCalendar(calYear, calMonth)
+    }
+
+    function calNav(dir) {
+        calMonth += dir
+        if (calMonth > 11) { calMonth = 0; calYear++ }
+        if (calMonth < 0)  { calMonth = 11; calYear-- }
+        renderCalendar(calYear, calMonth)
+    }
+
+    function renderCalendar(year, month) {
+        document.getElementById('cal-month-label').textContent =
+            `${MONTHS_ES[month]} ${year}`
+
+        const grid = document.getElementById('cal-grid')
+        grid.innerHTML = ''
+
+        // Day-of-week headers
+        DAYS_ES.forEach(d => {
+            const cell = document.createElement('div')
+            cell.className = 'cal-dow'
+            cell.textContent = d
+            grid.appendChild(cell)
+        })
+
+        const firstDay = new Date(year, month, 1).getDay() // 0=Sun
+        const daysInMonth = new Date(year, month + 1, 0).getDate()
+
+        // Empty cells before first day
+        for (let i = 0; i < firstDay; i++) {
+            const cell = document.createElement('div')
+            cell.className = 'cal-day cal-day--empty'
+            grid.appendChild(cell)
+        }
+
+        for (let d = 1; d <= daysInMonth; d++) {
+            const cell = document.createElement('div')
+            const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear()
+            const isPast  = new Date(year, month, d) < new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            const isSel   = state.selectedDate &&
+                            state.selectedDate.day === d &&
+                            state.selectedDate.month === month &&
+                            state.selectedDate.year === year
+
+            let cls = 'cal-day'
+            if (isPast)   cls += ' cal-day--past'
+            if (isToday)  cls += ' cal-day--today'
+            if (isSel)    cls += ' cal-day--selected'
+
+            cell.className = cls
+            cell.textContent = d
+
+            if (!isPast) {
+                cell.addEventListener('click', () => selectDay(year, month, d))
+            }
+            grid.appendChild(cell)
+        }
+    }
+
+    function selectDay(year, month, day) {
+        state.selectedDate = { year, month, day }
+        renderCalendar(year, month)
+        updateResumen()
+    }
+
+    /* ── TIME SELECT (9 to 19 only) ───────────────────────────── */
     function buildTimeSelect() {
         const sel = document.getElementById('time-start')
-        for (let h = 9; h <= 20; h++) {
+        for (let h = 9; h <= 19; h++) {
             const opt = document.createElement('option')
             opt.value = h
             opt.textContent = `${String(h).padStart(2,'0')}:00`
@@ -751,6 +1024,7 @@
         state.price = 0
         document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
         document.querySelector(`.studio-tab[data-studio="${id}"]`).classList.add('active')
+        // Deselect ALL hour buttons across all studios
         document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('active'))
         updateTimeEnd()
         updateResumen()
@@ -758,10 +1032,19 @@
 
     function selectHours(e, hs, price) {
         e.stopPropagation()
+        // Find which studio this button belongs to
+        const parentTab = e.currentTarget.closest('.studio-tab')
+        const tabStudioId = parseInt(parentTab.dataset.studio, 10)
+
+        // Switch to this studio first (deselects all buttons)
+        if (state.studio !== tabStudioId) {
+            selectStudio(tabStudioId)
+        }
+
         state.hs    = hs
         state.price = price
-        const studioId = state.studio
-        document.querySelectorAll(`#hours-${studioId} .hour-btn`).forEach(b => b.classList.remove('active'))
+        // Deselect only the buttons in this studio's container
+        document.querySelectorAll(`#hours-${tabStudioId} .hour-btn`).forEach(b => b.classList.remove('active'))
         e.currentTarget.classList.add('active')
         updateTimeEnd()
         updateResumen()
@@ -860,9 +1143,24 @@
         }
 
         const total = state.price + cateringTotal
-        const isComplete = state.hs && timeValid
+        const isComplete = state.hs && timeValid && state.selectedDate
 
+        const DAYS_LONG   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
+        const MONTHS_LONG = ['enero','febrero','marzo','abril','mayo','junio',
+                             'julio','agosto','septiembre','octubre','noviembre','diciembre']
+        let dateStr = '—'
+        if (state.selectedDate) {
+            const { year, month, day } = state.selectedDate
+            const dow = new Date(year, month, day).getDay()
+            dateStr = `${DAYS_LONG[dow]} ${day} de ${MONTHS_LONG[month]} de ${year}`
+        }
+
+        // label (left) bold white, value right white
         let html = ''
+        html += `<div class="resumen-line">
+            <span class="label">FECHA</span>
+            <span class="value">${dateStr}</span>
+        </div>`
         html += `<div class="resumen-line">
             <span class="label">ESPACIO</span>
             <span class="value">${studioName}</span>
@@ -881,7 +1179,7 @@
         </div>`
 
         cateringItems.forEach(ci => {
-            html += `<div class="resumen-line">
+            html += `<div class="resumen-line catering-line">
                 <span class="label">${ci.name} ×${ci.qty}</span>
                 <span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span>
             </div>`
