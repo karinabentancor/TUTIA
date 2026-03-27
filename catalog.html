@@ -9,7 +9,6 @@
 <body>
 
   <nav class="site-nav">
-    <!-- Fila 1: flecha + logo + título a la derecha -->
     <div class="nav-row-1">
       <a href="index.html" class="back-btn">←</a>
       <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
@@ -19,7 +18,6 @@
       </div>
     </div>
 
-    <!-- Fila 2: switch, búsqueda, filtros, luego packs + subasta al final -->
     <div class="nav-row-2">
       <div class="availability-switch">
         <div class="switch-option active" id="all-books">TODOS</div>
@@ -29,11 +27,11 @@
       <input type="text" id="search" placeholder="TÍTULO O AUTOR" />
 
       <select id="editorial">
-        <option value="all">EDITORIAL</option>
+        <option value="all" selected disabled hidden>EDITORIAL</option>
       </select>
 
       <select id="category">
-        <option value="all">CATEGORÍA</option>
+        <option value="all" selected disabled hidden>CATEGORÍA</option>
       </select>
 
       <button class="button-dark" onclick="window.location.href='packs.html'">

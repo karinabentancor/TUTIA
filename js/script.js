@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   listContainer = aside.querySelector('.selected-list')
   
-  // Ocultar aside hasta que haya al menos un libro seleccionado
   if (!selectedBooks.length) aside.style.display = "none"
   
   const storedUser = localStorage.getItem("clubUser")
@@ -105,7 +104,6 @@ function renderBooks(books) {
     const isSelected = selectedBooks.some(b => b.id == book.id)
 
     const bookDiv = document.createElement("div")
-    // selected-card: borde rojo si está seleccionado
     bookDiv.className = `book ${book.available ? "" : "not-available"} ${isSelected ? "selected-card" : ""}`
     bookDiv.dataset.id = book.id
 
@@ -120,7 +118,7 @@ function renderBooks(books) {
     h3.textContent = book.title
 
     const pAuthor = document.createElement("p")
-    pAuthor.innerHTML = `<span class="value">${book.author}</span>`
+    pAuthor.innerHTML = `<span class="value" style="font-weight:900; color:#000;">${book.author}</span>`
 
     const pPublisher = document.createElement("p")
     pPublisher.innerHTML = `<span class="value">${book.publisher}</span>`
