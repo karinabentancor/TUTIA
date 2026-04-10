@@ -8,6 +8,7 @@
     --red: #cc0000;
     --black: #000;
     --white: #fff;
+    --lima: #a8cc00;
 }
 
 html, body {
@@ -117,26 +118,26 @@ html, body {
 
 /* botón principal — relleno rojo */
 .button-wht {
+    background-color: var(--lima);
+    color: var(--black);
+    border: 2px solid var(--lima);
+}
+.button-wht:hover {
+    background-color: transparent;
+    color: var(--lima);
+    border: 2px solid var(--lima);
+}
+
+/* botón secundario — outline rojo */
+.aside-right .button {
     background-color: var(--red);
     color: var(--white);
     border: 2px solid var(--red);
 }
-.button-wht:hover {
+.aside-right .button:hover {
     background-color: transparent;
     color: var(--red);
     border: 2px solid var(--red);
-}
-
-/* botón secundario — outline blanco */
-.aside-right .button {
-    background-color: transparent;
-    color: var(--white);
-    border: 2px solid var(--white);
-}
-.aside-right .button:hover {
-    background-color: var(--white);
-    color: var(--black);
-    border: 2px solid var(--white);
 }
 
 /* ── RESPONSIVE ── */

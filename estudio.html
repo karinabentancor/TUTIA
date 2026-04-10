@@ -14,27 +14,34 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: monospace;
-            background: var(--white);
-            color: var(--black);
+        html, body {
             overflow-x: hidden;
-            max-width: 100vw;
+            max-width: 100%;
         }
 
-        /* HEADER */
+        body {
+            font-family: monospace;
+            font-size: 15px;
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* HEADER — fondo con img/back.png repetido (tile) */
         .estudio-header {
             position: sticky; top: 0; z-index: 100;
-            background: var(--black);
+            background-image: url('img/back.png');
+            background-size: auto;
+            background-repeat: repeat;
+            background-color: var(--black); /* fallback */
             border-bottom: 3px solid var(--red);
             padding: 10px 24px;
-            display: flex; align-items: center; gap: 16px;
+            display: flex; align-items: center; gap: 20px;
             flex-wrap: wrap;
         }
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
             width: 32px; height: 32px;
-            background: var(--black); color: var(--white);
+            background: rgba(0,0,0,0.5); color: var(--white);
             border: 2px solid var(--white);
             font-family: monospace; font-size: 14px;
             text-decoration: none;
@@ -43,28 +50,33 @@
         }
         .back-btn:hover { background: var(--red); border-color: var(--red); }
 
-        .header-logo { height: 28px; width: auto; filter: invert(1); }
+        /* Logo más grande y separado del back-btn */
+        .header-logo {
+            height: 38px; /* ↑ antes 28px */
+            width: auto;
+            filter: invert(1);
+            margin-left: 6px; /* ↑ separación extra del arrow */
+        }
 
-        /* sep + section pushed to the right together */
         .header-right {
             margin-left: auto;
             display: flex; align-items: center; gap: 10px;
         }
-        .header-sep { color: var(--red); font-size: 14px; font-weight: 900; }
+        .header-sep { color: var(--black); font-size: 15px; font-weight: 900; }
         .header-section {
-            font-family: monospace; font-size: 13px; font-weight: 900;
-            letter-spacing: 3px; color: var(--white);
+            font-family: monospace; font-size: 14px; font-weight: 900;
+            letter-spacing: 3px; color: var(--black);
         }
 
         .header-hours {
-            font-size: 11px; letter-spacing: 2px; font-weight: 900;
-            color: var(--red);
-            border: 1px solid var(--red);
+            font-size: 12px; letter-spacing: 2px; font-weight: 900;
+            color: var(--black);
+            border: 1px solid var(--black);
             padding: 4px 10px;
             flex-shrink: 0;
         }
 
-        /* FLOATING TABS — crisp, no blur */
+        /* FLOATING TABS — siempre visibles, escritura vertical correcta */
         .floating-tab {
             position: fixed;
             right: 0;
@@ -73,25 +85,24 @@
             transform: rotate(180deg);
             background: var(--black); color: var(--white);
             text-decoration: none; font-family: monospace;
-            font-size: 10px; font-weight: 900; letter-spacing: 0.2em;
-            padding: 16px 10px;
+            font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
+            padding: 18px 10px;
             z-index: 999;
             border: 2px solid var(--white);
             border-right: none;
             transition: background 0.2s, color 0.2s, border-color 0.2s;
             white-space: nowrap;
-            image-rendering: crisp-edges;
         }
         .floating-tab:hover { background: var(--red); border-color: var(--red); color: var(--white); }
-        .floating-tab.proyectos { top: calc(50% - 90px); }
-        .floating-tab.eventos   { top: calc(50% + 10px); }
+        .floating-tab.proyectos { top: calc(50% - 90px); background: var(--red); border-color: var(--red); }
+        .floating-tab.eventos   { top: calc(50% + 10px);  }
 
         /* PAGE */
         .estudio-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
 
         /* SECTION LABEL */
         .section-label {
-            font-size: 10px; letter-spacing: 4px; font-weight: 900;
+            font-size: 11px; letter-spacing: 4px; font-weight: 900;
             color: var(--red); margin-bottom: 14px;
             display: flex; align-items: center; gap: 10px;
         }
@@ -102,13 +113,13 @@
             display: inline-flex; align-items: center; justify-content: center;
             width: 22px; height: 22px;
             background: var(--red); color: var(--white);
-            font-size: 10px; font-weight: 900; flex-shrink: 0;
+            font-size: 11px; font-weight: 900; flex-shrink: 0;
         }
 
         /* STEP */
         .step { margin-bottom: 40px; }
 
-        /* STUDIO TABS — now with gap */
+        /* STUDIO TABS */
         .studio-tabs { display: flex; gap: 16px; }
 
         .studio-tab {
@@ -127,7 +138,7 @@
         .tab-title {
             background: var(--gray);
             padding: 12px 18px;
-            font-size: 13px; letter-spacing: 3px; font-weight: 900;
+            font-size: 14px; letter-spacing: 3px; font-weight: 900;
             display: flex; align-items: center; gap: 8px;
             border-bottom: 2px solid var(--black);
             transition: background 0.2s, color 0.2s;
@@ -146,7 +157,7 @@
             position: relative;
             width: 100%;
             height: 160px;
-            background: #111;
+            background: #c8c8c8;
             overflow: hidden;
             margin-bottom: 14px;
             cursor: pointer;
@@ -160,7 +171,7 @@
             flex-shrink: 0;
             width: 100%;
             height: 100%;
-            background: #1a1a1a;
+            background: #c8c8c8;
             display: flex; align-items: center; justify-content: center;
             position: relative;
             overflow: hidden;
@@ -174,23 +185,23 @@
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             gap: 8px; width: 100%; height: 100%;
-            color: #444;
+            color: #888;
         }
         .slide-placeholder-icon {
             width: 36px; height: 36px;
-            border: 2px solid #333;
+            border: 2px solid #aaa;
             display: flex; align-items: center; justify-content: center;
             font-size: 18px;
         }
         .slide-placeholder-label {
-            font-size: 9px; letter-spacing: 3px; color: #444;
+            font-size: 10px; letter-spacing: 3px; color: #888;
         }
 
         .gallery-expand-hint {
             position: absolute; bottom: 8px; right: 8px;
             background: rgba(0,0,0,0.7);
             color: var(--white);
-            font-size: 9px; letter-spacing: 2px; font-weight: 900;
+            font-size: 10px; letter-spacing: 2px; font-weight: 900;
             padding: 4px 8px;
             border: 1px solid #444;
             pointer-events: none;
@@ -250,7 +261,7 @@
             color: #444;
         }
         .lightbox-placeholder .lp-icon { font-size: 32px; }
-        .lightbox-placeholder .lp-label { font-size: 10px; letter-spacing: 3px; }
+        .lightbox-placeholder .lp-label { font-size: 11px; letter-spacing: 3px; }
         .lightbox-close {
             position: absolute; top: 16px; right: 20px;
             background: none; border: 2px solid #555;
@@ -275,15 +286,15 @@
         .lightbox-nav-btn + .lightbox-nav-btn { border-left: none; }
         .lightbox-nav-btn:hover { border-color: var(--red); background: rgba(204,0,0,0.2); }
         .lightbox-counter {
-            font-size: 10px; letter-spacing: 3px; color: #666;
+            font-size: 11px; letter-spacing: 3px; color: #666;
             margin-top: 10px;
         }
         .lightbox-studio-label {
-            font-size: 10px; letter-spacing: 4px; font-weight: 900;
+            font-size: 11px; letter-spacing: 4px; font-weight: 900;
             color: var(--red); margin-bottom: 14px;
         }
 
-        /* HOUR OPTIONS */
+        /* HOUR OPTIONS — hora seleccionada: rojo, no negro */
         .hour-options { display: flex; flex-wrap: nowrap; gap: 0; }
         .hour-btn {
             flex: 1;
@@ -291,25 +302,26 @@
             border-right: none;
             padding: 10px 8px;
             background: var(--white); color: var(--black);
-            font-family: monospace; font-size: 12px; letter-spacing: 1px; font-weight: 900;
+            font-family: monospace; font-size: 13px; letter-spacing: 1px; font-weight: 900;
             cursor: pointer; text-align: center;
             transition: background 0.15s, border-color 0.15s, color 0.15s;
         }
         .hour-btn:last-child { border-right: 2px solid var(--black); }
         .hour-btn:hover { border-color: var(--red); z-index: 1; position: relative; }
+        /* CAMBIO: activo en rojo en vez de negro */
         .hour-btn.active {
-            background: var(--black); color: var(--white);
-            border-color: var(--black); z-index: 1; position: relative;
+            background: var(--red); color: var(--white);
+            border-color: var(--red); z-index: 1; position: relative;
         }
-        .hour-btn .price { display: block; font-size: 13px; color: var(--red); margin-top: 3px; }
-        .hour-btn.active .price { color: #ff6666; }
+        .hour-btn .price { display: block; font-size: 14px; color: var(--red); margin-top: 3px; }
+        .hour-btn.active .price { color: var(--white); }
 
-        /* TIME — wrapper layout */
+        /* TIME */
         .time-section { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; }
 
         /* CALENDAR */
         .cal-wrap { flex-shrink: 0; }
-        .cal-label { font-size: 10px; letter-spacing: 2px; font-weight: 900; margin-bottom: 8px; }
+        .cal-label { font-size: 11px; letter-spacing: 2px; font-weight: 900; margin-bottom: 8px; }
         .cal {
             border: 2px solid var(--black);
             width: 224px;
@@ -321,7 +333,7 @@
             padding: 8px 10px;
         }
         .cal-month-label {
-            font-size: 11px; letter-spacing: 3px; font-weight: 900;
+            font-size: 12px; letter-spacing: 3px; font-weight: 900;
             flex: 1; text-align: center;
         }
         .cal-nav {
@@ -338,14 +350,14 @@
         }
         .cal-dow {
             text-align: center; padding: 6px 0;
-            font-size: 9px; letter-spacing: 1px; font-weight: 900;
+            font-size: 10px; letter-spacing: 1px; font-weight: 900;
             color: #888; border-bottom: 1px solid #ddd;
             background: #f5f5f5;
         }
         .cal-day {
             text-align: center;
             padding: 7px 2px;
-            font-size: 11px; font-weight: 900; font-family: monospace;
+            font-size: 12px; font-weight: 900; font-family: monospace;
             cursor: pointer;
             border: 1px solid transparent;
             transition: background 0.12s, color 0.12s;
@@ -356,25 +368,23 @@
         }
         .cal-day--empty { cursor: default; }
         .cal-day--past { color: #ccc; cursor: not-allowed; }
-        /* Today: black text, no dot */
         .cal-day--today { color: var(--black); font-weight: 900; }
-        /* Selected: red background, white text */
         .cal-day--selected {
             background: var(--red) !important;
             color: var(--white) !important;
             border-color: var(--red) !important;
         }
 
-        /* TIME row (beside calendar) */
+        /* TIME row */
         .time-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
         .time-field { display: flex; flex-direction: column; gap: 6px; }
-        .time-field label { font-size: 10px; letter-spacing: 2px; font-weight: 900; }
+        .time-field label { font-size: 11px; letter-spacing: 2px; font-weight: 900; }
         .time-controls { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
 
         .time-select {
             border: 2px solid var(--black);
             padding: 10px 14px;
-            font-family: monospace; font-size: 16px; font-weight: 900;
+            font-family: monospace; font-size: 17px; font-weight: 900;
             background: var(--white); color: var(--black);
             outline: none;
             appearance: none;
@@ -393,8 +403,8 @@
             font-size: 24px; font-weight: 900; letter-spacing: 1px;
             color: var(--black); padding-bottom: 8px;
         }
-        .time-note { font-size: 10px; letter-spacing: 1px; color: #888; margin-top: 8px; }
-        .time-error { font-size: 10px; letter-spacing: 1px; color: var(--red); margin-top: 8px; display: none; }
+        .time-note { font-size: 11px; letter-spacing: 1px; color: #888; margin-top: 8px; }
+        .time-error { font-size: 11px; letter-spacing: 1px; color: var(--red); margin-top: 8px; display: none; }
 
         /* CATERING */
         .catering-grid {
@@ -413,10 +423,10 @@
         .catering-item:hover { border-color: var(--black); }
         .catering-item.selected { border-color: var(--red); background: #fff5f5; }
         .catering-item-info { flex: 1; }
-        .catering-item-name { font-size: 11px; letter-spacing: 1px; font-weight: 900; margin-bottom: 2px; }
-        .catering-item-detail { font-size: 10px; letter-spacing: 1px; color: #666; }
+        .catering-item-name { font-size: 12px; letter-spacing: 1px; font-weight: 900; margin-bottom: 2px; }
+        .catering-item-detail { font-size: 11px; letter-spacing: 1px; color: #666; }
         .catering-item-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-        .catering-item-price { font-size: 12px; font-weight: 900; color: var(--red); min-width: 52px; text-align: right; }
+        .catering-item-price { font-size: 13px; font-weight: 900; color: var(--red); min-width: 52px; text-align: right; }
         .qty-ctrl { display: flex; align-items: center; gap: 0; }
         .qty-btn {
             width: 24px; height: 24px;
@@ -429,7 +439,7 @@
         .qty-btn:hover { background: var(--black); color: var(--white); }
         .qty-display {
             width: 26px; text-align: center;
-            font-size: 12px; font-weight: 900;
+            font-size: 13px; font-weight: 900;
             border-top: 1px solid var(--black); border-bottom: 1px solid var(--black);
             height: 24px; line-height: 24px;
         }
@@ -440,15 +450,13 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 10px 20px;
         }
-        .datos-field.span2 { grid-column: span 1; } /* no span needed on desktop */
-
         .datos-field {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
         .datos-field label {
-            font-size: 9px;
+            font-size: 10px;
             letter-spacing: 2px;
             font-weight: 900;
             color: #666;
@@ -458,7 +466,7 @@
             border-bottom: 2px solid #ccc;
             padding: 6px 0;
             font-family: monospace;
-            font-size: 11px;
+            font-size: 13px;
             background: transparent;
             color: var(--black);
             outline: none;
@@ -476,7 +484,7 @@
         }
         .resumen-header {
             padding: 14px 20px;
-            font-size: 11px; letter-spacing: 3px; font-weight: 900;
+            font-size: 12px; letter-spacing: 3px; font-weight: 900;
             border-bottom: 2px solid var(--red);
             display: flex; align-items: center; gap: 8px;
         }
@@ -486,15 +494,13 @@
         .resumen-body { padding: 18px 20px; }
         .resumen-line {
             display: flex; justify-content: space-between; align-items: baseline;
-            font-size: 12px; letter-spacing: 1px;
+            font-size: 13px; letter-spacing: 1px;
             padding: 7px 0; border-bottom: 1px solid #333;
         }
         .resumen-line:last-child { border-bottom: none; }
-        /* label = concept name, bold white LEFT; value = the data, also white RIGHT */
         .resumen-line .label { color: var(--white); font-weight: 900; }
         .resumen-line .value { color: var(--white); font-weight: 900; }
 
-        /* Catering lines: keep label muted, value red */
         .resumen-line.catering-line .label { color: #aaa; font-weight: 400; }
         .resumen-line.catering-line .value { color: var(--red); font-weight: 900; }
 
@@ -502,9 +508,9 @@
             margin-top: 10px; padding-top: 14px;
             border-top: 2px solid var(--red); border-bottom: none;
         }
-        .resumen-line.total .label { color: var(--white); font-size: 13px; letter-spacing: 2px; font-weight: 900; }
+        .resumen-line.total .label { color: var(--white); font-size: 14px; letter-spacing: 2px; font-weight: 900; }
         .resumen-line.total .value { font-size: 22px; color: var(--red); font-weight: 900; }
-        .resumen-empty { font-size: 11px; letter-spacing: 1px; color: #666; padding: 10px 0; }
+        .resumen-empty { font-size: 12px; letter-spacing: 1px; color: #666; padding: 10px 0; }
 
         /* CTA */
         .cta-btn {
@@ -512,35 +518,18 @@
             padding: 16px;
             background: var(--red); color: var(--white);
             border: 2px solid var(--red);
-            font-family: monospace; font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            font-family: monospace; font-size: 13px; letter-spacing: 3px; font-weight: 900;
             cursor: pointer; transition: background 0.2s;
         }
         .cta-btn:hover { background: #aa0000; border-color: #aa0000; }
         .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
 
-        /* FLOATING TABS */
-        .floating-tab {
-            position: fixed; right: -30px;
-            transform: translateY(-50%) rotate(90deg);
-            transform-origin: center center;
-            background: var(--black); color: var(--white);
-            text-decoration: none; font-family: monospace;
-            font-size: 10px; font-weight: 900; letter-spacing: 0.15em;
-            padding: 8px 16px; z-index: 999;
-            border: 2px solid var(--white);
-            transition: background 0.2s, color 0.2s, border-color 0.2s;
-            white-space: nowrap;
-        }
-        .floating-tab:hover { background: var(--red); border-color: var(--red); }
-        .floating-tab.proyectos { top: 40%; }
-        .floating-tab.eventos   { top: 58%; }
-
         /* ── RESPONSIVE ─────────────────────────────────────── */
         @media (max-width: 640px) {
-            .estudio-page { padding: 24px 16px 80px; }
+            /* Márgenes laterales generosos en mobile */
+            .estudio-page { padding: 24px 20px 80px; }
 
-            .estudio-header { padding: 8px 14px; gap: 10px; }
-            /* On mobile: hours drop below on its own row */
+            .estudio-header { padding: 8px 16px; gap: 10px; }
             .header-right { gap: 8px; }
             .header-hours {
                 display: block;
@@ -556,42 +545,72 @@
             .studio-tabs { flex-direction: column; gap: 12px; }
 
             .tab-gallery { height: 180px; }
-            .tab-title { font-size: 11px; letter-spacing: 2px; padding: 10px 14px; }
-            .tab-body { padding: 12px 12px 14px; }
+            .tab-title { font-size: 12px; letter-spacing: 2px; padding: 10px 14px; }
+            .tab-body { padding: 10px 10px 12px; }
 
-            .hour-options { flex-wrap: wrap; }
+            /* Todas las opciones de hora en la misma row sin wrapping */
+            .hour-options {
+                display: flex;
+                flex-wrap: nowrap;
+                gap: 0;
+                overflow: hidden;
+            }
             .hour-btn {
-                flex: 1 1 calc(50% - 1px);
+                flex: 1;
                 border-right: none;
                 min-width: 0;
+                padding: 8px 4px;
+                font-size: 11px;
             }
-            .hour-btn:nth-child(2n) { border-right: 2px solid var(--black); }
             .hour-btn:last-child { border-right: 2px solid var(--black); }
+            .hour-btn .price { font-size: 11px; }
 
-            .time-row { gap: 10px; flex-wrap: nowrap; }
-            .time-select { font-size: 14px; width: 90px; padding: 8px 10px; padding-right: 26px; }
-            .time-end { font-size: 18px; }
-
-            .catering-grid { grid-template-columns: 1fr; }
-            .datos-grid { grid-template-columns: 1fr 1fr; }
-
-            .time-section { gap: 20px; }
+            /* Fecha y horario: calendar arriba, time-controls abajo, en columna */
+            .time-section {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
             .cal { width: 100%; }
             .cal-grid { grid-template-columns: repeat(7, 1fr); }
-            .time-controls { flex-direction: row; align-items: flex-end; flex-wrap: wrap; gap: 10px; }
 
-            .resumen-line { font-size: 11px; }
+            /* Time controls: DESDE → HASTA en row horizontal */
+            .time-controls {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .time-row {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-end;
+                gap: 12px;
+                flex-wrap: nowrap;
+            }
+            .time-select { font-size: 14px; width: 90px; padding: 8px 10px; padding-right: 26px; }
+            .time-end { font-size: 18px; }
+            .time-arrow { display: flex; padding-bottom: 10px; }
+
+            .catering-grid { grid-template-columns: 1fr; }
+
+            /* Datos: 2 campos por fila */
+            .datos-grid { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+
+            .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 18px; }
 
-            .floating-tab { display: none; }
+            /* Pestañas flotantes en mobile: pequeñas pero visibles */
+            .floating-tab {
+                font-size: 9px;
+                padding: 12px 7px;
+                letter-spacing: 0.15em;
+            }
 
             .lightbox-placeholder { width: 90vw; height: 55vw; }
         }
 
         @media (max-width: 380px) {
-            .time-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .time-arrow { display: none; }
-            .datos-grid { grid-template-columns: 1fr; }
+            .estudio-page { padding: 20px 16px 80px; }
+            .datos-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -599,7 +618,7 @@
 
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
-    <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
+    <img src="svg/tutian.svg" alt="TUTÍA" class="header-logo">
     <div class="header-right">
         <span class="header-sep">/</span>
         <span class="header-section">ESTUDIO</span>
@@ -685,7 +704,6 @@
         <div class="section-label"><span class="section-num">2</span> FECHA Y HORARIO</div>
         <div class="time-section">
 
-            <!-- CALENDAR -->
             <div class="cal-wrap">
                 <div class="cal-label">DÍA</div>
                 <div class="cal" id="cal">
@@ -698,13 +716,11 @@
                 </div>
             </div>
 
-            <!-- TIME SELECTORS -->
             <div class="time-controls">
                 <div class="time-row">
                     <div class="time-field">
                         <label>DESDE</label>
                         <select class="time-select" id="time-start" onchange="updateTimeEnd()">
-                            <!-- populated by JS: 09:00 to 19:00 -->
                         </select>
                     </div>
                     <div class="time-arrow">→</div>
@@ -769,6 +785,7 @@
 
 </div>
 
+<!-- Pestañas flotantes: siempre visibles en todos los tamaños -->
 <a href="proyectos.html" class="floating-tab proyectos">PROYECTOS</a>
 <a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
 
@@ -787,7 +804,6 @@
         ]
     }
 
-    // Ordered: food first, then drinks at the end
     const CATERING = [
         { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600,  type: 'food' },
         { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400,  type: 'food' },
@@ -813,14 +829,13 @@
         price: 0,
         startHour: 9,
         catering: {},
-        selectedDate: null   // { year, month, day }
+        selectedDate: null
     }
 
     const galleryCurrent = { 1: 0, 2: 0 }
-    // Calendar navigation state
     const today = new Date()
     let calYear  = today.getFullYear()
-    let calMonth = today.getMonth() // 0-based
+    let calMonth = today.getMonth()
 
     /* ── INIT ─────────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', () => {
@@ -837,9 +852,7 @@
                        'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
     const DAYS_ES   = ['DO','LU','MA','MI','JU','VI','SA']
 
-    function buildCalendar() {
-        renderCalendar(calYear, calMonth)
-    }
+    function buildCalendar() { renderCalendar(calYear, calMonth) }
 
     function calNav(dir) {
         calMonth += dir
@@ -849,30 +862,22 @@
     }
 
     function renderCalendar(year, month) {
-        document.getElementById('cal-month-label').textContent =
-            `${MONTHS_ES[month]} ${year}`
-
+        document.getElementById('cal-month-label').textContent = `${MONTHS_ES[month]} ${year}`
         const grid = document.getElementById('cal-grid')
         grid.innerHTML = ''
-
-        // Day-of-week headers
         DAYS_ES.forEach(d => {
             const cell = document.createElement('div')
             cell.className = 'cal-dow'
             cell.textContent = d
             grid.appendChild(cell)
         })
-
-        const firstDay = new Date(year, month, 1).getDay() // 0=Sun
+        const firstDay = new Date(year, month, 1).getDay()
         const daysInMonth = new Date(year, month + 1, 0).getDate()
-
-        // Empty cells before first day
         for (let i = 0; i < firstDay; i++) {
             const cell = document.createElement('div')
             cell.className = 'cal-day cal-day--empty'
             grid.appendChild(cell)
         }
-
         for (let d = 1; d <= daysInMonth; d++) {
             const cell = document.createElement('div')
             const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear()
@@ -881,18 +886,13 @@
                             state.selectedDate.day === d &&
                             state.selectedDate.month === month &&
                             state.selectedDate.year === year
-
             let cls = 'cal-day'
-            if (isPast)   cls += ' cal-day--past'
-            if (isToday)  cls += ' cal-day--today'
-            if (isSel)    cls += ' cal-day--selected'
-
+            if (isPast)  cls += ' cal-day--past'
+            if (isToday) cls += ' cal-day--today'
+            if (isSel)   cls += ' cal-day--selected'
             cell.className = cls
             cell.textContent = d
-
-            if (!isPast) {
-                cell.addEventListener('click', () => selectDay(year, month, d))
-            }
+            if (!isPast) cell.addEventListener('click', () => selectDay(year, month, d))
             grid.appendChild(cell)
         }
     }
@@ -903,7 +903,7 @@
         updateResumen()
     }
 
-    /* ── TIME SELECT (9 to 19 only) ───────────────────────────── */
+    /* ── TIME SELECT ──────────────────────────────────────────── */
     function buildTimeSelect() {
         const sel = document.getElementById('time-start')
         for (let h = 9; h <= 19; h++) {
@@ -923,7 +923,6 @@
             const dotsEl = document.getElementById(`dots-${studioId}`)
             track.innerHTML = ''
             dotsEl.innerHTML = ''
-
             photos.forEach((photo, i) => {
                 const slide = document.createElement('div')
                 slide.className = 'tab-gallery-slide'
@@ -937,13 +936,11 @@
                         </div>`
                 }
                 track.appendChild(slide)
-
                 const dot = document.createElement('div')
                 dot.className = `gallery-dot${i === 0 ? ' active' : ''}`
                 dot.onclick = (e) => { e.stopPropagation(); goToSlide(studioId, i) }
                 dotsEl.appendChild(dot)
             })
-
             goToSlide(studioId, 0)
         })
     }
@@ -953,10 +950,8 @@
         const total = photos.length
         idx = (idx + total) % total
         galleryCurrent[studioId] = idx
-        const track = document.getElementById(`track-${studioId}`)
-        track.style.transform = `translateX(-${idx * 100}%)`
-        const dots = document.querySelectorAll(`#dots-${studioId} .gallery-dot`)
-        dots.forEach((d, i) => d.classList.toggle('active', i === idx))
+        document.getElementById(`track-${studioId}`).style.transform = `translateX(-${idx * 100}%)`
+        document.querySelectorAll(`#dots-${studioId} .gallery-dot`).forEach((d, i) => d.classList.toggle('active', i === idx))
     }
 
     function galleryNav(studioId, dir, e) {
@@ -965,15 +960,13 @@
     }
 
     /* ── LIGHTBOX ─────────────────────────────────────────────── */
-    let lbStudio = 1
-    let lbIndex  = 0
+    let lbStudio = 1, lbIndex = 0
 
     function openLightbox(studioId, e) {
         e.stopPropagation()
         lbStudio = studioId
         lbIndex  = galleryCurrent[studioId]
-        const studioName = studioId === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
-        document.getElementById('lb-studio-label').textContent = studioName
+        document.getElementById('lb-studio-label').textContent = studioId === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
         renderLightbox()
         document.getElementById('lightbox').classList.add('open')
         document.body.style.overflow = 'hidden'
@@ -1024,7 +1017,6 @@
         state.price = 0
         document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
         document.querySelector(`.studio-tab[data-studio="${id}"]`).classList.add('active')
-        // Deselect ALL hour buttons across all studios
         document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('active'))
         updateTimeEnd()
         updateResumen()
@@ -1032,18 +1024,11 @@
 
     function selectHours(e, hs, price) {
         e.stopPropagation()
-        // Find which studio this button belongs to
         const parentTab = e.currentTarget.closest('.studio-tab')
         const tabStudioId = parseInt(parentTab.dataset.studio, 10)
-
-        // Switch to this studio first (deselects all buttons)
-        if (state.studio !== tabStudioId) {
-            selectStudio(tabStudioId)
-        }
-
+        if (state.studio !== tabStudioId) selectStudio(tabStudioId)
         state.hs    = hs
         state.price = price
-        // Deselect only the buttons in this studio's container
         document.querySelectorAll(`#hours-${tabStudioId} .hour-btn`).forEach(b => b.classList.remove('active'))
         e.currentTarget.classList.add('active')
         updateTimeEnd()
@@ -1056,18 +1041,15 @@
         const endEl   = document.getElementById('time-end')
         const noteEl  = document.getElementById('time-note')
         const errorEl = document.getElementById('time-error')
-
         if (!state.hs) {
             endEl.textContent = '—'
             noteEl.style.display = 'block'
             errorEl.style.display = 'none'
             return
         }
-
         noteEl.style.display = 'none'
         const endH = state.startHour + state.hs
         const endStr = `${String(endH).padStart(2,'0')}:00`
-
         if (endH > 21) {
             endEl.textContent = endStr
             endEl.style.color = '#cc0000'
@@ -1077,7 +1059,6 @@
             endEl.style.color = ''
             errorEl.style.display = 'none'
         }
-
         updateResumen()
     }
 
@@ -1113,10 +1094,8 @@
         const next = Math.max(0, current + delta)
         if (next === 0) delete state.catering[id]
         else state.catering[id] = next
-
         document.getElementById(`qty-${id}`).textContent = next
-        const itemEl = document.getElementById(`cat-${id}`)
-        itemEl.classList.toggle('selected', next > 0)
+        document.getElementById(`cat-${id}`).classList.toggle('selected', next > 0)
         updateResumen()
     }
 
@@ -1124,13 +1103,11 @@
     function updateResumen() {
         const body = document.getElementById('resumen-body')
         const cta  = document.getElementById('cta-btn')
-
         const studioName = state.studio === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
         const endH = state.hs ? state.startHour + state.hs : null
         const endStr  = endH ? `${String(endH).padStart(2,'0')}:00` : '—'
         const startStr = `${String(state.startHour).padStart(2,'0')}:00`
         const timeValid = endH !== null && endH <= 21
-
         let cateringTotal = 0
         const cateringItems = []
         for (const [id, qty] of Object.entries(state.catering)) {
@@ -1141,10 +1118,8 @@
                 cateringItems.push({ name: item.name, qty, subtotal })
             }
         }
-
         const total = state.price + cateringTotal
         const isComplete = state.hs && timeValid && state.selectedDate
-
         const DAYS_LONG   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
         const MONTHS_LONG = ['enero','febrero','marzo','abril','mayo','junio',
                              'julio','agosto','septiembre','octubre','noviembre','diciembre']
@@ -1154,42 +1129,16 @@
             const dow = new Date(year, month, day).getDay()
             dateStr = `${DAYS_LONG[dow]} ${day} de ${MONTHS_LONG[month]} de ${year}`
         }
-
-        // label (left) bold white, value right white
         let html = ''
-        html += `<div class="resumen-line">
-            <span class="label">FECHA</span>
-            <span class="value">${dateStr}</span>
-        </div>`
-        html += `<div class="resumen-line">
-            <span class="label">ESPACIO</span>
-            <span class="value">${studioName}</span>
-        </div>`
-        html += `<div class="resumen-line">
-            <span class="label">DURACIÓN</span>
-            <span class="value">${state.hs ? state.hs + ' HS' : '—'}</span>
-        </div>`
-        html += `<div class="resumen-line">
-            <span class="label">HORARIO</span>
-            <span class="value">${state.hs ? startStr + ' → ' + endStr : '—'}</span>
-        </div>`
-        html += `<div class="resumen-line">
-            <span class="label">ALQUILER</span>
-            <span class="value">${state.price ? '$' + state.price.toLocaleString('es-AR') : '—'}</span>
-        </div>`
-
+        html += `<div class="resumen-line"><span class="label">FECHA</span><span class="value">${dateStr}</span></div>`
+        html += `<div class="resumen-line"><span class="label">ESPACIO</span><span class="value">${studioName}</span></div>`
+        html += `<div class="resumen-line"><span class="label">DURACIÓN</span><span class="value">${state.hs ? state.hs + ' HS' : '—'}</span></div>`
+        html += `<div class="resumen-line"><span class="label">HORARIO</span><span class="value">${state.hs ? startStr + ' → ' + endStr : '—'}</span></div>`
+        html += `<div class="resumen-line"><span class="label">ALQUILER</span><span class="value">${state.price ? '$' + state.price.toLocaleString('es-AR') : '—'}</span></div>`
         cateringItems.forEach(ci => {
-            html += `<div class="resumen-line catering-line">
-                <span class="label">${ci.name} ×${ci.qty}</span>
-                <span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span>
-            </div>`
+            html += `<div class="resumen-line catering-line"><span class="label">${ci.name} ×${ci.qty}</span><span class="value">$${ci.subtotal.toLocaleString('es-AR')}</span></div>`
         })
-
-        html += `<div class="resumen-line total">
-            <span class="label">TOTAL</span>
-            <span class="value">${isComplete || cateringItems.length ? '$' + total.toLocaleString('es-AR') : '—'}</span>
-        </div>`
-
+        html += `<div class="resumen-line total"><span class="label">TOTAL</span><span class="value">${isComplete || cateringItems.length ? '$' + total.toLocaleString('es-AR') : '—'}</span></div>`
         body.innerHTML = html
         cta.disabled = !isComplete
     }
