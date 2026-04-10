@@ -41,21 +41,20 @@
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
             width: 32px; height: 32px;
-            background: rgba(0,0,0,0.5); color: var(--white);
-            border: 2px solid var(--white);
+            background: var(--black); color: var(--white);
+            border: 2px solid var(--black);
             font-family: monospace; font-size: 14px;
             text-decoration: none;
-            transition: background 0.2s, border-color 0.2s;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
             flex-shrink: 0;
         }
-        .back-btn:hover { background: var(--red); border-color: var(--red); }
+        .back-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
         /* Logo más grande y separado del back-btn */
         .header-logo {
-            height: 38px; /* ↑ antes 28px */
+            height: 38px;
             width: auto;
-            filter: invert(1);
-            margin-left: 6px; /* ↑ separación extra del arrow */
+            margin-left: 6px;
         }
 
         .header-right {
@@ -525,60 +524,46 @@
         .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
 
         /* ── RESPONSIVE ─────────────────────────────────────── */
+
         @media (max-width: 640px) {
-            /* Márgenes laterales generosos en mobile */
-            .estudio-page { padding: 24px 20px 80px; }
+            /* Márgenes generosos en mobile, espacio para pestañas a la derecha */
+            .estudio-page { padding: 24px 56px 80px 20px; }
 
             .estudio-header { padding: 8px 16px; gap: 10px; }
-            .header-right { gap: 8px; }
+            .header-right { gap: 6px; }
             .header-hours {
-                display: block;
-                order: 10;
-                width: 100%;
-                text-align: center;
-                border-top: 1px solid #333;
-                margin-top: 4px;
-                padding: 6px 0 2px;
-                border-left: none; border-right: none; border-bottom: none;
+                font-size: 10px;
+                padding: 3px 7px;
+                letter-spacing: 1px;
             }
 
+            /* Studios en columna */
             .studio-tabs { flex-direction: column; gap: 12px; }
-
-            .tab-gallery { height: 180px; }
+            .tab-gallery { height: 160px; }
             .tab-title { font-size: 12px; letter-spacing: 2px; padding: 10px 14px; }
             .tab-body { padding: 10px 10px 12px; }
 
-            /* Todas las opciones de hora en la misma row sin wrapping */
-            .hour-options {
-                display: flex;
-                flex-wrap: nowrap;
-                gap: 0;
-                overflow: hidden;
-            }
+            /* Todas las opciones de hora en una sola row */
+            .hour-options { flex-wrap: nowrap; }
             .hour-btn {
                 flex: 1;
                 border-right: none;
                 min-width: 0;
-                padding: 8px 4px;
-                font-size: 11px;
+                padding: 8px 2px;
+                font-size: 10px;
+                letter-spacing: 0;
             }
             .hour-btn:last-child { border-right: 2px solid var(--black); }
-            .hour-btn .price { font-size: 11px; }
+            .hour-btn .price { font-size: 10px; }
 
-            /* Fecha y horario: calendar arriba, time-controls abajo, en columna */
+            /* Fecha y horario: calendario arriba, selector abajo */
             .time-section {
                 flex-direction: column;
                 gap: 16px;
                 align-items: stretch;
             }
             .cal { width: 100%; }
-            .cal-grid { grid-template-columns: repeat(7, 1fr); }
-
-            /* Time controls: DESDE → HASTA en row horizontal */
-            .time-controls {
-                flex-direction: column;
-                gap: 12px;
-            }
+            .time-controls { flex-direction: column; gap: 12px; }
             .time-row {
                 display: flex;
                 flex-direction: row;
@@ -586,10 +571,11 @@
                 gap: 12px;
                 flex-wrap: nowrap;
             }
-            .time-select { font-size: 14px; width: 90px; padding: 8px 10px; padding-right: 26px; }
+            .time-select { font-size: 14px; width: 88px; padding: 8px 10px; padding-right: 26px; }
             .time-end { font-size: 18px; }
             .time-arrow { display: flex; padding-bottom: 10px; }
 
+            /* Catering una columna */
             .catering-grid { grid-template-columns: 1fr; }
 
             /* Datos: 2 campos por fila */
@@ -598,18 +584,20 @@
             .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 18px; }
 
-            /* Pestañas flotantes en mobile: pequeñas pero visibles */
+            /* Pestañas flotantes más compactas */
             .floating-tab {
                 font-size: 9px;
                 padding: 12px 7px;
-                letter-spacing: 0.15em;
+                letter-spacing: 0.12em;
             }
 
             .lightbox-placeholder { width: 90vw; height: 55vw; }
         }
 
-        @media (max-width: 380px) {
-            .estudio-page { padding: 20px 16px 80px; }
+        @media (max-width: 420px) {
+            .estudio-page { padding: 20px 50px 80px 14px; }
+            .header-section { display: none; }
+            .header-sep { display: none; }
             .datos-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
@@ -645,7 +633,7 @@
         <div class="section-label"><span class="section-num">1</span> SELECCIONÁ EL ESPACIO</div>
         <div class="studio-tabs">
 
-            <div class="studio-tab active" data-studio="1" onclick="selectStudio(1)">
+            <div class="studio-tab active" data-studio="1" onclick="selectStudio(1, event)">
                 <div class="tab-title">ESTUDIO I</div>
                 <div class="tab-gallery" id="gallery-1" onclick="openLightbox(1, event)">
                     <div class="tab-gallery-track" id="track-1"></div>
@@ -669,7 +657,7 @@
                 </div>
             </div>
 
-            <div class="studio-tab" data-studio="2" onclick="selectStudio(2)">
+            <div class="studio-tab" data-studio="2" onclick="selectStudio(2, event)">
                 <div class="tab-title">ESTUDIO COMPLETO</div>
                 <div class="tab-gallery" id="gallery-2" onclick="openLightbox(2, event)">
                     <div class="tab-gallery-track" id="track-2"></div>
@@ -1011,7 +999,8 @@
     })
 
     /* ── STUDIO SELECT ────────────────────────────────────────── */
-    function selectStudio(id) {
+    function selectStudio(id, e) {
+        if (e) e.stopPropagation()
         state.studio = id
         state.hs    = null
         state.price = 0
@@ -1026,7 +1015,13 @@
         e.stopPropagation()
         const parentTab = e.currentTarget.closest('.studio-tab')
         const tabStudioId = parseInt(parentTab.dataset.studio, 10)
-        if (state.studio !== tabStudioId) selectStudio(tabStudioId)
+        // Switch studio without resetting hs
+        if (state.studio !== tabStudioId) {
+            state.studio = tabStudioId
+            document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
+            parentTab.classList.add('active')
+            document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('active'))
+        }
         state.hs    = hs
         state.price = price
         document.querySelectorAll(`#hours-${tabStudioId} .hour-btn`).forEach(b => b.classList.remove('active'))
