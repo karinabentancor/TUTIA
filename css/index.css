@@ -8,7 +8,6 @@
     --red: #cc0000;
     --black: #000;
     --white: #fff;
-    --lima: #a8cc00;
 }
 
 html, body {
@@ -25,7 +24,6 @@ html, body {
     width: 100vw;
 }
 
-/* ── COLUMNA IZQUIERDA ── */
 .left-column {
     position: relative;
     width: 60%;
@@ -45,9 +43,9 @@ html, body {
 
 .logo-aside {
     width: 100%;
-    max-width: 350px;
+    max-width: 800px;
     height: auto;
-    max-height: 50vh;
+    max-height: 80vh;
     object-fit: contain;
     flex-shrink: 0;
     filter: invert(1);
@@ -68,19 +66,18 @@ html, body {
     color: var(--white);
 }
 
-/* Montevideo abajo del todo */
 .text-end {
     position: absolute;
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
     letter-spacing: 2px;
-    color: var(--white);
+    color: var(--black);
+    font-weight: bold;
     white-space: nowrap;
 }
 
-/* ── COLUMNA DERECHA / ASIDE ── */
 .aside-right {
     width: 40%;
     background-color: var(--black);
@@ -88,18 +85,17 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: clamp(0.8rem, 2vh, 1.5rem);
+    gap: clamp(0.8rem, 2vh, 3rem);
     padding: clamp(1rem, 2vh, 2rem);
     max-height: 100vh;
     overflow-y: auto;
 }
 
-/* ── BOTONES ── */
 .button,
 .button-wht {
-    width: 80%;
-    padding: clamp(12px, 2vh, 18px) clamp(14px, 2.5vw, 20px);
-    font-size: clamp(10px, 1.8vw, 13px);
+    width: 75%;
+    padding: clamp(12px, 2vh, 26px) clamp(14px, 2.5vw, 28px);
+    font-size: clamp(10px, 1.8vw, 19px);
     font-weight: bold;
     cursor: pointer;
     border-radius: 0;
@@ -109,26 +105,24 @@ html, body {
     letter-spacing: 2px;
     white-space: nowrap;
     overflow: hidden;
-    min-height: clamp(36px, 5vh, 50px);
+    min-height: clamp(36px, 5vh, 94px);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
-/* botón principal — relleno rojo */
 .button-wht {
-    background-color: var(--lima);
-    color: var(--black);
-    border: 2px solid var(--lima);
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
 }
 .button-wht:hover {
-    background-color: transparent;
-    color: var(--lima);
-    border: 2px solid var(--lima);
+    background-color: var(--white);
+    color: var(--black);
+    border: 2px solid var(--white);
 }
 
-/* botón secundario — outline rojo */
 .aside-right .button {
     background-color: var(--red);
     color: var(--white);
@@ -140,14 +134,13 @@ html, body {
     border: 2px solid var(--red);
 }
 
-/* ── RESPONSIVE ── */
 @media (max-height: 700px) {
     .left-column { padding: 2rem 1rem; }
-    .logo-aside { max-height: 38vh; max-width: 280px; }
+    .logo-aside { max-height: 38vh; max-width: 400px; }
 }
 
 @media (max-height: 600px) {
-    .logo-aside { max-height: 30vh; max-width: 220px; }
+    .logo-aside { max-height: 30vh; max-width: 320px; }
     .aside-right { gap: clamp(0.5rem, 1.5vh, 1rem); padding: 0.8rem; }
     .button, .button-wht {
         min-height: clamp(30px, 4vh, 40px);
@@ -156,7 +149,7 @@ html, body {
 }
 
 @media (max-width: 767px) {
-    .logo-aside { max-width: 250px; max-height: 32vh; }
+    .logo-aside { max-width: 350px; max-height: 32vh; }
     .button, .button-wht {
         font-size: clamp(9px, 2.2vw, 12px);
         min-height: clamp(32px, 4.5vh, 44px);
@@ -167,13 +160,13 @@ html, body {
 
 @media (max-width: 480px) {
     .left-column { padding: 1.5rem 0.5rem; }
-    .logo-aside { max-width: 200px; max-height: 28vh; }
+    .logo-aside { max-width: 280px; max-height: 28vh; }
     .button, .button-wht { width: 90%; }
     .aside-right { gap: clamp(0.5rem, 1.8vh, 1rem); padding: 1rem; }
 }
 
 @media (max-width: 360px), (max-height: 550px) {
-    .logo-aside { max-height: 25vh; max-width: 170px; }
+    .logo-aside { max-height: 25vh; max-width: 240px; }
     .button, .button-wht {
         min-height: clamp(28px, 4vh, 36px);
         font-size: clamp(8px, 2vw, 10px);
@@ -181,5 +174,5 @@ html, body {
 }
 
 @media (max-height: 500px) {
-    .logo-aside { max-height: 22vh; max-width: 140px; }
+    .logo-aside { max-height: 22vh; max-width: 200px; }
 }

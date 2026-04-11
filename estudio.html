@@ -21,61 +21,62 @@
 
         body {
             font-family: monospace;
-            font-size: 15px;
+            font-size: 16px;
             background: var(--white);
             color: var(--black);
         }
 
-        /* HEADER — fondo con img/back.png repetido (tile) */
+        /* HEADER */
         .estudio-header {
             position: sticky; top: 0; z-index: 100;
             background-image: url('img/back.png');
             background-size: auto;
             background-repeat: repeat;
-            background-color: var(--black); /* fallback */
+            background-color: var(--black);
             border-bottom: 3px solid var(--red);
-            padding: 10px 24px;
+            padding: 12px 32px;
             display: flex; align-items: center; gap: 20px;
             flex-wrap: wrap;
         }
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 32px; height: 32px;
+            width: 36px; height: 36px;
             background: var(--black); color: var(--white);
             border: 2px solid var(--black);
-            font-family: monospace; font-size: 14px;
+            font-family: monospace; font-size: 16px;
             text-decoration: none;
             transition: background 0.2s, border-color 0.2s, color 0.2s;
             flex-shrink: 0;
         }
         .back-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
-        /* Logo más grande y separado del back-btn */
+        /* Logo más grande con padding generoso */
         .header-logo {
-            height: 38px;
+            height: 52px;
             width: auto;
-            margin-left: 6px;
+            margin-left: 12px;
+            padding: 6px 14px;
         }
 
         .header-right {
             margin-left: auto;
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
         }
-        .header-sep { color: var(--black); font-size: 15px; font-weight: 900; }
+        .header-sep { color: var(--black); font-size: 16px; font-weight: 900; }
         .header-section {
-            font-family: monospace; font-size: 14px; font-weight: 900;
+            font-family: monospace; font-size: 15px; font-weight: 900;
             letter-spacing: 3px; color: var(--black);
         }
 
         .header-hours {
-            font-size: 12px; letter-spacing: 2px; font-weight: 900;
+            font-size: 13px; letter-spacing: 2px; font-weight: 900;
             color: var(--black);
             border: 1px solid var(--black);
-            padding: 4px 10px;
+            padding: 5px 12px;
             flex-shrink: 0;
         }
 
-        /* FLOATING TABS — siempre visibles, escritura vertical correcta */
+        /* FLOATING TABS */
         .floating-tab {
             position: fixed;
             right: 0;
@@ -97,12 +98,12 @@
         .floating-tab.eventos   { top: calc(50% + 10px);  }
 
         /* PAGE */
-        .estudio-page { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+        .estudio-page { max-width: 980px; margin: 0 auto; padding: 64px 32px 100px; }
 
         /* SECTION LABEL */
         .section-label {
-            font-size: 11px; letter-spacing: 4px; font-weight: 900;
-            color: var(--red); margin-bottom: 14px;
+            font-size: 12px; letter-spacing: 4px; font-weight: 900;
+            color: var(--red); margin-bottom: 22px;
             display: flex; align-items: center; gap: 10px;
         }
         .section-label::after {
@@ -110,16 +111,16 @@
         }
         .section-num {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 22px; height: 22px;
+            width: 24px; height: 24px;
             background: var(--red); color: var(--white);
-            font-size: 11px; font-weight: 900; flex-shrink: 0;
+            font-size: 12px; font-weight: 900; flex-shrink: 0;
         }
 
         /* STEP */
-        .step { margin-bottom: 40px; }
+        .step { margin-bottom: 56px; }
 
         /* STUDIO TABS */
-        .studio-tabs { display: flex; gap: 16px; }
+        .studio-tabs { display: flex; gap: 18px; }
 
         .studio-tab {
             flex: 1;
@@ -136,29 +137,29 @@
 
         .tab-title {
             background: var(--gray);
-            padding: 12px 18px;
-            font-size: 14px; letter-spacing: 3px; font-weight: 900;
+            padding: 14px 20px;
+            font-size: 15px; letter-spacing: 3px; font-weight: 900;
             display: flex; align-items: center; gap: 8px;
             border-bottom: 2px solid var(--black);
             transition: background 0.2s, color 0.2s;
         }
         .tab-title::before {
-            content: ''; display: inline-block; width: 8px; height: 8px;
+            content: ''; display: inline-block; width: 9px; height: 9px;
             background: #999; flex-shrink: 0; transition: background 0.2s;
         }
         .studio-tab.active .tab-title::before,
         .studio-tab:hover .tab-title::before { background: var(--red); }
 
-        .tab-body { padding: 14px 16px 16px; }
+        .tab-body { padding: 16px 18px 18px; }
 
         /* GALLERY CAROUSEL */
         .tab-gallery {
             position: relative;
             width: 100%;
-            height: 160px;
+            height: 200px;
             background: #c8c8c8;
             overflow: hidden;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             cursor: pointer;
         }
         .tab-gallery-track {
@@ -187,21 +188,21 @@
             color: #888;
         }
         .slide-placeholder-icon {
-            width: 36px; height: 36px;
+            width: 40px; height: 40px;
             border: 2px solid #aaa;
             display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
         }
         .slide-placeholder-label {
-            font-size: 10px; letter-spacing: 3px; color: #888;
+            font-size: 11px; letter-spacing: 3px; color: #888;
         }
 
         .gallery-expand-hint {
-            position: absolute; bottom: 8px; right: 8px;
+            position: absolute; bottom: 10px; right: 10px;
             background: rgba(0,0,0,0.7);
             color: var(--white);
             font-size: 10px; letter-spacing: 2px; font-weight: 900;
-            padding: 4px 8px;
+            padding: 4px 10px;
             border: 1px solid #444;
             pointer-events: none;
         }
@@ -210,22 +211,22 @@
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(0,0,0,0.6); color: var(--white);
             border: 1px solid #555;
-            width: 28px; height: 28px;
+            width: 30px; height: 30px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 14px; font-weight: 900;
+            font-size: 16px; font-weight: 900;
             cursor: pointer; z-index: 5;
             transition: background 0.2s;
         }
         .gallery-arrow:hover { background: var(--red); border-color: var(--red); }
-        .gallery-arrow.prev { left: 6px; }
-        .gallery-arrow.next { right: 6px; }
+        .gallery-arrow.prev { left: 8px; }
+        .gallery-arrow.next { right: 8px; }
 
         .gallery-dots {
-            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
             display: flex; gap: 5px; z-index: 5;
         }
         .gallery-dot {
-            width: 6px; height: 6px;
+            width: 7px; height: 7px;
             background: #555; border: 1px solid #777;
             cursor: pointer; transition: background 0.2s;
         }
@@ -293,52 +294,63 @@
             color: var(--red); margin-bottom: 14px;
         }
 
-        /* HOUR OPTIONS — hora seleccionada: rojo, no negro */
+        /* HOUR OPTIONS */
         .hour-options { display: flex; flex-wrap: nowrap; gap: 0; }
         .hour-btn {
             flex: 1;
             border: 2px solid var(--black);
             border-right: none;
-            padding: 10px 8px;
+            padding: 12px 8px;
             background: var(--white); color: var(--black);
-            font-family: monospace; font-size: 13px; letter-spacing: 1px; font-weight: 900;
+            font-family: monospace; font-size: 14px; letter-spacing: 1px; font-weight: 900;
             cursor: pointer; text-align: center;
             transition: background 0.15s, border-color 0.15s, color 0.15s;
         }
         .hour-btn:last-child { border-right: 2px solid var(--black); }
         .hour-btn:hover { border-color: var(--red); z-index: 1; position: relative; }
-        /* CAMBIO: activo en rojo en vez de negro */
         .hour-btn.active {
             background: var(--red); color: var(--white);
             border-color: var(--red); z-index: 1; position: relative;
         }
-        .hour-btn .price { display: block; font-size: 14px; color: var(--red); margin-top: 3px; }
+        .hour-btn .price { display: block; font-size: 15px; color: var(--red); margin-top: 4px; }
         .hour-btn.active .price { color: var(--white); }
 
-        /* TIME */
-        .time-section { display: flex; gap: 32px; align-items: flex-end; flex-wrap: wrap; }
+        /* TIME — calendario y hora en la misma fila */
+        .time-section {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
+        }
 
-        /* CALENDAR */
+        .time-controls-top {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 20px;
+            padding-top: 26px;
+        }
+
         .cal-wrap { flex-shrink: 0; }
-        .cal-label { font-size: 11px; letter-spacing: 2px; font-weight: 900; margin-bottom: 8px; }
+        .cal-label { font-size: 12px; letter-spacing: 2px; font-weight: 900; margin-bottom: 10px; }
         .cal {
             border: 2px solid var(--black);
-            width: 224px;
+            width: 252px;
             user-select: none;
         }
         .cal-header {
             background: var(--black); color: var(--white);
             display: flex; align-items: center; justify-content: space-between;
-            padding: 8px 10px;
+            padding: 10px 12px;
         }
         .cal-month-label {
-            font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            font-size: 13px; letter-spacing: 3px; font-weight: 900;
             flex: 1; text-align: center;
         }
         .cal-nav {
             background: none; border: none;
             color: var(--white); font-family: monospace;
-            font-size: 16px; font-weight: 900;
+            font-size: 18px; font-weight: 900;
             cursor: pointer; padding: 0 4px; line-height: 1;
             transition: color 0.15s;
         }
@@ -348,15 +360,15 @@
             grid-template-columns: repeat(7, 1fr);
         }
         .cal-dow {
-            text-align: center; padding: 6px 0;
-            font-size: 10px; letter-spacing: 1px; font-weight: 900;
+            text-align: center; padding: 7px 0;
+            font-size: 11px; letter-spacing: 1px; font-weight: 900;
             color: #888; border-bottom: 1px solid #ddd;
             background: #f5f5f5;
         }
         .cal-day {
             text-align: center;
-            padding: 7px 2px;
-            font-size: 12px; font-weight: 900; font-family: monospace;
+            padding: 8px 2px;
+            font-size: 13px; font-weight: 900; font-family: monospace;
             cursor: pointer;
             border: 1px solid transparent;
             transition: background 0.12s, color 0.12s;
@@ -375,45 +387,44 @@
         }
 
         /* TIME row */
-        .time-row { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
-        .time-field { display: flex; flex-direction: column; gap: 6px; }
-        .time-field label { font-size: 11px; letter-spacing: 2px; font-weight: 900; }
-        .time-controls { display: flex; flex-direction: column; justify-content: flex-end; gap: 16px; }
+        .time-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
+        .time-field { display: flex; flex-direction: column; gap: 8px; }
+        .time-field label { font-size: 12px; letter-spacing: 2px; font-weight: 900; }
 
         .time-select {
             border: 2px solid var(--black);
-            padding: 10px 14px;
-            font-family: monospace; font-size: 17px; font-weight: 900;
+            padding: 12px 16px;
+            font-family: monospace; font-size: 19px; font-weight: 900;
             background: var(--white); color: var(--black);
             outline: none;
             appearance: none;
             -webkit-appearance: none;
-            width: 110px;
+            width: 120px;
             cursor: pointer;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23cc0000'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 12px center;
-            padding-right: 30px;
+            background-position: right 14px center;
+            padding-right: 34px;
         }
         .time-select:focus { border-color: var(--red); }
 
-        .time-arrow { font-size: 20px; color: var(--red); font-weight: 900; padding-bottom: 10px; }
+        .time-arrow { font-size: 22px; color: var(--red); font-weight: 900; padding-bottom: 12px; }
         .time-end {
-            font-size: 24px; font-weight: 900; letter-spacing: 1px;
+            font-size: 28px; font-weight: 900; letter-spacing: 1px;
             color: var(--black); padding-bottom: 8px;
         }
-        .time-note { font-size: 11px; letter-spacing: 1px; color: #888; margin-top: 8px; }
-        .time-error { font-size: 11px; letter-spacing: 1px; color: var(--red); margin-top: 8px; display: none; }
+        .time-note { font-size: 12px; letter-spacing: 1px; color: #888; margin-top: 10px; }
+        .time-error { font-size: 12px; letter-spacing: 1px; color: var(--red); margin-top: 10px; display: none; }
 
         /* CATERING */
         .catering-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 12px;
         }
         .catering-item {
             border: 2px solid #ddd;
-            padding: 12px 14px;
+            padding: 14px 16px;
             display: flex; align-items: center; justify-content: space-between;
             cursor: pointer;
             transition: border-color 0.15s;
@@ -422,40 +433,40 @@
         .catering-item:hover { border-color: var(--black); }
         .catering-item.selected { border-color: var(--red); background: #fff5f5; }
         .catering-item-info { flex: 1; }
-        .catering-item-name { font-size: 12px; letter-spacing: 1px; font-weight: 900; margin-bottom: 2px; }
-        .catering-item-detail { font-size: 11px; letter-spacing: 1px; color: #666; }
-        .catering-item-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-        .catering-item-price { font-size: 13px; font-weight: 900; color: var(--red); min-width: 52px; text-align: right; }
+        .catering-item-name { font-size: 13px; letter-spacing: 1px; font-weight: 900; margin-bottom: 3px; }
+        .catering-item-detail { font-size: 12px; letter-spacing: 1px; color: #666; }
+        .catering-item-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .catering-item-price { font-size: 14px; font-weight: 900; color: var(--red); min-width: 56px; text-align: right; }
         .qty-ctrl { display: flex; align-items: center; gap: 0; }
         .qty-btn {
-            width: 24px; height: 24px;
+            width: 26px; height: 26px;
             border: 1px solid var(--black);
             background: var(--white); color: var(--black);
-            font-family: monospace; font-size: 14px; font-weight: 900;
+            font-family: monospace; font-size: 15px; font-weight: 900;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: background 0.15s;
         }
         .qty-btn:hover { background: var(--black); color: var(--white); }
         .qty-display {
-            width: 26px; text-align: center;
-            font-size: 13px; font-weight: 900;
+            width: 28px; text-align: center;
+            font-size: 14px; font-weight: 900;
             border-top: 1px solid var(--black); border-bottom: 1px solid var(--black);
-            height: 24px; line-height: 24px;
+            height: 26px; line-height: 26px;
         }
 
         /* DATOS PERSONALES */
         .datos-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 10px 20px;
+            gap: 12px 24px;
         }
         .datos-field {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
         .datos-field label {
-            font-size: 10px;
+            font-size: 11px;
             letter-spacing: 2px;
             font-weight: 900;
             color: #666;
@@ -463,9 +474,9 @@
         .datos-field input {
             border: none;
             border-bottom: 2px solid #ccc;
-            padding: 6px 0;
+            padding: 8px 0;
             font-family: monospace;
-            font-size: 13px;
+            font-size: 14px;
             background: transparent;
             color: var(--black);
             outline: none;
@@ -482,19 +493,19 @@
             background: var(--black); color: var(--white);
         }
         .resumen-header {
-            padding: 14px 20px;
-            font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            padding: 16px 22px;
+            font-size: 13px; letter-spacing: 3px; font-weight: 900;
             border-bottom: 2px solid var(--red);
             display: flex; align-items: center; gap: 8px;
         }
         .resumen-header::before {
-            content: ''; display: inline-block; width: 8px; height: 8px; background: var(--red);
+            content: ''; display: inline-block; width: 9px; height: 9px; background: var(--red);
         }
-        .resumen-body { padding: 18px 20px; }
+        .resumen-body { padding: 20px 22px; }
         .resumen-line {
             display: flex; justify-content: space-between; align-items: baseline;
-            font-size: 13px; letter-spacing: 1px;
-            padding: 7px 0; border-bottom: 1px solid #333;
+            font-size: 14px; letter-spacing: 1px;
+            padding: 8px 0; border-bottom: 1px solid #333;
         }
         .resumen-line:last-child { border-bottom: none; }
         .resumen-line .label { color: var(--white); font-weight: 900; }
@@ -504,94 +515,126 @@
         .resumen-line.catering-line .value { color: var(--red); font-weight: 900; }
 
         .resumen-line.total {
-            margin-top: 10px; padding-top: 14px;
+            margin-top: 10px; padding-top: 16px;
             border-top: 2px solid var(--red); border-bottom: none;
         }
-        .resumen-line.total .label { color: var(--white); font-size: 14px; letter-spacing: 2px; font-weight: 900; }
-        .resumen-line.total .value { font-size: 22px; color: var(--red); font-weight: 900; }
-        .resumen-empty { font-size: 12px; letter-spacing: 1px; color: #666; padding: 10px 0; }
+        .resumen-line.total .label { color: var(--white); font-size: 15px; letter-spacing: 2px; font-weight: 900; }
+        .resumen-line.total .value { font-size: 26px; color: var(--red); font-weight: 900; }
+        .resumen-empty { font-size: 13px; letter-spacing: 1px; color: #666; padding: 10px 0; }
 
         /* CTA */
         .cta-btn {
-            width: 100%; margin-top: 18px;
-            padding: 16px;
+            width: 100%; margin-top: 20px;
+            padding: 18px;
             background: var(--red); color: var(--white);
             border: 2px solid var(--red);
-            font-family: monospace; font-size: 13px; letter-spacing: 3px; font-weight: 900;
+            font-family: monospace; font-size: 14px; letter-spacing: 3px; font-weight: 900;
             cursor: pointer; transition: background 0.2s;
         }
         .cta-btn:hover { background: #aa0000; border-color: #aa0000; }
         .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
 
+        /* MODAL de confirmación */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.85);
+            align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: var(--white);
+            border: 3px solid var(--black);
+            max-width: 480px; width: 100%;
+            padding: 0;
+            font-family: monospace;
+        }
+        .modal-header {
+            background: var(--black);
+            color: var(--white);
+            padding: 16px 22px;
+            font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            border-bottom: 2px solid var(--red);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .modal-header::before {
+            content: ''; display: inline-block; width: 9px; height: 9px; background: var(--red);
+        }
+        .modal-body {
+            padding: 28px 24px 24px;
+        }
+        .modal-icon {
+            width: 48px; height: 48px;
+            border: 3px solid var(--red);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; font-weight: 900; color: var(--red);
+            margin-bottom: 20px;
+        }
+        .modal-title {
+            font-size: 18px; font-weight: 900; letter-spacing: 2px;
+            margin-bottom: 10px; color: var(--black);
+        }
+        .modal-sub {
+            font-size: 13px; letter-spacing: 1px; color: #555;
+            line-height: 1.7; margin-bottom: 6px;
+        }
+        .modal-brand {
+            font-size: 12px; letter-spacing: 4px; font-weight: 900;
+            color: var(--red); margin-top: 16px;
+        }
+        .modal-close-btn {
+            width: 100%; margin-top: 24px;
+            padding: 14px;
+            background: var(--black); color: var(--white);
+            border: 2px solid var(--black);
+            font-family: monospace; font-size: 12px; letter-spacing: 3px; font-weight: 900;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .modal-close-btn:hover { background: var(--red); border-color: var(--red); }
+
         /* ── RESPONSIVE ─────────────────────────────────────── */
 
         @media (max-width: 640px) {
-            /* Márgenes generosos en mobile, espacio para pestañas a la derecha */
-            .estudio-page { padding: 24px 56px 80px 20px; }
+            .estudio-page { padding: 28px 56px 80px 20px; }
 
-            .estudio-header { padding: 8px 16px; gap: 10px; }
+            .estudio-header { padding: 10px 16px; gap: 10px; }
+            .header-logo { height: 40px; padding: 4px 10px; }
             .header-right { gap: 6px; }
-            .header-hours {
-                font-size: 10px;
-                padding: 3px 7px;
-                letter-spacing: 1px;
-            }
+            .header-hours { font-size: 10px; padding: 3px 7px; letter-spacing: 1px; }
 
-            /* Studios en columna */
             .studio-tabs { flex-direction: column; gap: 12px; }
             .tab-gallery { height: 160px; }
-            .tab-title { font-size: 12px; letter-spacing: 2px; padding: 10px 14px; }
+            .tab-title { font-size: 13px; letter-spacing: 2px; padding: 10px 14px; }
             .tab-body { padding: 10px 10px 12px; }
 
-            /* Todas las opciones de hora en una sola row */
             .hour-options { flex-wrap: nowrap; }
             .hour-btn {
-                flex: 1;
-                border-right: none;
-                min-width: 0;
-                padding: 8px 2px;
-                font-size: 10px;
-                letter-spacing: 0;
+                flex: 1; border-right: none;
+                min-width: 0; padding: 8px 2px;
+                font-size: 10px; letter-spacing: 0;
             }
             .hour-btn:last-child { border-right: 2px solid var(--black); }
             .hour-btn .price { font-size: 10px; }
 
-            /* Fecha y horario: calendario arriba, selector abajo */
-            .time-section {
-                flex-direction: column;
-                gap: 16px;
-                align-items: stretch;
-            }
+            .time-section { flex-direction: column; gap: 20px; }
+            .time-controls-top { flex-direction: column; align-items: stretch; gap: 14px; padding-top: 0; }
             .cal { width: 100%; }
-            .time-controls { flex-direction: column; gap: 12px; }
-            .time-row {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-end;
-                gap: 12px;
-                flex-wrap: nowrap;
-            }
-            .time-select { font-size: 14px; width: 88px; padding: 8px 10px; padding-right: 26px; }
-            .time-end { font-size: 18px; }
-            .time-arrow { display: flex; padding-bottom: 10px; }
+            .time-row { flex-direction: row; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
+            .time-select { font-size: 15px; width: 92px; padding: 10px 10px; padding-right: 28px; }
+            .time-end { font-size: 20px; }
 
-            /* Catering una columna */
             .catering-grid { grid-template-columns: 1fr; }
-
-            /* Datos: 2 campos por fila */
             .datos-grid { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
 
             .resumen-line { font-size: 12px; }
-            .resumen-line.total .value { font-size: 18px; }
+            .resumen-line.total .value { font-size: 20px; }
 
-            /* Pestañas flotantes más compactas */
-            .floating-tab {
-                font-size: 9px;
-                padding: 12px 7px;
-                letter-spacing: 0.12em;
-            }
-
+            .floating-tab { font-size: 9px; padding: 12px 7px; letter-spacing: 0.12em; }
             .lightbox-placeholder { width: 90vw; height: 55vw; }
+
+            .section-label { margin-bottom: 16px; }
+            .step { margin-bottom: 40px; }
         }
 
         @media (max-width: 420px) {
@@ -624,6 +667,20 @@
         <button class="lightbox-nav-btn" onclick="lbNav(1)">→</button>
     </div>
     <div class="lightbox-counter" id="lb-counter">1 / 1</div>
+</div>
+
+<!-- MODAL CONFIRMACIÓN -->
+<div class="modal-overlay" id="confirm-modal" onclick="closeModalOutside(event)">
+    <div class="modal-box">
+        <div class="modal-header">RESERVA ENVIADA</div>
+        <div class="modal-body">
+            <div class="modal-icon">✓</div>
+            <div class="modal-title">TU RESERVA HA SIDO CREADA.</div>
+            <div class="modal-sub">Nos ponemos en contacto a la brevedad.</div>
+            <div class="modal-brand">TUTÍA</div>
+            <button class="modal-close-btn" onclick="closeModal()">CERRAR →</button>
+        </div>
+    </div>
 </div>
 
 <div class="estudio-page">
@@ -692,6 +749,7 @@
         <div class="section-label"><span class="section-num">2</span> FECHA Y HORARIO</div>
         <div class="time-section">
 
+            <!-- CALENDARIO ARRIBA -->
             <div class="cal-wrap">
                 <div class="cal-label">DÍA</div>
                 <div class="cal" id="cal">
@@ -704,11 +762,23 @@
                 </div>
             </div>
 
-            <div class="time-controls">
+            <!-- HORARIO ABAJO -->
+            <div class="time-controls-top">
                 <div class="time-row">
                     <div class="time-field">
                         <label>DESDE</label>
                         <select class="time-select" id="time-start" onchange="updateTimeEnd()">
+                            <option value="9">09:00</option>
+                            <option value="10">10:00</option>
+                            <option value="11">11:00</option>
+                            <option value="12">12:00</option>
+                            <option value="13">13:00</option>
+                            <option value="14">14:00</option>
+                            <option value="15">15:00</option>
+                            <option value="16">16:00</option>
+                            <option value="17">17:00</option>
+                            <option value="18">18:00</option>
+                            <option value="19">19:00</option>
                         </select>
                     </div>
                     <div class="time-arrow">→</div>
@@ -773,12 +843,10 @@
 
 </div>
 
-<!-- Pestañas flotantes: siempre visibles en todos los tamaños -->
 <a href="proyectos.html" class="floating-tab proyectos">PROYECTOS</a>
 <a href="eventos.html"   class="floating-tab eventos">EVENTOS</a>
 
 <script>
-    /* ── DATA ─────────────────────────────────────────────────── */
     const STUDIO_PHOTOS = {
         1: [
             { src: null, alt: 'Estudio I — Vista principal' },
@@ -810,7 +878,6 @@
         { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800,  type: 'drink' },
     ]
 
-    /* ── STATE ────────────────────────────────────────────────── */
     let state = {
         studio: 1,
         hs: null,
@@ -825,7 +892,6 @@
     let calYear  = today.getFullYear()
     let calMonth = today.getMonth()
 
-    /* ── INIT ─────────────────────────────────────────────────── */
     document.addEventListener('DOMContentLoaded', () => {
         buildTimeSelect()
         buildGalleries()
@@ -835,7 +901,6 @@
         updateResumen()
     })
 
-    /* ── CALENDAR ─────────────────────────────────────────────── */
     const MONTHS_ES = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO',
                        'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
     const DAYS_ES   = ['DO','LU','MA','MI','JU','VI','SA']
@@ -891,7 +956,6 @@
         updateResumen()
     }
 
-    /* ── TIME SELECT ──────────────────────────────────────────── */
     function buildTimeSelect() {
         const sel = document.getElementById('time-start')
         for (let h = 9; h <= 19; h++) {
@@ -903,7 +967,6 @@
         sel.value = 9
     }
 
-    /* ── GALLERY ──────────────────────────────────────────────── */
     function buildGalleries() {
         [1, 2].forEach(studioId => {
             const photos = STUDIO_PHOTOS[studioId]
@@ -947,7 +1010,6 @@
         goToSlide(studioId, galleryCurrent[studioId] + dir)
     }
 
-    /* ── LIGHTBOX ─────────────────────────────────────────────── */
     let lbStudio = 1, lbIndex = 0
 
     function openLightbox(studioId, e) {
@@ -998,7 +1060,6 @@
         if (e.key === 'ArrowRight') lbNav(1)
     })
 
-    /* ── STUDIO SELECT ────────────────────────────────────────── */
     function selectStudio(id, e) {
         if (e) e.stopPropagation()
         state.studio = id
@@ -1015,7 +1076,6 @@
         e.stopPropagation()
         const parentTab = e.currentTarget.closest('.studio-tab')
         const tabStudioId = parseInt(parentTab.dataset.studio, 10)
-        // Switch studio without resetting hs
         if (state.studio !== tabStudioId) {
             state.studio = tabStudioId
             document.querySelectorAll('.studio-tab').forEach(t => t.classList.remove('active'))
@@ -1030,7 +1090,6 @@
         updateResumen()
     }
 
-    /* ── TIME ─────────────────────────────────────────────────── */
     function updateTimeEnd() {
         state.startHour = parseInt(document.getElementById('time-start').value, 10) || 9
         const endEl   = document.getElementById('time-end')
@@ -1057,7 +1116,6 @@
         updateResumen()
     }
 
-    /* ── CATERING ─────────────────────────────────────────────── */
     function buildCatering() {
         const grid = document.getElementById('catering-grid')
         grid.innerHTML = ''
@@ -1094,7 +1152,6 @@
         updateResumen()
     }
 
-    /* ── RESUMEN ──────────────────────────────────────────────── */
     function updateResumen() {
         const body = document.getElementById('resumen-body')
         const cta  = document.getElementById('cta-btn')
@@ -1139,7 +1196,17 @@
     }
 
     function confirmarReserva() {
-        alert('¡Reserva enviada! Nos ponemos en contacto para confirmar.')
+        document.getElementById('confirm-modal').classList.add('open')
+        document.body.style.overflow = 'hidden'
+    }
+
+    function closeModal() {
+        document.getElementById('confirm-modal').classList.remove('open')
+        document.body.style.overflow = ''
+    }
+
+    function closeModalOutside(e) {
+        if (e.target === document.getElementById('confirm-modal')) closeModal()
     }
 </script>
 
