@@ -1,4 +1,3 @@
-/* ── BASE ── */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -17,7 +16,6 @@ body {
     overflow-y: auto;
 }
 
-/* ── NAV ── */
 .site-nav {
     position: sticky;
     top: 0;
@@ -26,12 +24,11 @@ body {
     border-bottom: 3px solid var(--red);
 }
 
-/* fila 1: logo + título alineado a la derecha */
 .nav-row-1 {
     display: flex;
     align-items: center;
     padding: 10px 24px;
-    border-bottom: 1px solid #222;
+    border-bottom: none;
 }
 
 .back-btn {
@@ -40,9 +37,9 @@ body {
     justify-content: center;
     width: 34px;
     height: 34px;
-    background: var(--black);
+    background: var(--red);
     color: var(--white);
-    border: 2px solid var(--white);
+    border: 2px solid var(--red);
     font-family: monospace;
     font-size: 15px;
     text-decoration: none;
@@ -50,13 +47,15 @@ body {
     transition: background 0.2s, border-color 0.2s;
     margin-right: 28px;
 }
-.back-btn:hover { background: var(--red); border-color: var(--red); }
+.back-btn:hover { background: var(--black); border-color: var(--white); }
 
 .header-logo {
     height: 48px;
     width: auto;
     filter: invert(1);
     margin-right: 28px;
+    margin-top: 12px;
+    padding-top: 10px;
 }
 
 .nav-row-1-right {
@@ -81,7 +80,6 @@ body {
     color: var(--white);
 }
 
-/* fila 2: filtros */
 .nav-row-2 {
     display: flex;
     align-items: center;
@@ -147,7 +145,7 @@ body {
 
 .button-subasta {
     background: transparent;
-    color: var(--red);
+    color: var(--white);
     border: 2px solid var(--red);
     font-family: monospace;
     font-size: 11px;
@@ -185,7 +183,6 @@ body {
 .switch-option.active { background: var(--white); color: var(--black); }
 .switch-option:not(.active):hover { background: var(--red); color: var(--white); }
 
-/* ── CARD SELECTED ── */
 .book.selected-card {
     border-color: var(--red);
 }
@@ -194,13 +191,11 @@ body {
     visibility: visible !important;
 }
 
-/* ── LAYOUT ── */
 .main-container {
     display: flex;
     min-height: calc(100vh - 111px);
 }
 
-/* ── CONTENIDO ── */
 .content {
     flex: 1;
     padding: 24px 20px;
@@ -216,7 +211,6 @@ body {
     justify-content: center;
 }
 
-/* ── ASIDE DERECHO ── */
 .right-aside {
     position: sticky;
     top: 111px;
@@ -319,7 +313,6 @@ body {
 }
 .welcome-user:hover { opacity: 0.7; }
 
-/* ── CARD LIBRO ── */
 .book {
     display: flex;
     flex-direction: column;
@@ -393,7 +386,6 @@ body {
 
 .out-of-stock { color: var(--red); font-weight: bold; font-size: 11px; }
 
-/* ── MODAL ── */
 .modal {
     display: none;
     position: fixed;
@@ -455,7 +447,6 @@ body {
 .modal-info p { font-size: 13px; margin-bottom: 8px; letter-spacing: 0.5px; line-height: 1.6; }
 .modal-info .value { font-weight: bold; }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
     .right-aside { width: 180px; min-width: 180px; }
 }
@@ -514,20 +505,17 @@ body {
     .header-logo { height: 28px; }
 }
 
-/* tablet */
 @media (max-width: 1024px) {
     .right-aside { width: 170px; min-width: 170px; }
     .book { width: 175px; }
 }
 
-/* tablet chica */
 @media (max-width: 768px) {
     .book { width: 160px; padding: 14px; }
     .content { padding: 16px 14px; }
     #catalog { justify-content: center; gap: 14px; }
 }
 
-/* móvil */
 @media (max-width: 480px) {
     .book { width: 145px; padding: 12px; }
     .book-content h3 { font-size: 11px; }
@@ -535,8 +523,11 @@ body {
     .content { padding: 14px 10px; }
 }
 
-/* móvil muy chico */
 @media (max-width: 360px) {
     #catalog { flex-direction: column; align-items: stretch; }
     .book { width: 100%; }
+}
+
+@media (min-width: 1025px) {
+    .header-logo { height: 64px; margin-top: 16px; padding-top: 12px; }
 }
