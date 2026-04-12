@@ -50,7 +50,6 @@
         }
         .back-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
 
-        /* Logo más grande con padding generoso */
         .header-logo {
             height: 52px;
             width: auto;
@@ -68,12 +67,17 @@
             letter-spacing: 3px; color: var(--black);
         }
 
-        .header-hours {
-            font-size: 13px; letter-spacing: 2px; font-weight: 900;
+        /* HORARIO FUERA DE LA NAV */
+        .horario-bar {
+            text-align: center;
+            padding: 9px 32px;
+            font-family: monospace;
+            font-size: 12px;
+            letter-spacing: 4px;
+            font-weight: 900;
             color: var(--black);
-            border: 1px solid var(--black);
-            padding: 5px 12px;
-            flex-shrink: 0;
+            border-bottom: 1px solid #ddd;
+            background: #f5f5f5;
         }
 
         /* FLOATING TABS */
@@ -103,16 +107,16 @@
         /* SECTION LABEL */
         .section-label {
             font-size: 12px; letter-spacing: 4px; font-weight: 900;
-            color: var(--red); margin-bottom: 22px;
+            color: var(--black); margin-bottom: 22px;
             display: flex; align-items: center; gap: 10px;
         }
         .section-label::after {
-            content: ''; flex: 1; height: 1px; background: var(--red); opacity: 0.3;
+            content: ''; flex: 1; height: 1px; background: var(--black); opacity: 0.2;
         }
         .section-num {
             display: inline-flex; align-items: center; justify-content: center;
             width: 24px; height: 24px;
-            background: var(--red); color: var(--white);
+            background: var(--black); color: var(--white);
             font-size: 12px; font-weight: 900; flex-shrink: 0;
         }
 
@@ -315,7 +319,7 @@
         .hour-btn .price { display: block; font-size: 15px; color: var(--red); margin-top: 4px; }
         .hour-btn.active .price { color: var(--white); }
 
-        /* TIME — calendario y hora en la misma fila */
+        /* TIME */
         .time-section {
             display: flex;
             flex-direction: row;
@@ -593,15 +597,13 @@
         }
         .modal-close-btn:hover { background: var(--red); border-color: var(--red); }
 
-        /* ── RESPONSIVE ─────────────────────────────────────── */
-
+        /* RESPONSIVE */
         @media (max-width: 640px) {
             .estudio-page { padding: 28px 56px 80px 20px; }
 
             .estudio-header { padding: 10px 16px; gap: 10px; }
             .header-logo { height: 40px; padding: 4px 10px; }
             .header-right { gap: 6px; }
-            .header-hours { font-size: 10px; padding: 3px 7px; letter-spacing: 1px; }
 
             .studio-tabs { flex-direction: column; gap: 12px; }
             .tab-gallery { height: 160px; }
@@ -639,8 +641,6 @@
 
         @media (max-width: 420px) {
             .estudio-page { padding: 20px 50px 80px 14px; }
-            .header-section { display: none; }
-            .header-sep { display: none; }
             .datos-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
@@ -653,9 +653,10 @@
     <div class="header-right">
         <span class="header-sep">/</span>
         <span class="header-section">ESTUDIO</span>
-        <span class="header-hours">09:00 — 21:00 HS</span>
     </div>
 </header>
+
+<div class="horario-bar">09:00 — 21:00 HS</div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
@@ -749,7 +750,6 @@
         <div class="section-label"><span class="section-num">2</span> FECHA Y HORARIO</div>
         <div class="time-section">
 
-            <!-- CALENDARIO ARRIBA -->
             <div class="cal-wrap">
                 <div class="cal-label">DÍA</div>
                 <div class="cal" id="cal">
@@ -762,7 +762,6 @@
                 </div>
             </div>
 
-            <!-- HORARIO ABAJO -->
             <div class="time-controls-top">
                 <div class="time-row">
                     <div class="time-field">
