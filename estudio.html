@@ -69,15 +69,19 @@
 
         /* HORARIO FUERA DE LA NAV */
         .horario-bar {
-            text-align: center;
-            padding: 9px 32px;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 32px;
+            background: transparent;
+        }
+        .horario-bar span {
             font-family: monospace;
             font-size: 12px;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             font-weight: 900;
             color: var(--black);
-            border-bottom: 1px solid #ddd;
-            background: #f5f5f5;
+            border: 1px solid var(--black);
+            padding: 5px 12px;
         }
 
         /* FLOATING TABS */
@@ -89,8 +93,8 @@
             transform: rotate(180deg);
             background: var(--black); color: var(--white);
             text-decoration: none; font-family: monospace;
-            font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
-            padding: 18px 10px;
+            font-size: 13px; font-weight: 900; letter-spacing: 0.2em;
+            padding: 22px 13px;
             z-index: 999;
             border: 2px solid var(--white);
             border-right: none;
@@ -98,7 +102,7 @@
             white-space: nowrap;
         }
         .floating-tab:hover { background: var(--red); border-color: var(--red); color: var(--white); }
-        .floating-tab.proyectos { top: calc(50% - 90px); background: var(--red); border-color: var(--red); }
+        .floating-tab.proyectos { top: calc(50% - 110px); background: var(--red); border-color: var(--red); }
         .floating-tab.eventos   { top: calc(50% + 10px);  }
 
         /* PAGE */
@@ -602,7 +606,6 @@
             .estudio-page { padding: 28px 56px 80px 20px; }
 
             .estudio-header { padding: 10px 16px; gap: 10px; }
-            .header-logo { height: 40px; padding: 4px 10px; }
             .header-right { gap: 6px; }
 
             .studio-tabs { flex-direction: column; gap: 12px; }
@@ -632,7 +635,8 @@
             .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 20px; }
 
-            .floating-tab { font-size: 9px; padding: 12px 7px; letter-spacing: 0.12em; }
+            .floating-tab { font-size: 10px; padding: 14px 8px; letter-spacing: 0.12em; }
+            .horario-bar { padding: 8px 16px; }
             .lightbox-placeholder { width: 90vw; height: 55vw; }
 
             .section-label { margin-bottom: 16px; }
@@ -649,14 +653,13 @@
 
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
-    <img src="svg/tutian.svg" alt="TUTÍA" class="header-logo">
     <div class="header-right">
         <span class="header-sep">/</span>
         <span class="header-section">ESTUDIO</span>
     </div>
 </header>
 
-<div class="horario-bar">09:00 — 21:00 HS</div>
+<div class="horario-bar"><span>09:00 — 21:00 HS</span></div>
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
