@@ -140,13 +140,13 @@ function spinRoulette() {
   setTimeout(() => {
     isSpinning = false
     
-    const resultHTML = selectedPack.books.map(book => `
-      <div class="book-info">
-        <strong>${book.title}</strong>
-        <p><strong>Autor/a:</strong> ${book.author}</p>
-        <p><strong>Editorial:</strong> ${book.publisher}</p>
-      </div>
-    `).join('')
+   const resultHTML = selectedPack.books.map(book => `
+  <div class="book-info">
+    <strong>${book.title.toUpperCase()}</strong>
+    <p class="book-author">${book.author}</p>
+    <p class="book-publisher">${book.publisher}</p>
+  </div>
+`).join('')
     
     resultDiv.innerHTML = `
       <div class="roulette-wheel-container">

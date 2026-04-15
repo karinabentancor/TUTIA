@@ -189,11 +189,11 @@ body {
 }
 
 .pack-button {
-  background: #000;
+  background: rgba(255,43,43,1);
   border: 3px solid #000;
   padding: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,14 +202,12 @@ body {
 
 .pack-button:hover {
   transform: scale(1.05);
-  background: rgba(255,43,43,1);
-  border-color: #000;
 }
 
 .pack-button img {
   width: 35px;
   height: 35px;
-  filter: brightness(0) invert(1);
+  filter: brightness(0);
 }
 
 .roulette-section {
@@ -282,11 +280,25 @@ body {
   margin-bottom: 0.3rem;
   color: rgba(255,43,43,1);
 }
-
 .book-info p {
   font-size: 0.8rem;
   line-height: 1.4;
   margin: 0.2rem 0;
+}
+
+.book-author {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.book-publisher {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 .roulette-actions {
@@ -356,19 +368,14 @@ body {
 }
 
 .page-footer .logo {
-  width: 120px;
+  width: 160px;
   height: auto;
-}
-
-.footer-title {
-  font-weight: bold;
-  font-size: clamp(0.9rem, 2vw, 1.2rem);
-  margin-bottom: 0.5rem;
+  filter: brightness(0);
 }
 
 .footer-location {
-  font-size: clamp(0.75rem, 1.5vw, 1rem);
-  opacity: 0.8;
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  font-weight: bold;
 }
 
 .roulette-wheel-container {
@@ -538,7 +545,7 @@ body {
     width: 350px;
     height: 350px;
   }
-  
+
   #roulette-wheel {
     width: 350px !important;
     height: 350px !important;
@@ -732,12 +739,12 @@ body {
     width: 250px;
     height: 250px;
   }
-  
+
   #roulette-wheel {
     width: 250px !important;
     height: 250px !important;
   }
-  
+
   .roulette-pointer {
     border-left: 12px solid transparent;
     border-right: 12px solid transparent;

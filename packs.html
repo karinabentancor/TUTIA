@@ -12,7 +12,6 @@
       --white: #fff;
     }
 
-    /* ── NAV ── */
     .site-nav {
       position: sticky;
       top: 0;
@@ -24,6 +23,7 @@
       display: flex;
       align-items: center;
       padding: 10px 24px;
+      gap: 0;
     }
     .back-btn {
       display: inline-flex;
@@ -39,15 +39,15 @@
       text-decoration: none;
       flex-shrink: 0;
       transition: background 0.2s, border-color 0.2s, color 0.2s;
-      margin-right: 20px;
+      margin-right: 28px;
     }
     .back-btn:hover { background: var(--black); color: rgba(255,43,43,1); border-color: var(--black); }
 
     .header-logo {
-      height: 48px;
+      height: 52px;
       width: auto;
-      filter: brightness(0); /* negro sobre rojo */
-      margin-right: 28px;
+      filter: brightness(0);
+      margin-right: 32px;
     }
     .nav-row-1-right {
       margin-left: auto;
@@ -58,16 +58,16 @@
     .header-sep { font-family: monospace; font-size: 13px; font-weight: 900; color: var(--black); }
     .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--black); }
 
-    /* ── reducir espacio entre nav y cards ── */
     .content { padding-top: 16px; }
     .pack-section { margin-top: 0; padding-top: 0; }
 
     @media (max-width: 680px) {
-      .header-logo { height: 34px; }
+      .header-logo { height: 38px; }
     }
     @media (max-width: 420px) {
       .nav-row-1 { padding: 8px 12px; }
-      .header-logo { height: 28px; }
+      .header-logo { height: 30px; }
+      .back-btn { margin-right: 16px; }
     }
   </style>
 </head>
@@ -76,8 +76,7 @@
   <nav class="site-nav">
     <div class="nav-row-1">
       <a href="catalog.html" class="back-btn">←</a>
-      <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
-      <div class="nav-row-1-right">
+    <div class="nav-row-1-right">
         <span class="header-sep">/</span>
         <span class="header-section">PACKS DE LIBROS</span>
       </div>
@@ -110,10 +109,9 @@
 
       <footer class="page-footer">
         <a href="index.html">
-          <img src="svg/TUTÍA_b.svg" alt="Logo TUTÍA" class="logo" />
+          <img src="svg/TUTIALOGO.svg" alt="Logo TUTÍA" class="logo" />
         </a>
-        <p class="footer-title">CLUB DE LIBROS</p>
-        <p class="footer-location">Montevideo, Uruguay</p>
+        <p class="footer-location"><strong>Montevideo, Uruguay</strong></p>
       </footer>
     </div>
   </main>

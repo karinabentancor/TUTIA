@@ -50,9 +50,10 @@ body {
 .back-btn:hover { background: var(--black); border-color: var(--white); }
 
 .header-logo {
-    height: 48px;
+    height: 56px;
     width: auto;
     filter: invert(1);
+    margin-left: 24px;
     margin-right: 28px;
     margin-top: 12px;
     padding-top: 10px;
@@ -495,14 +496,14 @@ body {
     .switch-option { flex: 1; text-align: center; }
     .button-dark { width: 100%; }
     .button-subasta { width: 100%; }
-    .header-logo { height: 34px; }
+    .header-logo { height: 48px; margin-left: 16px; }
     .nav-row-1-right { gap: 6px; }
     #catalog { justify-content: center; }
 }
 
 @media (max-width: 420px) {
     .nav-row-1 { padding: 8px 12px; }
-    .header-logo { height: 28px; }
+    .header-logo { height: 40px; margin-left: 12px; }
 }
 
 @media (max-width: 1024px) {
@@ -519,7 +520,7 @@ body {
 @media (max-width: 480px) {
     .book { width: 145px; padding: 12px; }
     .book-content h3 { font-size: 11px; }
-    #catalog { gap: 10px; }
+    #catalog { gap: 20px; }
     .content { padding: 14px 10px; }
 }
 
@@ -529,5 +530,5 @@ body {
 }
 
 @media (min-width: 1025px) {
-    .header-logo { height: 64px; margin-top: 16px; padding-top: 12px; }
+    .header-logo { height: 72px; margin-left: 32px; margin-top: 16px; padding-top: 12px; }
 }
