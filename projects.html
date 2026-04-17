@@ -4,128 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TUTÍA / PROYECTOS</title>
-<style>
-  :root { --red: #cc0000; --black: #0a0a0a; --white: #f0f0f0; }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { overflow-x: hidden; }
-  body { font-family: monospace; background: var(--black); color: var(--white); }
-
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background-image: url('img/back.png');
-    background-size: auto; background-repeat: repeat;
-    background-color: var(--black);
-    border-bottom: 3px solid var(--red);
-    padding: 12px 32px;
-    display: flex; align-items: center; gap: 20px;
-  }
-  .back-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px;
-    background: var(--red); color: var(--white);
-    border: 2px solid var(--red);
-    font-family: monospace; font-size: 16px;
-    text-decoration: none; flex-shrink: 0;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .back-btn:hover { background: var(--black); border-color: var(--white); }
-  .header-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .header-sep { color: #000; font-size: 16px; font-weight: 900; }
-  .header-section { font-family: monospace; font-size: 13px; font-weight: 900; letter-spacing: 2px; color: #000; white-space: nowrap; }
-
-  .floating-tab {
-    position: fixed; right: 0;
-    writing-mode: vertical-rl; text-orientation: mixed;
-    transform: rotate(180deg);
-    text-decoration: none; font-family: monospace;
-    font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
-    padding: 18px 10px; z-index: 999;
-    border: 2px solid; border-right: none;
-    white-space: nowrap;
-  }
-  .floating-tab.estudio { top: calc(50% - 90px); background: var(--white); border-color: var(--white); color: var(--black); }
-  .floating-tab.eventos { top: calc(50% + 10px); background: var(--red); border-color: var(--red); color: var(--white); }
-
-  .page { max-width: 1100px; margin: 0 auto; padding: 0 32px 120px; }
-
-  .hero { padding: 60px 0 0; margin-bottom: 80px; }
-  .hero-eyebrow { font-size: 10px; letter-spacing: 5px; font-weight: 900; color: #555; margin-bottom: 12px; }
-  .hero-title {
-    font-size: clamp(56px, 15vw, 200px);
-    font-weight: 900; letter-spacing: -4px; line-height: 0.84;
-    text-transform: uppercase; color: var(--white);
-    word-break: break-word;
-  }
-  .hero-title span { color: var(--red); }
-  .hero-sub { margin-top: 32px; border-top: 1px solid #222; padding-top: 24px; }
-  .hero-desc { font-size: 12px; letter-spacing: 1.5px; line-height: 2.4; color: #888; max-width: 400px; }
-
-  .services { display: flex; flex-direction: column; }
-
-  .s-row {
-    padding: 44px 0;
-    border-top: 1px solid #1c1c1c;
-  }
-  .s-row:last-child { border-bottom: 1px solid #1c1c1c; }
-
-  .s-title {
-    font-size: clamp(22px, 4vw, 50px);
-    font-weight: 900; letter-spacing: -1px; line-height: 1;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    word-break: break-word;
-  }
-  .s-title .w1 { color: var(--red); }
-  .s-title .w2 { color: var(--white); }
-
-  .s-desc {
-    font-size: 12px; letter-spacing: 0.8px; line-height: 2.2;
-    color: #aaa; max-width: 560px;
-  }
-
-  .cta {
-    margin-top: 48px;
-    padding-top: 32px;
-    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  }
-  .cta-text {
-    font-size: clamp(28px, 5vw, 56px); font-weight: 900;
-    letter-spacing: -1px; line-height: 1.1; color: var(--white);
-    flex-shrink: 0;
-  }
-  .cta-text span { color: var(--red); }
-  .cta-link {
-    display: inline-flex; align-items: center; justify-content: center;
-    font-size: 12px; letter-spacing: 3px; font-weight: 900;
-    color: var(--white); text-decoration: none;
-    background: var(--red);
-    border: 2px solid var(--red);
-    padding: 18px 36px;
-    flex-shrink: 0;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-  .cta-link:hover { background: var(--black); }
-
-  @media (max-width: 768px) {
-    .page { padding: 0 24px 100px; }
-    header { padding: 10px 20px; gap: 12px; }
-    .hero { padding: 40px 0 0; margin-bottom: 56px; }
-    .hero-title { letter-spacing: -2px; }
-    .s-row { padding: 32px 0; }
-    .cta { margin-top: 36px; }
-  }
-
-  @media (max-width: 480px) {
-    .page { padding: 0 56px 100px 16px; }
-    header { padding: 10px 14px; gap: 8px; }
-    .hero { padding: 32px 0 0; margin-bottom: 44px; }
-    .hero-title { letter-spacing: -1px; }
-    .s-row { padding: 28px 0; }
-    .cta { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .floating-tab { font-size: 9px; padding: 12px 7px; }
-  }
-</style>
+<link rel="stylesheet" href="css/projects.css">
 </head>
 <body>
 
@@ -141,23 +20,41 @@
   <div class="hero">
     <div class="hero-eyebrow">TUTÍA — ESTUDIO CREATIVO</div>
     <div class="hero-title">QUÉ<br>HACE<br>MOS<span>.</span></div>
-    <div class="hero-sub">
-      <div class="hero-desc">Trabajamos con marcas, instituciones y personas.<br>Desde la pantalla hasta el espacio físico.</div>
-    </div>
   </div>
 
   <div class="services" id="services"></div>
 
   <div class="cta">
-    <div class="cta-text">¿Tenés un proyecto<span>?</span></div>
-    <a href="mailto:hola@tutia.uy" class="cta-link">ESCRIBINOS</a>
+    <div class="cta-text">¿Tenés un<br>proyecto<span>?</span></div>
+    <a href="#" class="cta-link" id="cta-btn">ESCRIBINOS</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <button class="modal-close" id="modal-close">✕</button>
+    <form id="contact-form">
+      <div class="modal-field" style="margin-bottom:0">
+        <div class="modal-title">TU MAIL</div>
+        <input class="modal-input" id="field-email" type="email" required placeholder="nombre@mail.com">
+      </div>
+      <div class="modal-field" style="margin-bottom:0">
+        <div class="modal-title">MENSAJE</div>
+        <textarea class="modal-textarea" id="field-message" required placeholder="Contanos sobre tu proyecto..."></textarea>
+      </div>
+      <button class="modal-submit" id="modal-submit" type="submit">ENVIAR</button>
+      <div class="modal-status" id="modal-status"></div>
+    </form>
   </div>
 </div>
 
 <a href="estudio.html" class="floating-tab estudio">ESTUDIO</a>
 <a href="events.html" class="floating-tab eventos">EVENTOS</a>
 
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+emailjs.init('TU_PUBLIC_KEY')
+
 const SERVICES = [
   { title: ['DISEÑO', 'DIGITAL'],        desc: 'Piezas gráficas para comunicar con precisión. Afiches, flyers, material para eventos y campañas de comunicación visual.' },
   { title: ['DISEÑO', 'WEB'],            desc: 'Sitios y plataformas construidos desde la función. Sin adornos que no trabajen.' },
@@ -170,8 +67,55 @@ const list = document.getElementById('services')
 SERVICES.forEach(s => {
   const row = document.createElement('div')
   row.className = 's-row'
-  row.innerHTML = '<div class="s-title"><span class="w1">' + s.title[0] + '</span> <span class="w2">' + s.title[1] + '</span></div><div class="s-desc">' + s.desc + '</div>'
+  row.innerHTML = `<div class="s-title"><span class="w1">${s.title[0]}</span> <span class="w2">${s.title[1]}</span></div><div class="s-desc">${s.desc}</div>`
   list.appendChild(row)
+})
+
+const overlay   = document.getElementById('modal-overlay')
+const form      = document.getElementById('contact-form')
+const status    = document.getElementById('modal-status')
+const submitBtn = document.getElementById('modal-submit')
+
+document.getElementById('cta-btn').addEventListener('click', e => {
+  e.preventDefault()
+  overlay.classList.add('open')
+})
+
+function closeModal() {
+  overlay.classList.remove('open')
+  form.reset()
+  status.textContent = ''
+  status.className = 'modal-status'
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal)
+
+overlay.addEventListener('click', e => {
+  if (e.target === overlay) closeModal()
+})
+
+form.addEventListener('submit', async e => {
+  e.preventDefault()
+  submitBtn.disabled = true
+  submitBtn.textContent = 'ENVIANDO...'
+  status.textContent = ''
+
+  try {
+    await emailjs.send('TU_SERVICE_ID', 'TU_TEMPLATE_ID', {
+      from_email: document.getElementById('field-email').value,
+      message:    document.getElementById('field-message').value,
+      to_email:   'tutiaclub@gmail.com'
+    })
+    status.textContent = 'MENSAJE ENVIADO.'
+    status.className = 'modal-status ok'
+    form.reset()
+  } catch {
+    status.textContent = 'ERROR. INTENTÁ DE NUEVO.'
+    status.className = 'modal-status err'
+  } finally {
+    submitBtn.disabled = false
+    submitBtn.textContent = 'ENVIAR'
+  }
 })
 </script>
 </body>
