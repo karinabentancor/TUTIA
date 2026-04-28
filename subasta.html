@@ -22,7 +22,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
     .site-nav {
       position: sticky;
       top: 0;
@@ -39,19 +38,19 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: var(--black);
+      width: 34px;
+      height: 34px;
+      background: var(--red);
       color: var(--white);
-      border: 2px solid var(--white);
+      border: 2px solid var(--red);
       font-family: monospace;
-      font-size: 18px;
+      font-size: 15px;
       text-decoration: none;
       flex-shrink: 0;
       transition: background 0.2s, border-color 0.2s;
       margin-right: 20px;
     }
-    .back-btn:hover { background: var(--red); border-color: var(--red); }
+    .back-btn:hover { background: var(--black); border-color: var(--white); }
 
     .header-logo {
       height: 48px;
@@ -68,7 +67,6 @@
     .header-sep { font-size: 13px; font-weight: 900; color: var(--red); }
     .header-section { font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--white); }
 
-    /* ── HERO ── */
     .auction-hero {
       background: var(--black);
       color: var(--white);
@@ -93,7 +91,6 @@
     .timer-block .label { font-size: 9px; letter-spacing: 2px; color: #666; margin-top: 4px; }
     .timer-sep { font-size: 28px; font-weight: 900; color: var(--mid); line-height: 1.1; align-self: flex-start; margin-top: 2px; }
 
-    /* ── GRID ── */
     .auction-grid {
       display: flex;
       flex-wrap: wrap;
@@ -101,9 +98,8 @@
       border-top: 3px solid var(--black);
     }
 
-    /* ── CARD ── */
     .auction-card {
-      width: calc(33.333%);
+      width: 25%;
       border-right: 3px solid var(--black);
       border-bottom: 3px solid var(--black);
       display: flex;
@@ -143,7 +139,6 @@
       font-size: 9px; font-weight: 900; letter-spacing: 2px; padding: 3px 8px;
     }
 
-    /* ── PANEL ── */
     .bid-panel-wrapper {
       width: 100%;
       border-right: 3px solid var(--black);
@@ -202,7 +197,6 @@
     .bid-list li.top-bid .bid-name::before { content: "★ "; color: var(--red); }
     .no-bids { font-size: 11px; color: #aaa; font-style: italic; padding: 10px 0; letter-spacing: 1px; }
 
-    /* ── TOAST ── */
     .toast {
       position: fixed; bottom: 28px; right: 28px;
       background: var(--black); color: var(--white);
@@ -213,20 +207,41 @@
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) { .auction-card { width: 50%; } }
-    @media (max-width: 680px) {
-      .auction-card { width: 100%; }
+    @media (max-width: 1024px) { .auction-card { width: 50%; } }
+    @media (max-width: 480px) {
+      .auction-card { width: 50%; }
+      .card-body { padding: 10px 10px; }
+      .card-title { font-size: 10px; letter-spacing: 0.5px; }
+      .card-meta { font-size: 9px; }
+      .card-footer { padding: 8px 10px 10px; }
+      .card-price { font-size: 13px; }
+      .card-bids { font-size: 9px; }
+      .active-badge { font-size: 8px; padding: 2px 6px; }
+
       .bid-panel { flex-direction: column; }
-      .bid-form-section { border-right: none; padding: 20px 16px; }
-      .bid-history-section { width: 100%; min-width: 0; border-top: 2px solid var(--gray); padding: 20px 16px; }
-      .auction-hero h1 { font-size: 22px; }
-      .timer-block .digits { font-size: 24px; }
-      .header-logo { height: 34px; }
-    }
-    @media (max-width: 420px) {
-      .bid-form { grid-template-columns: 1fr; }
+      .bid-form-section { border-right: none; padding: 16px 12px; }
+      .bid-form-section h3 { font-size: 11px; letter-spacing: 1.5px; }
+      .bid-form { grid-template-columns: 1fr; gap: 10px; }
       .bid-form label.full { grid-column: 1; }
+      .bid-form input { font-size: 11px; padding: 8px 10px; }
+      .bid-form input.monto-input { font-size: 15px; }
+      .bid-submit { font-size: 10px; padding: 12px; }
+
+      .bid-history-section { width: 100%; min-width: 0; border-top: 2px solid var(--gray); padding: 16px 12px; }
+      .bid-history-section h3 { font-size: 11px; letter-spacing: 1.5px; }
+      .bid-list li .bid-name { font-size: 10px; }
+      .bid-list li .bid-amount { font-size: 11px; }
+
+      .auction-hero { padding: 20px 16px; }
+      .auction-hero h1 { font-size: 20px; letter-spacing: 4px; }
+      .auction-hero p { font-size: 9px; }
+      .timer-block .digits { font-size: 22px; min-width: 36px; }
+      .timer-block .label { font-size: 8px; }
+      .timer-sep { font-size: 20px; }
+
+      .nav-row-1 { padding: 8px 12px; }
+      .header-logo { height: 34px; }
+      .header-section { font-size: 11px; letter-spacing: 2px; }
     }
   </style>
 </head>
@@ -348,7 +363,6 @@
       return Math.max(...book.bids.map(b => b.amount))
     }
 
-    /* "Karina" + "Bentancor" → "K. BENTANCOR" */
     function formatBidderName(nombre, apellido) {
       const inicial = nombre.trim().charAt(0).toUpperCase()
       const ap = apellido.trim().toUpperCase()
@@ -358,7 +372,7 @@
     function renderGrid() {
       const grid = document.getElementById("auction-grid")
       grid.innerHTML = ""
-      const ROW_SIZE = 3
+      const ROW_SIZE = 4
 
       for (let i = 0; i < BOOKS.length; i += ROW_SIZE) {
         const row = BOOKS.slice(i, i + ROW_SIZE)
@@ -391,7 +405,6 @@
           grid.appendChild(card)
         })
 
-        /* panel de la fila */
         const panel = document.createElement("div")
         panel.className = "bid-panel-wrapper"
 
@@ -520,7 +533,6 @@
       }, 50)
     }
 
-    /* countdown */
     function updateTimer() {
       const diff = Math.max(0, AUCTION_END - Date.now())
       const h = Math.floor(diff / 3600000)
@@ -533,7 +545,6 @@
     setInterval(updateTimer, 1000)
     updateTimer()
 
-    /* toast */
     let toastTimer = null
     function showToast(msg) {
       const t = document.getElementById("toast")
