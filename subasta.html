@@ -10,7 +10,6 @@
       --black: #000;
       --white: #fff;
       --gray: #ddd;
-      --mid: #444;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,75 +21,100 @@
       overflow-x: hidden;
     }
 
+    /* ── NAV ── */
     .site-nav {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: var(--black);
+      z-index: 200;
+      background-image: url('img/back.png');
+      background-size: auto;
+      background-repeat: repeat;
+      background-color: var(--black);
       border-bottom: 3px solid var(--red);
+      padding: 12px 32px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    .nav-row-1 {
+
+    .nav-top-row {
       display: flex;
       align-items: center;
-      padding: 10px 24px;
+      gap: 20px;
     }
+
+    .nav-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
     .back-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
-      background: var(--red);
-      color: var(--white);
-      border: 2px solid var(--red);
-      font-family: monospace;
-      font-size: 15px;
-      text-decoration: none;
-      flex-shrink: 0;
-      transition: background 0.2s, border-color 0.2s;
-      margin-right: 20px;
-    }
-    .back-btn:hover { background: var(--black); border-color: var(--white); }
-
-    .header-logo {
-      height: 48px;
-      width: auto;
-      filter: invert(1);
-      margin-right: 28px;
-    }
-    .nav-row-1-right {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .header-sep { font-size: 13px; font-weight: 900; color: var(--red); }
-    .header-section { font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--white); }
-
-    .auction-hero {
+      width: 36px; height: 36px;
       background: var(--black);
       color: var(--white);
-      padding: 32px 24px 28px;
-      border-bottom: 3px solid var(--red);
+      border: 2px solid var(--black);
+      font-family: monospace;
+      font-size: 16px;
+      text-decoration: none;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--red); border-color: var(--red); }
+
+    .header-logo {
+      height: 52px; width: auto;
+      margin-left: 12px; padding: 6px 14px;
+    }
+
+    .nav-right {
+      margin-left: auto;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .header-sep { color: var(--black); font-size: 16px; font-weight: 900; }
+    .header-section {
+      font-family: monospace; font-size: 15px;
+      font-weight: 900; letter-spacing: 3px; color: var(--black);
+    }
+
+    /* ── TIMER dentro de la nav ── */
+    .global-timer {
+      display: flex;
+      align-items: stretch;
+      border: 2px solid var(--black);
+    }
+    .timer-label-block {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
+      padding: 6px 14px;
+      border-right: 2px solid var(--black);
+      background: var(--black);
     }
-    .auction-hero h1 { font-size: 28px; letter-spacing: 6px; font-weight: 900; line-height: 1; }
-    .auction-hero h1 span { color: var(--red); }
-    .auction-hero p { font-size: 11px; letter-spacing: 2px; color: #888; margin-top: 8px; }
-
-    .global-timer { display: flex; gap: 12px; align-items: flex-end; }
-    .timer-block { display: flex; flex-direction: column; align-items: center; }
+    .timer-label-block span {
+      font-size: 9px; font-weight: 900;
+      letter-spacing: 3px; color: var(--white);
+      writing-mode: horizontal-tb;
+    }
+    .timer-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 16px;
+    }
+    .timer-block:not(:last-child) { border-right: 2px solid var(--black); }
     .timer-block .digits {
-      font-size: 32px; font-weight: 900; letter-spacing: 2px;
-      color: var(--red); line-height: 1; min-width: 48px; text-align: center;
+      font-size: 22px; font-weight: 900;
+      letter-spacing: 4px; color: var(--red); line-height: 1;
     }
-    .timer-block .label { font-size: 9px; letter-spacing: 2px; color: #666; margin-top: 4px; }
-    .timer-sep { font-size: 28px; font-weight: 900; color: var(--mid); line-height: 1.1; align-self: flex-start; margin-top: 2px; }
+    .timer-block .label {
+      font-size: 8px; letter-spacing: 2px; color: var(--black); margin-top: 2px;
+    }
 
+    /* ── GRID ── */
     .auction-grid {
       display: flex;
       flex-wrap: wrap;
@@ -102,33 +126,36 @@
       width: 25%;
       border-right: 3px solid var(--black);
       border-bottom: 3px solid var(--black);
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
       cursor: pointer;
       transition: background 0.2s;
       background: var(--white);
       position: relative;
     }
-    .auction-card:hover { background: #fafafa; }
+    .auction-card:hover { background: #f5f5f5; }
     .auction-card.active-card { background: var(--black); color: var(--white); }
     .auction-card.active-card .card-meta { color: #aaa; }
     .auction-card.active-card .card-footer { border-top-color: #333; }
+    .auction-card.active-card .card-bids { color: #aaa; }
 
     .card-img {
-      width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block;
-      border-bottom: 2px solid var(--black); filter: grayscale(20%);
+      width: 100%; aspect-ratio: 3/4;
+      object-fit: cover; display: block;
+      border-bottom: 2px solid var(--black);
+      filter: grayscale(15%);
       transition: filter 0.3s; background: #eee;
     }
     .auction-card:hover .card-img,
     .auction-card.active-card .card-img { filter: grayscale(0%); }
 
     .card-body { padding: 14px 16px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
-    .card-title { font-size: 12px; font-weight: 900; letter-spacing: 1px; line-height: 1.4; }
+    .card-title { font-size: 12px; font-weight: 900; letter-spacing: 1px; line-height: 1.4; text-transform: uppercase; }
     .card-meta { font-size: 10px; color: #666; letter-spacing: 0.5px; line-height: 1.5; }
 
     .card-footer {
       display: flex; justify-content: space-between; align-items: flex-end;
-      padding: 10px 16px 14px; border-top: 1px solid #eee; margin-top: auto;
+      padding: 10px 16px 14px;
+      border-top: 1px solid #eee; margin-top: auto;
     }
     .card-price { font-size: 15px; font-weight: 900; color: var(--red); letter-spacing: 1px; }
     .card-bids { font-size: 10px; color: #888; letter-spacing: 1px; }
@@ -139,144 +166,282 @@
       font-size: 9px; font-weight: 900; letter-spacing: 2px; padding: 3px 8px;
     }
 
-    .bid-panel-wrapper {
-      width: 100%;
-      border-right: 3px solid var(--black);
+    /* ── DRAWER ── */
+    .drawer-overlay {
+      position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.6);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+    .drawer {
+      position: fixed; top: 0; right: 0; z-index: 400;
+      width: 780px; max-width: 100vw; height: 100%;
+      background: var(--white);
+      border-left: 3px solid var(--black);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    /* Header drawer */
+    .drawer-header {
+      background: var(--black);
+      border-bottom: 3px solid var(--red);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .drawer-header-title {
+      font-size: 11px; font-weight: 900; letter-spacing: 3px; color: var(--white);
+    }
+    .drawer-close {
+      width: 34px; height: 34px;
+      background: none; border: 2px solid #444;
+      color: var(--white); font-family: monospace;
+      font-size: 18px; font-weight: 900;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .drawer-close:hover { border-color: var(--red); background: var(--red); }
+
+    /* Bloque libro — imagen más grande */
+    .drawer-book {
+      display: flex;
+      flex-shrink: 0;
       border-bottom: 3px solid var(--black);
-      display: none;
-      flex-basis: 100%;
+      height: 220px;
     }
-    .bid-panel-wrapper.open { display: flex; }
-    .bid-panel { display: flex; width: 100%; }
-
-    .bid-form-section { flex: 1; padding: 28px; border-right: 2px solid var(--gray); }
-    .bid-form-section h3 {
-      font-size: 13px; font-weight: 900; letter-spacing: 3px;
-      margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--red); line-height: 1.4;
+    .drawer-book-img {
+      width: 160px; flex-shrink: 0;
+      border-right: 3px solid var(--black);
+      overflow: hidden;
+    }
+    .drawer-book-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .drawer-book-info {
+      flex: 1; padding: 20px 22px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .drawer-book-title {
+      font-size: 15px; font-weight: 900;
+      letter-spacing: 1px; line-height: 1.35;
+      text-transform: uppercase;
+    }
+    .drawer-book-meta {
+      font-size: 11px; color: #555; letter-spacing: 0.5px; line-height: 1.7;
+    }
+    .drawer-book-price-row {
+      display: flex; align-items: baseline; gap: 12px; margin-top: auto;
+      padding-top: 10px; border-top: 1px solid #eee;
+    }
+    .drawer-book-price-label {
+      font-size: 9px; letter-spacing: 2px; color: #888; font-weight: 900;
+    }
+    .drawer-book-price {
+      font-size: 26px; font-weight: 900; color: var(--red); letter-spacing: 1px;
+    }
+    .drawer-book-bids {
+      font-size: 10px; color: #888; letter-spacing: 1px;
     }
 
-    .bid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    /* Cuerpo del drawer: dos columnas */
+    .drawer-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Columna izquierda: formulario */
+    .drawer-form-col {
+      flex: 1;
+      border-right: 3px solid var(--black);
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+    }
+    .drawer-form-col-inner {
+      padding: 22px 20px;
+    }
+    .drawer-form-col h3 {
+      font-size: 10px; font-weight: 900; letter-spacing: 3px;
+      margin-bottom: 16px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--red);
+    }
+
+    .bid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .bid-form label {
-      display: flex; flex-direction: column; gap: 5px;
+      display: flex; flex-direction: column; gap: 4px;
       font-size: 9px; letter-spacing: 2px; color: #666;
     }
     .bid-form label.full { grid-column: 1 / -1; }
     .bid-form input {
       background: var(--white); color: var(--black);
       border: 2px solid #ccc; font-family: monospace;
-      font-size: 12px; letter-spacing: 1px; padding: 9px 12px;
+      font-size: 12px; letter-spacing: 1px; padding: 8px 10px;
       outline: none; transition: border-color 0.2s; width: 100%;
     }
     .bid-form input:focus { border-color: var(--red); }
-    .bid-form input.monto-input { font-size: 18px; font-weight: 900; border-color: var(--black); }
+    .bid-form input.monto-input {
+      font-size: 20px; font-weight: 900;
+      border-color: var(--black); letter-spacing: 2px;
+    }
     .bid-form input.monto-input:focus { border-color: var(--red); }
-
     .bid-submit {
       grid-column: 1 / -1;
       background: var(--red); color: var(--white);
       border: 2px solid var(--red); font-family: monospace;
-      font-size: 11px; font-weight: 900; letter-spacing: 2px;
-      padding: 13px; cursor: pointer;
-      transition: background 0.2s, border-color 0.2s; margin-top: 4px;
+      font-size: 11px; font-weight: 900; letter-spacing: 3px;
+      padding: 14px; cursor: pointer;
+      transition: background 0.2s, border-color 0.2s; margin-top: 6px;
     }
-    .bid-submit:hover { background: var(--black); border-color: var(--white); }
+    .bid-submit:hover { background: var(--black); border-color: var(--black); }
 
-    .bid-history-section { width: 300px; min-width: 260px; padding: 28px 24px; background: #fafafa; }
-    .bid-history-section h3 {
-      font-size: 13px; font-weight: 900; letter-spacing: 3px;
-      margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--black);
+    /* Columna derecha: historial */
+    .drawer-history-col {
+      width: 280px; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      overflow-y: auto;
+      background: #fafafa;
+    }
+    .drawer-history-col-inner {
+      padding: 22px 18px;
+    }
+    .drawer-history-col h3 {
+      font-size: 10px; font-weight: 900; letter-spacing: 3px;
+      margin-bottom: 14px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--black);
     }
     .bid-list { list-style: none; }
     .bid-list li {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-bottom: 1px solid #e0e0e0; gap: 10px;
+      display: flex; flex-direction: column;
+      padding: 10px 0; border-bottom: 1px solid #eee; gap: 3px;
     }
-    .bid-list li .bid-name { font-size: 11px; font-weight: 900; letter-spacing: 1px; flex: 1; }
-    .bid-list li .bid-amount { font-size: 13px; font-weight: 900; color: var(--red); letter-spacing: 1px; white-space: nowrap; }
-    .bid-list li .bid-time { font-size: 9px; color: #999; letter-spacing: 1px; white-space: nowrap; }
+    .bid-list li .bid-row {
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    }
+    .bid-list li .bid-name { font-size: 11px; font-weight: 900; letter-spacing: 1px; }
+    .bid-list li .bid-amount { font-size: 14px; font-weight: 900; color: var(--red); letter-spacing: 1px; white-space: nowrap; }
+    .bid-list li .bid-time { font-size: 9px; color: #999; letter-spacing: 1px; }
     .bid-list li.top-bid .bid-name::before { content: "★ "; color: var(--red); }
     .no-bids { font-size: 11px; color: #aaa; font-style: italic; padding: 10px 0; letter-spacing: 1px; }
 
+    /* ── TOAST ── */
     .toast {
-      position: fixed; bottom: 28px; right: 28px;
+      position: fixed; bottom: 28px; left: 28px; z-index: 500;
       background: var(--black); color: var(--white);
       border-left: 4px solid var(--red); font-family: monospace;
       font-size: 12px; letter-spacing: 1.5px; padding: 14px 20px;
-      z-index: 999; opacity: 0; transform: translateY(12px);
+      opacity: 0; transform: translateY(12px);
       transition: opacity 0.3s, transform 0.3s; pointer-events: none; max-width: 320px;
     }
     .toast.show { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 1024px) { .auction-card { width: 50%; } }
-    @media (max-width: 480px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .drawer { width: 100vw; border-left: none; }
+      .drawer-history-col { width: 220px; }
+    }
+
+    @media (max-width: 767px) {
       .auction-card { width: 50%; }
-      .card-body { padding: 10px 10px; }
-      .card-title { font-size: 10px; letter-spacing: 0.5px; }
-      .card-meta { font-size: 9px; }
-      .card-footer { padding: 8px 10px 10px; }
-      .card-price { font-size: 13px; }
-      .card-bids { font-size: 9px; }
-      .active-badge { font-size: 8px; padding: 2px 6px; }
+      .site-nav { padding: 10px 16px 12px; gap: 8px; }
+      .header-logo { height: 40px; padding: 4px 10px; }
+      .header-section { font-size: 13px; letter-spacing: 2px; }
+      .timer-block { padding: 4px 10px; }
+      .timer-block .digits { font-size: 18px; }
+      .timer-label-block span { font-size: 8px; letter-spacing: 2px; }
+      .timer-label-block { padding: 4px 10px; }
 
-      .bid-panel { flex-direction: column; }
-      .bid-form-section { border-right: none; padding: 16px 12px; }
-      .bid-form-section h3 { font-size: 11px; letter-spacing: 1.5px; }
-      .bid-form { grid-template-columns: 1fr; gap: 10px; }
+      /* En móvil: drawer en columna única */
+      .drawer-body { flex-direction: column; }
+      .drawer-form-col { border-right: none; border-bottom: 3px solid var(--black); overflow-y: visible; }
+      .drawer-history-col { width: 100%; overflow-y: visible; }
+      .bid-form { grid-template-columns: 1fr 1fr; }
+      .drawer-book { height: 160px; }
+      .drawer-book-img { width: 110px; }
+    }
+
+    @media (max-width: 479px) {
+      .auction-card { width: 50%; }
+      .card-body { padding: 8px 10px; }
+      .card-title { font-size: 9px; }
+      .card-meta { font-size: 8px; }
+      .card-price { font-size: 12px; }
+      .timer-block .digits { font-size: 15px; }
+      .timer-block { padding: 3px 8px; }
+      .bid-form { grid-template-columns: 1fr; }
       .bid-form label.full { grid-column: 1; }
-      .bid-form input { font-size: 11px; padding: 8px 10px; }
-      .bid-form input.monto-input { font-size: 15px; }
-      .bid-submit { font-size: 10px; padding: 12px; }
-
-      .bid-history-section { width: 100%; min-width: 0; border-top: 2px solid var(--gray); padding: 16px 12px; }
-      .bid-history-section h3 { font-size: 11px; letter-spacing: 1.5px; }
-      .bid-list li .bid-name { font-size: 10px; }
-      .bid-list li .bid-amount { font-size: 11px; }
-
-      .auction-hero { padding: 20px 16px; }
-      .auction-hero h1 { font-size: 20px; letter-spacing: 4px; }
-      .auction-hero p { font-size: 9px; }
-      .timer-block .digits { font-size: 22px; min-width: 36px; }
-      .timer-block .label { font-size: 8px; }
-      .timer-sep { font-size: 20px; }
-
-      .nav-row-1 { padding: 8px 12px; }
-      .header-logo { height: 34px; }
-      .header-section { font-size: 11px; letter-spacing: 2px; }
     }
   </style>
 </head>
 <body>
 
   <nav class="site-nav">
-    <div class="nav-row-1">
+    <div class="nav-top-row">
       <a href="catalog.html" class="back-btn">←</a>
       <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
-      <div class="nav-row-1-right">
+      <div class="nav-right">
         <span class="header-sep">/</span>
         <span class="header-section">SUBASTA</span>
       </div>
     </div>
+    <div class="nav-bottom-row">
+      <div class="global-timer">
+        <div class="timer-label-block"><span>CIERRE DE SUBASTA</span></div>
+        <div class="timer-block">
+          <span class="digits" id="t-hours">00</span>
+          <span class="label">HORAS</span>
+        </div>
+        <div class="timer-block">
+          <span class="digits" id="t-minutes">00</span>
+          <span class="label">MIN</span>
+        </div>
+        <div class="timer-block">
+          <span class="digits" id="t-seconds">00</span>
+          <span class="label">SEG</span>
+        </div>
+      </div>
+    </div>
   </nav>
 
-  <div class="auction-hero">
-    <div>
-      <h1>SUB<span>ASTA</span></h1>
-      <p>HACÉ TU OFERTA · GANA EL MÁS ALTO POSTOR</p>
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <span class="drawer-header-title">HACER UNA OFERTA</span>
+      <button class="drawer-close" onclick="closeDrawer()">×</button>
     </div>
-    <div class="global-timer">
-      <div class="timer-block">
-        <span class="digits" id="t-hours">00</span>
-        <span class="label">HORAS</span>
+
+    <div class="drawer-book" id="drawer-book"></div>
+
+    <div class="drawer-body">
+      <!-- Columna formulario -->
+      <div class="drawer-form-col">
+        <div class="drawer-form-col-inner">
+          <h3>TUS DATOS Y OFERTA</h3>
+          <div class="bid-form" id="drawer-form">
+            <label>NOMBRE<input type="text" name="nombre" autocomplete="off"></label>
+            <label>APELLIDO<input type="text" name="apellido" autocomplete="off"></label>
+            <label>DOCUMENTO<input type="text" name="documento" autocomplete="off"></label>
+            <label>CELULAR<input type="text" name="celular" autocomplete="off"></label>
+            <label class="full">CORREO ELECTRÓNICO<input type="email" name="mail" autocomplete="off"></label>
+            <label class="full" id="monto-label">TU OFERTA<input type="number" name="monto" class="monto-input" autocomplete="off"></label>
+            <button type="button" class="bid-submit" id="bid-submit-btn">ENVIAR OFERTA →</button>
+          </div>
+        </div>
       </div>
-      <span class="timer-sep">:</span>
-      <div class="timer-block">
-        <span class="digits" id="t-minutes">00</span>
-        <span class="label">MIN</span>
-      </div>
-      <span class="timer-sep">:</span>
-      <div class="timer-block">
-        <span class="digits" id="t-seconds">00</span>
-        <span class="label">SEG</span>
+
+      <!-- Columna historial -->
+      <div class="drawer-history-col">
+        <div class="drawer-history-col-inner">
+          <h3>OFERTAS ANTERIORES</h3>
+          <ul class="bid-list" id="drawer-history"></ul>
+        </div>
       </div>
     </div>
   </div>
@@ -331,32 +496,10 @@
         image: "img/filosof-as-del-sur-descolonizaci-n-y-transmodernidad.jpg",
         basePrice: 500,
         bids: []
-      },
-      {
-        id: 5,
-        title: "La mirada del jaguar — Introducción al perspectivismo amerindio",
-        author: "Eduardo Viveiros de Castro",
-        publisher: "Tinta Limón",
-        pages: 288,
-        category: "Antropología",
-        image: "img/la-mirada-del-jaguar-introducci-n-al-pespectivismo-amerindio.jpg",
-        basePrice: 450,
-        bids: []
-      },
-      {
-        id: 6,
-        title: "Gramática de la multitud",
-        author: "Paolo Virno",
-        publisher: "Tinta Limón / Traficantes de sueños",
-        pages: 137,
-        category: "Filosofía",
-        image: "img/gram-tica-de-la-multitud-para-un-an-lisis-de-las-formas-de-vida-contempor-neas.jpg",
-        basePrice: 320,
-        bids: []
       }
     ]
 
-    let activeCardId = null
+    let activeBookId = null
 
     function currentPrice(book) {
       if (!book.bids.length) return book.basePrice
@@ -364,139 +507,106 @@
     }
 
     function formatBidderName(nombre, apellido) {
-      const inicial = nombre.trim().charAt(0).toUpperCase()
-      const ap = apellido.trim().toUpperCase()
-      return `${inicial}. ${ap}`
+      return `${nombre.trim().charAt(0).toUpperCase()}. ${apellido.trim().toUpperCase()}`
     }
 
     function renderGrid() {
       const grid = document.getElementById("auction-grid")
       grid.innerHTML = ""
-      const ROW_SIZE = 4
+      BOOKS.forEach(book => {
+        const isActive = book.id === activeBookId
+        const card = document.createElement("div")
+        card.className = `auction-card${isActive ? " active-card" : ""}`
+        const price = currentPrice(book)
+        const bidsCount = book.bids.length
+        const imgSrc = book.image || "https://placehold.co/300x400/111/fff?text=S/I"
 
-      for (let i = 0; i < BOOKS.length; i += ROW_SIZE) {
-        const row = BOOKS.slice(i, i + ROW_SIZE)
+        card.innerHTML = `
+          ${isActive ? '<span class="active-badge">OFERTANDO</span>' : ""}
+          <img class="card-img" src="${imgSrc}" alt="${book.title}"
+               onerror="this.src='https://placehold.co/300x400/111/fff?text=S/I'">
+          <div class="card-body">
+            <div class="card-title">${book.title}</div>
+            <div class="card-meta">${book.author}<br>${book.publisher} · ${book.category}</div>
+          </div>
+          <div class="card-footer">
+            <div class="card-price">$ ${price.toLocaleString("es-UY")}</div>
+            <div class="card-bids">${bidsCount} oferta${bidsCount !== 1 ? "s" : ""}</div>
+          </div>`
 
-        row.forEach(book => {
-          const isActive = book.id === activeCardId
-          const card = document.createElement("div")
-          card.className = `auction-card${isActive ? " active-card" : ""}`
-          card.dataset.id = book.id
-
-          const price = currentPrice(book)
-          const bidsCount = book.bids.length
-          const imgSrc = book.image || "https://placehold.co/300x400/111/fff?text=S/I"
-
-          card.innerHTML = `
-            ${isActive ? '<span class="active-badge">OFERTANDO</span>' : ""}
-            <img class="card-img" src="${imgSrc}" alt="${book.title}"
-                 onerror="this.src='https://placehold.co/300x400/111/fff?text=S/I'">
-            <div class="card-body">
-              <div class="card-title">${book.title}</div>
-              <div class="card-meta">${book.author}<br>${book.publisher} · ${book.category}</div>
-            </div>
-            <div class="card-footer">
-              <div class="card-price">$ ${price.toLocaleString("es-UY")}</div>
-              <div class="card-bids">${bidsCount} oferta${bidsCount !== 1 ? "s" : ""}</div>
-            </div>
-          `
-
-          card.addEventListener("click", () => togglePanel(book.id))
-          grid.appendChild(card)
-        })
-
-        const panel = document.createElement("div")
-        panel.className = "bid-panel-wrapper"
-
-        const activeInRow = row.find(b => b.id === activeCardId)
-        if (activeInRow) {
-          panel.classList.add("open")
-          panel.innerHTML = buildPanel(activeInRow)
-          bindForm(panel, activeInRow)
-        }
-
-        grid.appendChild(panel)
-      }
+        card.addEventListener("click", () => openDrawer(book.id))
+        grid.appendChild(card)
+      })
     }
 
-    function buildPanel(book) {
+    function openDrawer(bookId) {
+      const book = BOOKS.find(b => b.id === bookId)
+      if (!book) return
+      activeBookId = bookId
+
       const price = currentPrice(book)
-      const sortedBids = [...book.bids].sort((a, b) => b.amount - a.amount)
+      const imgSrc = book.image || "https://placehold.co/300x400/111/fff?text=S/I"
 
-      const historyHTML = sortedBids.length
-        ? sortedBids.map((b, i) => `
-            <li class="${i === 0 ? "top-bid" : ""}">
-              <span class="bid-name">${b.name}</span>
-              <span class="bid-amount">$ ${b.amount.toLocaleString("es-UY")}</span>
-              <span class="bid-time">${b.time}</span>
-            </li>`).join("")
-        : `<li><span class="no-bids">Sin ofertas aún — ¡sé el primero!</span></li>`
-
-      return `
-        <div class="bid-panel">
-          <div class="bid-form-section">
-            <h3>HACER UNA OFERTA — ${book.title}</h3>
-            <div class="bid-form" id="form-${book.id}">
-              <label>
-                NOMBRE
-                <input type="text" name="nombre" placeholder="Karina" required autocomplete="off">
-              </label>
-              <label>
-                APELLIDO
-                <input type="text" name="apellido" placeholder="Bentancor" required autocomplete="off">
-              </label>
-              <label>
-                DOCUMENTO DE IDENTIDAD
-                <input type="text" name="documento" placeholder="CI / Pasaporte" required autocomplete="off">
-              </label>
-              <label>
-                CELULAR
-                <input type="text" name="celular" placeholder="+598 09X XXX XXX" required autocomplete="off">
-              </label>
-              <label class="full">
-                CORREO ELECTRÓNICO
-                <input type="email" name="mail" placeholder="tu@mail.com" required autocomplete="off">
-              </label>
-              <label class="full">
-                TU OFERTA (mínimo $ ${(price + 1).toLocaleString("es-UY")})
-                <input type="number" name="monto" class="monto-input"
-                       placeholder="$ ${(price + 50).toLocaleString("es-UY")}"
-                       min="${price + 1}" required autocomplete="off">
-              </label>
-              <button type="button" class="bid-submit" data-book-id="${book.id}">ENVIAR OFERTA</button>
-            </div>
-          </div>
-          <div class="bid-history-section">
-            <h3>OFERTAS ANTERIORES</h3>
-            <ul class="bid-list" id="history-${book.id}">
-              ${historyHTML}
-            </ul>
-          </div>
+      document.getElementById("drawer-book").innerHTML = `
+        <div class="drawer-book-img">
+          <img src="${imgSrc}" alt="${book.title}"
+               onerror="this.src='https://placehold.co/300x400/111/fff?text=S/I'">
         </div>
-      `
-    }
+        <div class="drawer-book-info">
+          <div class="drawer-book-title">${book.title}</div>
+          <div class="drawer-book-meta">${book.author}<br>${book.publisher} &nbsp;·&nbsp; ${book.category} &nbsp;·&nbsp; ${book.pages} págs.</div>
+          <div class="drawer-book-price-row">
+            <span class="drawer-book-price-label">OFERTA MÁS ALTA</span>
+            <span class="drawer-book-price">$ ${price.toLocaleString("es-UY")}</span>
+            <span class="drawer-book-bids">${book.bids.length} oferta${book.bids.length !== 1 ? "s" : ""}</span>
+          </div>
+        </div>`
 
-    function bindForm(panel, book) {
-      const btn = panel.querySelector(".bid-submit")
-      if (!btn) return
-      btn.addEventListener("click", () => submitBid(book))
-    }
+      const montoLabel = document.getElementById("monto-label")
+      montoLabel.childNodes[0].textContent = `TU OFERTA (MÍN. $ ${(price + 1).toLocaleString("es-UY")})`
+      const montoInput = montoLabel.querySelector("input")
+      montoInput.placeholder = `$ ${(price + 50).toLocaleString("es-UY")}`
+      montoInput.min = price + 1
 
-    function togglePanel(bookId) {
-      activeCardId = activeCardId === bookId ? null : bookId
+      document.getElementById("drawer-form").querySelectorAll("input").forEach(i => i.value = "")
+
+      renderHistory(book)
+
+      document.getElementById("bid-submit-btn").onclick = () => submitBid(book)
+
+      document.getElementById("drawer").classList.add("open")
+      document.getElementById("drawer-overlay").classList.add("open")
+      document.body.style.overflow = "hidden"
       renderGrid()
-      if (activeCardId) {
-        setTimeout(() => {
-          const openPanel = document.querySelector(".bid-panel-wrapper.open")
-          if (openPanel) openPanel.scrollIntoView({ behavior: "smooth", block: "nearest" })
-        }, 60)
+    }
+
+    function renderHistory(book) {
+      const sorted = [...book.bids].sort((a, b) => b.amount - a.amount)
+      const ul = document.getElementById("drawer-history")
+      if (!sorted.length) {
+        ul.innerHTML = `<li><span class="no-bids">Sin ofertas aún — ¡sé el primero!</span></li>`
+        return
       }
+      ul.innerHTML = sorted.map((b, i) => `
+        <li class="${i === 0 ? "top-bid" : ""}">
+          <div class="bid-row">
+            <span class="bid-name">${b.name}</span>
+            <span class="bid-amount">$ ${b.amount.toLocaleString("es-UY")}</span>
+          </div>
+          <span class="bid-time">${b.time}</span>
+        </li>`).join("")
+    }
+
+    function closeDrawer() {
+      activeBookId = null
+      document.getElementById("drawer").classList.remove("open")
+      document.getElementById("drawer-overlay").classList.remove("open")
+      document.body.style.overflow = ""
+      renderGrid()
     }
 
     function submitBid(book) {
-      const form = document.getElementById(`form-${book.id}`)
-      if (!form) return
-
+      const form = document.getElementById("drawer-form")
       const nombre    = form.querySelector('[name="nombre"]').value.trim()
       const apellido  = form.querySelector('[name="apellido"]').value.trim()
       const documento = form.querySelector('[name="documento"]').value.trim()
@@ -507,31 +617,30 @@
       const minimo    = currentPrice(book) + 1
 
       if (!nombre || !apellido || !documento || !celular || !mail || !montoRaw) {
-        showToast("⚠ COMPLETÁ TODOS LOS CAMPOS")
-        return
+        showToast("⚠ COMPLETÁ TODOS LOS CAMPOS"); return
       }
       if (isNaN(monto) || monto < minimo) {
-        showToast(`⚠ LA OFERTA MÍNIMA ES $ ${minimo.toLocaleString("es-UY")}`)
-        return
+        showToast(`⚠ LA OFERTA MÍNIMA ES $ ${minimo.toLocaleString("es-UY")}`); return
       }
 
       const now = new Date()
       const timeStr = `${String(now.getHours()).padStart(2,"0")}:${String(now.getMinutes()).padStart(2,"0")}`
-
-      book.bids.unshift({
-        name: formatBidderName(nombre, apellido),
-        amount: monto,
-        time: timeStr
-      })
+      book.bids.unshift({ name: formatBidderName(nombre, apellido), amount: monto, time: timeStr })
 
       showToast(`✓ OFERTA DE $ ${monto.toLocaleString("es-UY")} REGISTRADA`)
 
-      setTimeout(() => {
-        renderGrid()
-        const openPanel = document.querySelector(".bid-panel-wrapper.open")
-        if (openPanel) openPanel.scrollIntoView({ behavior: "smooth", block: "nearest" })
-      }, 50)
+      const price = currentPrice(book)
+      document.querySelector(".drawer-book-price").textContent = `$ ${price.toLocaleString("es-UY")}`
+      document.querySelector(".drawer-book-bids").textContent = `${book.bids.length} oferta${book.bids.length !== 1 ? "s" : ""}`
+      const montoLabel = document.getElementById("monto-label")
+      montoLabel.childNodes[0].textContent = `TU OFERTA (MÍN. $ ${(price + 1).toLocaleString("es-UY")})`
+      montoLabel.querySelector("input").min = price + 1
+      form.querySelectorAll("input").forEach(i => i.value = "")
+      renderHistory(book)
+      renderGrid()
     }
+
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeDrawer() })
 
     function updateTimer() {
       const diff = Math.max(0, AUCTION_END - Date.now())
