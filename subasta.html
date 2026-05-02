@@ -80,23 +80,17 @@
       font-weight: 900; letter-spacing: 3px; color: var(--black);
     }
 
-    /* ── TIMER dentro de la nav ── */
+    /* ── TIMER ── */
     .global-timer {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 5px;
+    }
+    .timer-digits-row {
       display: flex;
       align-items: stretch;
       border: 2px solid var(--black);
-    }
-    .timer-label-block {
-      display: flex;
-      align-items: center;
-      padding: 6px 14px;
-      border-right: 2px solid var(--black);
-      background: var(--black);
-    }
-    .timer-label-block span {
-      font-size: 9px; font-weight: 900;
-      letter-spacing: 3px; color: var(--white);
-      writing-mode: horizontal-tb;
     }
     .timer-block {
       display: flex;
@@ -112,6 +106,11 @@
     }
     .timer-block .label {
       font-size: 8px; letter-spacing: 2px; color: var(--black); margin-top: 2px;
+    }
+    .timer-caption {
+      font-size: 9px; font-weight: 900;
+      letter-spacing: 0.45em; color: var(--black);
+      width: 100%; text-align: center;
     }
 
     /* ── GRID ── */
@@ -187,7 +186,6 @@
     }
     .drawer.open { transform: translateX(0); }
 
-    /* Header drawer */
     .drawer-header {
       background: var(--black);
       border-bottom: 3px solid var(--red);
@@ -208,7 +206,6 @@
     }
     .drawer-close:hover { border-color: var(--red); background: var(--red); }
 
-    /* Bloque libro — imagen más grande */
     .drawer-book {
       display: flex;
       flex-shrink: 0;
@@ -250,14 +247,12 @@
       font-size: 10px; color: #888; letter-spacing: 1px;
     }
 
-    /* Cuerpo del drawer: dos columnas */
     .drawer-body {
       flex: 1;
       display: flex;
       overflow: hidden;
     }
 
-    /* Columna izquierda: formulario */
     .drawer-form-col {
       flex: 1;
       border-right: 3px solid var(--black);
@@ -301,7 +296,6 @@
     }
     .bid-submit:hover { background: var(--black); border-color: var(--black); }
 
-    /* Columna derecha: historial */
     .drawer-history-col {
       width: 280px; flex-shrink: 0;
       display: flex; flex-direction: column;
@@ -328,7 +322,7 @@
     .bid-list li .bid-amount { font-size: 14px; font-weight: 900; color: var(--red); letter-spacing: 1px; white-space: nowrap; }
     .bid-list li .bid-time { font-size: 9px; color: #999; letter-spacing: 1px; }
     .bid-list li.top-bid .bid-name::before { content: "★ "; color: var(--red); }
-    .no-bids { font-size: 11px; color: #aaa; font-style: italic; padding: 10px 0; letter-spacing: 1px; }
+    .no-bids { font-size: 11px; color: #aaa; padding: 10px 0; letter-spacing: 1px; line-height: 1.7; }
 
     /* ── TOAST ── */
     .toast {
@@ -354,16 +348,23 @@
       .header-section { font-size: 13px; letter-spacing: 2px; }
       .timer-block { padding: 4px 10px; }
       .timer-block .digits { font-size: 18px; }
-      .timer-label-block span { font-size: 8px; letter-spacing: 2px; }
-      .timer-label-block { padding: 4px 10px; }
+      .timer-block .label { color: var(--black); }
+      .timer-digits-row { border-color: var(--black); }
 
-      /* En móvil: drawer en columna única */
-      .drawer-body { flex-direction: column; }
-      .drawer-form-col { border-right: none; border-bottom: 3px solid var(--black); overflow-y: visible; }
-      .drawer-history-col { width: 100%; overflow-y: visible; }
+      .drawer { overflow-y: auto; }
+      .drawer-body { flex-direction: column; overflow: visible; }
+      .drawer-form-col { border-right: none; border-bottom: 3px solid var(--black); overflow-y: visible; flex: none; }
+      .drawer-history-col { width: 100%; overflow-y: visible; flex: none; }
       .bid-form { grid-template-columns: 1fr 1fr; }
-      .drawer-book { height: 160px; }
-      .drawer-book-img { width: 110px; }
+
+      .drawer-book { height: auto; flex-shrink: 0; }
+      .drawer-book-img { width: 100px; }
+      .drawer-book-info { padding: 14px; }
+      .drawer-book-title { font-size: 12px; }
+      .drawer-book-meta { font-size: 9px; }
+      .drawer-book-price-row { flex-wrap: wrap; gap: 4px; }
+      .drawer-book-price-label { width: 100%; margin-bottom: 2px; }
+      .drawer-book-price { font-size: 20px; }
     }
 
     @media (max-width: 479px) {
@@ -392,19 +393,21 @@
     </div>
     <div class="nav-bottom-row">
       <div class="global-timer">
-        <div class="timer-label-block"><span>CIERRE DE SUBASTA</span></div>
-        <div class="timer-block">
-          <span class="digits" id="t-hours">00</span>
-          <span class="label">HORAS</span>
+        <div class="timer-digits-row">
+          <div class="timer-block">
+            <span class="digits" id="t-hours">00</span>
+            <span class="label">HORAS</span>
+          </div>
+          <div class="timer-block">
+            <span class="digits" id="t-minutes">00</span>
+            <span class="label">MIN</span>
+          </div>
+          <div class="timer-block">
+            <span class="digits" id="t-seconds">00</span>
+            <span class="label">SEG</span>
+          </div>
         </div>
-        <div class="timer-block">
-          <span class="digits" id="t-minutes">00</span>
-          <span class="label">MIN</span>
-        </div>
-        <div class="timer-block">
-          <span class="digits" id="t-seconds">00</span>
-          <span class="label">SEG</span>
-        </div>
+        <span class="timer-caption">CIERRE DE SUBASTA</span>
       </div>
     </div>
   </nav>
@@ -420,7 +423,6 @@
     <div class="drawer-book" id="drawer-book"></div>
 
     <div class="drawer-body">
-      <!-- Columna formulario -->
       <div class="drawer-form-col">
         <div class="drawer-form-col-inner">
           <h3>TUS DATOS Y OFERTA</h3>
@@ -431,12 +433,11 @@
             <label>CELULAR<input type="text" name="celular" autocomplete="off"></label>
             <label class="full">CORREO ELECTRÓNICO<input type="email" name="mail" autocomplete="off"></label>
             <label class="full" id="monto-label">TU OFERTA<input type="number" name="monto" class="monto-input" autocomplete="off"></label>
-            <button type="button" class="bid-submit" id="bid-submit-btn">ENVIAR OFERTA →</button>
+            <button type="button" class="bid-submit" id="bid-submit-btn">ENVIAR OFERTA</button>
           </div>
         </div>
       </div>
 
-      <!-- Columna historial -->
       <div class="drawer-history-col">
         <div class="drawer-history-col-inner">
           <h3>OFERTAS ANTERIORES</h3>
@@ -584,7 +585,7 @@
       const sorted = [...book.bids].sort((a, b) => b.amount - a.amount)
       const ul = document.getElementById("drawer-history")
       if (!sorted.length) {
-        ul.innerHTML = `<li><span class="no-bids">Sin ofertas aún — ¡sé el primero!</span></li>`
+        ul.innerHTML = `<li><span class="no-bids">Llegaste primero.<br>Todavía no hay ofertas en este lote.</span></li>`
         return
       }
       ul.innerHTML = sorted.map((b, i) => `
