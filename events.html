@@ -48,7 +48,7 @@
   .hero {
     display: flex; align-items: flex-end; justify-content: space-between;
     border-bottom: 3px solid var(--black);
-    padding-bottom: 40px; margin-bottom: 56px; gap: 32px;
+    padding-bottom: 24px; margin-bottom: 56px; gap: 32px;
   }
   .hero-tag { font-size: 11px; letter-spacing: 4px; font-weight: 900; color: var(--black); margin-bottom: 18px; }
   .hero-title {
@@ -58,38 +58,37 @@
     color: var(--black);
   }
   .hero-right {
-    flex-shrink: 0; max-width: 260px;
-    font-size: 11px; letter-spacing: 1.5px; line-height: 2.2;
+    flex-shrink: 0;
+    font-size: 11px; letter-spacing: 1.5px; line-height: 1.6;
     color: var(--black); text-align: right;
+    white-space: nowrap; font-weight: 900;
   }
 
   .events-list { display: flex; flex-direction: column; gap: 0; }
+
+  .event-card {
+    cursor: pointer;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-left: 3px solid transparent;
+    margin-bottom: 16px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .event-card:hover { background: rgba(255,255,255,0.97); border-left-color: var(--red); }
 
   .event-row {
     display: grid;
     grid-template-columns: 100px 1fr auto;
     align-items: center;
     gap: 0 40px;
-    padding: 32px 28px;
-    border: none;
-    border-left: 3px solid transparent;
-    cursor: pointer;
-    position: relative;
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    margin-bottom: 16px;
-    transition: border-color 0.2s, background 0.2s;
+    padding: 32px 28px 24px;
   }
-  .event-row:hover { background: rgba(255,255,255,0.97); border-left-color: var(--red); }
-  .event-row::before { display: none; }
-  .event-row .row-arrow { color: var(--red); }
-  .event-row .row-day { color: var(--red); }
 
   .row-date { display: flex; flex-direction: column; gap: 2px; }
-  .row-day { font-size: 40px; font-weight: 900; line-height: 1; }
+  .row-day { font-size: 40px; font-weight: 900; line-height: 1; color: var(--red); }
   .row-month { font-size: 12px; letter-spacing: 3px; font-weight: 900; color: var(--black); }
-  .row-time { font-size: 12px; letter-spacing: 2px; color: var(--black); }
+  .row-time { display: none; }
 
   .row-body {}
   .row-cat { font-size: 11px; letter-spacing: 3px; font-weight: 900; color: var(--black); margin-bottom: 8px; }
@@ -104,7 +103,7 @@
   .row-tag:not(:last-child)::after { content: '·'; margin-left: 8px; }
 
   .row-right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex-shrink: 0; }
-  .row-arrow { font-size: 18px; transform: translateX(4px); color: var(--black); }
+  .row-arrow { font-size: 26px; transform: translateX(4px); color: var(--black); }
 
   .modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 9999;
@@ -114,7 +113,7 @@
   .modal-overlay.open { display: flex; }
   .modal-box {
     background: rgba(255,255,255,0.95);
-    border-left: 4px solid var(--black);
+    border-left: 4px solid var(--red);
     max-width: 660px; width: 100%;
     max-height: 90vh; overflow-y: auto; font-family: monospace;
   }
@@ -124,7 +123,7 @@
     display: flex; align-items: flex-start; justify-content: space-between;
     position: sticky; top: 0; z-index: 2;
   }
-  .modal-header-left { font-size: 11px; letter-spacing: 4px; font-weight: 900; color: var(--black); }
+  .modal-header-left { font-size: 11px; letter-spacing: 4px; font-weight: 900; color: var(--red); }
   .modal-close {
     background: none; border: 2px solid var(--black); color: var(--black);
     font-family: monospace; font-size: 18px; font-weight: 900;
@@ -141,12 +140,12 @@
     letter-spacing: -1px; text-transform: uppercase;
     color: var(--black); margin-bottom: 16px; line-height: 0.92;
   }
-  .modal-venue { font-size: 14px; letter-spacing: 2px; color: var(--black); margin-bottom: 4px; font-weight: 700; }
+  .modal-venue { font-size: 14px; letter-spacing: 2px; color: var(--red); margin-bottom: 4px; font-weight: 700; }
   .modal-datetime { font-size: 13px; letter-spacing: 2px; color: var(--black); margin-bottom: 36px; }
   .modal-desc {
     font-size: 15px; letter-spacing: 0.3px; line-height: 1.9;
-    color: var(--black); border-left: 4px solid var(--black);
-    padding-left: 20px; margin-bottom: 36px;
+    color: var(--black); border-left: none;
+    padding-left: 0; margin-bottom: 36px;
   }
   .modal-tags { display: flex; gap: 10px; flex-wrap: wrap; }
   .modal-tag {
@@ -159,13 +158,27 @@
     .eventos-header { padding: 10px 16px; gap: 10px; }
     .header-logo { height: 40px; padding: 4px 10px; }
     .hero { flex-direction: column; gap: 14px; align-items: flex-start; }
-    .hero-right { text-align: left; max-width: 100%; }
-    .event-row { grid-template-columns: 70px 1fr auto; gap: 0 20px; }
+    .hero-right { text-align: left; margin-top: 24px; white-space: normal; }
+    .event-card { margin-bottom: 16px; }
+    .event-row { grid-template-columns: 70px 1fr auto; gap: 0 20px; padding: 24px 20px 16px; }
     .row-day { font-size: 28px; }
     .row-title { font-size: 16px; }
+    .row-tags { display: none; }
+    .row-tags-below {
+      display: flex; gap: 5px; flex-wrap: wrap;
+      padding: 0 20px 20px;
+    }
+    .row-tag-below {
+      font-size: 9px; letter-spacing: 1px; font-weight: 900;
+      color: var(--black);
+    }
+    .row-tag-below:not(:last-child)::after { content: '·'; margin-left: 5px; }
     .floating-tab { font-size: 9px; padding: 12px 7px; }
     .modal-body { padding: 24px 20px 28px; }
     .modal-title { font-size: 22px; }
+  }
+  @media (min-width: 641px) {
+    .row-tags-below { display: none; }
   }
 </style>
 </head>
@@ -199,7 +212,7 @@
       <div class="hero-title">EVENTOS</div>
     </div>
     <div class="hero-right">
-      Fechas que no se repiten.<br>Espacios que no se archivan.
+      Fechas que no se repiten.<br>Momentos que solo existen si estás.
     </div>
   </div>
 
@@ -212,57 +225,41 @@
 <script>
 const EVENTS = [
   {
-    title: 'ENCUENTRO DE PROCESO',
-    cat: 'CHARLA / PANEL',
-    day: '08', month: 'ABR', year: '2025', time: '18:30 HS',
-    venue: 'TALLER TUTÍA',
+    title: 'INAUGURACIÓN',
+    cat: 'OPENING',
+    day: '12', month: 'MAY', year: '2025', time: '14:00 — 21:00 HS',
+    venue: 'ESTUDIO TUTÍA',
     statusLabel: 'PRÓXIMO',
-    desc: 'Conversación abierta sobre proceso creativo. No sobre resultados. Dos invitados, sin moderador fijo, sin tema prefijado.',
-    tags: ['CHARLA', 'PROCESO', 'ABIERTO'],
-  },
-  {
-    title: 'RESIDENCIA IMPRESIÓN',
-    cat: 'RESIDENCIA CREATIVA',
-    day: '01', month: 'MAY', year: '2025', time: '2 SEMANAS',
-    venue: 'TALLER TUTÍA',
-    statusLabel: 'PRÓXIMO',
-    desc: 'Residencia breve en torno a la impresión artesanal. Cuatro participantes seleccionados. Resultado: edición de tiraje mínimo.',
-    tags: ['RESIDENCIA', 'IMPRESIÓN', 'EDITORIAL'],
-  },
-  {
-    title: 'NOCHE SIN NOMBRE',
-    cat: 'MÚSICA EN VIVO',
-    day: '14', month: 'JUN', year: '2025', time: '21:00 HS',
-    venue: 'POR CONFIRMAR',
-    statusLabel: 'PRÓXIMO',
-    desc: 'Una noche construida alrededor del silencio entre canciones. Tres actos, ningún presentador. El diseño de sala como parte de la pieza.',
-    tags: ['MÚSICA', 'DISEÑO DE ESPACIO', 'PRODUCCIÓN'],
+    desc: 'Nos encontramos a brindar por este nuevo espacio. Una tarde para conocerse, para ver, para escuchar. Habrá cocktail, shooting de fotos, exhibiciones de artistas, proyecciones y música en vivo. Entrada libre.',
+    tags: ['COCKTAIL', 'EXHIBITIONS', 'PHOTO SHOOTING', 'MUSIC', 'VISUAL PROJECTIONS', 'GIFTS'],
   },
 ]
 
 function buildList() {
   const list = document.getElementById('events-list')
   EVENTS.forEach(ev => {
-    const row = document.createElement('div')
-    row.className = 'event-row'
-    row.innerHTML = `
-      <div class="row-date">
-        <div class="row-day">${ev.day}</div>
-        <div class="row-month">${ev.month} ${ev.year}</div>
-        <div class="row-time">${ev.time}</div>
+    const card = document.createElement('div')
+    card.className = 'event-card'
+    card.innerHTML = `
+      <div class="event-row">
+        <div class="row-date">
+          <div class="row-day">${ev.day}</div>
+          <div class="row-month">${ev.month} ${ev.year}</div>
+        </div>
+        <div class="row-body">
+          <div class="row-cat">${ev.cat}</div>
+          <div class="row-title">${ev.title}</div>
+          <div class="row-venue">${ev.venue}</div>
+          <div class="row-tags">${ev.tags.map(t => `<span class="row-tag">${t}</span>`).join('')}</div>
+        </div>
+        <div class="row-right">
+          <div class="row-arrow">→</div>
+        </div>
       </div>
-      <div class="row-body">
-        <div class="row-cat">${ev.cat}</div>
-        <div class="row-title">${ev.title}</div>
-        <div class="row-venue">◎ ${ev.venue}</div>
-        <div class="row-tags">${ev.tags.map(t => `<span class="row-tag">${t}</span>`).join('')}</div>
-      </div>
-      <div class="row-right">
-        <div class="row-arrow">→</div>
-      </div>
+      <div class="row-tags-below">${ev.tags.map(t => `<span class="row-tag-below">${t}</span>`).join('')}</div>
     `
-    row.onclick = () => openModal(ev)
-    list.appendChild(row)
+    card.onclick = () => openModal(ev)
+    list.appendChild(card)
   })
 }
 
@@ -270,7 +267,7 @@ function openModal(ev) {
   document.getElementById('modal-header-label').textContent = ev.cat
   document.getElementById('modal-cat').textContent = ev.cat
   document.getElementById('modal-title').textContent = ev.title
-  document.getElementById('modal-venue').textContent = '◎ ' + ev.venue
+  document.getElementById('modal-venue').textContent = ev.venue
   document.getElementById('modal-datetime').textContent = ev.day + ' ' + ev.month + ' ' + ev.year + ' — ' + ev.time
   document.getElementById('modal-desc').textContent = ev.desc
   document.getElementById('modal-tags').innerHTML = ev.tags.map(t => `<span class="modal-tag">${t}</span>`).join('')
