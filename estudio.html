@@ -315,7 +315,7 @@
             transition: background 0.15s, border-color 0.15s, color 0.15s;
         }
         .hour-btn:last-child { border-right: 2px solid var(--black); }
-        .hour-btn:hover { border-color: var(--red); z-index: 1; position: relative; }
+        .hour-btn:hover:not(:disabled) { border-color: var(--red); z-index: 1; position: relative; }
         .hour-btn.active {
             background: var(--red); color: var(--white);
             border-color: var(--red); z-index: 1; position: relative;
@@ -572,13 +572,7 @@
         .modal-body {
             padding: 28px 24px 24px;
         }
-        .modal-icon {
-            width: 48px; height: 48px;
-            border: 3px solid var(--red);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 22px; font-weight: 900; color: var(--red);
-            margin-bottom: 20px;
-        }
+        .modal-icon { display: none; }
         .modal-title {
             font-size: 18px; font-weight: 900; letter-spacing: 2px;
             margin-bottom: 10px; color: var(--black);
@@ -587,6 +581,7 @@
             font-size: 13px; letter-spacing: 1px; color: #555;
             line-height: 1.7; margin-bottom: 6px;
         }
+        /* TUTÍA alineado con el texto pero tirando a la derecha */
         .modal-brand {
             font-size: 12px; letter-spacing: 4px; font-weight: 900;
             color: var(--red); margin-top: 16px;
@@ -600,6 +595,11 @@
             cursor: pointer; transition: background 0.2s;
         }
         .modal-close-btn:hover { background: var(--red); border-color: var(--red); }
+
+        /* HORA DESHABILITADA */
+        .time-select option:disabled {
+            color: #bbb;
+        }
 
         /* RESPONSIVE */
         @media (max-width: 640px) {
@@ -679,10 +679,10 @@
         <div class="modal-header">RESERVA ENVIADA</div>
         <div class="modal-body">
             <div class="modal-icon">✓</div>
-            <div class="modal-title">TU RESERVA HA SIDO CREADA.</div>
+            <div class="modal-title" style="color: var(--red);">TU RESERVA HA SIDO CREADA.</div>
             <div class="modal-sub">Nos ponemos en contacto a la brevedad.</div>
-            <div class="modal-brand">TUTÍA</div>
-            <button class="modal-close-btn" onclick="closeModal()">CERRAR →</button>
+            <div class="modal-brand" style="margin-top: 28px; margin-bottom: 8px;"><img src="svg/tutian.svg" alt="TUTÍA" style="height: 28px; width: auto; display: block; margin-left: auto; margin-right: 8px;"></div>
+            <button class="modal-close-btn" onclick="closeModal()">CERRAR</button>
         </div>
     </div>
 </div>
@@ -770,17 +770,6 @@
                     <div class="time-field">
                         <label>DESDE</label>
                         <select class="time-select" id="time-start" onchange="updateTimeEnd()">
-                            <option value="9">09:00</option>
-                            <option value="10">10:00</option>
-                            <option value="11">11:00</option>
-                            <option value="12">12:00</option>
-                            <option value="13">13:00</option>
-                            <option value="14">14:00</option>
-                            <option value="15">15:00</option>
-                            <option value="16">16:00</option>
-                            <option value="17">17:00</option>
-                            <option value="18">18:00</option>
-                            <option value="19">19:00</option>
                         </select>
                     </div>
                     <div class="time-arrow">→</div>
@@ -810,23 +799,23 @@
         <div class="datos-grid">
             <div class="datos-field">
                 <label>NOMBRE</label>
-                <input type="text" id="dato-nombre" autocomplete="given-name">
+                <input type="text" id="dato-nombre" autocomplete="given-name" oninput="updateResumen()">
             </div>
             <div class="datos-field">
                 <label>APELLIDO</label>
-                <input type="text" id="dato-apellido" autocomplete="family-name">
+                <input type="text" id="dato-apellido" autocomplete="family-name" oninput="updateResumen()">
             </div>
             <div class="datos-field">
                 <label>DOCUMENTO</label>
-                <input type="text" id="dato-doc" autocomplete="off">
+                <input type="text" id="dato-doc" autocomplete="off" oninput="updateResumen()">
             </div>
             <div class="datos-field">
                 <label>CELULAR</label>
-                <input type="tel" id="dato-cel" autocomplete="tel">
+                <input type="tel" id="dato-cel" autocomplete="tel" oninput="updateResumen()">
             </div>
             <div class="datos-field">
                 <label>EMAIL</label>
-                <input type="email" id="dato-mail" autocomplete="email">
+                <input type="email" id="dato-mail" autocomplete="email" oninput="updateResumen()">
             </div>
         </div>
     </div>
@@ -907,6 +896,55 @@
                        'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
     const DAYS_ES   = ['DO','LU','MA','MI','JU','VI','SA']
 
+    // ── Helpers de fecha ──────────────────────────────────────────────
+    function isTodaySelected() {
+        if (!state.selectedDate) return false
+        const t = new Date()
+        return state.selectedDate.year  === t.getFullYear() &&
+               state.selectedDate.month === t.getMonth()    &&
+               state.selectedDate.day   === t.getDate()
+    }
+
+    // Retorna la primera hora válida para hoy: hora actual + 2, mínimo 9
+    function firstValidHourToday() {
+        const now = new Date()
+        return Math.max(9, now.getHours() + 2)
+    }
+
+    // ── Select de hora ────────────────────────────────────────────────
+    function buildTimeSelect() {
+        rebuildTimeOptions()
+    }
+
+    function rebuildTimeOptions() {
+        const sel = document.getElementById('time-start')
+        const prevVal = parseInt(sel.value, 10) || 9
+        sel.innerHTML = ''
+
+        const minHour = isTodaySelected() ? firstValidHourToday() : 9
+
+        for (let h = 9; h <= 19; h++) {
+            const opt = document.createElement('option')
+            opt.value = h
+            opt.textContent = `${String(h).padStart(2,'0')}:00`
+            if (h < minHour) {
+                opt.disabled = true
+                opt.style.color = '#bbb'
+            }
+            sel.appendChild(opt)
+        }
+
+        // Mantener valor anterior si sigue siendo válido, sino saltar al primero válido
+        if (prevVal >= minHour && prevVal <= 19) {
+            sel.value = prevVal
+        } else {
+            sel.value = minHour <= 19 ? minHour : 19
+        }
+
+        state.startHour = parseInt(sel.value, 10)
+    }
+
+    // ── Calendario ────────────────────────────────────────────────────
     function buildCalendar() { renderCalendar(calYear, calMonth) }
 
     function calNav(dir) {
@@ -955,20 +993,41 @@
     function selectDay(year, month, day) {
         state.selectedDate = { year, month, day }
         renderCalendar(year, month)
+        // Reconstruir opciones de hora según si es hoy o no
+        rebuildTimeOptions()
+        updateTimeEnd()
         updateResumen()
     }
 
-    function buildTimeSelect() {
-        const sel = document.getElementById('time-start')
-        for (let h = 9; h <= 19; h++) {
-            const opt = document.createElement('option')
-            opt.value = h
-            opt.textContent = `${String(h).padStart(2,'0')}:00`
-            sel.appendChild(opt)
+    // ── Hora fin ──────────────────────────────────────────────────────
+    function updateTimeEnd() {
+        state.startHour = parseInt(document.getElementById('time-start').value, 10) || 9
+        const endEl   = document.getElementById('time-end')
+        const noteEl  = document.getElementById('time-note')
+        const errorEl = document.getElementById('time-error')
+        if (!state.hs) {
+            endEl.textContent = '—'
+            noteEl.style.display = 'block'
+            errorEl.style.display = 'none'
+            updateResumen()
+            return
         }
-        sel.value = 9
+        noteEl.style.display = 'none'
+        const endH = state.startHour + state.hs
+        const endStr = `${String(endH).padStart(2,'0')}:00`
+        if (endH > 21) {
+            endEl.textContent = endStr
+            endEl.style.color = '#cc0000'
+            errorEl.style.display = 'block'
+        } else {
+            endEl.textContent = endStr
+            endEl.style.color = ''
+            errorEl.style.display = 'none'
+        }
+        updateResumen()
     }
 
+    // ── Galerías ──────────────────────────────────────────────────────
     function buildGalleries() {
         [1, 2].forEach(studioId => {
             const photos = STUDIO_PHOTOS[studioId]
@@ -1062,6 +1121,7 @@
         if (e.key === 'ArrowRight') lbNav(1)
     })
 
+    // ── Estudio / horas ───────────────────────────────────────────────
     function selectStudio(id, e) {
         if (e) e.stopPropagation()
         state.studio = id
@@ -1092,32 +1152,7 @@
         updateResumen()
     }
 
-    function updateTimeEnd() {
-        state.startHour = parseInt(document.getElementById('time-start').value, 10) || 9
-        const endEl   = document.getElementById('time-end')
-        const noteEl  = document.getElementById('time-note')
-        const errorEl = document.getElementById('time-error')
-        if (!state.hs) {
-            endEl.textContent = '—'
-            noteEl.style.display = 'block'
-            errorEl.style.display = 'none'
-            return
-        }
-        noteEl.style.display = 'none'
-        const endH = state.startHour + state.hs
-        const endStr = `${String(endH).padStart(2,'0')}:00`
-        if (endH > 21) {
-            endEl.textContent = endStr
-            endEl.style.color = '#cc0000'
-            errorEl.style.display = 'block'
-        } else {
-            endEl.textContent = endStr
-            endEl.style.color = ''
-            errorEl.style.display = 'none'
-        }
-        updateResumen()
-    }
-
+    // ── Catering ──────────────────────────────────────────────────────
     function buildCatering() {
         const grid = document.getElementById('catering-grid')
         grid.innerHTML = ''
@@ -1154,6 +1189,13 @@
         updateResumen()
     }
 
+    // ── Validación de datos ───────────────────────────────────────────
+    function datosCompletos() {
+        const campos = ['dato-nombre','dato-apellido','dato-doc','dato-cel','dato-mail']
+        return campos.every(id => document.getElementById(id).value.trim() !== '')
+    }
+
+    // ── Resumen ───────────────────────────────────────────────────────
     function updateResumen() {
         const body = document.getElementById('resumen-body')
         const cta  = document.getElementById('cta-btn')
@@ -1173,7 +1215,7 @@
             }
         }
         const total = state.price + cateringTotal
-        const isComplete = state.hs && timeValid && state.selectedDate
+        const isComplete = state.hs && timeValid && state.selectedDate && datosCompletos()
         const DAYS_LONG   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
         const MONTHS_LONG = ['enero','febrero','marzo','abril','mayo','junio',
                              'julio','agosto','septiembre','octubre','noviembre','diciembre']
@@ -1197,6 +1239,7 @@
         cta.disabled = !isComplete
     }
 
+    // ── Modal ─────────────────────────────────────────────────────────
     function confirmarReserva() {
         document.getElementById('confirm-modal').classList.add('open')
         document.body.style.overflow = 'hidden'
