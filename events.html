@@ -30,9 +30,6 @@
     font-family: monospace; font-size: 16px;
     text-decoration: none; flex-shrink: 0;
   }
-  .header-logo { height: 52px; width: auto; margin-left: 12px; padding: 6px 14px; }
-  .header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-  .header-section { font-family: monospace; font-size: 15px; font-weight: 900; letter-spacing: 3px; color: var(--black); }
 
   .floating-tab {
     position: fixed; right: 0;
@@ -40,13 +37,20 @@
     transform: rotate(180deg);
     color: var(--white);
     text-decoration: none; font-family: monospace;
-    font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
-    padding: 18px 10px; z-index: 999;
+    font-size: 13px; font-weight: 900; letter-spacing: 0.2em;
+    padding: 13px; z-index: 999;
+    height: 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid var(--white); border-right: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
     white-space: nowrap;
   }
-  .floating-tab.estudio { top: calc(50% - 90px); background: var(--black); border-color: var(--white); }
+  .floating-tab.estudio { top: calc(50% - 150px); background: var(--black); border-color: var(--black); }
+  .floating-tab.estudio:hover { background: var(--red); border-color: var(--red); }
   .floating-tab.proyectos { top: calc(50% + 10px); background: var(--red); border-color: var(--red); }
+  .floating-tab.proyectos:hover { background: #aa0000; border-color: #aa0000; }
 
   .page { max-width: 1100px; margin: 0 auto; padding: 72px 32px 120px; }
 
@@ -95,7 +99,6 @@
   .row-month { font-size: 12px; letter-spacing: 3px; font-weight: 900; color: var(--black); }
   .row-time { display: none; }
 
-  .row-body {}
   .row-cat { font-size: 11px; letter-spacing: 3px; font-weight: 900; color: var(--black); margin-bottom: 8px; }
   .row-title {
     font-size: 26px; font-weight: 900; letter-spacing: 1px;
@@ -161,7 +164,6 @@
   @media (max-width: 640px) {
     .page { padding: 40px 56px 100px 20px; }
     .eventos-header { padding: 10px 16px; gap: 10px; }
-    .header-logo { height: 40px; padding: 4px 10px; }
     .hero { flex-direction: column; gap: 14px; align-items: flex-start; }
     .hero-right { text-align: left; margin-top: 24px; white-space: normal; }
     .event-card { margin-bottom: 16px; }
@@ -178,7 +180,7 @@
       color: var(--black);
     }
     .row-tag-below:not(:last-child)::after { content: '·'; margin-left: 5px; }
-    .floating-tab { font-size: 9px; padding: 12px 7px; }
+    .floating-tab { font-size: 10px; padding: 8px; height: 110px; }
     .modal-body { padding: 24px 20px 28px; }
     .modal-title { font-size: 22px; }
   }

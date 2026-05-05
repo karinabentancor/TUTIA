@@ -31,7 +31,6 @@
             color: var(--black);
         }
 
-        /* HEADER */
         .estudio-header {
             position: sticky; top: 0; z-index: 100;
             background-image: url('img/back.png');
@@ -72,7 +71,6 @@
             letter-spacing: 3px; color: var(--black);
         }
 
-        /* HORARIO FUERA DE LA NAV */
         .horario-bar {
             display: flex;
             justify-content: flex-end;
@@ -89,31 +87,31 @@
             padding: 5px 12px;
         }
 
-        /* FLOATING TABS */
         .floating-tab {
             position: fixed;
             right: 0;
             writing-mode: vertical-rl;
             text-orientation: mixed;
             transform: rotate(180deg);
-            background: var(--black); color: var(--white);
+            color: var(--white);
             text-decoration: none; font-family: monospace;
             font-size: 13px; font-weight: 900; letter-spacing: 0.2em;
-            padding: 22px 13px;
-            z-index: 999;
-            border: 2px solid var(--white);
-            border-right: none;
+            padding: 13px; z-index: 999;
+            height: 140px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--white); border-right: none;
             transition: background 0.2s, color 0.2s, border-color 0.2s;
             white-space: nowrap;
         }
-        .floating-tab:hover { background: var(--red); border-color: var(--red); color: var(--white); }
-        .floating-tab.proyectos { top: calc(50% - 110px); background: var(--red); border-color: var(--red); }
-        .floating-tab.eventos   { top: calc(50% + 10px);  }
+        .floating-tab.proyectos { top: calc(50% - 150px); background: var(--red); border-color: var(--red); }
+        .floating-tab.proyectos:hover { background: #aa0000; border-color: #aa0000; }
+        .floating-tab.eventos { top: calc(50% + 10px); background: var(--black); border-color: var(--black); }
+        .floating-tab.eventos:hover { background: var(--red); border-color: var(--red); }
 
-        /* PAGE */
         .estudio-page { max-width: 980px; margin: 0 auto; padding: 64px 32px 100px; }
 
-        /* SECTION LABEL */
         .section-label {
             font-size: 12px; letter-spacing: 4px; font-weight: 900;
             color: var(--black); margin-bottom: 22px;
@@ -129,10 +127,8 @@
             font-size: 12px; font-weight: 900; flex-shrink: 0;
         }
 
-        /* STEP */
         .step { margin-bottom: 56px; }
 
-        /* STUDIO TABS */
         .studio-tabs { display: flex; gap: 18px; }
 
         .studio-tab {
@@ -165,7 +161,6 @@
 
         .tab-body { padding: 16px 18px 18px; }
 
-        /* GALLERY CAROUSEL */
         .tab-gallery {
             position: relative;
             width: 100%;
@@ -245,7 +240,6 @@
         }
         .gallery-dot.active { background: var(--red); border-color: var(--red); }
 
-        /* LIGHTBOX */
         .lightbox {
             display: none;
             position: fixed; inset: 0; z-index: 9999;
@@ -307,7 +301,6 @@
             color: var(--red); margin-bottom: 14px;
         }
 
-        /* HOUR OPTIONS */
         .hour-options { display: flex; flex-wrap: nowrap; gap: 0; }
         .hour-btn {
             flex: 1;
@@ -328,7 +321,6 @@
         .hour-btn .price { display: block; font-size: 15px; color: var(--red); margin-top: 4px; }
         .hour-btn.active .price { color: var(--white); }
 
-        /* TIME */
         .time-section {
             display: flex;
             flex-direction: row;
@@ -399,7 +391,6 @@
             border-color: var(--red) !important;
         }
 
-        /* TIME row */
         .time-row { display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap; }
         .time-field { display: flex; flex-direction: column; gap: 8px; }
         .time-field label { font-size: 12px; letter-spacing: 2px; font-weight: 900; }
@@ -429,7 +420,6 @@
         .time-note { font-size: 12px; letter-spacing: 1px; color: #888; margin-top: 10px; }
         .time-error { font-size: 12px; letter-spacing: 1px; color: var(--red); margin-top: 10px; display: none; }
 
-        /* CATERING */
         .catering-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -467,7 +457,6 @@
             height: 26px; line-height: 26px;
         }
 
-        /* DATOS PERSONALES */
         .datos-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -500,7 +489,6 @@
         }
         .datos-field input:focus { border-bottom-color: var(--red); }
 
-        /* RESUMEN */
         .resumen-box {
             border: 3px solid var(--black);
             background: var(--black); color: var(--white);
@@ -523,10 +511,8 @@
         .resumen-line:last-child { border-bottom: none; }
         .resumen-line .label { color: var(--white); font-weight: 900; }
         .resumen-line .value { color: var(--white); font-weight: 900; }
-
         .resumen-line.catering-line .label { color: #aaa; font-weight: 400; }
         .resumen-line.catering-line .value { color: var(--red); font-weight: 900; }
-
         .resumen-line.total {
             margin-top: 10px; padding-top: 16px;
             border-top: 2px solid var(--red); border-bottom: none;
@@ -535,7 +521,6 @@
         .resumen-line.total .value { font-size: 26px; color: var(--red); font-weight: 900; }
         .resumen-empty { font-size: 13px; letter-spacing: 1px; color: #666; padding: 10px 0; }
 
-        /* CTA */
         .cta-btn {
             width: 100%; margin-top: 20px;
             padding: 18px;
@@ -547,7 +532,6 @@
         .cta-btn:hover { background: #aa0000; border-color: #aa0000; }
         .cta-btn:disabled { background: #555; border-color: #555; cursor: not-allowed; }
 
-        /* MODAL de confirmación */
         .modal-overlay {
             display: none;
             position: fixed; inset: 0; z-index: 9999;
@@ -586,7 +570,6 @@
             font-size: 13px; letter-spacing: 1px; color: #555;
             line-height: 1.7; margin-bottom: 6px;
         }
-        /* TUTÍA alineado con el texto pero tirando a la derecha */
         .modal-brand {
             font-size: 12px; letter-spacing: 4px; font-weight: 900;
             color: var(--red); margin-top: 16px;
@@ -601,23 +584,16 @@
         }
         .modal-close-btn:hover { background: var(--red); border-color: var(--red); }
 
-        /* HORA DESHABILITADA */
-        .time-select option:disabled {
-            color: #bbb;
-        }
+        .time-select option:disabled { color: #bbb; }
 
-        /* RESPONSIVE */
         @media (max-width: 640px) {
             .estudio-page { padding: 28px 56px 80px 20px; }
-
             .estudio-header { padding: 10px 16px; gap: 10px; }
             .header-right { gap: 6px; }
-
             .studio-tabs { flex-direction: column; gap: 12px; }
             .tab-gallery { height: 160px; }
             .tab-title { font-size: 13px; letter-spacing: 2px; padding: 10px 14px; }
             .tab-body { padding: 10px 10px 12px; }
-
             .hour-options { flex-wrap: nowrap; }
             .hour-btn {
                 flex: 1; border-right: none;
@@ -626,24 +602,19 @@
             }
             .hour-btn:last-child { border-right: 2px solid var(--black); }
             .hour-btn .price { font-size: 10px; }
-
             .time-section { flex-direction: column; gap: 20px; }
             .time-controls-top { flex-direction: column; align-items: stretch; gap: 14px; padding-top: 0; }
             .cal { width: 100%; }
             .time-row { flex-direction: row; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
             .time-select { font-size: 15px; width: 92px; padding: 10px 10px; padding-right: 28px; }
             .time-end { font-size: 20px; }
-
             .catering-grid { grid-template-columns: 1fr; }
             .datos-grid { grid-template-columns: 1fr 1fr; gap: 14px 16px; }
-
             .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 20px; }
-
-            .floating-tab { font-size: 10px; padding: 14px 8px; letter-spacing: 0.12em; }
+            .floating-tab { font-size: 10px; padding: 8px; height: 110px; }
             .horario-bar { padding: 8px 16px; }
             .lightbox-placeholder { width: 90vw; height: 55vw; }
-
             .section-label { margin-bottom: 16px; }
             .step { margin-bottom: 40px; }
         }
@@ -666,7 +637,6 @@
 
 <div class="horario-bar"><span>09:00 — 21:00 HS</span></div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <div class="lightbox-studio-label" id="lb-studio-label">ESTUDIO I</div>
@@ -678,7 +648,6 @@
     <div class="lightbox-counter" id="lb-counter">1 / 1</div>
 </div>
 
-<!-- MODAL CONFIRMACIÓN -->
 <div class="modal-overlay" id="confirm-modal" onclick="closeModalOutside(event)">
     <div class="modal-box">
         <div class="modal-header">RESERVA ENVIADA</div>
@@ -694,7 +663,6 @@
 
 <div class="estudio-page">
 
-    <!-- STEP 1 -->
     <div class="step">
         <div class="section-label"><span class="section-num">1</span> SELECCIONÁ EL ESPACIO</div>
         <div class="studio-tabs">
@@ -753,7 +721,6 @@
         </div>
     </div>
 
-    <!-- STEP 2: HORARIO -->
     <div class="step">
         <div class="section-label"><span class="section-num">2</span> FECHA Y HORARIO</div>
         <div class="time-section">
@@ -792,13 +759,11 @@
         </div>
     </div>
 
-    <!-- STEP 3: CATERING -->
     <div class="step">
         <div class="section-label"><span class="section-num">3</span> CATERING</div>
         <div class="catering-grid" id="catering-grid"></div>
     </div>
 
-    <!-- STEP 4: DATOS -->
     <div class="step">
         <div class="section-label"><span class="section-num">4</span> TUS DATOS</div>
         <div class="datos-grid">
@@ -825,7 +790,6 @@
         </div>
     </div>
 
-    <!-- STEP 5: RESUMEN -->
     <div class="step">
         <div class="section-label"><span class="section-num">5</span> RESUMEN</div>
         <div class="resumen-box">
@@ -901,7 +865,6 @@
                        'JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
     const DAYS_ES   = ['DO','LU','MA','MI','JU','VI','SA']
 
-    // ── Helpers de fecha ──────────────────────────────────────────────
     function isTodaySelected() {
         if (!state.selectedDate) return false
         const t = new Date()
@@ -910,13 +873,12 @@
                state.selectedDate.day   === t.getDate()
     }
 
-    // Retorna la primera hora válida para hoy: hora actual + 2, mínimo 9
     function firstValidHourToday() {
         const now = new Date()
-        return Math.max(9, now.getHours() + 2)
+        const horaRedondeada = now.getHours() + (now.getMinutes() > 0 ? 1 : 0)
+        return Math.max(9, horaRedondeada + 3)
     }
 
-    // ── Select de hora ────────────────────────────────────────────────
     function buildTimeSelect() {
         rebuildTimeOptions()
     }
@@ -939,7 +901,6 @@
             sel.appendChild(opt)
         }
 
-        // Mantener valor anterior si sigue siendo válido, sino saltar al primero válido
         if (prevVal >= minHour && prevVal <= 19) {
             sel.value = prevVal
         } else {
@@ -949,7 +910,6 @@
         state.startHour = parseInt(sel.value, 10)
     }
 
-    // ── Calendario ────────────────────────────────────────────────────
     function buildCalendar() { renderCalendar(calYear, calMonth) }
 
     function calNav(dir) {
@@ -998,13 +958,11 @@
     function selectDay(year, month, day) {
         state.selectedDate = { year, month, day }
         renderCalendar(year, month)
-        // Reconstruir opciones de hora según si es hoy o no
         rebuildTimeOptions()
         updateTimeEnd()
         updateResumen()
     }
 
-    // ── Hora fin ──────────────────────────────────────────────────────
     function updateTimeEnd() {
         state.startHour = parseInt(document.getElementById('time-start').value, 10) || 9
         const endEl   = document.getElementById('time-end')
@@ -1032,7 +990,6 @@
         updateResumen()
     }
 
-    // ── Galerías ──────────────────────────────────────────────────────
     function buildGalleries() {
         [1, 2].forEach(studioId => {
             const photos = STUDIO_PHOTOS[studioId]
@@ -1126,7 +1083,6 @@
         if (e.key === 'ArrowRight') lbNav(1)
     })
 
-    // ── Estudio / horas ───────────────────────────────────────────────
     function selectStudio(id, e) {
         if (e) e.stopPropagation()
         state.studio = id
@@ -1157,7 +1113,6 @@
         updateResumen()
     }
 
-    // ── Catering ──────────────────────────────────────────────────────
     function buildCatering() {
         const grid = document.getElementById('catering-grid')
         grid.innerHTML = ''
@@ -1194,13 +1149,11 @@
         updateResumen()
     }
 
-    // ── Validación de datos ───────────────────────────────────────────
     function datosCompletos() {
         const campos = ['dato-nombre','dato-apellido','dato-doc','dato-cel','dato-mail']
         return campos.every(id => document.getElementById(id).value.trim() !== '')
     }
 
-    // ── Resumen ───────────────────────────────────────────────────────
     function updateResumen() {
         const body = document.getElementById('resumen-body')
         const cta  = document.getElementById('cta-btn')
@@ -1244,7 +1197,6 @@
         cta.disabled = !isComplete
     }
 
-    // ── Modal ─────────────────────────────────────────────────────────
     function confirmarReserva() {
         document.getElementById('confirm-modal').classList.add('open')
         document.body.style.overflow = 'hidden'
