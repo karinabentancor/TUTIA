@@ -1,15 +1,20 @@
 let allBooksData = []
 let currentBooks = []
 let showOnlyAvailable = false
-const aside = document.querySelector("aside.right-aside")
-let listContainer = null
 let selectedBooks = []
 
+// ── Storage helpers ──────────────────────────────────────────────────────────
+function saveSelection() {
+  const json = JSON.stringify(selectedBooks)
+  sessionStorage.setItem('selectedBooks', json)
+  localStorage.setItem('selectedBooks', json)
+}
+
 function loadSavedSelection() {
-  const savedSelection = sessionStorage.getItem('selectedBooks')
-  if (savedSelection) {
+  const saved = sessionStorage.getItem('selectedBooks') || localStorage.getItem('selectedBooks')
+  if (saved) {
     try {
-      selectedBooks = JSON.parse(savedSelection)
+      selectedBooks = JSON.parse(saved)
     } catch (error) {
       console.error('Error al cargar selección guardada:', error)
       selectedBooks = []
@@ -17,45 +22,37 @@ function loadSavedSelection() {
   }
 }
 
+// ── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedSelection()
-  
-  listContainer = aside.querySelector('.selected-list')
-  
-  if (!selectedBooks.length) aside.style.display = "none"
-  
-  const storedUser = localStorage.getItem("clubUser")
-  if (storedUser) {
-    const btn = aside.querySelector("button.button-wht")
-    if (btn) btn.remove()
-    
-    const pNombre = document.createElement("p")
-    pNombre.className = "welcome-user"
-    pNombre.textContent = `${storedUser.toUpperCase()}`
-    pNombre.style.cursor = "pointer"
-    pNombre.title = "Ver perfil"
-    pNombre.addEventListener("click", () => {
-      window.location.href = "profile.html"
-    })
 
-    const infoP = aside.querySelectorAll("p")[1]
-    if (infoP) infoP.textContent = "Nos encanta que seas parte del club"
-    const tituloClub = aside.querySelectorAll("p")[0]
-    if (tituloClub) tituloClub.insertAdjacentElement("afterend", pNombre)
+  // Botón mobile
+  const mobileBtn = document.getElementById('mobileCartBtn')
+  if (mobileBtn) {
+    mobileBtn.removeAttribute('onclick')
+    mobileBtn.addEventListener('click', () => {
+      saveSelection()
+      window.location.href = 'selection.html'
+    })
   }
-  
+
   fetch("books.json")
     .then(response => response.json())
     .then(data => {
       allBooksData = data
       populateEditorials(data)
       populateCategories(data)
+      selectedBooks = selectedBooks.filter(b =>
+        allBooksData.some(book => book.id == b.id)
+      )
+      saveSelection()
       applyFilters()
-      updateAsideList()
+      updateMobileBar()
     })
     .catch(error => console.error("Error loading books:", error))
 })
 
+// ── Filters ──────────────────────────────────────────────────────────────────
 function populateEditorials(data) {
   const select = document.getElementById("editorial")
   const editorials = Array.from(new Set(data.map(book => book.publisher))).sort()
@@ -86,17 +83,32 @@ function applyFilters() {
     const matchesSearch =
       book.title.toLowerCase().includes(query) ||
       book.author.toLowerCase().includes(query)
-    const matchesEditorial =
-      editorial === "all" || book.publisher === editorial
-    const matchesCategory =
-      category === "all" || book.category === category
-    const matchesAvailability =
-      !showOnlyAvailable || book.available
+    const matchesEditorial = editorial === "all" || book.publisher === editorial
+    const matchesCategory  = category === "all"  || book.category === category
+    const matchesAvailability = !showOnlyAvailable || book.available
     return matchesSearch && matchesEditorial && matchesCategory && matchesAvailability
   })
   renderBooks(currentBooks)
 }
 
+document.getElementById("search").addEventListener("input", applyFilters)
+document.getElementById("editorial").addEventListener("change", applyFilters)
+document.getElementById("category").addEventListener("change", applyFilters)
+
+document.getElementById("all-books").addEventListener("click", () => {
+  showOnlyAvailable = false
+  document.getElementById("all-books").classList.add("active")
+  document.getElementById("available-books").classList.remove("active")
+  applyFilters()
+})
+document.getElementById("available-books").addEventListener("click", () => {
+  showOnlyAvailable = true
+  document.getElementById("available-books").classList.add("active")
+  document.getElementById("all-books").classList.remove("active")
+  applyFilters()
+})
+
+// ── Render ───────────────────────────────────────────────────────────────────
 function renderBooks(books) {
   const container = document.getElementById("catalog")
   container.innerHTML = ""
@@ -136,68 +148,43 @@ function renderBooks(books) {
     bookFooter.className = "book-footer"
 
     const button = document.createElement("button")
-    button.className = "pack-button"
+    button.className = `pack-button${isSelected ? " selected" : ""}`
     button.setAttribute("aria-label", "Seleccionar libro")
-
-    if (isSelected) {
-      button.classList.add("selected")
-    }
 
     const icon = document.createElement("img")
     icon.src = "svg/arrow-through-heart.svg"
     icon.alt = ""
-
     button.appendChild(icon)
-    
+
     button.addEventListener("click", (e) => {
       e.stopPropagation()
       handleBookSelection(book, button, bookDiv)
     })
-    
-    bookFooter.appendChild(button)
 
+    bookFooter.appendChild(button)
     bookContent.append(h3, pAuthor, pPublisher, pCategory, pPages, pLang)
     bookDiv.append(img, bookContent, bookFooter)
-    
+
     bookDiv.addEventListener("click", (e) => {
-      if (!e.target.closest(".pack-button")) {
-        openModal(book)
-      }
+      if (!e.target.closest(".pack-button")) openModal(book)
     })
-    
+
     container.appendChild(bookDiv)
   })
 }
 
-document.getElementById("search").addEventListener("input", applyFilters)
-document.getElementById("editorial").addEventListener("change", applyFilters)
-document.getElementById("category").addEventListener("change", applyFilters)
-
-document.getElementById("all-books").addEventListener("click", () => {
-  showOnlyAvailable = false
-  document.getElementById("all-books").classList.add("active")
-  document.getElementById("available-books").classList.remove("active")
-  applyFilters()
-})
-document.getElementById("available-books").addEventListener("click", () => {
-  showOnlyAvailable = true
-  document.getElementById("available-books").classList.add("active")
-  document.getElementById("all-books").classList.remove("active")
-  applyFilters()
-})
-
+// ── Selection ────────────────────────────────────────────────────────────────
 function handleBookSelection(book, button, bookDiv) {
   if (!book.available) {
     alert("Este libro no está disponible")
     return
   }
-  
-  const id = book.id
-  const idx = selectedBooks.findIndex(b => b.id == id)
-  
+
+  const idx = selectedBooks.findIndex(b => b.id == book.id)
+
   if (idx === -1) {
-    if (selectedBooks.length >= 3) {
-      alert("Puedes seleccionar hasta 3 libros")
+    if (selectedBooks.length >= 2) {
+      alert("Podés seleccionar hasta 2 libros")
       return
     }
     selectedBooks.push({
@@ -219,44 +206,81 @@ function handleBookSelection(book, button, bookDiv) {
     button.classList.remove("selected")
     if (bookDiv) bookDiv.classList.remove("selected-card")
   }
-  
-  sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
-  updateAsideList()
+
+  saveSelection()
+  updateMobileBar()
 }
 
+function handleRemoveBook(bookId) {
+  const idx = selectedBooks.findIndex(b => b.id == bookId)
+  if (idx !== -1) {
+    selectedBooks.splice(idx, 1)
+    saveSelection()
+
+    const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
+    if (bookDiv) {
+      bookDiv.querySelector(".pack-button")?.classList.remove("selected")
+      bookDiv.classList.remove("selected-card")
+    }
+
+    updateMobileBar()
+  }
+}
+
+// ── Mobile bar ───────────────────────────────────────────────────────────────
+function updateMobileBar() {
+  const bar    = document.getElementById('mobileCartBar')
+  const count  = document.getElementById('mobileCartCount')
+  const titles = document.getElementById('mobileCartTitles')
+  const btn    = document.getElementById('mobileCartBtn')
+  if (!bar) return
+
+  count.textContent = selectedBooks.length
+
+  if (selectedBooks.length === 0) {
+    bar.classList.remove('visible')
+    btn.disabled = true
+    return
+  }
+
+  bar.classList.add('visible')
+  btn.disabled = false
+
+  // Renderizar slots: número + título (siempre) + autor (solo desktop via CSS)
+  titles.innerHTML = selectedBooks.map((book, i) => `
+    <div class="mobile-slot">
+      <div class="mobile-slot-num">${i + 1}</div>
+      <div class="mobile-slot-text">
+        <span>${book.title}</span><span class="mobile-slot-author">${book.author}</span>
+      </div>
+    </div>
+  `).join('')
+}
+
+// ── Modal ────────────────────────────────────────────────────────────────────
 function openModal(book) {
   let modal = document.getElementById("book-modal")
-  
+
   if (!modal) {
     modal = document.createElement("div")
     modal.id = "book-modal"
     modal.className = "modal"
     document.body.appendChild(modal)
   }
-  
-  const images = [
-    book.image,
-    book.image2 || book.image,
-    book.image3 || book.image
-  ]
-  
+
+  const images = [book.image, book.image2 || book.image, book.image3 || book.image]
+
   modal.innerHTML = `
     <div class="modal-content">
       <button class="modal-close">&times;</button>
-      
       <div class="modal-main-image">
         <img id="main-image" src="${images[0]}" alt="${book.title}">
       </div>
-      
       <div class="modal-thumbnails">
-        ${images.map((img, index) => `
-          <img src="${img}" 
-               class="modal-thumbnail ${index === 0 ? 'active' : ''}" 
-               data-index="${index}"
-               alt="Imagen ${index + 1}">
+        ${images.map((img, i) => `
+          <img src="${img}" class="modal-thumbnail ${i === 0 ? 'active' : ''}" data-index="${i}" alt="Imagen ${i + 1}">
         `).join('')}
       </div>
-      
       <div class="modal-info">
         <h2>${book.title}</h2>
         <p><strong>Autor/a:</strong> <span class="value">${book.author}</span></p>
@@ -270,103 +294,19 @@ function openModal(book) {
       </div>
     </div>
   `
-  
+
   modal.classList.add("active")
-  
-  const closeBtn = modal.querySelector(".modal-close")
-  closeBtn.addEventListener("click", () => {
-    modal.classList.remove("active")
-  })
-  
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("active")
-    }
-  })
-  
+
+  modal.querySelector(".modal-close").addEventListener("click", () => modal.classList.remove("active"))
+  modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("active") })
+
   const thumbnails = modal.querySelectorAll(".modal-thumbnail")
-  const mainImage = modal.querySelector("#main-image")
-  
+  const mainImage  = modal.querySelector("#main-image")
   thumbnails.forEach(thumb => {
     thumb.addEventListener("click", () => {
-      const index = thumb.dataset.index
-      mainImage.src = images[index]
+      mainImage.src = images[thumb.dataset.index]
       thumbnails.forEach(t => t.classList.remove("active"))
       thumb.classList.add("active")
     })
   })
-}
-
-function updateAsideList() {
-  if (!listContainer) return
-  
-  listContainer.innerHTML = ""
-  
-  const existingButton = aside.querySelector('.finalize-selection-btn')
-  if (existingButton) existingButton.remove()
-  
-  if (!selectedBooks.length) {
-    listContainer.innerHTML = "<li class='empty'>No hay libros seleccionados</li>"
-    aside.style.display = "none"
-    return
-  }
-
-  aside.style.display = ""
-  
-  selectedBooks.forEach(b => {
-    const li = document.createElement("li")
-    li.dataset.id = b.id
-    li.innerHTML = `
-      <div style="flex-grow: 1; padding-right: 20px;">
-        <div style="font-weight: bold; margin-bottom: 2px;">${b.title}</div>
-        <div style="font-size: 0.9em; opacity: 0.8;">${b.author}</div>
-      </div>
-      <img 
-        src="svg/trash.svg" 
-        class="remove-btn" 
-        alt="Quitar"
-        title="Quitar de la selección"
-      />
-    `
-    
-    const trashBtn = li.querySelector('.remove-btn')
-    trashBtn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      handleRemoveBook(b.id)
-    })
-    
-    listContainer.appendChild(li)
-  })
-  
-  if (selectedBooks.length > 0) {
-    const finalizeButton = document.createElement("button")
-    finalizeButton.className = "button-wht finalize-selection-btn"
-    finalizeButton.textContent = "FINALIZAR SELECCIÓN"
-    
-    finalizeButton.addEventListener("click", () => {
-      sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
-      window.location.href = 'selection.html'
-    })
-    
-    const asideBottom = aside.querySelector('.aside-bottom')
-    asideBottom.appendChild(finalizeButton)
-  }
-}
-
-function handleRemoveBook(bookId) {
-  const idx = selectedBooks.findIndex(b => b.id == bookId)
-  
-  if (idx !== -1) {
-    selectedBooks.splice(idx, 1)
-    sessionStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
-    
-    const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
-    if (bookDiv) {
-      const packBtn = bookDiv.querySelector(".pack-button")
-      if (packBtn) packBtn.classList.remove("selected")
-      bookDiv.classList.remove("selected-card")
-    }
-    
-    updateAsideList()
-  }
 }
