@@ -48,8 +48,8 @@ function loadSelectedBooks() {
         <div class="book-cover">
           ${imagePath ? 
             `<img src="${imagePath}" alt="Portada de ${book.title || 'libro'}" 
-                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'no-image\\'>Imagen no disponible</div>';" />` : 
-            '<div class="no-image">Imagen no disponible</div>'
+                 onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'no-image\\'>Sin imagen</div>';" />` : 
+            '<div class="no-image">Sin imagen</div>'
           }
         </div>
         <div class="book-info">
@@ -57,9 +57,7 @@ function loadSelectedBooks() {
           <div class="book-author">${book.author || 'Autor desconocido'}</div>
           <div class="book-publisher">${book.publisher || ''}</div>
         </div>
-        <button class="remove-btn" onclick="removeBook(${book.id})">
-          <img src="svg/close-red.svg" alt="Eliminar" />
-        </button>
+        <button class="remove-btn" onclick="removeBook(${book.id})">×</button>
       </div>
     `;
   }).join('');
@@ -73,7 +71,6 @@ function removeBook(bookId) {
   selectedBooks = selectedBooks.filter(book => book.id !== bookId);
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks));
   loadSelectedBooks();
-  console.log('Libro eliminado. Libros restantes:', selectedBooks.length);
 }
 
 function goBack() {
@@ -89,5 +86,4 @@ function proceedToCheckout() {
   }
   
   console.log('Procediendo con', selectedBooks.length, 'libros');
-  alert(`Procediendo con ${selectedBooks.length} libro(s) seleccionado(s)`);
 }

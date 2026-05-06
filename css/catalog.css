@@ -1,5 +1,9 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html, body {
+    overflow-x: hidden;
+}
+
 :root {
     --red: #cc0000;
     --black: #000;
@@ -12,7 +16,6 @@ body {
     font-family: monospace;
     background: var(--white);
     color: var(--black);
-    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -355,7 +358,7 @@ body {
 
 /* ── Mobile cart bar ── */
 .mobile-cart-bar {
-    display: none; /* oculta hasta que haya selección */
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -367,7 +370,7 @@ body {
     justify-content: space-between;
     padding: 10px 16px;
     gap: 12px;
-    min-height: 62px;
+    min-height: 72px;
 }
 .mobile-cart-bar.visible {
     display: flex;
@@ -381,19 +384,9 @@ body {
     min-width: 0;
 }
 
+/* Número grande eliminado */
 .mobile-cart-count {
-    background: var(--red);
-    color: var(--white);
-    font-family: monospace;
-    font-size: 13px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    display: none;
 }
 
 .mobile-cart-titles {
@@ -413,9 +406,7 @@ body {
     font-size: 10px;
     color: var(--white);
     letter-spacing: 0.5px;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .mobile-slot-num {
@@ -429,31 +420,42 @@ body {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 1px;
 }
 
 .mobile-slot-text {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
 }
 
+/* Autor siempre visible, en línea aparte en mobile */
 .mobile-slot-author {
-    display: none;
+    display: block;
     color: #aaa;
     font-size: 9px;
 }
+.mobile-slot-author::before {
+    content: none;
+}
 
-/* En pantallas grandes mostramos autor */
 @media (min-width: 681px) {
-    .mobile-slot-author {
-        display: inline;
-    }
-    .mobile-slot-author::before {
-        content: ' — ';
-        color: #555;
-    }
     .mobile-cart-bar {
         padding: 10px 24px;
+        min-height: 68px;
+    }
+    .mobile-slot {
+        font-size: 12px;
+    }
+    .mobile-slot-author {
+        font-size: 10px;
+    }
+    .mobile-slot-num {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
     }
 }
 
@@ -501,7 +503,7 @@ body {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
-        padding: 10px 12px;
+        padding: 10px 20px;
         justify-content: unset;
     }
     .nav-row-2 input[type="text"] {
