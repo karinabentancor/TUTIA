@@ -39,12 +39,12 @@
   <div class="modal">
     <button class="modal-close" id="modal-close">✕</button>
     <form id="contact-form">
-      <div class="modal-field" style="margin-bottom:0">
-        <div class="modal-title">TU MAIL</div>
+      <div class="modal-field" style="margin-bottom:20px">
+        <div class="modal-title" style="margin-bottom:10px">TU MAIL</div>
         <input class="modal-input" id="field-email" type="email" required placeholder="nombre@mail.com">
       </div>
       <div class="modal-field" style="margin-bottom:0">
-        <div class="modal-title">MENSAJE</div>
+        <div class="modal-title" style="margin-bottom:10px">MENSAJE</div>
         <textarea class="modal-textarea" id="field-message" required placeholder="Contanos sobre tu proyecto..."></textarea>
       </div>
       <button class="modal-submit" id="modal-submit" type="submit">ENVIAR</button>
@@ -58,14 +58,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-emailjs.init('TU_PUBLIC_KEY')
+emailjs.init('qV_IRVWDmbi5Zgtbh')
 
 const SERVICES = [
-  { title: ['DISEÑO', 'DIGITAL'],        desc: 'Piezas gráficas para comunicar con precisión. Afiches, flyers, material para eventos y campañas de comunicación visual.' },
-  { title: ['DISEÑO', 'WEB'],            desc: 'Sitios y plataformas construidos desde la función. Sin adornos que no trabajen.' },
-  { title: ['DISEÑO', 'EDITORIAL'],      desc: 'Libros, catálogos, folletos y publicaciones. La página como espacio de composición.' },
-  { title: ['PRODUCCIÓN', 'DE EVENTOS'], desc: 'Desde la idea hasta el desmontaje. Espacios que duran pocas horas y se recuerdan.' },
-  { title: ['DISEÑO DE', 'EXPOSICIONES'],desc: 'Montajes que contienen obras sin competir con ellas. El diseño como soporte invisible.' },
+  { title: ['DISEÑO', 'DIGITAL'],        desc: 'Gráfica que no pide permiso. Para proyectos que tienen algo que decir.' },
+  { title: ['DISEÑO', 'WEB'],            desc: 'Sitios web sin compromisos de forma. Diseñados desde lo que sos.' },
+  { title: ['DISEÑO', 'EDITORIAL'],      desc: 'Diseño editorial para los que saben que un buen libro habla antes de abrirlo.' },
+  { title: ['PRODUCCIÓN', 'DE EVENTOS'], desc: 'Desde la idea hasta que se apagan las luces. Un evento es mil decisiones y nos encargamos de todas.' },
+  { title: ['DISEÑO DE', 'EXPOSICIONES'],desc: 'La obra puede ser cualquier cosa. El diseño también.' },
 ]
 
 const list = document.getElementById('services')
@@ -106,10 +106,17 @@ form.addEventListener('submit', async e => {
   status.textContent = ''
 
   try {
-    await emailjs.send('TU_SERVICE_ID', 'TU_TEMPLATE_ID', {
-      from_email: document.getElementById('field-email').value,
-      message:    document.getElementById('field-message').value,
-      to_email:   'tutiaclub@gmail.com'
+    const fromEmail = document.getElementById('field-email').value
+    const message   = document.getElementById('field-message').value
+    await emailjs.send('service_869lk5h', 'template_7ad5hrd', {
+      from_email: fromEmail,
+      message:    message,
+      to_email:   'tutiaestudio@gmail.com'
+    })
+    await emailjs.send('service_869lk5h', 'template_1og5rje', {
+      from_email: fromEmail,
+      message:    message,
+      to_email:   fromEmail
     })
     status.textContent = 'MENSAJE ENVIADO.'
     status.className = 'modal-status ok'
