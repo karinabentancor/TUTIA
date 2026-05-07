@@ -3,131 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TUTÍA</title>
-  <link rel="stylesheet" href="css/order.css">
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoA6V6f5YkzQg9lfQZbMvH+PvLVWZ0tZrGv7huZOnIxN0Rs"
-    crossorigin="anonymous"
-  />
+  <title>TUTÍA — CONFIRMAR PRÉSTAMO</title>
+  <meta name="description" content="TUTÍA — ESTUDIO CREATIVO Montevideo, Uruguay.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="stylesheet" href="css/order.css" />
 </head>
-
 <body>
-  <div class="container-fluid h-100 p-0">
-    <div class="row gx-0 h-100">
-      <main class="col-12 d-flex flex-column">
-        <div class="selection-container">
-          <div class="selection-header">
-            <p>Detalles del préstamo antes de confirmar</p>
-          </div>
 
-          <div class="loan-dates">
-            <div class="date-info">
-              <strong>Préstamo:</strong> <span id="loanDate"></span>
+  <div class="page-bg">
+
+    <!-- Header flotante sobre el fondo -->
+    <div class="page-header">
+      <a href="selection.html" class="back-btn">←</a>
+      <img src="svg/TUTIALOGO.svg" alt="TUTÍA" class="header-logo">
+    </div>
+
+    <div class="main-container">
+      <div class="selection-container">
+
+        <div class="selection-header">
+          <p>Revisá los detalles antes de confirmar</p>
+        </div>
+
+        <div class="loan-dates">
+          <div class="date-info"><strong>PRÉSTAMO:</strong> <span id="loanDate"></span></div>
+          <div class="date-info"><strong>DEVOLUCIÓN:</strong> <span id="returnDate"></span></div>
+        </div>
+
+        <div class="books-section">
+          <div id="selectedBooksContainer"></div>
+        </div>
+
+        <div class="price-display" id="priceDisplay">TOTAL: $0</div>
+
+        <!-- Método de entrega -->
+        <div class="form-section">
+          <h3 class="section-title">MÉTODO DE ENTREGA</h3>
+          <div class="address-options">
+
+            <div class="address-option">
+              <div class="address-option-header">
+                <input type="radio" id="pickup" name="delivery_address" value="pickup" checked>
+                <label for="pickup" class="radio-label">PICK-UP</label>
+              </div>
+              <p class="pickup-text">Paysandú esquina Av. Rondeau</p>
             </div>
-            <div class="date-info">
-              <strong>Devolución:</strong> <span id="returnDate"></span>
+
+            <div class="address-option">
+              <div class="address-option-header">
+                <input type="radio" id="delivery" name="delivery_address" value="delivery">
+                <label for="delivery" class="radio-label">ENVÍO <span class="delivery-surcharge">+ $150</span></label>
+              </div>
+              <div class="address-fields">
+                <input type="text" id="street" placeholder="DIRECCIÓN" class="form-input" />
+                <input type="text" id="corner" placeholder="ESQUINA" class="form-input" />
+              </div>
+              <textarea id="notes" placeholder="ACLARACIONES" class="form-textarea"></textarea>
             </div>
-          </div>
 
-          <div class="books-section">
-            <div id="selectedBooksContainer"></div>
-          </div>
-
-          <div class="price-display" id="priceDisplay">TOTAL: $0</div>
-
-          <div class="personal-info-section">
-            <h3>Datos personales</h3>
-            <div class="personal-info-form">
-              <div class="form-row">
-                <input type="text" id="firstName" placeholder="Nombre" class="form-input" required />
-                <input type="text" id="lastName" placeholder="Apellido" class="form-input" required />
-              </div>
-              <div class="form-row">
-                <input type="text" id="documentId" placeholder="Documento" class="form-input" required />
-                <input type="tel" id="phone" placeholder="Celular" class="form-input" required />
-              </div>
-              <div class="form-row">
-                <input type="email" id="email" placeholder="Email" class="form-input" required />
-              </div>
-            </div>
-          </div>
-
-          <div class="document-upload-section">
-            <h3>Documento de identidad</h3>
-            <div class="document-upload-container">
-              <div class="upload-item">
-                <label class="upload-label">Frente</label>
-                <div class="file-upload-wrapper">
-                  <input type="file" id="docFront" accept="image/*" class="file-input" />
-                  <label for="docFront" class="file-label">
-                    <span class="file-text" id="docFrontText">Seleccionar archivo</span>
-                  </label>
-                </div>
-              </div>
-              <div class="upload-item">
-                <label class="upload-label">Dorso</label>
-                <div class="file-upload-wrapper">
-                  <input type="file" id="docBack" accept="image/*" class="file-input" />
-                  <label for="docBack" class="file-label">
-                    <span class="file-text" id="docBackText">Seleccionar archivo</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="address-section">
-            <h3>Método de entrega</h3>
-            <div class="address-options">
-              <div class="address-option">
-                <div class="address-option-header">
-                  <input type="radio" id="delivery" name="delivery_address" value="delivery" checked>
-                  <label for="delivery" class="address-label">ENVÍO</label>
-                </div>
-                <div class="address-content">
-                  <div class="address-fields">
-                    <input type="text" id="street" placeholder="Dirección" class="address-input" />
-                    <input type="text" id="corner" placeholder="Esquina" class="address-input" />
-                  </div>
-                  <textarea id="notes" placeholder="Aclaraciones" class="address-textarea"></textarea>
-                </div>
-              </div>
-
-              <div class="address-option">
-                <div class="pickup-info">
-                  <input type="radio" id="pickup" name="delivery_address" value="pickup">
-                  <label for="pickup" class="address-label">PICK-UP</label>
-                  <span class="pickup-text">Paysandú esquina Av. Rondeau</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="payment-section">
-            <h3>Medio de pago</h3>
-            <div class="payment-options">
-              <div class="payment-option">
-                <input type="radio" id="transfer" name="payment_method" value="transfer" checked>
-                <label for="transfer">Transferencia bancaria</label>
-              </div>
-              <div class="payment-option">
-                <input type="radio" id="cash" name="payment_method" value="cash">
-                <label for="cash">Efectivo</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="action-buttons">
-            <button class="button" onclick="goBack()">VOLVER</button>
-            <button class="button button-primary" onclick="confirmOrder()" id="confirmBtn">CONFIRMAR PRÉSTAMO</button>
           </div>
         </div>
-      </main>
+
+        <!-- Medio de pago -->
+        <div class="form-section">
+          <h3 class="section-title">MEDIO DE PAGO</h3>
+          <div class="payment-options">
+            <div class="payment-option">
+              <input type="radio" id="transfer" name="payment_method" value="transfer" checked>
+              <label for="transfer" class="radio-label">TRANSFERENCIA BANCARIA</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="cash" name="payment_method" value="cash">
+              <label for="cash" class="radio-label">EFECTIVO</label>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Datos personales -->
+        <div class="form-section">
+          <h3 class="section-title">DATOS PERSONALES</h3>
+          <div class="personal-info-form">
+            <div class="form-row">
+              <input type="text" id="firstName" placeholder="NOMBRE" class="form-input" required />
+              <input type="text" id="lastName" placeholder="APELLIDO" class="form-input" required />
+            </div>
+            <div class="form-row">
+              <input type="text" id="documentId" placeholder="DOCUMENTO" class="form-input" required />
+              <input type="tel" id="phone" placeholder="CELULAR" class="form-input" required />
+            </div>
+            <div class="form-row full-row">
+              <input type="email" id="email" placeholder="EMAIL" class="form-input" required />
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="action-buttons">
+          <button class="button-outline" onclick="goBack()">VOLVER</button>
+          <button class="button-primary" onclick="confirmOrder()" id="confirmBtn">CONFIRMAR PRÉSTAMO</button>
+        </div>
+
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init("QlrFx-Q3IIk9mClin");
+  </script>
   <script src="js/order.js"></script>
 </body>
 </html>
