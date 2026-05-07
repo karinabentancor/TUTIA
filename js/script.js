@@ -3,7 +3,6 @@ let currentBooks = []
 let showOnlyAvailable = false
 let selectedBooks = []
 
-// ── Storage helpers ──────────────────────────────────────────────────────────
 function saveSelection() {
   const json = JSON.stringify(selectedBooks)
   sessionStorage.setItem('selectedBooks', json)
@@ -22,11 +21,9 @@ function loadSavedSelection() {
   }
 }
 
-// ── Init ─────────────────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   loadSavedSelection()
 
-  // Botón mobile
   const mobileBtn = document.getElementById('mobileCartBtn')
   if (mobileBtn) {
     mobileBtn.removeAttribute('onclick')
@@ -52,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(error => console.error("Error loading books:", error))
 })
 
-// ── Filters ──────────────────────────────────────────────────────────────────
 function populateEditorials(data) {
   const select = document.getElementById("editorial")
   const editorials = Array.from(new Set(data.map(book => book.publisher))).sort()
@@ -108,7 +104,6 @@ document.getElementById("available-books").addEventListener("click", () => {
   applyFilters()
 })
 
-// ── Render ───────────────────────────────────────────────────────────────────
 function renderBooks(books) {
   const container = document.getElementById("catalog")
   container.innerHTML = ""
@@ -150,11 +145,7 @@ function renderBooks(books) {
     const button = document.createElement("button")
     button.className = `pack-button${isSelected ? " selected" : ""}`
     button.setAttribute("aria-label", "Seleccionar libro")
-
-    const icon = document.createElement("img")
-    icon.src = "svg/arrow-through-heart.svg"
-    icon.alt = ""
-    button.appendChild(icon)
+    button.textContent = isSelected ? "♥" : "♡"
 
     button.addEventListener("click", (e) => {
       e.stopPropagation()
@@ -173,7 +164,6 @@ function renderBooks(books) {
   })
 }
 
-// ── Selection ────────────────────────────────────────────────────────────────
 function handleBookSelection(book, button, bookDiv) {
   if (!book.available) {
     alert("Este libro no está disponible")
@@ -200,10 +190,12 @@ function handleBookSelection(book, button, bookDiv) {
       available: book.available
     })
     button.classList.add("selected")
+    button.textContent = "♥"
     if (bookDiv) bookDiv.classList.add("selected-card")
   } else {
     selectedBooks.splice(idx, 1)
     button.classList.remove("selected")
+    button.textContent = "♡"
     if (bookDiv) bookDiv.classList.remove("selected-card")
   }
 
@@ -219,7 +211,11 @@ function handleRemoveBook(bookId) {
 
     const bookDiv = document.querySelector(`.book[data-id="${bookId}"]`)
     if (bookDiv) {
-      bookDiv.querySelector(".pack-button")?.classList.remove("selected")
+      const btn = bookDiv.querySelector(".pack-button")
+      if (btn) {
+        btn.classList.remove("selected")
+        btn.textContent = "♡"
+      }
       bookDiv.classList.remove("selected-card")
     }
 
@@ -227,7 +223,6 @@ function handleRemoveBook(bookId) {
   }
 }
 
-// ── Mobile bar ───────────────────────────────────────────────────────────────
 function updateMobileBar() {
   const bar    = document.getElementById('mobileCartBar')
   const count  = document.getElementById('mobileCartCount')
@@ -246,7 +241,6 @@ function updateMobileBar() {
   bar.classList.add('visible')
   btn.disabled = false
 
-  // Renderizar slots: número + título (siempre) + autor (solo desktop via CSS)
   titles.innerHTML = selectedBooks.map((book, i) => `
     <div class="mobile-slot">
       <div class="mobile-slot-num">${i + 1}</div>
@@ -257,7 +251,6 @@ function updateMobileBar() {
   `).join('')
 }
 
-// ── Modal ────────────────────────────────────────────────────────────────────
 function openModal(book) {
   let modal = document.getElementById("book-modal")
 

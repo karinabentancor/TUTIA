@@ -9,103 +9,65 @@
   --red: #cc0000;
   --black: #000;
   --white: #fff;
+  --card-bg: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #444444;
+  --text-muted: #888888;
+  --border-light: #e0e0e0;
+  --border-mid: #cccccc;
 }
 
 html, body {
   height: 100%;
-  overflow: hidden;
   background: var(--black);
-  color: var(--white);
+  color: var(--text-primary);
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-}
-
-/* ── Nav ── */
-.site-nav {
-  flex-shrink: 0;
-  background: var(--black);
-  border-bottom: 3px solid var(--red);
-  display: flex;
-  align-items: center;
-  padding: 8px 24px;
-  gap: 20px;
-}
-
-.back-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  background: var(--red);
-  color: var(--white);
-  border: 2px solid var(--red);
-  text-decoration: none;
-  font-family: monospace;
-  font-size: 14px;
-  flex-shrink: 0;
-  transition: background 0.2s, border-color 0.2s;
-}
-.back-arrow:hover {
-  background: var(--black);
-  border-color: var(--white);
-}
-
-.nav-logo {
-  height: 38px;
-  width: auto;
-  filter: invert(1);
-  margin-top: 3px;
-}
-
-/* ── Layout ── */
-.main-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.content {
-  flex: 1;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 20px;
-  overflow: hidden;
+  background-image: url('../img/back.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 24px 16px;
 }
 
-/* ── Contenedor principal ── */
-.selection-container {
+.page {
   width: 100%;
-  max-width: 560px;
-  border: 2px solid #333;
-  border-top: 4px solid var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--card-bg);
+  border-top: 5px solid var(--red);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 20px 28px 18px;
+  border-bottom: 2px solid var(--border-light);
+  background: #fafafa;
   display: flex;
   flex-direction: column;
 }
 
-/* ── Header ── */
-.selection-header {
-  text-align: center;
-  padding: 12px 20px;
-  border-bottom: 2px solid var(--red);
-  background: #0a0a0a;
-}
-
-.selection-header p {
-  font-size: 10px;
+.card-header p {
+  font-size: 14px;
   font-weight: 900;
-  color: var(--white);
+  color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 2.5px;
 }
 
-/* ── Lista ── */
 #booksContainer {
   display: flex;
   flex-direction: column;
@@ -116,121 +78,115 @@ body {
   flex-direction: column;
 }
 
-/* cada fila de libro tiene altura fija generosa */
 .selected-book {
-  height: 140px;
-  background: var(--black);
-  border-bottom: 1px solid #222;
-  padding: 12px 50px 12px 12px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-light);
+  padding: 16px 56px 16px 20px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   position: relative;
-  transition: background 0.2s;
+  transition: background 0.15s;
 }
 
-.selected-book:first-child {
-  border-top: 1px solid #222;
-}
-  background: #0d0d0d;
+.selected-book:hover {
+  background: #f9f9f9;
 }
 
-/* imagen proporcional dentro de la fila */
 .book-cover {
   flex-shrink: 0;
   width: 80px;
-  height: 110px;
+  height: 112px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: 2px solid #444;
-  background: #111;
+  background: #f0f0f0;
 }
 
 .book-cover img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .no-image {
-  color: #555;
+  color: var(--text-muted);
   font-size: 9px;
   text-align: center;
-  padding: 4px;
-  line-height: 1.3;
+  padding: 6px;
+  line-height: 1.4;
 }
 
 .book-info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   min-width: 0;
 }
 
 .book-title {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
-  color: var(--white);
-  line-height: 1.3;
+  color: var(--text-primary);
+  line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.6px;
   word-wrap: break-word;
 }
 
 .book-author {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
 .book-publisher {
-  font-size: 10px;
-  color: #555;
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
-/* ── X eliminar ── */
 .remove-btn {
   position: absolute;
-  right: 14px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
   background: transparent;
-  border: 2px solid var(--red);
+  border: 2px solid #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: monospace;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 900;
-  color: var(--red);
+  color: var(--text-muted);
   line-height: 1;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
+
 .remove-btn:hover {
   background: var(--red);
   color: var(--white);
+  border-color: var(--red);
 }
 
-/* ── Botones ── */
 .action-buttons {
   display: flex;
-  gap: 8px;
-  padding: 14px 20px;
-  border-top: 2px solid #333;
-  background: #0a0a0a;
+  gap: 10px;
+  padding: 18px 20px;
+  border-top: 2px solid var(--border-light);
+  background: #fafafa;
 }
 
 .button {
   flex: 1;
   background: transparent;
-  color: var(--white);
-  border: 2px solid #555;
-  height: 36px;
+  color: var(--text-primary);
+  border: 2px solid var(--border-mid);
+  height: 44px;
   font-family: monospace;
   font-size: 11px;
   font-weight: 900;
@@ -238,12 +194,13 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
+
 .button:hover {
-  background: var(--white);
-  color: var(--black);
-  border-color: var(--white);
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
 }
 
 .button-dark {
@@ -251,7 +208,7 @@ body {
   background: var(--red);
   color: var(--white);
   border: 2px solid var(--red);
-  height: 36px;
+  height: 44px;
   font-family: monospace;
   font-size: 11px;
   font-weight: 900;
@@ -259,49 +216,93 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s;
-}
-.button-dark:hover {
-  background: var(--black);
-  border-color: var(--white);
+  transition: background 0.15s, border-color 0.15s;
 }
 
-/* ── Empty state ── */
+.button-dark:hover {
+  background: #aa0000;
+  border-color: #aa0000;
+}
+
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  gap: 20px;
+  padding: 52px 28px;
+  gap: 24px;
 }
 
 .empty-state p {
-  font-size: 11px;
-  letter-spacing: 1px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #555;
+  color: var(--text-muted);
+  text-align: center;
 }
 
-/* ── Responsive ── */
+.empty-btn {
+  width: 100%;
+  max-width: 280px;
+  height: 48px;
+  font-size: 12px;
+}
+
 @media (min-width: 768px) {
-  .selected-book {
-    height: 150px;
+  body {
+    padding: 40px 24px;
   }
+
+  .card-header {
+    padding: 24px 32px 20px;
+  }
+
+  .card-header p {
+    font-size: 15px;
+  }
+
+  .selected-book {
+    padding: 18px 60px 18px 24px;
+    gap: 20px;
+  }
+
   .book-cover {
     width: 90px;
-    height: 120px;
+    height: 126px;
+  }
+
+  .book-title {
+    font-size: 14px;
+  }
+
+  .action-buttons {
+    padding: 20px 24px;
+    gap: 12px;
+  }
+
+  .button,
+  .button-dark {
+    height: 46px;
+    font-size: 12px;
   }
 }
 
-@media (max-width: 480px) {
-  .content {
+@media (max-width: 400px) {
+  body {
     padding: 16px 12px;
+    align-items: center;
+  }
+
+  .card {
+    border-top-width: 4px;
+  }
+
+  .card-header {
+    padding: 16px 16px 14px;
   }
 
   .selected-book {
-    height: 120px;
-    padding: 10px 44px 10px 10px;
+    padding: 12px 48px 12px 14px;
     gap: 12px;
   }
 
@@ -311,20 +312,27 @@ body {
   }
 
   .book-title {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .book-author {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .action-buttons {
-    padding: 12px;
-    gap: 6px;
+    padding: 14px;
+    gap: 8px;
+    flex-direction: column;
   }
 
-  .button, .button-dark {
-    font-size: 10px;
-    height: 34px;
+  .button,
+  .button-dark {
+    flex: none;
+    width: 100%;
+    height: 44px;
+  }
+
+  .empty-btn {
+    max-width: 100%;
   }
 }
