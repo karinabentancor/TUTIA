@@ -21,62 +21,16 @@ body {
 }
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  background-image: url('../img/back.png');
-  background-size: auto;
-  background-repeat: repeat;
-  background-color: var(--black);
+  background: transparent;
   border-bottom: 3px solid var(--red);
-  padding: 12px 32px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  background: var(--black);
-  color: var(--white);
-  border: 2px solid var(--white);
-  font-family: monospace;
-  font-size: 15px;
-  text-decoration: none;
-  flex-shrink: 0;
-  transition: background 0.2s, border-color 0.2s;
-}
-
-.back-btn:hover {
-  background: var(--red);
-  border-color: var(--red);
-}
-
-.header-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.header-sep {
-  color: #000;
-  font-size: 16px;
-  font-weight: 900;
-}
-
-.header-section {
-  font-family: monospace;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #000;
-  white-space: nowrap;
+  height: 3px;
+  padding: 0;
+  margin: 0;
 }
 
 .floating-tab {
@@ -231,17 +185,13 @@ header {
     padding: 0 24px 100px;
   }
 
-  header {
-    padding: 10px 20px;
-    gap: 12px;
-  }
-
   .hero {
     padding: 40px 0 0;
     margin-bottom: 56px;
   }
 
   .hero-title {
+    font-size: clamp(72px, 22vw, 200px);
     letter-spacing: -2px;
   }
 
@@ -264,17 +214,13 @@ header {
     padding: 0 56px 100px 16px;
   }
 
-  header {
-    padding: 10px 14px;
-    gap: 8px;
-  }
-
   .hero {
     padding: 32px 0 0;
     margin-bottom: 44px;
   }
 
   .hero-title {
+    font-size: clamp(64px, 24vw, 200px);
     letter-spacing: -1px;
   }
 

@@ -38,53 +38,46 @@
             background-repeat: repeat;
             background-color: var(--black);
             border-bottom: 3px solid var(--red);
-            padding: 12px 32px;
+            padding: 16px 32px;
             display: flex; align-items: center; gap: 20px;
             flex-wrap: wrap;
         }
+
         .back-btn {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px;
-            background: var(--black); color: var(--white);
+            width: 42px; height: 42px;
+            background: rgba(255,255,255,0.15);
+            color: var(--black);
             border: 2px solid var(--black);
-            font-family: monospace; font-size: 16px;
+            font-family: monospace; font-size: 18px;
             text-decoration: none;
             transition: background 0.2s, border-color 0.2s, color 0.2s;
             flex-shrink: 0;
         }
-        .back-btn:hover { background: var(--red); border-color: var(--red); color: var(--white); }
-
-        .header-logo {
-            height: 52px;
-            width: auto;
-            margin-left: 12px;
-            padding: 6px 14px;
+        .back-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: var(--white);
         }
 
-        .header-right {
-            margin-left: auto;
-            display: flex; align-items: center; gap: 12px;
-        }
-        .header-sep { color: var(--black); font-size: 16px; font-weight: 900; }
-        .header-section {
-            font-family: monospace; font-size: 15px; font-weight: 900;
-            letter-spacing: 3px; color: var(--black);
-        }
-
+        /* ── HORARIO BAR: mismo ancho y padding que .estudio-page ── */
         .horario-bar {
-            display: flex;
-            justify-content: flex-end;
-            padding: 10px 32px;
-            background: transparent;
+            display: block;
+            padding: 28px 32px 0;
+            max-width: 980px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            width: 100%;
         }
         .horario-bar span {
             font-family: monospace;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 3px;
             font-weight: 900;
             color: var(--black);
             border: 1px solid var(--black);
             padding: 5px 12px;
+            display: block;
         }
 
         .floating-tab {
@@ -110,7 +103,9 @@
         .floating-tab.eventos { top: calc(50% + 10px); background: var(--black); border-color: var(--black); }
         .floating-tab.eventos:hover { background: var(--red); border-color: var(--red); }
 
-        .estudio-page { max-width: 980px; margin: 0 auto; padding: 64px 32px 100px; }
+        /* ── MÁS AIRE: padding-top aumentado + margen extra antes del step 1 ── */
+        .estudio-page { max-width: 980px; margin: 0 auto; padding: 52px 32px 100px; }
+        .step:first-child { margin-top: 32px; }
 
         .section-label {
             font-size: 12px; letter-spacing: 4px; font-weight: 900;
@@ -558,9 +553,7 @@
         .modal-header::before {
             content: ''; display: inline-block; width: 9px; height: 9px; background: var(--red);
         }
-        .modal-body {
-            padding: 28px 24px 24px;
-        }
+        .modal-body { padding: 28px 24px 24px; }
         .modal-icon { display: none; }
         .modal-title {
             font-size: 18px; font-weight: 900; letter-spacing: 2px;
@@ -588,8 +581,7 @@
 
         @media (max-width: 640px) {
             .estudio-page { padding: 28px 56px 80px 20px; }
-            .estudio-header { padding: 10px 16px; gap: 10px; }
-            .header-right { gap: 6px; }
+            .estudio-header { padding: 12px 16px; gap: 10px; }
             .studio-tabs { flex-direction: column; gap: 12px; }
             .tab-gallery { height: 160px; }
             .tab-title { font-size: 13px; letter-spacing: 2px; padding: 10px 14px; }
@@ -604,7 +596,10 @@
             .hour-btn .price { font-size: 10px; }
             .time-section { flex-direction: column; gap: 20px; }
             .time-controls-top { flex-direction: column; align-items: stretch; gap: 14px; padding-top: 0; }
-            .cal { width: 100%; }
+            .cal-wrap { width: 100%; }
+            .cal { width: 100%; max-width: 100%; }
+            .cal-day { font-size: 11px; padding: 6px 1px; }
+            .cal-dow { font-size: 9px; padding: 5px 0; }
             .time-row { flex-direction: row; align-items: flex-end; gap: 12px; flex-wrap: nowrap; }
             .time-select { font-size: 15px; width: 92px; padding: 10px 10px; padding-right: 28px; }
             .time-end { font-size: 20px; }
@@ -613,15 +608,18 @@
             .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 20px; }
             .floating-tab { font-size: 10px; padding: 8px; height: 110px; }
-            .horario-bar { padding: 8px 16px; }
+            .horario-bar { padding: 16px 56px 0 20px; }
+            .horario-bar span { font-size: 9px; letter-spacing: 1px; }
             .lightbox-placeholder { width: 90vw; height: 55vw; }
             .section-label { margin-bottom: 16px; }
             .step { margin-bottom: 40px; }
+            .step:first-child { margin-top: 20px; }
         }
 
         @media (max-width: 420px) {
             .estudio-page { padding: 20px 50px 80px 14px; }
             .datos-grid { grid-template-columns: 1fr 1fr; }
+            .horario-bar { padding: 12px 50px 0 14px; }
         }
     </style>
 </head>
@@ -629,13 +627,11 @@
 
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
-    <div class="header-right">
-        <span class="header-sep">/</span>
-        <span class="header-section">ESTUDIO</span>
-    </div>
 </header>
 
-<div class="horario-bar"><span>09:00 — 21:00 HS</span></div>
+<div class="horario-bar">
+    <span>ESTUDIO&nbsp;&nbsp;/&nbsp;&nbsp;09:00 — 21:00 HS&nbsp;&nbsp;/&nbsp;&nbsp;PAYSANDÚ Y RONDEAU. MVD, UY.</span>
+</div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
@@ -821,21 +817,21 @@
     }
 
     const CATERING = [
-        { id: 'medialunas',  name: 'MEDIALUNAS',               detail: '6 unidades',   price: 600,  type: 'food' },
-        { id: 'painchoc',    name: 'PAIN AU CHOCOLAT',         detail: '2 unidades',   price: 400,  type: 'food' },
-        { id: 'martinfierro',name: 'MARTÍN FIERRO',            detail: '10 unidades',  price: 400,  type: 'food' },
-        { id: 'camembert',   name: 'QUESO CAMEMBERT',          detail: '350 gr',       price: 400,  type: 'food' },
-        { id: 'empcap',      name: 'EMPANADITAS CAPRESSE',     detail: '12 unidades',  price: 800,  type: 'food' },
-        { id: 'empqya',      name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades', price: 800, type: 'food' },
-        { id: 'alfajorcitos',name: 'ALFAJORCITOS',             detail: '10 unidades',  price: 350,  type: 'food' },
-        { id: 'granola',     name: 'GRANOLA',                  detail: '250 gr',       price: 300,  type: 'food' },
-        { id: 'mani',        name: 'MANÍ SALADO',              detail: '250 gr',       price: 250,  type: 'food' },
-        { id: 'mixfrutos',   name: 'MIX FRUTOS SECOS',         detail: '250 gr',       price: 350,  type: 'food' },
-        { id: 'jugo',        name: 'JUGO DE NARANJA',          detail: '1 litro',      price: 250,  type: 'drink' },
-        { id: 'kombucha',    name: 'KOMBUCHA',                 detail: '350 ml',       price: 200,  type: 'drink' },
-        { id: 'cerveza',     name: 'CERVEZA',                  detail: '330 ml',       price: 300,  type: 'drink' },
-        { id: 'cervsinalc',  name: 'CERVEZA SIN ALCOHOL',      detail: '330 ml',       price: 300,  type: 'drink' },
-        { id: 'vino',        name: 'VINO BLANCO',              detail: '750 ml',       price: 800,  type: 'drink' },
+        { id: 'medialunas',   name: 'MEDIALUNAS',                   detail: '6 unidades',   price: 600,  type: 'food' },
+        { id: 'painchoc',     name: 'PAIN AU CHOCOLAT',             detail: '2 unidades',   price: 400,  type: 'food' },
+        { id: 'martinfierro', name: 'MARTÍN FIERRO',                detail: '10 unidades',  price: 400,  type: 'food' },
+        { id: 'camembert',    name: 'QUESO CAMEMBERT',              detail: '350 gr',       price: 400,  type: 'food' },
+        { id: 'empcap',       name: 'EMPANADITAS CAPRESSE',         detail: '12 unidades',  price: 800,  type: 'food' },
+        { id: 'empqya',       name: 'EMPANADITAS QUESO Y ACEITUNA', detail: '12 unidades',  price: 800,  type: 'food' },
+        { id: 'alfajorcitos', name: 'ALFAJORCITOS',                 detail: '10 unidades',  price: 350,  type: 'food' },
+        { id: 'granola',      name: 'GRANOLA',                      detail: '250 gr',       price: 300,  type: 'food' },
+        { id: 'mani',         name: 'MANÍ SALADO',                  detail: '250 gr',       price: 250,  type: 'food' },
+        { id: 'mixfrutos',    name: 'MIX FRUTOS SECOS',             detail: '250 gr',       price: 350,  type: 'food' },
+        { id: 'jugo',         name: 'JUGO DE NARANJA',              detail: '1 litro',      price: 250,  type: 'drink' },
+        { id: 'kombucha',     name: 'KOMBUCHA',                     detail: '350 ml',       price: 200,  type: 'drink' },
+        { id: 'cerveza',      name: 'CERVEZA',                      detail: '330 ml',       price: 300,  type: 'drink' },
+        { id: 'cervsinalc',   name: 'CERVEZA SIN ALCOHOL',          detail: '330 ml',       price: 300,  type: 'drink' },
+        { id: 'vino',         name: 'VINO BLANCO',                  detail: '750 ml',       price: 800,  type: 'drink' },
     ]
 
     let state = {
@@ -879,34 +875,22 @@
         return Math.max(9, horaRedondeada + 3)
     }
 
-    function buildTimeSelect() {
-        rebuildTimeOptions()
-    }
+    function buildTimeSelect() { rebuildTimeOptions() }
 
     function rebuildTimeOptions() {
         const sel = document.getElementById('time-start')
         const prevVal = parseInt(sel.value, 10) || 9
         sel.innerHTML = ''
-
         const minHour = isTodaySelected() ? firstValidHourToday() : 9
-
         for (let h = 9; h <= 19; h++) {
             const opt = document.createElement('option')
             opt.value = h
             opt.textContent = `${String(h).padStart(2,'0')}:00`
-            if (h < minHour) {
-                opt.disabled = true
-                opt.style.color = '#bbb'
-            }
+            if (h < minHour) { opt.disabled = true; opt.style.color = '#bbb' }
             sel.appendChild(opt)
         }
-
-        if (prevVal >= minHour && prevVal <= 19) {
-            sel.value = prevVal
-        } else {
-            sel.value = minHour <= 19 ? minHour : 19
-        }
-
+        if (prevVal >= minHour && prevVal <= 19) sel.value = prevVal
+        else sel.value = minHour <= 19 ? minHour : 19
         state.startHour = parseInt(sel.value, 10)
     }
 
@@ -993,7 +977,7 @@
     function buildGalleries() {
         [1, 2].forEach(studioId => {
             const photos = STUDIO_PHOTOS[studioId]
-            const track = document.getElementById(`track-${studioId}`)
+            const track  = document.getElementById(`track-${studioId}`)
             const dotsEl = document.getElementById(`dots-${studioId}`)
             track.innerHTML = ''
             dotsEl.innerHTML = ''
@@ -1020,8 +1004,7 @@
     }
 
     function goToSlide(studioId, idx) {
-        const photos = STUDIO_PHOTOS[studioId]
-        const total = photos.length
+        const total = STUDIO_PHOTOS[studioId].length
         idx = (idx + total) % total
         galleryCurrent[studioId] = idx
         document.getElementById(`track-${studioId}`).style.transform = `translateX(-${idx * 100}%)`
@@ -1078,9 +1061,9 @@
 
     document.addEventListener('keydown', e => {
         if (!document.getElementById('lightbox').classList.contains('open')) return
-        if (e.key === 'Escape') closeLightbox()
-        if (e.key === 'ArrowLeft')  lbNav(-1)
-        if (e.key === 'ArrowRight') lbNav(1)
+        if (e.key === 'Escape')      closeLightbox()
+        if (e.key === 'ArrowLeft')   lbNav(-1)
+        if (e.key === 'ArrowRight')  lbNav(1)
     })
 
     function selectStudio(id, e) {
@@ -1097,7 +1080,7 @@
 
     function selectHours(e, hs, price) {
         e.stopPropagation()
-        const parentTab = e.currentTarget.closest('.studio-tab')
+        const parentTab   = e.currentTarget.closest('.studio-tab')
         const tabStudioId = parseInt(parentTab.dataset.studio, 10)
         if (state.studio !== tabStudioId) {
             state.studio = tabStudioId
@@ -1158,9 +1141,9 @@
         const body = document.getElementById('resumen-body')
         const cta  = document.getElementById('cta-btn')
         const studioName = state.studio === 1 ? 'ESTUDIO I' : 'ESTUDIO COMPLETO'
-        const endH = state.hs ? state.startHour + state.hs : null
-        const endStr  = endH ? `${String(endH).padStart(2,'0')}:00` : '—'
-        const startStr = `${String(state.startHour).padStart(2,'0')}:00`
+        const endH   = state.hs ? state.startHour + state.hs : null
+        const endStr = endH ? `${String(endH).padStart(2,'0')}:00` : '—'
+        const startStr  = `${String(state.startHour).padStart(2,'0')}:00`
         const timeValid = endH !== null && endH <= 21
         let cateringTotal = 0
         const cateringItems = []
@@ -1172,7 +1155,7 @@
                 cateringItems.push({ name: item.name, qty, subtotal })
             }
         }
-        const total = state.price + cateringTotal
+        const total      = state.price + cateringTotal
         const isComplete = state.hs && timeValid && state.selectedDate && datosCompletos()
         const DAYS_LONG   = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado']
         const MONTHS_LONG = ['enero','febrero','marzo','abril','mayo','junio',
