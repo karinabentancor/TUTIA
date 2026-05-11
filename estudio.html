@@ -22,6 +22,7 @@
         html, body {
             overflow-x: hidden;
             max-width: 100%;
+            overflow-y: auto;
         }
 
         body {
@@ -38,9 +39,23 @@
             background-repeat: repeat;
             background-color: var(--black);
             border-bottom: 3px solid var(--red);
-            padding: 16px 32px;
-            display: flex; align-items: center; gap: 20px;
+            padding: 14px 32px;
+            display: flex; align-items: center; justify-content: space-between; gap: 20px;
             flex-wrap: wrap;
+        }
+
+        .header-info {
+            font-family: monospace;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 900;
+            color: var(--black);
+            background: var(--white);
+            border: 1px solid var(--white);
+            padding: 10px 16px;
+            text-align: right;
+            line-height: 2;
+            max-width: calc(980px - 32px - 32px - 160px);
         }
 
         .back-btn {
@@ -58,26 +73,6 @@
             background: var(--red);
             border-color: var(--red);
             color: var(--white);
-        }
-
-        /* ── HORARIO BAR: mismo ancho y padding que .estudio-page ── */
-        .horario-bar {
-            display: block;
-            padding: 28px 32px 0;
-            max-width: 980px;
-            margin: 0 auto;
-            box-sizing: border-box;
-            width: 100%;
-        }
-        .horario-bar span {
-            font-family: monospace;
-            font-size: 11px;
-            letter-spacing: 3px;
-            font-weight: 900;
-            color: var(--black);
-            border: 1px solid var(--black);
-            padding: 5px 12px;
-            display: block;
         }
 
         .floating-tab {
@@ -98,12 +93,17 @@
             transition: background 0.2s, color 0.2s, border-color 0.2s;
             white-space: nowrap;
         }
-        .floating-tab.proyectos { top: calc(50% - 150px); background: var(--red); border-color: var(--red); }
+        .floating-tab.proyectos {
+            top: clamp(60px, calc(50% - 145px), calc(100vh - 300px));
+            background: var(--red); border-color: var(--red);
+        }
         .floating-tab.proyectos:hover { background: #aa0000; border-color: #aa0000; }
-        .floating-tab.eventos { top: calc(50% + 10px); background: var(--black); border-color: var(--black); }
-        .floating-tab.eventos:hover { background: var(--red); border-color: var(--red); }
+        .floating-tab.eventos {
+            top: clamp(210px, calc(50% + 5px), calc(100vh - 150px));
+            background: var(--black); border-color: var(--black);
+        }
+        .floating-tab.eventos:hover { background: var(--black); border-color: var(--black); color: var(--red); }
 
-        /* ── MÁS AIRE: padding-top aumentado + margen extra antes del step 1 ── */
         .estudio-page { max-width: 980px; margin: 0 auto; padding: 52px 32px 100px; }
         .step:first-child { margin-top: 32px; }
 
@@ -608,8 +608,7 @@
             .resumen-line { font-size: 12px; }
             .resumen-line.total .value { font-size: 20px; }
             .floating-tab { font-size: 10px; padding: 8px; height: 110px; }
-            .horario-bar { padding: 16px 56px 0 20px; }
-            .horario-bar span { font-size: 9px; letter-spacing: 1px; }
+            .header-info { font-size: 8px; letter-spacing: 1px; padding: 6px 10px; line-height: 2; }
             .lightbox-placeholder { width: 90vw; height: 55vw; }
             .section-label { margin-bottom: 16px; }
             .step { margin-bottom: 40px; }
@@ -619,7 +618,6 @@
         @media (max-width: 420px) {
             .estudio-page { padding: 20px 50px 80px 14px; }
             .datos-grid { grid-template-columns: 1fr 1fr; }
-            .horario-bar { padding: 12px 50px 0 14px; }
         }
     </style>
 </head>
@@ -627,11 +625,13 @@
 
 <header class="estudio-header">
     <a href="index.html" class="back-btn">←</a>
+    <div class="header-info">
+        TUTÍA / ESTUDIO CREATIVO<br>
+        09:00 — 21:00 HS<br>
+        PAYSANDÚ Y RONDEAU / MVD, UY<br>
+        tutiaestudio@gmail.com
+    </div>
 </header>
-
-<div class="horario-bar">
-    <span>ESTUDIO&nbsp;&nbsp;/&nbsp;&nbsp;09:00 — 21:00 HS&nbsp;&nbsp;/&nbsp;&nbsp;PAYSANDÚ Y RONDEAU. MVD, UY.</span>
-</div>
 
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
