@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   document.getElementById('booksContainer').addEventListener('click', function (e) {
     const btn = e.target.closest('.remove-btn');
-    if (btn) removeBook(Number(btn.dataset.bookId));
+    if (btn) removeBook(btn.dataset.bookId);
   });
 });
 
@@ -42,9 +42,7 @@ function loadSelectedBooks() {
   const continueBtn = document.getElementById('continueBtn');
 
   if (selectedBooks.length === 0) {
-    header.innerHTML = `
-      <p>No hay libros seleccionados</p>
-    `;
+    header.innerHTML = `<p>No hay libros seleccionados</p>`;
     container.innerHTML = `
       <div class="empty-state">
         <p>Todavía no elegiste ningún libro.</p>
@@ -55,9 +53,7 @@ function loadSelectedBooks() {
     return;
   }
 
-  header.innerHTML = `
-    <p>Los libros que seleccionaste</p>
-  `;
+  header.innerHTML = `<p>Los libros que seleccionaste</p>`;
 
   const list = document.createElement('div');
   list.className = 'books-list';
@@ -100,7 +96,7 @@ function loadSelectedBooks() {
 
 function removeBook(bookId) {
   let selectedBooks = JSON.parse(localStorage.getItem('selectedBooks')) || [];
-  selectedBooks = selectedBooks.filter(book => book.id !== bookId);
+  selectedBooks = selectedBooks.filter(book => String(book.id) !== String(bookId));
   localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks));
   loadSelectedBooks();
 }

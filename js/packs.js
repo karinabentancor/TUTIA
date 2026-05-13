@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   selectBtn.addEventListener('click', () => {
     if (selectedPack && selectedPack.books) {
-      localStorage.setItem('selectedBooks', JSON.stringify(selectedPack.books))
+      const books = selectedPack.books.map((book, i) => ({ ...book, id: book.id ?? i }))
+      localStorage.setItem('selectedBooks', JSON.stringify(books))
       window.location.href = 'selection.html'
     }
   })
@@ -206,7 +207,8 @@ function attachPackButtonHandlers() {
 
 function handlePackSelection(pack) {
   if (pack && pack.books) {
-    localStorage.setItem('selectedBooks', JSON.stringify(pack.books))
+    const books = pack.books.map((book, i) => ({ ...book, id: book.id ?? i }))
+    localStorage.setItem('selectedBooks', JSON.stringify(books))
     window.location.href = 'selection.html'
   }
 }
