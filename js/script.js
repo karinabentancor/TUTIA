@@ -4,13 +4,11 @@ let showOnlyAvailable = false
 let selectedBooks = []
 
 function saveSelection() {
-  const json = JSON.stringify(selectedBooks)
-  sessionStorage.setItem('selectedBooks', json)
-  localStorage.setItem('selectedBooks', json)
+  localStorage.setItem('selectedBooks', JSON.stringify(selectedBooks))
 }
 
 function loadSavedSelection() {
-  const saved = sessionStorage.getItem('selectedBooks') || localStorage.getItem('selectedBooks')
+  const saved = localStorage.getItem('selectedBooks')
   if (saved) {
     try {
       selectedBooks = JSON.parse(saved)
@@ -303,3 +301,11 @@ function openModal(book) {
     })
   })
 }
+
+window.addEventListener('pageshow', function(e) {
+  if (e.persisted) {
+    loadSavedSelection()
+    applyFilters()
+    updateMobileBar()
+  }
+})
