@@ -68,7 +68,6 @@ html, body {
     font-weight: bold;
     white-space: nowrap;
     z-index: 2;
-    text-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 2px rgba(255,255,255,0.8);
 }
 
 .aside-right {
